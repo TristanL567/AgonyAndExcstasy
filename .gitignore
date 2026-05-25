@@ -1,0 +1,43 @@
+# R / RStudio local state
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+# Python local state
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local agent/editor state
+.claude/settings.local.json
+.codex_tmp/
+.idea/
+
+# Data, generated outputs, research, documentation, and presentations.
+# These are intentionally excluded because many files exceed Git hosting limits.
+02_Data_Input/**
+03_Data_Output/**
+04_Research/**
+05_Documentation/**
+06_Presentations/**
+
+# Root archives and large binary workspace artifacts
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.rds
+*.RData
+*.parquet
+*.feather
+*.fst
+*.sqlite
+*.db
+
+# Generated logs
+*.log
+

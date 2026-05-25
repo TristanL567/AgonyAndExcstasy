@@ -1,0 +1,965 @@
+#==============================================================================#
+#==== 13_Robustness_Checks.R ==================================================#
+#==== Revised CSI Methodology Robustness Checks ===============================#
+#==============================================================================#
+#
+# PURPOSE:
+#   Validate the dynamic / temporary Tewari-style CSI label methodology across
+#   all C/M/T parameter combinations.
+#
+# REVISED METHODOLOGY:
+#   1. CSI events are detected at monthly frequency.
+#   2. A candidate trigger occurs when drawdown from the running peak is <= C.
+#   3. The recovery ceiling follows the paper-style interpretation:
+#
+#        recovery_ceiling = wealth_trigger * (1 + M)
+#
+#      With M = -0.20, the firm must remain at or below 80% of the trigger
+#      wealth during the confirmation window.
+#   4. The annual target follows the paper-style yearly alignment:
+#
+#        confirmed trigger in year t+1  ->  y_{i,t} = 1
+#
+# OUTPUTS:
+#   A) Long-run validation of temporary CSI flags:
+#      how many stay depressed over a 5-year horizon vs recover later.
+#   B) C/M/T grid sensitivity.
+#   C) Market-cap summary of temporary CSI firms vs non-CSI observations.
+#   D) CSI event counts by year and overall relative to observed firms.
+#
+#==============================================================================#
+
+source("config.R")
+
+suppressPackageStartupMessages({
+  library(data.table)
+  library(ggplot2)
+  library(lubridate)
+  library(parallel)
+  library(scales)
+})
+
+cat("\n[13_Robustness_Checks.R] START:", format(Sys.time()), "\n")
+
+#==============================================================================#
+# 0. Output directories
+#==============================================================================#
+
+FIGS <- fn_setup_figure_dirs()
+
+ROB_OUT_DIR   <- DIR_ROB_TRACK  ## 03_Data_Output/2_Robustness_Checks/Necessary/{track_folder}/
+ROB_TABLE_DIR <- file.path(ROB_OUT_DIR, "tables")
+ROB_FIG_DIR   <- file.path(ROB_OUT_DIR, "figures")
+ROB_DOC_DIR   <- file.path(DIR_ROOT, "05_Documentation", "04_Robustness",
+                           "01_Dynamic_CSI", "Necessary")
+ROB_DOC_PATH  <- file.path(ROB_DOC_DIR, "dynamic_csi_robustness_report.md")
+
+dir.create(ROB_TABLE_DIR, recursive = TRUE, showWarnings = FALSE)
+dir.create(ROB_FIG_DIR, recursive = TRUE, showWarnings = FALSE)
+dir.create(ROB_DOC_DIR, recursive = TRUE, showWarnings = FALSE)
+
+#==============================================================================#
+# 1. Helpers
+#==============================================================================#
+
+fn_months_between <- function(start_date, end_date) {
+  12L * (year(end_date) - year(start_date)) +
+    (month(end_date) - month(start_date))
+}
+
+fn_quantile <- function(x, p) {
+  x <- x[is.finite(x)]
+  if (length(x) == 0L) return(NA_real_)
+  as.numeric(quantile(x, p, na.rm = TRUE, names = FALSE))
+}
+
+fn_count_true <- function(x) {
+  as.integer(sum(x %in% TRUE))
+}
+
+fn_pct_true <- function(x) {
+  observed <- !is.na(x)
+  if (!any(observed)) return(NA_real_)
+  100 * sum(x[observed] %in% TRUE) / sum(observed)
+}
+
+fn_prepare_price_path <- function(monthly_dt) {
+  out <- copy(monthly_dt)
+  setorder(out, permno, date)
+  out[, ret_clean := fifelse(is.na(ret), 0, ret)]
+  out[, wealth_index := cumprod(1 + ret_clean), by = permno]
+  out[, running_peak := cummax(wealth_index), by = permno]
+  out[, drawdown := wealth_index / running_peak - 1]
+  out[]
+}
+
+fn_detect_events_one_firm <- function(dt, C, M, T, end_date) {
+  n <- nrow(dt)
+  if (n == 0L) return(data.table())
+
+  out <- vector("list", 0L)
+  i <- 1L
+  event_n <- 0L
+
+  while (i <= n) {
+    if (!is.na(dt$drawdown[i]) && dt$drawdown[i] <= C) {
+      trigger_date     <- dt$date[i]
+      confirmation_date <- trigger_date %m+% months(T)
+      wealth_trigger   <- dt$wealth_index[i]
+      peak_at_trigger  <- dt$running_peak[i]
+      recovery_ceiling <- wealth_trigger * (1 + M)
+      terminal_date    <- dt$date[n]
+
+      event_n <- event_n + 1L
+
+      if (confirmation_date > end_date || confirmation_date > terminal_date) {
+        out[[length(out) + 1L]] <- data.table(
+          event_seq = event_n,
+          trigger_date = trigger_date,
+          confirmation_date = confirmation_date,
+          trigger_year = year(trigger_date),
+          trigger_month = month(trigger_date),
+          label_year = year(trigger_date) - 1L,
+          event_status = "censored",
+          censor_reason = fifelse(confirmation_date > end_date,
+                                  "sample_end_before_confirmation",
+                                  "firm_exit_before_confirmation"),
+          wealth_trigger = wealth_trigger,
+          peak_at_trigger = peak_at_trigger,
+          drawdown_trigger = dt$drawdown[i],
+          recovery_ceiling = recovery_ceiling,
+          window_max = NA_real_,
+          terminal_wealth = dt$wealth_index[n],
+          terminal_date = terminal_date,
+          left_sample_after_trigger = terminal_date > trigger_date & terminal_date < end_date,
+          months_to_sample_exit = fn_months_between(trigger_date, terminal_date)
+        )
+        i <- i + 1L
+        next
+      }
+
+      forward_idx <- which(dt$date > trigger_date & dt$date <= confirmation_date)
+      if (length(forward_idx) == 0L) {
+        out[[length(out) + 1L]] <- data.table(
+          event_seq = event_n,
+          trigger_date = trigger_date,
+          confirmation_date = confirmation_date,
+          trigger_year = year(trigger_date),
+          trigger_month = month(trigger_date),
+          label_year = year(trigger_date) - 1L,
+          event_status = "censored",
+          censor_reason = "no_forward_months",
+          wealth_trigger = wealth_trigger,
+          peak_at_trigger = peak_at_trigger,
+          drawdown_trigger = dt$drawdown[i],
+          recovery_ceiling = recovery_ceiling,
+          window_max = NA_real_,
+          terminal_wealth = dt$wealth_index[n],
+          terminal_date = terminal_date,
+          left_sample_after_trigger = terminal_date > trigger_date & terminal_date < end_date,
+          months_to_sample_exit = fn_months_between(trigger_date, terminal_date)
+        )
+        i <- i + 1L
+        next
+      }
+
+      forward_max <- max(dt$wealth_index[forward_idx], na.rm = TRUE)
+
+      if (forward_max <= recovery_ceiling) {
+        event_status <- "confirmed_csi"
+        next_i <- max(forward_idx) + 1L
+      } else {
+        event_status <- "recovered_within_T"
+        next_i <- i + 1L
+      }
+
+      out[[length(out) + 1L]] <- data.table(
+        event_seq = event_n,
+        trigger_date = trigger_date,
+        confirmation_date = confirmation_date,
+        trigger_year = year(trigger_date),
+        trigger_month = month(trigger_date),
+        label_year = year(trigger_date) - 1L,
+        event_status = event_status,
+        censor_reason = NA_character_,
+        wealth_trigger = wealth_trigger,
+        peak_at_trigger = peak_at_trigger,
+        drawdown_trigger = dt$drawdown[i],
+        recovery_ceiling = recovery_ceiling,
+        window_max = forward_max,
+        terminal_wealth = dt$wealth_index[n],
+        terminal_date = terminal_date,
+        left_sample_after_trigger = terminal_date > trigger_date & terminal_date < end_date,
+        months_to_sample_exit = fn_months_between(trigger_date, terminal_date)
+      )
+
+      i <- next_i
+    } else {
+      i <- i + 1L
+    }
+  }
+
+  if (length(out) == 0L) return(data.table())
+  rbindlist(out, fill = TRUE)
+}
+
+fn_detect_events_grid <- function(price_path, grid_dt, end_date) {
+  n_grid <- nrow(grid_dt)
+  default_workers <- max(1L, min(n_grid, parallel::detectCores(logical = TRUE) - 8L))
+  n_workers <- as.integer(Sys.getenv("ROBUST_WORKERS", unset = default_workers))
+  if (is.na(n_workers) || n_workers < 1L) n_workers <- 1L
+  if (.Platform$OS.type == "windows") n_workers <- 1L
+  n_workers <- min(n_workers, n_grid)
+
+  old_dt_threads <- data.table::getDTthreads()
+  if (n_workers > 1L) {
+    data.table::setDTthreads(1L)
+    on.exit(data.table::setDTthreads(old_dt_threads), add = TRUE)
+  }
+
+  cat(sprintf("  Parallel grid workers: %d of %d parameter combinations\n",
+              n_workers, n_grid))
+
+  run_one_grid <- function(j) {
+    prm <- grid_dt[j]
+    start_time <- Sys.time()
+    cat(sprintf("  [%02d/%02d] START %s | C=%.2f M=%.2f T=%d | %s\n",
+                j, n_grid, prm$param_id, prm$C, prm$M, prm$T,
+                format(start_time)))
+    flush.console()
+
+    ev <- price_path[
+      ,
+      fn_detect_events_one_firm(.SD, C = prm$C, M = prm$M,
+                                T = prm$T, end_date = end_date),
+      by = permno,
+      .SDcols = c("date", "ret", "wealth_index", "running_peak", "drawdown")
+    ]
+
+    if (nrow(ev) > 0L) {
+      ev[, `:=`(
+        param_id = prm$param_id,
+        C = prm$C,
+        M = prm$M,
+        T = prm$T,
+        terminal_vs_trigger = terminal_wealth / wealth_trigger - 1,
+        terminal_vs_peak = terminal_wealth / peak_at_trigger - 1
+      )]
+    }
+
+    cat(sprintf("  [%02d/%02d] DONE  %s | rows=%d | elapsed=%.1f min\n",
+                j, n_grid, prm$param_id, nrow(ev),
+                as.numeric(difftime(Sys.time(), start_time, units = "mins"))))
+    flush.console()
+    ev
+  }
+
+  event_list <- if (n_workers == 1L) {
+    lapply(seq_len(n_grid), run_one_grid)
+  } else {
+    parallel::mclapply(
+      seq_len(n_grid),
+      run_one_grid,
+      mc.cores = n_workers,
+      mc.preschedule = FALSE
+    )
+  }
+
+  out <- rbindlist(event_list, fill = TRUE)
+  if (nrow(out) > 0L) {
+    setcolorder(out, c("param_id", "C", "M", "T", "permno", "event_seq"))
+    out[, event_id := .I]
+  }
+  out[]
+}
+
+fn_add_forward_5y_returns <- function(events_dt, monthly_dt) {
+  confirmed <- copy(events_dt[event_status == "confirmed_csi"])
+  if (nrow(confirmed) == 0L) return(confirmed[])
+
+  confirmed[, fwd_5y_end_date := trigger_date %m+% months(60L)]
+  confirmed_join <- copy(confirmed)
+  setnames(
+    confirmed_join,
+    old = c("trigger_date", "confirmation_date", "fwd_5y_end_date"),
+    new = c("event_trigger_date", "event_confirmation_date", "event_fwd_5y_end_date")
+  )
+
+  fwd <- monthly_dt[
+    confirmed_join,
+    on = .(permno),
+    allow.cartesian = TRUE,
+    nomatch = 0L
+  ][
+    date > event_trigger_date & date <= event_fwd_5y_end_date
+  ]
+
+  if (nrow(fwd) == 0L) {
+    confirmed[, `:=`(
+      fwd_5y_n_months = 0L,
+      fwd_5y_geometric_return = NA_real_,
+      fwd_5y_cagr = NA_real_,
+      complete_5y_return_window = FALSE
+    )]
+    return(confirmed[])
+  }
+
+  fwd_summary <- fwd[, {
+    ret_vec <- ret
+    n_months <- sum(!is.na(ret_vec))
+    growth <- if (n_months > 0L) prod(1 + ret_vec[!is.na(ret_vec)]) else NA_real_
+    geo <- if (!is.na(growth)) growth - 1 else NA_real_
+    cagr <- if (!is.na(growth) && growth > 0 && n_months > 0L) {
+      growth^(12 / n_months) - 1
+    } else {
+      NA_real_
+    }
+    after_confirmation <- date > event_confirmation_date
+    .(
+      fwd_5y_n_months = n_months,
+      fwd_5y_geometric_return = geo,
+      fwd_5y_cagr = cagr,
+      fwd_5y_max_wealth = max(wealth_index, na.rm = TRUE),
+      fwd_5y_max_wealth_after_confirmation = if (any(after_confirmation)) {
+        max(wealth_index[after_confirmation], na.rm = TRUE)
+      } else {
+        NA_real_
+      },
+      fwd_5y_terminal_observed_date = max(date, na.rm = TRUE)
+    )
+  }, by = .(event_id)]
+
+  confirmed <- merge(confirmed, fwd_summary, by = "event_id", all.x = TRUE)
+  confirmed[is.na(fwd_5y_n_months), fwd_5y_n_months := 0L]
+  confirmed[, complete_5y_return_window := fwd_5y_n_months >= 60L]
+  confirmed[, `:=`(
+    recovered_above_confirmation_ceiling_5y = fifelse(
+      is.na(fwd_5y_max_wealth_after_confirmation),
+      FALSE,
+      fwd_5y_max_wealth_after_confirmation > recovery_ceiling
+    ),
+    recovered_to_trigger_wealth_5y = fifelse(
+      is.na(fwd_5y_max_wealth),
+      FALSE,
+      fwd_5y_max_wealth >= wealth_trigger
+    ),
+    recovered_to_prior_peak_5y = fifelse(
+      is.na(fwd_5y_max_wealth),
+      FALSE,
+      fwd_5y_max_wealth >= peak_at_trigger
+    )
+  )]
+  confirmed[, stayed_depressed_5y := !recovered_above_confirmation_ceiling_5y]
+  confirmed[]
+}
+
+fn_distribution_summary <- function(dt, value_col, by_cols) {
+  if (length(by_cols) == 0L) {
+    valid <- dt[is.finite(get(value_col))]
+    if (nrow(valid) == 0L) {
+      return(data.table(
+        n = 0L,
+        mean = NA_real_,
+        sd = NA_real_,
+        min = NA_real_,
+        p05 = NA_real_,
+        p25 = NA_real_,
+        median = NA_real_,
+        p75 = NA_real_,
+        p95 = NA_real_,
+        max = NA_real_
+      ))
+    }
+    return(valid[
+      ,
+      .(
+        n = .N,
+        mean = mean(get(value_col), na.rm = TRUE),
+        sd = sd(get(value_col), na.rm = TRUE),
+        min = min(get(value_col), na.rm = TRUE),
+        p05 = fn_quantile(get(value_col), 0.05),
+        p25 = fn_quantile(get(value_col), 0.25),
+        median = median(get(value_col), na.rm = TRUE),
+        p75 = fn_quantile(get(value_col), 0.75),
+        p95 = fn_quantile(get(value_col), 0.95),
+        max = max(get(value_col), na.rm = TRUE)
+      )
+    ])
+  }
+
+  valid <- dt[is.finite(get(value_col))]
+  if (nrow(valid) == 0L) {
+    out <- unique(dt[, ..by_cols])
+    if (nrow(out) == 0L) out <- as.data.table(setNames(vector("list", length(by_cols)), by_cols))
+    out[, `:=`(
+      n = 0L,
+      mean = NA_real_,
+      sd = NA_real_,
+      min = NA_real_,
+      p05 = NA_real_,
+      p25 = NA_real_,
+      median = NA_real_,
+      p75 = NA_real_,
+      p95 = NA_real_,
+      max = NA_real_
+    )]
+    return(out[])
+  }
+
+  valid[
+    ,
+    .(
+      n = .N,
+      mean = mean(get(value_col), na.rm = TRUE),
+      sd = sd(get(value_col), na.rm = TRUE),
+      min = min(get(value_col), na.rm = TRUE),
+      p05 = fn_quantile(get(value_col), 0.05),
+      p25 = fn_quantile(get(value_col), 0.25),
+      median = median(get(value_col), na.rm = TRUE),
+      p75 = fn_quantile(get(value_col), 0.75),
+      p95 = fn_quantile(get(value_col), 0.95),
+      max = max(get(value_col), na.rm = TRUE)
+    ),
+    by = by_cols
+  ]
+}
+
+fn_write_csv <- function(dt, file_name) {
+  path <- file.path(ROB_TABLE_DIR, file_name)
+  fwrite(dt, path)
+  cat(sprintf("  Wrote: %s\n", path))
+}
+
+fn_save_plot <- function(plot, file_name, width = PLOT_WIDTH, height = PLOT_HEIGHT) {
+  path <- file.path(ROB_FIG_DIR, file_name)
+  ggsave(path, plot = plot, width = width, height = height, dpi = PLOT_DPI)
+  cat(sprintf("  Saved: %s\n", path))
+}
+
+#==============================================================================#
+# 2. Load and prepare monthly data
+#==============================================================================#
+
+cat("\n[13] Loading monthly CRSP data...\n")
+
+monthly <- as.data.table(readRDS(PATH_PRICES_MONTHLY))
+setnames(monthly, "ret_adj", "ret", skip_absent = TRUE)
+setnames(monthly, "mktcap", "mkvalt", skip_absent = TRUE)
+
+monthly[, date := as.Date(date)]
+monthly[, ret := fifelse(is.na(ret), NA_real_, pmin(pmax(ret, -0.99), 10))]
+monthly <- monthly[date >= START_DATE & date <= END_DATE]
+
+if (file.exists(PATH_UNIVERSE)) {
+  universe <- as.data.table(readRDS(PATH_UNIVERSE))
+  monthly <- monthly[permno %in% universe$permno]
+}
+
+monthly[, year := year(date)]
+monthly[, month := month(date)]
+setorder(monthly, permno, date)
+
+price_path <- fn_prepare_price_path(monthly)
+
+firm_year_denominator <- unique(monthly[, .(permno, year)])
+firm_year_counts <- firm_year_denominator[, .(
+  n_firms_observed = uniqueN(permno)
+), by = year]
+
+overall_n_firms <- uniqueN(firm_year_denominator$permno)
+overall_n_firm_years <- nrow(firm_year_denominator)
+
+cat(sprintf("  Monthly rows        : %d\n", nrow(monthly)))
+cat(sprintf("  Firms               : %d\n", overall_n_firms))
+cat(sprintf("  Firm-years          : %d\n", overall_n_firm_years))
+cat(sprintf("  Date range          : %s to %s\n",
+            min(monthly$date), max(monthly$date)))
+
+#==============================================================================#
+# 3. Detect revised-methodology CSI events for every parameter combination
+#==============================================================================#
+
+cat("\n[13] Detecting revised CSI events across the C/M/T grid...\n")
+
+grid_dt <- as.data.table(CSI_GRID)
+setorder(grid_dt, C, M, T)
+
+path_event_audit_rds <- file.path(ROB_TABLE_DIR, "revised_csi_all_trigger_audit.rds")
+reuse_grid <- isTRUE(as.logical(Sys.getenv("ROBUST_REUSE_GRID", unset = "FALSE")))
+
+if (reuse_grid && file.exists(path_event_audit_rds)) {
+  cat(sprintf("  Reusing cached grid event audit: %s\n", path_event_audit_rds))
+  csi_events_all <- readRDS(path_event_audit_rds)
+} else {
+  csi_events_all <- fn_detect_events_grid(price_path, grid_dt, END_DATE)
+  saveRDS(csi_events_all, path_event_audit_rds)
+  fn_write_csv(csi_events_all, "revised_csi_all_trigger_audit.csv")
+}
+
+csi_events_confirmed <- fn_add_forward_5y_returns(csi_events_all, price_path)
+
+market_cap_panel <- price_path[
+  is.finite(mkvalt) & mkvalt > 0,
+  .(permno, date, year, mktcap = mkvalt)
+]
+
+csi_events_confirmed[
+  market_cap_panel,
+  trigger_mktcap := i.mktcap,
+  on = .(permno, trigger_date = date)
+]
+
+saveRDS(csi_events_confirmed,
+        file.path(ROB_TABLE_DIR, "revised_csi_confirmed_events_with_5y_returns.rds"))
+
+fn_write_csv(csi_events_confirmed,
+             "revised_csi_confirmed_events_with_5y_validation.csv")
+
+#==============================================================================#
+# A. Long-run validation of temporary CSI flags
+#==============================================================================#
+
+cat("\n[13] A) Long-run validation of temporary CSI flags...\n")
+
+long_run_validation <- csi_events_confirmed[, .(
+  n_temporary_csi_flags = .N,
+  n_stayed_depressed_5y = fn_count_true(stayed_depressed_5y),
+  pct_stayed_depressed_5y = fn_pct_true(stayed_depressed_5y),
+  n_recovered_above_confirmation_ceiling_5y =
+    fn_count_true(recovered_above_confirmation_ceiling_5y),
+  pct_recovered_above_confirmation_ceiling_5y =
+    fn_pct_true(recovered_above_confirmation_ceiling_5y),
+  n_recovered_to_trigger_wealth_5y =
+    fn_count_true(recovered_to_trigger_wealth_5y),
+  pct_recovered_to_trigger_wealth_5y =
+    fn_pct_true(recovered_to_trigger_wealth_5y),
+  n_recovered_to_prior_peak_5y =
+    fn_count_true(recovered_to_prior_peak_5y),
+  pct_recovered_to_prior_peak_5y =
+    fn_pct_true(recovered_to_prior_peak_5y),
+  n_complete_5y_windows = fn_count_true(complete_5y_return_window),
+  pct_complete_5y_windows = fn_pct_true(complete_5y_return_window),
+  median_forward_months = as.numeric(median(fwd_5y_n_months, na.rm = TRUE)),
+  median_5y_cagr = as.numeric(median(fwd_5y_cagr, na.rm = TRUE)),
+  median_5y_geometric_return = as.numeric(median(fwd_5y_geometric_return, na.rm = TRUE))
+), by = .(param_id, C, M, T)]
+
+setorder(long_run_validation, C, M, T)
+fn_write_csv(long_run_validation, "A_long_run_validation_temporary_csi.csv")
+saveRDS(long_run_validation,
+        file.path(ROB_TABLE_DIR, "A_long_run_validation_temporary_csi.rds"))
+
+#==============================================================================#
+# B. C/M/T grid sensitivity and overall prevalence
+#==============================================================================#
+
+cat("\n[13] B) C/M/T grid sensitivity and overall prevalence...\n")
+
+overall_csi <- csi_events_confirmed[, .(
+  n_csi_events = .N,
+  n_csi_firms = uniqueN(permno),
+  n_csi_label_firm_years = uniqueN(paste(permno, label_year)),
+  first_csi_year = min(trigger_year, na.rm = TRUE),
+  last_csi_year = max(trigger_year, na.rm = TRUE)
+), by = .(param_id, C, M, T)]
+
+overall_csi[, `:=`(
+  n_all_firms = overall_n_firms,
+  n_all_firm_years = overall_n_firm_years,
+  pct_csi_firms_overall = 100 * n_csi_firms / overall_n_firms,
+  pct_csi_label_firm_years = 100 * n_csi_label_firm_years / overall_n_firm_years
+)]
+
+status_counts <- csi_events_all[, .N, by = .(param_id, event_status)]
+status_counts <- dcast(status_counts, param_id ~ event_status,
+                       value.var = "N", fill = 0)
+overall_csi <- merge(overall_csi, status_counts, by = "param_id", all.x = TRUE)
+
+grid_sensitivity <- merge(
+  overall_csi,
+  long_run_validation,
+  by = c("param_id", "C", "M", "T"),
+  all = TRUE
+)
+
+setorder(grid_sensitivity, C, M, T)
+fn_write_csv(grid_sensitivity, "B_grid_sensitivity_c_m_t.csv")
+saveRDS(grid_sensitivity, file.path(ROB_TABLE_DIR, "B_grid_sensitivity_c_m_t.rds"))
+
+#==============================================================================#
+# C. Market cap summary: temporary CSI trigger firms vs non-CSI observations
+#==============================================================================#
+
+cat("\n[13] C) Market-cap summary of CSI vs non-CSI observations...\n")
+
+market_cap_summary_list <- vector("list", nrow(grid_dt))
+
+for (j in seq_len(nrow(grid_dt))) {
+  prm <- grid_dt[j]
+  confirmed_keys <- csi_events_confirmed[
+    param_id == prm$param_id,
+    .(permno, date = trigger_date)
+  ]
+
+  csi_mktcap <- csi_events_confirmed[
+    param_id == prm$param_id & is.finite(trigger_mktcap) & trigger_mktcap > 0,
+    .(mktcap = trigger_mktcap)
+  ]
+
+  non_csi_mktcap <- if (nrow(confirmed_keys) > 0L) {
+    market_cap_panel[!confirmed_keys, on = .(permno, date)]
+  } else {
+    market_cap_panel
+  }
+
+  csi_summary <- fn_distribution_summary(
+    csi_mktcap,
+    "mktcap",
+    character()
+  )
+  non_csi_summary <- fn_distribution_summary(
+    non_csi_mktcap,
+    "mktcap",
+    character()
+  )
+
+  csi_summary[, group := "temporary_csi_trigger_month"]
+  non_csi_summary[, group := "non_csi_firm_month"]
+
+  market_cap_summary_list[[j]] <- rbindlist(
+    list(csi_summary, non_csi_summary),
+    fill = TRUE
+  )[, `:=`(
+    param_id = prm$param_id,
+    C = prm$C,
+    M = prm$M,
+    T = prm$T
+  )]
+}
+
+market_cap_summary <- rbindlist(market_cap_summary_list, fill = TRUE)
+setcolorder(market_cap_summary,
+            c("param_id", "C", "M", "T", "group",
+              setdiff(names(market_cap_summary),
+                      c("param_id", "C", "M", "T", "group"))))
+setorder(market_cap_summary, C, M, T, group)
+
+fn_write_csv(market_cap_summary, "C_market_cap_csi_vs_non_csi.csv")
+saveRDS(market_cap_summary,
+        file.path(ROB_TABLE_DIR, "C_market_cap_csi_vs_non_csi.rds"))
+
+#==============================================================================#
+# D. CSI events per year: absolute and percent of observed firms
+#==============================================================================#
+
+cat("\n[13] D) CSI events per year and relative prevalence...\n")
+
+events_per_year <- csi_events_confirmed[, .(
+  n_csi_events = .N,
+  n_csi_firms = uniqueN(permno)
+), by = .(param_id, C, M, T, trigger_year)]
+
+setnames(events_per_year, "trigger_year", "year")
+
+events_per_year <- merge(
+  events_per_year,
+  firm_year_counts,
+  by = "year",
+  all.x = TRUE
+)
+
+events_per_year[, `:=`(
+  pct_csi_firms_of_observed = 100 * n_csi_firms / n_firms_observed,
+  pct_csi_events_of_observed = 100 * n_csi_events / n_firms_observed
+)]
+
+setorder(events_per_year, C, M, T, year)
+fn_write_csv(events_per_year, "D_csi_events_per_year.csv")
+saveRDS(events_per_year, file.path(ROB_TABLE_DIR, "D_csi_events_per_year.rds"))
+
+overall_event_counts <- events_per_year[, .(
+  n_csi_events = sum(n_csi_events, na.rm = TRUE),
+  n_csi_firms = uniqueN(csi_events_confirmed[param_id == .BY$param_id, permno]),
+  n_observed_firm_years = overall_n_firm_years,
+  n_observed_firms = overall_n_firms,
+  pct_events_per_observed_firm_year = 100 * sum(n_csi_events, na.rm = TRUE) / overall_n_firm_years,
+  pct_csi_firms_of_observed_firms =
+    100 * uniqueN(csi_events_confirmed[param_id == .BY$param_id, permno]) / overall_n_firms
+), by = .(param_id, C, M, T)]
+
+setorder(overall_event_counts, C, M, T)
+fn_write_csv(overall_event_counts, "D_csi_events_overall_relative_to_sample.csv")
+saveRDS(overall_event_counts,
+        file.path(ROB_TABLE_DIR, "D_csi_events_overall_relative_to_sample.rds"))
+
+#==============================================================================#
+# 4. Compact diagnostic figures
+#==============================================================================#
+
+cat("\n[13] Creating diagnostic figures...\n")
+
+base_param_id <- grid_dt[
+  C == CSI_BASE$C & M == CSI_BASE$M & T == CSI_BASE$T,
+  param_id
+][1L]
+
+base_yearly <- events_per_year[param_id == base_param_id]
+if (nrow(base_yearly) > 0L) {
+  p_year <- ggplot(base_yearly, aes(x = year, y = n_csi_events)) +
+    geom_col(fill = "#1565C0", alpha = 0.9) +
+    geom_line(aes(y = pct_csi_firms_of_observed *
+                    max(n_csi_events, na.rm = TRUE) /
+                    max(pct_csi_firms_of_observed, na.rm = TRUE)),
+              colour = "#E53935", linewidth = 0.9) +
+    geom_point(aes(y = pct_csi_firms_of_observed *
+                     max(n_csi_events, na.rm = TRUE) /
+                     max(pct_csi_firms_of_observed, na.rm = TRUE)),
+               colour = "#E53935", size = 1.8) +
+    scale_y_continuous(
+      name = "CSI events",
+      sec.axis = sec_axis(
+        ~ . * max(base_yearly$pct_csi_firms_of_observed, na.rm = TRUE) /
+          max(base_yearly$n_csi_events, na.rm = TRUE),
+        name = "% of observed firms"
+      )
+    ) +
+    labs(
+      title = "Base Revised CSI Events per Year",
+      subtitle = sprintf("param_id=%s | C=%.2f, M=%.2f, T=%d",
+                         base_param_id, CSI_BASE$C, CSI_BASE$M, CSI_BASE$T),
+      x = "Trigger year"
+    ) +
+    theme_minimal(base_size = 12)
+
+  fn_save_plot(p_year, "A_base_csi_events_per_year.png")
+}
+
+if (nrow(long_run_validation) > 0L) {
+  p_ret_heat <- ggplot(long_run_validation,
+                       aes(x = factor(T), y = factor(C),
+                           fill = median_5y_cagr)) +
+    geom_tile(colour = "white", linewidth = 0.5) +
+    geom_text(aes(label = percent(median_5y_cagr, accuracy = 0.1)),
+              colour = "white", size = 3) +
+    facet_wrap(~ M, labeller = label_bquote(M == .(M))) +
+    scale_fill_viridis_c(option = "mako", labels = percent,
+                         name = "Median\n5y CAGR") +
+    labs(
+      title = "Median Five-Year Forward CAGR After Confirmed CSI",
+      subtitle = "Lower values indicate the temporary CSI rule is catching more persistent distress",
+      x = "T: confirmation months",
+      y = "C: drawdown threshold"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid = element_blank())
+
+  fn_save_plot(p_ret_heat, "C_median_5y_cagr_heatmap.png",
+               width = PLOT_WIDTH * 1.15, height = PLOT_HEIGHT)
+}
+
+if (nrow(long_run_validation) > 0L) {
+  p_exit_heat <- ggplot(long_run_validation,
+                        aes(x = factor(T), y = factor(C),
+                            fill = pct_stayed_depressed_5y)) +
+    geom_tile(colour = "white", linewidth = 0.5) +
+    geom_text(aes(label = paste0(round(pct_stayed_depressed_5y, 1), "%")),
+              colour = "white", size = 3) +
+    facet_wrap(~ M, labeller = label_bquote(M == .(M))) +
+    scale_fill_viridis_c(option = "rocket", name = "% stayed\ndepressed") +
+    labs(
+      title = "Temporary CSI Firms That Stay Depressed Over Five Years",
+      subtitle = "Share of confirmed temporary CSI events with no later recovery above the confirmation ceiling",
+      x = "T: confirmation months",
+      y = "C: drawdown threshold"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(panel.grid = element_blank())
+
+  fn_save_plot(p_exit_heat, "A_stayed_depressed_5y_heatmap.png",
+               width = PLOT_WIDTH * 1.15, height = PLOT_HEIGHT)
+}
+
+#==============================================================================#
+# 5. Markdown report
+#==============================================================================#
+
+cat("\n[13] Writing markdown report...\n")
+
+fmt_int <- function(x) {
+  if (length(x) == 0L || is.na(x)) return("NA")
+  formatC(as.integer(round(x)), format = "d", big.mark = ",")
+}
+
+fmt_num <- function(x, digits = 2) {
+  if (length(x) == 0L || is.na(x) || !is.finite(x)) return("NA")
+  formatC(x, format = "f", digits = digits, big.mark = ",")
+}
+
+fmt_pct <- function(x, digits = 1) {
+  if (length(x) == 0L || is.na(x) || !is.finite(x)) return("NA")
+  paste0(formatC(x, format = "f", digits = digits), "%")
+}
+
+fmt_ret <- function(x, digits = 1) {
+  if (length(x) == 0L || is.na(x) || !is.finite(x)) return("NA")
+  paste0(formatC(100 * x, format = "f", digits = digits), "%")
+}
+
+base_validation <- long_run_validation[param_id == base_param_id][1]
+base_grid <- grid_sensitivity[param_id == base_param_id][1]
+base_events <- overall_event_counts[param_id == base_param_id][1]
+base_mktcap <- market_cap_summary[param_id == base_param_id]
+base_mktcap_csi <- base_mktcap[group == "temporary_csi_trigger_month"][1]
+base_mktcap_non <- base_mktcap[group == "non_csi_firm_month"][1]
+
+top_recovery_grid <- long_run_validation[
+  order(-pct_recovered_above_confirmation_ceiling_5y)
+][1:min(.N, 5L)]
+
+lowest_recovery_grid <- long_run_validation[
+  order(pct_recovered_above_confirmation_ceiling_5y)
+][1:min(.N, 5L)]
+
+md_lines <- c(
+  "# Dynamic CSI Robustness Report",
+  "",
+  paste0("Generated: ", format(Sys.time())),
+  "",
+  "## Scope",
+  "",
+  paste0("- Sample: ", format(min(monthly$date)), " to ", format(max(monthly$date)), "."),
+  paste0("- Firms: ", fmt_int(overall_n_firms), "."),
+  paste0("- Firm-years: ", fmt_int(overall_n_firm_years), "."),
+  paste0("- Grid size: ", fmt_int(nrow(grid_dt)), " C/M/T combinations."),
+  paste0("- Base rule: C = ", CSI_BASE$C, ", M = ", CSI_BASE$M,
+         ", T = ", CSI_BASE$T, " months (`", base_param_id, "`)."),
+  "",
+  "## Interpretation",
+  "",
+  paste0(
+    "A temporary CSI flag is counted as staying depressed when, after the ",
+    "standard confirmation window, the firm does not climb above the same ",
+    "recovery ceiling during the following five-year horizon. A later move ",
+    "above that ceiling is treated as a later recovery and therefore a ",
+    "potential false positive for a permanent-distress interpretation."
+  ),
+  "",
+  "The report also records stronger recovery concepts: recovery back to trigger-month wealth and recovery back to the pre-trigger running peak.",
+  "",
+  "## A. Long-Run Validation of Temporary CSI Flags",
+  "",
+  paste0("- Base temporary CSI flags: ", fmt_int(base_validation$n_temporary_csi_flags), "."),
+  paste0("- Stayed depressed over five years: ",
+         fmt_int(base_validation$n_stayed_depressed_5y), " (",
+         fmt_pct(base_validation$pct_stayed_depressed_5y), ")."),
+  paste0("- Recovered above confirmation ceiling within five years: ",
+         fmt_int(base_validation$n_recovered_above_confirmation_ceiling_5y), " (",
+         fmt_pct(base_validation$pct_recovered_above_confirmation_ceiling_5y), ")."),
+  paste0("- Recovered to trigger wealth within five years: ",
+         fmt_int(base_validation$n_recovered_to_trigger_wealth_5y), " (",
+         fmt_pct(base_validation$pct_recovered_to_trigger_wealth_5y), ")."),
+  paste0("- Recovered to prior peak within five years: ",
+         fmt_int(base_validation$n_recovered_to_prior_peak_5y), " (",
+         fmt_pct(base_validation$pct_recovered_to_prior_peak_5y), ")."),
+  paste0("- Complete five-year return windows: ",
+         fmt_int(base_validation$n_complete_5y_windows), " (",
+         fmt_pct(base_validation$pct_complete_5y_windows), ")."),
+  paste0("- Median forward CAGR after confirmed temporary CSI: ",
+         fmt_ret(base_validation$median_5y_cagr), "."),
+  "",
+  "## B. C/M/T Grid Sensitivity",
+  "",
+  paste0("- Base confirmed events: ", fmt_int(base_grid$n_csi_events), "."),
+  paste0("- Base unique CSI firms: ", fmt_int(base_grid$n_csi_firms), " (",
+         fmt_pct(base_grid$pct_csi_firms_overall), " of observed firms)."),
+  paste0("- Base CSI label firm-years: ", fmt_int(base_grid$n_csi_label_firm_years),
+         " (", fmt_pct(base_grid$pct_csi_label_firm_years), " of observed firm-years)."),
+  "",
+  "Highest later-recovery grid rows:",
+  "",
+  "| param_id | C | M | T | flags | later recovery | stayed depressed |",
+  "|---|---:|---:|---:|---:|---:|---:|",
+  apply(top_recovery_grid, 1, function(row) {
+    paste0(
+      "| `", row[["param_id"]], "` | ", row[["C"]], " | ", row[["M"]],
+      " | ", row[["T"]], " | ", fmt_int(as.numeric(row[["n_temporary_csi_flags"]])),
+      " | ", fmt_pct(as.numeric(row[["pct_recovered_above_confirmation_ceiling_5y"]])),
+      " | ", fmt_pct(as.numeric(row[["pct_stayed_depressed_5y"]])), " |"
+    )
+  }),
+  "",
+  "Lowest later-recovery grid rows:",
+  "",
+  "| param_id | C | M | T | flags | later recovery | stayed depressed |",
+  "|---|---:|---:|---:|---:|---:|---:|",
+  apply(lowest_recovery_grid, 1, function(row) {
+    paste0(
+      "| `", row[["param_id"]], "` | ", row[["C"]], " | ", row[["M"]],
+      " | ", row[["T"]], " | ", fmt_int(as.numeric(row[["n_temporary_csi_flags"]])),
+      " | ", fmt_pct(as.numeric(row[["pct_recovered_above_confirmation_ceiling_5y"]])),
+      " | ", fmt_pct(as.numeric(row[["pct_stayed_depressed_5y"]])), " |"
+    )
+  }),
+  "",
+  "## C. Market Capitalization of Temporary CSI vs Non-CSI Observations",
+  "",
+  "Market capitalization uses the CRSP monthly `mktcap` field as produced by the data pipeline.",
+  "",
+  paste0("- Base CSI trigger-month median market cap: ",
+         fmt_num(base_mktcap_csi$median), "."),
+  paste0("- Base non-CSI firm-month median market cap: ",
+         fmt_num(base_mktcap_non$median), "."),
+  paste0("- Base CSI trigger-month mean market cap: ",
+         fmt_num(base_mktcap_csi$mean), "."),
+  paste0("- Base non-CSI firm-month mean market cap: ",
+         fmt_num(base_mktcap_non$mean), "."),
+  "",
+  "## D. CSI Events per Year and Overall",
+  "",
+  paste0("- Base CSI events over the full sample: ",
+         fmt_int(base_events$n_csi_events), "."),
+  paste0("- Base unique CSI firms over the full sample: ",
+         fmt_int(base_events$n_csi_firms), "."),
+  paste0("- Base events as a share of observed firm-years: ",
+         fmt_pct(base_events$pct_events_per_observed_firm_year), "."),
+  paste0("- Base CSI firms as a share of observed firms: ",
+         fmt_pct(base_events$pct_csi_firms_of_observed_firms), "."),
+  "",
+  "## Output Files",
+  "",
+  paste0("- Tables: `", ROB_TABLE_DIR, "`."),
+  paste0("- Figures: `", ROB_FIG_DIR, "`."),
+  paste0("- Event audit: `", file.path(ROB_TABLE_DIR, "revised_csi_confirmed_events_with_5y_validation.csv"), "`."),
+  paste0("- A: `", file.path(ROB_TABLE_DIR, "A_long_run_validation_temporary_csi.csv"), "`."),
+  paste0("- B: `", file.path(ROB_TABLE_DIR, "B_grid_sensitivity_c_m_t.csv"), "`."),
+  paste0("- C: `", file.path(ROB_TABLE_DIR, "C_market_cap_csi_vs_non_csi.csv"), "`."),
+  paste0("- D: `", file.path(ROB_TABLE_DIR, "D_csi_events_per_year.csv"), "` and `",
+         file.path(ROB_TABLE_DIR, "D_csi_events_overall_relative_to_sample.csv"), "`.")
+)
+
+writeLines(md_lines, ROB_DOC_PATH, useBytes = TRUE)
+cat(sprintf("  Wrote: %s\n", ROB_DOC_PATH))
+
+#==============================================================================#
+# 6. Final console summary
+#==============================================================================#
+
+cat("\n[13] Summary\n")
+cat(sprintf("  Parameter combinations : %d\n", nrow(grid_dt)))
+cat(sprintf("  All trigger rows       : %d\n", nrow(csi_events_all)))
+cat(sprintf("  Confirmed CSI events   : %d\n", nrow(csi_events_confirmed)))
+
+if (nrow(overall_csi) > 0L) {
+  base_overall <- overall_csi[param_id == base_param_id]
+  if (nrow(base_overall) == 1L) {
+    cat(sprintf("  Base confirmed events  : %d\n", base_overall$n_csi_events))
+    cat(sprintf("  Base CSI firm share    : %.2f%%\n",
+                base_overall$pct_csi_firms_overall))
+    cat(sprintf("  Base CSI firm-year share: %.2f%%\n",
+                base_overall$pct_csi_label_firm_years))
+  }
+}
+
+cat(sprintf("  Tables written to      : %s\n", ROB_TABLE_DIR))
+cat(sprintf("  Figures written to     : %s\n", ROB_FIG_DIR))
+cat(sprintf("[13_Robustness_Checks.R] DONE: %s\n", format(Sys.time())))
