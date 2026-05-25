@@ -1,0 +1,13 @@
+track,csi_type,split,split_label,response,obs,firms,first_year,last_year,total,share
+dynamic_csi,Temporary-CSI,cv,CV,0,89844,12352,1999,2015,94968,0.946044983573414
+dynamic_csi,Temporary-CSI,test,Test,0,17307,5371,2016,2019,18111,0.955607089614047
+dynamic_csi,Temporary-CSI,oos,Test-OOS,0,17332,6307,2020,2023,18502,0.936763593125067
+dynamic_csi,Temporary-CSI,cv,CV,1,5124,3474,1999,2015,94968,0.0539550164265858
+dynamic_csi,Temporary-CSI,test,Test,1,804,659,2016,2019,18111,0.0443929103859533
+dynamic_csi,Temporary-CSI,oos,Test-OOS,1,1170,1050,2020,2023,18502,0.0632364068749324
+permanent_csi,Permanent-CSI,cv,CV,0,90866,12352,1999,2015,94968,0.956806503243198
+permanent_csi,Permanent-CSI,test,Test,0,17511,5373,2016,2019,18053,0.969977289093226
+permanent_csi,Permanent-CSI,oos,Test-OOS,0,26063,6809,2020,2024,26400,0.987234848484848
+permanent_csi,Permanent-CSI,cv,CV,1,4102,3102,1999,2015,94968,0.0431934967568023
+permanent_csi,Permanent-CSI,test,Test,1,542,468,2016,2019,18053,0.0300227109067745
+permanent_csi,Permanent-CSI,oos,Test-OOS,1,337,311,2020,2022,26400,0.0127651515151515
