@@ -293,13 +293,6 @@ fn_prepare_permanent_model_ready <- function() {
     y_structural = NA_integer_
   )]
 
-  max_label_year <- year(END_DATE) - LABEL_EVENT_YEAR_LAG
-  labels_perm[year > max_label_year, `:=`(
-    y_permanent_csi = NA_integer_,
-    y_structural = NA_integer_,
-    permanent_label_censored = TRUE
-  )]
-
   events_diag <- events[event_status %in% CSI_POSITIVE_EVENT_STATUSES, .(
     permno,
     label_year = trigger_year - LABEL_EVENT_YEAR_LAG,
@@ -377,11 +370,17 @@ fn_prepare_permanent_model_ready <- function() {
   saveRDS(out, PATH_LABELS_PERMANENT)
   saveRDS(out, PATH_LABELS_MODEL_READY)
 
+  permanent_y1 <- sum(out$y_permanent_csi == 1L, na.rm = TRUE)
+  permanent_y0 <- sum(out$y_permanent_csi == 0L, na.rm = TRUE)
+  permanent_yna <- sum(is.na(out$y_permanent_csi))
+  permanent_labelled <- sum(!is.na(out$y_permanent_csi))
+
   cat(sprintf("  Permanent model-ready labels saved: %s\n", PATH_LABELS_MODEL_READY))
-  cat(sprintf("  Positives: %d | labelled: %d | prevalence: %.3f%%\n",
-              sum(out$y == 1L, na.rm = TRUE),
-              sum(!is.na(out$y)),
-              100 * mean(out$y == 1L, na.rm = TRUE)))
+  cat(sprintf("  Permanent y=1: %d | y=0: %d | y=NA: %d\n",
+              permanent_y1, permanent_y0, permanent_yna))
+  cat(sprintf("  Labelled: %d | prevalence: %.3f%%\n",
+              permanent_labelled,
+              100 * permanent_y1 / max(permanent_labelled, 1L)))
 
   invisible(TRUE)
 }
