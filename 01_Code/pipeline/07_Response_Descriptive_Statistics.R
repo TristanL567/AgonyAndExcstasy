@@ -209,21 +209,26 @@ fn_split_summary <- function(dt, include_cv = FALSE) {
   out[, share := obs / total]
   setcolorder(out, c("track", "csi_type", "split", "split_label", "response",
                      "obs", "firms", "first_year", "last_year", "total", "share"))
-  setorder(out, track, response, factor(split, levels = c("cv", "test", "oos")))
+  out[, split_order := match(split, c("cv", "test", "oos"))]
+  setorder(out, track, response, split_order)
+  out[, split_order := NULL]
   out[]
 }
 
 fn_cv_full_counts <- function(labels_dt) {
-  full <- labels_dt[, .(
+  full_base <- copy(labels_dt)
+  full_base[, Split := "Full"]
+  full <- full_base[, .(
     Obs = .N,
     Firms = uniqueN(permno)
-  ), by = .(`CSI type` = csi_type_short, Split = "Full", y)]
+  ), by = .(`CSI type` = csi_type_short, Split, y)]
 
   cv <- rbindlist(lapply(track_payloads, `[[`, "cv_dt"), use.names = TRUE, fill = TRUE)
+  cv[, Split := "CV"]
   cv <- cv[, .(
     Obs = .N,
     Firms = uniqueN(permno)
-  ), by = .(`CSI type` = csi_type_short, Split = "CV", y)]
+  ), by = .(`CSI type` = csi_type_short, Split, y)]
 
   out <- rbindlist(list(cv, full), use.names = TRUE)
   out[, Share := Obs / sum(Obs), by = .(`CSI type`, Split)]
