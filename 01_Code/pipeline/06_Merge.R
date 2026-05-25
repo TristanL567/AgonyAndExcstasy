@@ -44,9 +44,57 @@ fn_label_scaffold <- function() {
          PATH_PRICES_MONTHLY)
   }
   prices_for_permno <- as.data.table(readRDS(PATH_PRICES_MONTHLY))
+  required_cols <- c("permno", "date")
+  missing_cols <- setdiff(required_cols, names(prices_for_permno))
+  if (length(missing_cols) > 0L) {
+    stop(sprintf(
+      "[06_Merge.R] Monthly prices missing required scaffold column(s): %s",
+      paste(missing_cols, collapse = ", ")
+    ))
+  }
+
+  prices_for_permno[, date := as.Date(date)]
+  prices_for_permno[, year := year(date)]
+
   all_permno <- sort(unique(prices_for_permno$permno))
   years <- seq(year(START_DATE), year(END_DATE))
-  CJ(permno = all_permno, year = years)
+  rectangular_scaffold <- CJ(permno = all_permno, year = years)
+
+  observable_cols <- intersect(c("ret_adj", "mktcap"), names(prices_for_permno))
+  if (length(observable_cols) > 0L) {
+    prices_for_permno[, observable_month := Reduce(
+      `|`,
+      lapply(.SD, function(x) !is.na(x))
+    ), .SDcols = observable_cols]
+    observable_firm_years <- unique(
+      prices_for_permno[
+        observable_month == TRUE & !is.na(year),
+        .(permno, year)
+      ],
+      by = c("permno", "year")
+    )
+  } else {
+    observable_firm_years <- unique(
+      prices_for_permno[!is.na(year), .(permno, year)],
+      by = c("permno", "year")
+    )
+  }
+
+  scaffold <- rectangular_scaffold[
+    observable_firm_years,
+    on = .(permno, year),
+    nomatch = 0L
+  ]
+  phantom_rows <- nrow(rectangular_scaffold) - nrow(scaffold)
+  kept_pct <- 100 * nrow(scaffold) / max(nrow(rectangular_scaffold), 1L)
+
+  cat("[06_Merge.R] Label scaffold diagnostics:\n")
+  cat(sprintf("  Rectangular scaffold rows : %d\n", nrow(rectangular_scaffold)))
+  cat(sprintf("  Observable firm-year rows : %d\n", nrow(scaffold)))
+  cat(sprintf("  Phantom rows removed      : %d\n", phantom_rows))
+  cat(sprintf("  Kept percentage           : %.2f%%\n", kept_pct))
+
+  scaffold
 }
 
 fn_prepare_dynamic_model_ready <- function() {
