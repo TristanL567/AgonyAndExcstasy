@@ -182,7 +182,17 @@ stopifnot(
 DIR_ROOT        <- Sys.getenv("MT_ROOT", unset = here::here())
 DIR_CODE        <- file.path(DIR_ROOT, "01_Code")
 DIR_DATA_INPUT  <- file.path(DIR_ROOT, "02_Data_Input")
-DIR_DATA_OUTPUT <- file.path(DIR_ROOT, "03_Data_Output")
+
+fn_is_absolute_path <- function(path) {
+  grepl("^(/|[A-Za-z]:[/\\\\]|\\\\\\\\)", path)
+}
+
+MT_OUTPUT_DIR <- Sys.getenv("MT_OUTPUT_DIR", unset = "")
+DIR_DATA_OUTPUT <- if (nzchar(MT_OUTPUT_DIR) && fn_is_absolute_path(MT_OUTPUT_DIR)) {
+  MT_OUTPUT_DIR
+} else {
+  file.path(DIR_ROOT, "03_Data_Output")
+}
 
 ## Track-folder mapping:
 ##   Code uses RESPONSE_TRACK = "dynamic_csi" or "permanent_csi".
