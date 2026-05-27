@@ -16,7 +16,7 @@ dependencies:
 allowed_areas:
 - `07_CloudComputing/`
 - Future ticket-specific edits may touch `01_Code/` only if a ticket explicitly authorizes implementation.
-- Future generated outputs may be written under `03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/`.
+- Future generated sensitivity outputs may be written under `03_Data_Output/3_Modelling_Results/Necessary/sensitivity/`.
 
 must_not_touch:
 - `C:\Users\Tristan Leiter\Documents\MT`
@@ -56,7 +56,7 @@ verification_commands:
 - `Rscript 01_Code/pipeline/00_Master.R --help`
 - `Rscript 01_Code/pipeline/09C_preflight.py --help`
 - `Rscript 01_Code/pipeline/13c_Old_CSI_Recovery_Buckets_All_Grid.R --help`
-- `find 03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid -maxdepth 4 -type f | sort`
+- `find 03_Data_Output/3_Modelling_Results/Necessary/sensitivity -maxdepth 4 -type f | sort`
 
 completion_report_required: true
 
@@ -148,13 +148,19 @@ Do not upload by default:
 
 ## Expected Cloud Output Layout
 
-Recommended root:
+Canonical local results root after the `Development_CC` work is merged into `main`:
+
+```text
+C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\3_Modelling_Results\Necessary\sensitivity
+```
+
+Repository-relative cloud and local root:
 
 ```text
 03_Data_Output/
-  2_Robustness_Checks/
+  3_Modelling_Results/
     Necessary/
-      sensitivity_grid/
+      sensitivity/
         manifest/
         logs/
         labels/
@@ -172,6 +178,8 @@ Recommended root:
 ```
 
 Use one run ID per configuration. Never overwrite baseline outputs with variant outputs.
+
+These result files must not be committed. `03_Data_Output/**` is ignored by `.gitignore` because the outputs are too large for Git. The branch merge should bring in only the code and prompt changes needed to write results to this path; when the merged `main` branch is run locally, results should be stored under the canonical local path above.
 
 ## Execution Strategy
 
@@ -617,7 +625,7 @@ dependencies:
 allowed_areas:
 - Remote project directory
 - Local `07_CloudComputing/`
-- Remote output path `03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/`
+- Remote output path `03_Data_Output/3_Modelling_Results/Necessary/sensitivity/`
 
 must_not_touch:
 - MT
@@ -645,8 +653,8 @@ acceptance_criteria:
 manual_verification_required: true
 
 verification_commands:
-- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid -maxdepth 4 -type f | sort"`
-- `ssh -p <PORT> <USER>@<HOST> "grep -R \"C080_M020_T018\\|C090_M020_T028\" <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/logs"`
+- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity -maxdepth 4 -type f | sort"`
+- `ssh -p <PORT> <USER>@<HOST> "grep -R \"C080_M020_T018\\|C090_M020_T028\" <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/logs"`
 
 completion_report_required: true
 
@@ -689,7 +697,7 @@ acceptance_criteria:
 manual_verification_required: true
 
 verification_commands:
-- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/comparisons -type f | sort"`
+- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/comparisons -type f | sort"`
 
 completion_report_required: true
 
@@ -704,7 +712,7 @@ dependencies:
 
 allowed_areas:
 - Remote project directory
-- Remote output path `03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/`
+- Remote output path `03_Data_Output/3_Modelling_Results/Necessary/sensitivity/`
 - Local `07_CloudComputing/` for status reports
 
 must_not_touch:
@@ -734,8 +742,8 @@ acceptance_criteria:
 manual_verification_required: true
 
 verification_commands:
-- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/raw_predictions -mindepth 1 -maxdepth 1 -type d | wc -l"`
-- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/index_construction -mindepth 1 -maxdepth 1 -type d | wc -l"`
+- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions -mindepth 1 -maxdepth 1 -type d | wc -l"`
+- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/index_construction -mindepth 1 -maxdepth 1 -type d | wc -l"`
 
 completion_report_required: true
 
@@ -779,7 +787,7 @@ acceptance_criteria:
 manual_verification_required: true
 
 verification_commands:
-- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/2_Robustness_Checks/Necessary/sensitivity_grid/comparisons -type f | sort"`
+- `ssh -p <PORT> <USER>@<HOST> "find <REMOTE_PROJECT>/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/comparisons -type f | sort"`
 
 completion_report_required: true
 

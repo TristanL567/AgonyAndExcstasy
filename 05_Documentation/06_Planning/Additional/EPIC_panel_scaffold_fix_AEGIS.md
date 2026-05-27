@@ -1,5 +1,15 @@
 # EPIC: Panel Scaffold Row-Count and Label-NA Cleanup
 
+## Completion And Supersession Status
+
+This AEGIS planning conversion is complete and superseded by the accepted AE-PANEL implementation record:
+
+- `05_Documentation/09_Epics/AE-PANEL_Labelled_Firm_Year_Panel/AE-PANEL-001_Accepted_Rule_Decision_Report.md`
+- `05_Documentation/09_Epics/AE-PANEL_Labelled_Firm_Year_Panel/Validation/AE-PANEL_Implementation_ReReview_2026-05-25.md`
+- `05_Documentation/09_Epics/AE-PANEL_Labelled_Firm_Year_Panel/AE-PANEL-007_Final_Results_And_Update_List.md`
+
+The corrected re-review supersedes the first-pass baseline-count interpretation. The first-pass baseline table is not a binding final-count target. Final temporary CSI positives are 8,517, final permanent CSI OOS `y=NA` is 776, canonical artifacts retain `y=NA`, and supervised training and label-based evaluation exclude `y=NA`.
+
 ## Epic Goal
 
 Clean up the firm-year panel construction so labelled modelling panels exclude phantom firm-years and represent unresolvable forward-label windows as `NA`, without losing valid positive labels or OOS inference rows.
