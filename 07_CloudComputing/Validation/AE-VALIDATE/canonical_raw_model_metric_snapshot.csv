@@ -1,0 +1,169 @@
+track,source_type,relative_path,model_key,model_label,set,metric,value
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_ap,0.2197
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_auc,0.9647
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_r3,0.6127
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_n_folds,3
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,avg_precision,0.2114
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,auc_roc,0.9692
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,brier,0.0089
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr1,0.3066
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr3,0.6551
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr5,0.8183
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr10,0.9765
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,avg_precision,0.2911
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,auc_roc,0.9552
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,brier,0.0128
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr1,0.3222
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr3,0.7169
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr5,0.8401
+temporary_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr10,0.9492
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap,0.7342
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc,0.9359
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr1,0.3173
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr3,0.5469
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr5,0.6682
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr10,0.8169
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,brier,0.0705
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,ap,0.7009
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,auc,0.9343
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr1,0.3429
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr3,0.5366
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr5,0.6427
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr10,0.7844
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,brier,0.0691
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,fund,,test,auc_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap,0.6945
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc,0.9231
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr1,0.296
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr3,0.4783
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr5,0.5934
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr10,0.749
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,brier,0.0751
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap,0.6948
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc,0.9252
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr1,0.3525
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr3,0.5373
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr5,0.6208
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr10,0.7529
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,brier,0.0666
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap,0.8509
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc,0.965
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr1,0.5431
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr3,0.7178
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr5,0.8116
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr10,0.9001
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,brier,0.0636
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,ap,0.8495
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,auc,0.969
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr1,0.5811
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr3,0.7522
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr5,0.8275
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr10,0.9144
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,brier,0.0572
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,ap_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,ap_hi,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,auc_lo,
+temporary_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/temporary_csi/evaluation/eval_performance_all.rds,raw,,test,auc_hi,
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_ap,0.2016
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_auc,0.965
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_r3,0.6216
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,cv,cv_n_folds,3
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,avg_precision,0.148
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,auc_roc,0.9674
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,brier,0.0069
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr1,0.2693
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr3,0.6621
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr5,0.8233
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,test,recall_fpr10,0.9708
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,avg_precision,0.0587
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,auc_roc,0.9495
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,brier,0.0059
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr1,0.122
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr3,0.4456
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr5,0.7109
+permanent_csi,ag_eval_summary_json,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw/ag_eval_summary.json,raw,M3 — Full engineered features,oos,recall_fpr10,0.9045
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap,0.1044
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc,0.9328
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr1,0.261
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr3,0.5806
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr5,0.7361
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,r_fpr10,0.8944
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,brier,0.0058
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,oos_2020_2022,auc_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,ap,0.1195
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,auc,0.952
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr1,0.2381
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr3,0.5952
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr5,0.8022
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,r_fpr10,0.9286
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,brier,0.0066
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,fund,,test,auc_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap,0.1078
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc,0.9542
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr1,0.2405
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr3,0.5484
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr5,0.7009
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,r_fpr10,0.9003
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,brier,0.0056
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,oos_2020_2022,auc_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap,0.1101
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc,0.9583
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr1,0.2106
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr3,0.5568
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr5,0.7527
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,r_fpr10,0.9396
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,brier,0.0064
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,latent_raw,,test,auc_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap,0.1223
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc,0.9558
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr1,0.2698
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr3,0.6129
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr5,0.7683
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,r_fpr10,0.9179
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,brier,0.006
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,oos_2020_2022,auc_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,ap,0.1344
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,auc,0.9661
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr1,0.2656
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr3,0.6648
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr5,0.8425
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,r_fpr10,0.9634
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,brier,0.0067
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,ap_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,ap_hi,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,auc_lo,
+permanent_csi,eval_performance_all.rds,03_Data_Output/3_Modelling_Results/Necessary/permanent_csi/evaluation/eval_performance_all.rds,raw,,test,auc_hi,
