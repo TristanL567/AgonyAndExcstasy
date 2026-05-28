@@ -1,0 +1,2 @@
+decision,reason,required_before_AE_SENS_007
+PROCEED,"Both pilot configurations completed all required isolated raw-only steps; stricter C=-0.90/T=28 reduced positives, prevalence, mean scores, AP, and benchmark-relative 11C improvements in the expected direction without scope or canonical-output issues.",Use the validated run-id-isolated runner; preserve raw-only/full-grid scope and compact evidence capture.
