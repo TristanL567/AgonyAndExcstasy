@@ -1,0 +1,5 @@
+CANONICAL_CHECK_SCOPE
+remote writes inspected by path policy
+sensitivity_root=/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity
+canonical roots were not targeted by AE-SENS-007S commands
+RECENT_NON_SENSITIVITY_OUTPUTS

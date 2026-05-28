@@ -1,0 +1,11 @@
+run_id,C,M,T,status,started_at,ended_at,exit_code,note
+C060_M000_T012,-0.60,0.00,12,skipped_complete,2026-05-28T18:41:47+00:00,2026-05-28T18:41:47+00:00,0,reused complete isolated run
+C060_M000_T018,-0.60,0.00,18,completed_resume_11c,2026-05-28T18:41:47+00:00,2026-05-28T18:45:45+00:00,0,resumed 11C only
+C060_M000_T028,-0.60,0.00,28,completed_resume_11c,2026-05-28T18:45:45+00:00,2026-05-28T18:49:37+00:00,0,resumed 11C only
+C060_M020_T012,-0.60,-0.20,12,completed_resume_11c,2026-05-28T18:49:37+00:00,2026-05-28T18:53:22+00:00,0,resumed 11C only
+C060_M020_T018,-0.60,-0.20,18,completed_resume_11c,2026-05-28T18:53:22+00:00,2026-05-28T18:57:10+00:00,0,resumed 11C only
+C060_M020_T028,-0.60,-0.20,28,blocked_partial,2026-05-28T18:57:10+00:00,2026-05-28T18:57:10+00:00,3,partial non-empty outputs lack documented safe resume point
+C060_M030_T012,-0.60,-0.30,12,completed_full,2026-05-28T18:57:10+00:00,2026-05-28T19:32:45+00:00,0,full isolated raw-only run completed
+C060_M030_T018,-0.60,-0.30,18,completed_full,2026-05-28T19:32:45+00:00,2026-05-28T20:05:45+00:00,0,full isolated raw-only run completed
+C060_M030_T028,-0.60,-0.30,28,completed_full,2026-05-28T20:05:45+00:00,2026-05-28T20:38:59+00:00,0,full isolated raw-only run completed
+C080_M000_T012,-0.80,0.00,12,failed_full,2026-05-28T20:38:59+00:00,2026-05-28T20:53:54+00:00,1,full isolated run failed or required outputs missing

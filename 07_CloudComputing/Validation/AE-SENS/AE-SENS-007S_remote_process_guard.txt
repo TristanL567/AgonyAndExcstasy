@@ -1,0 +1,11 @@
+PROCESS_GUARD
+DISK
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         100G  100G     0 100% /
+overlay         100G  100G     0 100% /
+overlay         100G  100G     0 100% /
+DISK_BYTES
+Filesystem        1B-blocks         Used Available Use% Mounted on
+overlay        107374182400 107374182400         0 100% /
+overlay        107374182400 107374182400         0 100% /
+overlay        107374182400 107374182400         0 100% /

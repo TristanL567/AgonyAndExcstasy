@@ -1,0 +1,3 @@
+run_id,failed_step,exit_code,reason
+C060_M020_T028,partial_state,3,partial non-empty outputs lack documented safe resume point
+C080_M000_T012,full_run,1,full isolated run failed or required outputs missing
