@@ -1,0 +1,22 @@
+[config.R] Loaded.
+  Root           : /root/AgonyAndExcstasy
+  RESPONSE_TRACK : dynamic_csi  (downstream consumers route here)
+  Terminal CSI   : enabled  (CRSP codes 572, 573, 574)
+  Output         : /root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models
+  Period         : 1993-01-01 to 2024-12-31
+  Split          : Train ≤2015 | Test 2016–2019 | OOS ≥2020
+  CV folds (R/Py): 4 / 3  (fold 1 omitted in expanding window)
+  CSI base       : C=-0.80 | M=-0.20 | T=18 months
+  CSI grid       : disabled
+  PCL hybrid     : forward=60 months | delisting window=36 months | impute dlret=-0.55
+  Bucket         : 5-yr fwd | loser < -2% | phoenix ≥ 0% | last year=2019
+  Exclusion rate : CSI=5% | Bucket/Structural=20%
+  Universe       : Top 3000 | min $100M mktcap
+  Seed           : 123
+  Models         : 12  (fund, latent_fund, raw, latent_raw, bucket, bucket_latent_fund, bucket_raw, bucket_latent_raw, structural, structural_latent_fund, structural_raw, structural_latent_raw)
+
+[11C_IndexConstruction_Revised.R] START: 2026-05-28 08:14:35 
+[11C] Loading CRSP-like constituents and monthly returns...
+  Monthly rows: 2086144 | constituents: 1066751 | indices: large_cap, mid_cap, small_cap, total_market
+[11C] Loading ag_raw predictions and estimating CV thresholds...
+double free or corruption (!prev)
