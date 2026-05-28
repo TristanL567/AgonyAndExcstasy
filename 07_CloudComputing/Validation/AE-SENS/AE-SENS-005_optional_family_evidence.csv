@@ -1,0 +1,11 @@
+run_id,check,observed
+C080_M020_T018,LightGBM,True
+C080_M020_T018,CatBoost,True
+C080_M020_T018,FastAI,True
+C080_M020_T018,XGBoost,True
+C080_M020_T018,missing_import_skip,False
+C090_M020_T028,LightGBM,True
+C090_M020_T028,CatBoost,True
+C090_M020_T028,FastAI,True
+C090_M020_T028,XGBoost,True
+C090_M020_T028,missing_import_skip,False

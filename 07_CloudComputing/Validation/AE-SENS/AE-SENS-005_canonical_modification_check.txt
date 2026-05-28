@@ -1,0 +1,6 @@
+canonical_snapshot_hashes
+before: cf23594cfa2f63ee319ebd556b25008265d1432e54ac9606998a3c69947c1c55
+resume_before: cf23594cfa2f63ee319ebd556b25008265d1432e54ac9606998a3c69947c1c55
+after: cf23594cfa2f63ee319ebd556b25008265d1432e54ac9606998a3c69947c1c55
+canonical_hashes_match: True
+scope: remote temporary_csi canonical modelling, 4_IndexConstruction temporary_csi, and pipeline-result temporary_csi files

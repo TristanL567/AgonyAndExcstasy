@@ -45,7 +45,33 @@ cat("\n[11C_IndexConstruction_Revised.R] START:", format(Sys.time()), "\n")
 RUN_STARTED <- Sys.time()
 SCRIPT_PATH <- normalizePath("11C_IndexConstruction_Revised.R", mustWork = FALSE)
 
-OUT_DIR <- file.path(DIR_TABLES_TRACK, "11c_index_revised")
+AE_SENS_RUN_ID <- Sys.getenv("AE_SENS_RUN_ID", unset = "")
+AE_SENS_OUTPUT_ROOT <- Sys.getenv("AE_SENS_OUTPUT_ROOT", unset = "")
+AE_SENS_MODE <- nzchar(AE_SENS_RUN_ID) || nzchar(AE_SENS_OUTPUT_ROOT)
+if (AE_SENS_MODE) {
+  if (!nzchar(AE_SENS_RUN_ID) || !nzchar(AE_SENS_OUTPUT_ROOT)) {
+    stop("AE_SENS_RUN_ID and AE_SENS_OUTPUT_ROOT are both required in AE-SENS mode.")
+  }
+  if (!identical(Sys.getenv("MODEL", unset = ""), "raw")) {
+    stop("AE-SENS 11C mode only permits MODEL=raw.")
+  }
+  if (!identical(RESPONSE_TRACK, "dynamic_csi")) {
+    stop("AE-SENS 11C mode only permits RESPONSE_TRACK=dynamic_csi.")
+  }
+  if (!grepl("^C(060|080|090)_M(000|020|030)_T(012|018|028)$", AE_SENS_RUN_ID)) {
+    stop("Invalid AE_SENS_RUN_ID: ", AE_SENS_RUN_ID)
+  }
+  if (!grepl("/03_Data_Output/3_Modelling_Results/Necessary/sensitivity$", AE_SENS_OUTPUT_ROOT)) {
+    stop("AE_SENS_OUTPUT_ROOT is outside the approved sensitivity root: ",
+         AE_SENS_OUTPUT_ROOT)
+  }
+}
+
+OUT_DIR <- if (AE_SENS_MODE) {
+  file.path(AE_SENS_OUTPUT_ROOT, "index_construction", AE_SENS_RUN_ID)
+} else {
+  file.path(DIR_TABLES_TRACK, "11c_index_revised")
+}
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 ## CRSP-MI replication data lives under
@@ -91,7 +117,7 @@ fn_stop_missing <- function(paths) {
   }
 }
 
-HAS_ARROW <- requireNamespace("arrow", quietly = TRUE)
+HAS_ARROW <- requireNamespace("arrow", quietly = TRUE) && !AE_SENS_MODE
 
 fn_read_parquet <- function(path) {
   if (HAS_ARROW) {
@@ -106,7 +132,10 @@ fn_read_parquet <- function(path) {
     "import sys",
     "pd.read_parquet(sys.argv[1]).to_csv(sys.argv[2], index=False)"
   ), py_file)
-  status <- system2("python", c(py_file, path, tmp))
+  py_bin <- Sys.which("python3")
+  if (!nzchar(py_bin)) py_bin <- Sys.which("python")
+  if (!nzchar(py_bin)) stop("Python is required for parquet fallback")
+  status <- system2(py_bin, c(py_file, path, tmp))
   if (!identical(status, 0L)) {
     stop(sprintf("Python parquet fallback failed for %s", path))
   }
@@ -219,7 +248,11 @@ cat(sprintf("  Monthly rows: %d | constituents: %d | indices: %s\n",
 cat("[11C] Loading ag_raw predictions and estimating CV thresholds...\n")
 
 fn_load_predictions <- function() {
-  tdir <- file.path(DIR_TABLES_AUTOGLUON_TRACK, "ag_raw")
+  tdir <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID)
+  } else {
+    file.path(DIR_TABLES_AUTOGLUON_TRACK, "ag_raw")
+  }
   fmap <- c(
     oos = file.path(tdir, "ag_preds_oos.parquet"),
     test = file.path(tdir, "ag_preds_test.parquet"),
@@ -243,24 +276,101 @@ fn_load_predictions <- function() {
   pred <- rbindlist(parts, use.names = TRUE, fill = TRUE)
   pred[, src_rank := src_rank[src]]
   setorder(pred, permno, year, src_rank)
-  pred <- pred[!duplicated(pred, by = c("permno", "year"))]
+  if (AE_SENS_MODE) {
+    keep_first <- !duplicated(data.frame(permno = pred$permno, year = pred$year))
+    pred <- pred[keep_first]
+  } else {
+    pred <- pred[!duplicated(pred, by = c("permno", "year"))]
+  }
   pred[, src_rank := NULL]
   pred[]
 }
 
 fn_cv_thresholds <- function() {
-  cv_path <- file.path(
-    DIR_TABLES_AUTOGLUON_TRACK, "ag_raw", "ag_cv_results.parquet"
-  )
+  cv_path <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID,
+              "ag_cv_results.parquet")
+  } else {
+    file.path(DIR_TABLES_AUTOGLUON_TRACK, "ag_raw", "ag_cv_results.parquet")
+  }
   cv <- fn_read_parquet(cv_path)
-  cv <- cv[!is.na(y) & !is.na(p_csi), .(
-    y = as.integer(y),
-    p_csi = as.numeric(p_csi)
-  )]
-  if (nrow(cv) < 100L || uniqueN(cv$y) < 2L) {
+  y <- as.integer(cv$y)
+  p_csi <- as.numeric(cv$p_csi)
+  ok <- !is.na(y) & !is.na(p_csi)
+  y <- y[ok]
+  p_csi <- p_csi[ok]
+  if (length(y) < 100L || length(unique(y)) < 2L) {
     stop("CV predictions are insufficient for thresholding.")
   }
 
+  if (AE_SENS_MODE) {
+    ord <- order(p_csi, decreasing = TRUE)
+    y <- y[ord]
+    p_csi <- p_csi[ord]
+    runs <- rle(p_csi)
+    ends <- cumsum(runs$lengths)
+    pos_cum <- cumsum(y == 1L)
+    neg_cum <- cumsum(y == 0L)
+    pos_before <- c(0L, pos_cum[ends[-length(ends)]])
+    neg_before <- c(0L, neg_cum[ends[-length(ends)]])
+
+    roc_grid <- data.frame(
+      threshold = runs$values,
+      tp = pos_cum[ends],
+      fp = neg_cum[ends],
+      pos = pos_cum[ends] - pos_before,
+      neg = neg_cum[ends] - neg_before
+    )
+    total_pos <- sum(y == 1L)
+    total_neg <- sum(y == 0L)
+    roc_grid$fn <- total_pos - roc_grid$tp
+    roc_grid$tn <- total_neg - roc_grid$fp
+    roc_grid$recall <- roc_grid$tp / total_pos
+    roc_grid$fpr <- roc_grid$fp / total_neg
+    roc_grid$precision <- ifelse(
+      roc_grid$tp + roc_grid$fp > 0L,
+      roc_grid$tp / (roc_grid$tp + roc_grid$fp),
+      NA_real_
+    )
+    roc_grid$youden_j <- roc_grid$recall - roc_grid$fpr
+
+    fpr1_idx <- which(roc_grid$fpr <= 0.01)
+    fpr3_idx <- which(roc_grid$fpr <= 0.03)
+    if (length(fpr1_idx) == 0L) stop("No CV threshold satisfies FPR <= 1%.")
+    if (length(fpr3_idx) == 0L) stop("No CV threshold satisfies FPR <= 3%.")
+
+    pick_fpr <- function(idx) {
+      idx[order(-roc_grid$recall[idx], roc_grid$fpr[idx],
+                -roc_grid$threshold[idx])][1L]
+    }
+    picks <- c(
+      fpr1 = pick_fpr(fpr1_idx),
+      fpr3 = pick_fpr(fpr3_idx),
+      youden = order(-roc_grid$youden_j, -roc_grid$recall,
+                     roc_grid$fpr, -roc_grid$threshold)[1L]
+    )
+
+    out <- rbindlist(lapply(names(picks), function(method) {
+      row <- roc_grid[picks[[method]], ]
+      data.table(
+        track = RESPONSE_TRACK,
+        model_key = MODEL_KEY,
+        model_label = MODEL_LABEL,
+        threshold_method = method,
+        threshold_label = THRESHOLD_METHODS[[method]],
+        threshold = row$threshold,
+        cv_fpr = row$fpr,
+        cv_recall = row$recall,
+        cv_precision = row$precision,
+        cv_youden = row$youden_j,
+        cv_flag_rate = (row$tp + row$fp) / (total_pos + total_neg),
+        cv_n_flagged = row$tp + row$fp
+      )
+    }), use.names = TRUE)
+    return(out[order(threshold_method)])
+  }
+
+  cv <- data.table(y = y, p_csi = p_csi)
   total_pos <- sum(cv$y == 1L)
   total_neg <- sum(cv$y == 0L)
   roc_grid <- cv[, .(
@@ -784,7 +894,10 @@ fn_write_csv(exclusion_summary, file.path(OUT_DIR, "index_exclusion_summary_by_c
 cat("[11C] Computing FP/FN/TP/TN error-cost decomposition...\n")
 
 fn_load_track_labels <- function() {
-  candidates <- if (IS_PERMANENT_TRACK) {
+  if (AE_SENS_MODE) {
+    candidates <- file.path(AE_SENS_OUTPUT_ROOT, "labels", AE_SENS_RUN_ID,
+                            "labels_model_ready.rds")
+  } else if (IS_PERMANENT_TRACK) {
     c(PATH_LABELS_MODEL_READY, PATH_LABELS_PERMANENT)
   } else {
     c(PATH_LABELS_MODEL_READY, PATH_LABELS_BASE)

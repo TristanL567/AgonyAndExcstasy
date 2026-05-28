@@ -1,0 +1,5 @@
+REMOTE_PROCESS_GUARD_AFTER
+matching_forbidden_or_project_processes: none beyond the diagnostic shell and grep commands themselves
+checked_after: both pilot run_status files recorded four completed steps
+scope: checked for 09C_AutoGluon.py, 10_Evaluation.R, 11C_IndexConstruction_Revised.R, ae_sens, run_ae_sens, and CSI_RUN_GRID after pilot completion
+note: remote command output was sanitized locally to avoid retaining the diagnostic command body; no endpoint, port, key path, or credential material is recorded

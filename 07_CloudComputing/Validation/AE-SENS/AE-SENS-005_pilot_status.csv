@@ -1,0 +1,3 @@
+run_id,status,completed_steps,started_at,ended_at,note
+C080_M020_T018,completed,4,2026-05-28T13:10:27+00:00,2026-05-28T14:03:07+00:00,isolated raw-only sensitivity pilot under AE_SENS_OUTPUT_ROOT
+C090_M020_T028,completed,4,2026-05-28T14:05:35+00:00,2026-05-28T14:33:16+00:00,isolated raw-only sensitivity pilot under AE_SENS_OUTPUT_ROOT
