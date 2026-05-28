@@ -1,0 +1,80 @@
+[09C] CV fold structure (expanding window, folds 2–4):
+  Fold 2: train ≤2001 n=70,950 | val 2002–2006 n=28,956
+  Fold 3: train ≤2006 n=99,906 | val 2007–2010 n=20,441
+  Fold 4: train ≤2010 n=120,347 | val 2011–2015 n=22,826
+
+[09C] ══ STAGE 1 [raw] ══  preset=good_quality  time=1800s
+
+  Training rows : 120,347
+  Holdout rows  : 22,826
+  Test rows     : 18,111  (eval-safe 2016-2019)
+
+[09C] Stage 1 training complete.
+
+[09C] Leaderboard (holdout):
+
+              model  score_val  pred_time_val   fit_time
+WeightedEnsemble_L2   0.230682       4.280329 280.222932
+         LightGBMXT   0.217673       0.053819   8.926904
+     ExtraTreesEntr   0.217216       0.249454  17.791124
+     NeuralNetTorch   0.216767       0.274247  52.039386
+           CatBoost   0.216106       0.058589   9.091503
+   RandomForestEntr   0.215133       0.252839  52.360062
+           LightGBM   0.213695       0.083386  10.759900
+      LightGBMLarge   0.212389       0.103738  30.349995
+     ExtraTreesGini   0.207256       0.268797  17.890449
+   RandomForestGini   0.204428       0.225208  53.641423
+            XGBoost   0.200142       0.592353   8.508519
+    NeuralNetFastAI   0.195909       3.258325 107.010535
+
+[09C] Feature importance skipped (set AG_FEATURE_IMPORTANCE=1 to enable).
+
+[09C] Generating predictions ...
+  ag_preds_test_eval.parquet                     18,111 rows  ← eval-safe metrics
+  ag_preds_test.parquet                          18,111 rows  ← index construction
+  ag_preds_oos_eval.parquet                      18,502 rows  ← OOS metrics (CSI only)
+  ag_preds_oos.parquet                           18,502 rows  ← index construction
+  ag_preds_train_boundary.parquet                 4,663 rows  ← year=2015 for index construction
+
+[09C] ── Stage 1 Evaluation [raw] ──
+
+  (Test 2016-2019 = model selection basis)
+  (OOS 2020–2024 = index construction, not model selection)
+
+  test_2016_2019                AP=0.1985  AUC=0.8766  R@FPR3=0.2002  R@FPR5=0.2998 ← MODEL SELECTION
+  oos_2020_2024                 AP=0.3084  AUC=0.8961  R@FPR3=0.2547  R@FPR5=0.4000 ← index use only
+
+[09C] ══ STAGE 2 — CV [raw] ══  preset=medium_quality  time=900s/fold
+
+[09C] Fold 2: train ≤2001 → val 2002–2006
+  Fit rows: 70,950  pos=3424  neg=67526
+  Val rows: 28,956
+  Fold 2: AP=0.2058  AUC=0.8920  R@FPR3=0.2633  n=28,956  prev=0.0370
+[09C] Fold 3: train ≤2006 → val 2007–2010
+  Fit rows: 99,906  pos=4495  neg=95411
+  Val rows: 20,441
+  Fold 3: AP=0.2098  AUC=0.8284  R@FPR3=0.1927  n=20,441  prev=0.0561
+[09C] Fold 4: train ≤2010 → val 2011–2015
+  Fit rows: 120,347  pos=5642  neg=114705
+  Val rows: 22,826
+  Fold 4: AP=0.2344  AUC=0.8991  R@FPR3=0.2852  n=22,826  prev=0.0395
+
+[09C] CV averaged across 3 folds (not pooled):
+  AP      : 0.2166  per-fold: [0.2058, 0.2098, 0.2344]
+  AUC     : 0.8732  per-fold: [0.892, 0.8284, 0.8991]
+  R@FPR3  : 0.2471  per-fold: [0.2633, 0.1927, 0.2852]
+
+[09C] Summary: /root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_eval_summary.json
+
+[09C] ══ RESULTS [raw] ══
+
+  Model                          | CV AP    | Test AP  | AUC      | R@FPR3
+  ------------------------------ | -------- | -------- | ----------
+  raw                            | 0.2166   | 0.1985   | 0.8766   | 0.2002
+  ------------------------------ | -------- | -------- | ----------
+  M1 prior run                   | —        | 0.6546   | 0.9337   | 0.4936
+  M3 prior run                   | —        | 0.7576   | 0.9601   | 0.6397
+
+[09C] DONE [raw]
+  Tables : /root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw
+  Model  : /root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw/ag_predictor

@@ -1,0 +1,3 @@
+track,start_utc,end_utc,runtime_seconds,exit_code
+dynamic_csi,2026-05-28T06:06:37Z,2026-05-28T06:30:24Z,1427,0
+permanent_csi,2026-05-28T06:30:36Z,2026-05-28T06:53:41Z,1385,0
