@@ -1,0 +1,6 @@
+run_id,C,M,T,status,started_at,ended_at,exit_code,note
+C060_M000_T012,-0.60,0.00,12,failed,2026-05-28T15:04:04+00:00,2026-05-28T15:37:23+00:00,139,runner exited nonzero or required outputs missing
+C060_M000_T018,-0.60,0.00,18,failed,2026-05-28T15:37:23+00:00,2026-05-28T16:06:44+00:00,134,runner exited nonzero or required outputs missing
+C060_M000_T028,-0.60,0.00,28,failed,2026-05-28T16:06:44+00:00,2026-05-28T16:40:38+00:00,139,runner exited nonzero or required outputs missing
+C060_M020_T012,-0.60,-0.20,12,failed,2026-05-28T16:40:38+00:00,2026-05-28T17:11:48+00:00,134,runner exited nonzero or required outputs missing
+C060_M020_T018,-0.60,-0.20,18,failed,2026-05-28T17:11:48+00:00,2026-05-28T17:43:21+00:00,134,runner exited nonzero or required outputs missing

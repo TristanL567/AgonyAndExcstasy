@@ -1,0 +1,90 @@
+==== C060_M000_T012 ====
+
+ *** caught segfault ***
+address 0x5ba29f93e318, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x5ba29f9be110, cause 'memory not mapped'
+Error in forderv(x, by = xcols) : bad value
+Calls: merge ... merge.data.table -> [ -> [.data.table -> bmerge -> forderv
+Execution halted
+
+Traceback:
+ 1: forderv(x, by = xcols)
+ 2: bmerge(i, x, leftcols, rightcols, roll, rollends, nomatch, mult,     ops, verbose = verbose)
+ 3: `[.data.table`(y, x, nomatch = if (all.x) NA else NULL, on = by,     allow.cartesian = allow.cartesian)
+ 4: y[x, nomatch = if (all.x) NA else NULL, on = by, allow.cartesian = allow.cartesian]
+ 5: merge.data.table(bench_q[index_id == sk$index_id], model_q, by = c("index_id",     "qdate", "permno"), all.x = TRUE)
+ 6: merge(bench_q[index_id == sk$index_id], model_q, by = c("index_id",     "qdate", "permno"), all.x = TRUE)
+An irrecoverable exception occurred. R is aborting now ...
+
+ *** caught segfault ***
+address 0x5ba29f97e218, cause 'memory not mapped'
+An irrecoverable exception occurred. R is aborting now ...
+
+ *** caught segfault ***
+address 0x5ba29f8fde40, cause 'memory not mapped'
+Warning: stack imbalance in 'lazyLoadDBfetch', 15 then 17
+
+Traceback:
+ 1: (function (x) x$unload())(<environment>)
+An irrecoverable exception occurred. R is aborting now ...
+==== C060_M000_T018 ====
+double free or corruption (!prev)
+==== C060_M000_T028 ====
+
+ *** caught segfault ***
+address 0x5ec89f299ac4, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x5ec89f399e48, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x5ec89f2d9e2c, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x5ec89f35a0f8, cause 'memory not mapped'
+
+ *** caught segfault ***
+address 0x5ec89f319ed0, cause 'memory not mapped'
+Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+Execution halted
+Error in forderv(x, by = xcols) : bad value
+Fatal error: error during cleanup
+
+
+Traceback:
+
+Traceback:
+ 1:  1: 
+Traceback:
+ 1: forderv(x, by = xcols)forderv(x, by = xcols)forderv(x, by = xcols)
+ 2: bmerge(i, x, leftcols, rightcols, roll, rollends, nomatch, mult, 
+
+    ops, verbose = verbose) 2:  2: 
+ 3: `[.data.table`(y, x, nomatch = if (all.x) NA else NULL, on = by,     allow.cartesian = allow.cartesian)bmerge(i, x, leftcols, rightcols, roll, rollends, nomatch, mult,     ops, verbose = verbose)
+ 3: `[.data.table`(y, x, nomatch = if (all.x) NA else NULL, on = by,     allow.cartesian = allow.cartesian)
+ 4: y[x, nomatch = if (all.x) NA else NULL, on = by, allow.cartesian = allow.cartesian]
+bmerge(i, x, leftcols, rightcols, roll, rollends, nomatch, mult, 
+ 4: y[x, nomatch = if (all.x) NA else NULL, on = by, allow.cartesian = allow.cartesian] 5:     ops, verbose = verbose)
+merge.data.table(bench_q[index_id == sk$index_id], model_q, by = c("index_id", 
+ 5:     "qdate"id", "qdate"), all.x = TRUE) 3: merge.data.table(bench_q[index_id == sk$index_id], model_q, by = c("qdate"id",     "qdate", "permno"), all.x = TRUE)
+ 6: `[.data.table`(y, x, nomatch = if (all.x) NA else NULL, on = by, 
+merge(bench_q[index_id == sk$index_id], model_q, by = c("index_id",     "perme", "permno"), all.x = TRUE)
+An irrecoverable exception occurred. R is aborting now ...
+    allow.cartesian = allow.cartesian)
+ 4: y[x, nomatch = if (all.x) NA else NULL, on = by, allow.cartesian = allow.cartesian]
+ 5: merge.data.table(bench_q[index_id == sk$index_id], model_q, by = c("qdate"id",     "qdate", "permno"), all.x = TRUE)
+ 6:  6: merge(bench_q[index_id == sk$index_id], model_q, by = c("index_id",     "qdate", "permno"), all.x = TRUE)
+An irrecoverable exception occurred. R is aborting now ...
+merge(bench_q[index_id == sk$index_id], model_q, by = c("index_id",     "perme", "permno"), all.x = TRUE)
+An irrecoverable exception occurred. R is aborting now ...
+*** stack smashing detected ***: terminated
+==== C060_M020_T012 ====
+double free or corruption (!prev)
+==== C060_M020_T018 ====
+double free or corruption (!prev)
+==== C080_M020_T018 ====
+
+==== C090_M020_T028 ====
+
