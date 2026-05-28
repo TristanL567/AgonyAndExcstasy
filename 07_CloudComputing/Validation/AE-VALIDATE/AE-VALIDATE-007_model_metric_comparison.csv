@@ -1,0 +1,45 @@
+source_group,track,set,metric,canonical_value,validation_value,abs_delta,pct_delta,classification,comparability_note
+raw_autogluon_summary,dynamic_csi,cv,cv_ap,0.2197,0.2166,-0.0031,-0.0141101502,numeric-only,
+raw_autogluon_summary,dynamic_csi,cv,cv_auc,0.9647,0.8732,-0.0915,-0.09484813932,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,cv,cv_r3,0.6127,0.2471,-0.3656,-0.5967031173,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,cv,cv_n_folds,3,3,0,0,none,
+raw_autogluon_summary,dynamic_csi,test,avg_precision,0.2114,0.1985,-0.0129,-0.0610217597,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,test,auc_roc,0.9692,0.8766,-0.0926,-0.09554271564,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,test,recall_fpr3,0.6551,0.2002,-0.4549,-0.6943978019,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,oos,avg_precision,0.2911,0.3084,0.0173,0.05942974923,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,oos,auc_roc,0.9552,0.8961,-0.0591,-0.0618718593,interpretation-changing,
+raw_autogluon_summary,dynamic_csi,oos,recall_fpr3,0.7169,0.2547,-0.4622,-0.6447203236,interpretation-changing,
+evaluation_rerun,dynamic_csi,oos_2020_2022,ap,0.8509,0.3784,-0.4725,-0.5552943942,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,oos_2020_2022,auc,0.965,0.8958,-0.0692,-0.07170984456,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,oos_2020_2022,r_fpr1,0.5431,0.1161,-0.427,-0.7862272141,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,oos_2020_2022,r_fpr3,0.7178,0.2738,-0.444,-0.618556701,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,oos_2020_2022,r_fpr5,0.8116,0.4116,-0.4,-0.4928536225,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,oos_2020_2022,brier,0.0636,0.0601,-0.0035,-0.05503144654,numeric-only,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,ap,0.8495,0.1978,-0.6517,-0.7671571513,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,auc,0.969,0.8766,-0.0924,-0.09535603715,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,r_fpr1,0.5811,0.0821,-0.499,-0.8587162278,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,r_fpr3,0.7522,0.2002,-0.552,-0.733847381,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,r_fpr5,0.8275,0.2998,-0.5277,-0.6377039275,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,dynamic_csi,test,brier,0.0572,0.0389,-0.0183,-0.3199300699,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+raw_autogluon_summary,permanent_csi,cv,cv_ap,0.2016,0.1929,-0.0087,-0.0431547619,interpretation-changing,
+raw_autogluon_summary,permanent_csi,cv,cv_auc,0.965,0.8789,-0.0861,-0.08922279793,interpretation-changing,
+raw_autogluon_summary,permanent_csi,cv,cv_r3,0.6216,0.2658,-0.3558,-0.5723938224,interpretation-changing,
+raw_autogluon_summary,permanent_csi,cv,cv_n_folds,3,3,0,0,none,
+raw_autogluon_summary,permanent_csi,test,avg_precision,0.148,0.1416,-0.0064,-0.04324324324,interpretation-changing,
+raw_autogluon_summary,permanent_csi,test,auc_roc,0.9674,0.881,-0.0864,-0.08931155675,interpretation-changing,
+raw_autogluon_summary,permanent_csi,test,recall_fpr3,0.6621,0.1808,-0.4813,-0.7269294668,interpretation-changing,
+raw_autogluon_summary,permanent_csi,oos,avg_precision,0.0587,0.0323,-0.0264,-0.4497444634,interpretation-changing,
+raw_autogluon_summary,permanent_csi,oos,auc_roc,0.9495,0.8081,-0.1414,-0.1489204845,interpretation-changing,
+raw_autogluon_summary,permanent_csi,oos,recall_fpr3,0.4456,0.0119,-0.4337,-0.9732944345,interpretation-changing,
+evaluation_rerun,permanent_csi,oos_2020_2022,ap,0.1223,0.1387,0.0164,0.1340964841,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,oos_2020_2022,auc,0.9558,0.8769,-0.0789,-0.08254865035,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,oos_2020_2022,r_fpr1,0.2698,0.1217,-0.1481,-0.5489251297,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,oos_2020_2022,r_fpr3,0.6129,0.2908,-0.3221,-0.5255343449,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,oos_2020_2022,r_fpr5,0.7683,0.3858,-0.3825,-0.4978524014,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,oos_2020_2022,brier,0.006,0.0214,0.0154,2.566666667,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,ap,0.1344,0.1405,0.0061,0.04538690476,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,auc,0.9661,0.881,-0.0851,-0.08808611945,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,r_fpr1,0.2656,0.0664,-0.1992,-0.75,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,r_fpr3,0.6648,0.1808,-0.484,-0.7280385078,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,r_fpr5,0.8425,0.3007,-0.5418,-0.6430860534,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
+evaluation_rerun,permanent_csi,test,brier,0.0067,0.0284,0.0217,3.23880597,interpretation-changing,"validation value parsed from AE-VALIDATE-005S report, rounded to 4 decimals"
