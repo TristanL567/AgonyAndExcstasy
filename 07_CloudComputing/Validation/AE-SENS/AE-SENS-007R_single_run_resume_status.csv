@@ -1,0 +1,2 @@
+"run_id","resumed_step","upstream_steps_rerun","exit_code","status","required_outputs_present","elapsed_minutes","n_threshold_rows","n_weight_rows","n_return_rows","n_performance_rows","n_exclusion_rows","n_decomposition_rows"
+"C060_M000_T012","04_raw_11c_index_only","none","0","completed","True","3.86284451882045","3","6865721","13728","208","4224","768"

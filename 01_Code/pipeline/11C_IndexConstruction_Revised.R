@@ -65,6 +65,12 @@ if (AE_SENS_MODE) {
     stop("AE_SENS_OUTPUT_ROOT is outside the approved sensitivity root: ",
          AE_SENS_OUTPUT_ROOT)
   }
+  data.table::setDTthreads(1L)
+  Sys.setenv(
+    OMP_NUM_THREADS = "1",
+    OPENBLAS_NUM_THREADS = "1",
+    MKL_NUM_THREADS = "1"
+  )
 }
 
 OUT_DIR <- if (AE_SENS_MODE) {
@@ -98,6 +104,7 @@ PATH_11C_PERF <- file.path(OUT_DIR, "index_performance_by_crsp_universe.rds")
 PATH_11C_EXCLUSION <- file.path(OUT_DIR, "index_exclusion_summary_by_crsp_universe.rds")
 PATH_11C_DECOMP <- file.path(OUT_DIR, "error_cost_decomposition_by_crsp_universe.rds")
 PATH_11C_STATUS <- file.path(OUT_DIR, "run_status.csv")
+PATH_AE_SENS_11C_DIAG <- file.path(OUT_DIR, "ae_sens_11c_merge_diagnostics.csv")
 
 fn_write_csv <- function(dt, path) {
   tryCatch(
@@ -115,6 +122,67 @@ fn_stop_missing <- function(paths) {
   if (length(missing) > 0L) {
     stop("Missing required inputs:\n", paste(missing, collapse = "\n"))
   }
+}
+
+fn_ae_sens_key_classes <- function(dt, cols) {
+  paste(
+    vapply(cols, function(col) {
+      if (!col %in% names(dt)) return(paste0(col, "=<missing>"))
+      paste0(col, "=", paste(class(dt[[col]]), collapse = "/"))
+    }, character(1)),
+    collapse = ";"
+  )
+}
+
+fn_ae_sens_key_na_counts <- function(dt, cols) {
+  paste(
+    vapply(cols, function(col) {
+      if (!col %in% names(dt)) return(paste0(col, "=NA"))
+      paste0(col, "=", sum(is.na(dt[[col]])))
+    }, character(1)),
+    collapse = ";"
+  )
+}
+
+fn_ae_sens_prepare_join_keys <- function(dt, key_cols, context, side) {
+  out <- copy(dt)
+  if ("index_id" %in% names(out)) out[, index_id := as.character(index_id)]
+  if ("qdate" %in% names(out)) out[, qdate := as.IDate(qdate)]
+  if ("permno" %in% names(out)) out[, permno := as.integer(permno)]
+
+  n_before <- nrow(out)
+  if (length(key_cols) > 0L) {
+    out <- out[complete.cases(out[, ..key_cols])]
+    setorderv(out, key_cols)
+  }
+  n_after <- nrow(out)
+  n_dup <- if (n_after > 0L && length(key_cols) > 0L) {
+    n_after - uniqueN(out, by = key_cols)
+  } else {
+    0L
+  }
+  diag <- data.table(
+    run_id = AE_SENS_RUN_ID,
+    context = context,
+    side = side,
+    n_before = n_before,
+    n_after = n_after,
+    n_dropped_na_key = n_before - n_after,
+    n_duplicate_keys = n_dup,
+    key_classes = fn_ae_sens_key_classes(out, key_cols),
+    key_na_counts = fn_ae_sens_key_na_counts(out, key_cols)
+  )
+  fwrite(diag, PATH_AE_SENS_11C_DIAG, append = file.exists(PATH_AE_SENS_11C_DIAG))
+  out
+}
+
+fn_ae_sens_left_merge <- function(left, right, by, context) {
+  if (!AE_SENS_MODE) {
+    return(merge(left, right, by = by, all.x = TRUE))
+  }
+  left_prepped <- fn_ae_sens_prepare_join_keys(left, by, context, "left")
+  right_prepped <- fn_ae_sens_prepare_join_keys(right, by, context, "right")
+  merge(left_prepped, right_prepped, by = by, all.x = TRUE)
 }
 
 HAS_ARROW <- requireNamespace("arrow", quietly = TRUE) && !AE_SENS_MODE
@@ -850,11 +918,11 @@ for (i in seq_len(nrow(model_strategies))) {
       exclusion_rule == sk$exclusion_rule,
     .(index_id, qdate, permno, model_w = w)
   ]
-  d <- merge(
+  d <- fn_ae_sens_left_merge(
     bench_q[index_id == sk$index_id],
     model_q,
     by = c("index_id", "qdate", "permno"),
-    all.x = TRUE
+    context = paste("exclusion_summary", sk$strategy_id, sep = "::")
   )
   d[, excluded := is.na(model_w)]
   out <- d[, .(
@@ -1008,11 +1076,11 @@ for (i in seq_len(nrow(model_strategies))) {
       exclusion_rule == sk$exclusion_rule,
     .(index_id, qdate, permno, model_w = w)
   ]
-  d <- merge(
+  d <- fn_ae_sens_left_merge(
     base_month[index_id == sk$index_id],
     model_q,
     by = c("index_id", "qdate", "permno"),
-    all.x = TRUE
+    context = paste("error_cost_decomposition", sk$strategy_id, sep = "::")
   )
   d[is.na(model_w), model_w := 0]
   d[, predicted_excluded := model_w <= 0]
