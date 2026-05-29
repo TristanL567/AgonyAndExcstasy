@@ -1,0 +1,5 @@
+track,artifact,rows,unique_permno_year_keys,duplicate_key_count,missing_keys_vs_raw,extra_keys_vs_raw,missing_keys_vs_labels,extra_keys_vs_labels,missing_keys_vs_splits,extra_keys_vs_splits,y_mismatch_count,split_counts,validation_status
+temporary_csi,features_latent_raw.parquet,188460,188460,0,0,0,0,0,0,0,0,oos=27176|test=18111|train=143173,pass
+temporary_csi,features_raw_plus_latent.parquet,188460,188460,0,0,0,0,0,0,0,0,oos=27176|test=18111|train=143173,pass
+permanent_csi,features_latent_raw.parquet,188460,188460,0,0,0,0,0,0,0,0,oos=27176|test=18111|train=143173,pass
+permanent_csi,features_raw_plus_latent.parquet,188460,188460,0,0,0,0,0,0,0,0,oos=27176|test=18111|train=143173,pass

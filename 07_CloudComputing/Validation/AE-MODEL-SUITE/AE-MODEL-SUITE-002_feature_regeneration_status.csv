@@ -1,0 +1,3 @@
+track,response_track,vae_input,run_location,isolated_output_root,exit_code,stderr_bytes,latent_rows,raw_plus_latent_rows,collapsed_dims,regeneration_status
+temporary_csi,dynamic_csi,raw,remote,[remote]/03_Data_Output/validation/AE-MODEL-SUITE/vae_feature_regen_20260529_001,0,0,188460,188460,0,complete
+permanent_csi,permanent_csi,raw,remote,[remote]/03_Data_Output/validation/AE-MODEL-SUITE/vae_feature_regen_20260529_001,0,0,188460,188460,0,complete
