@@ -1,0 +1,15 @@
+check,status,detail
+directory_exists:00_manifest,pass,03_Data_Output\5_SensitivityAnalysis\00_manifest
+directory_exists:01_labels/by_run,pass,03_Data_Output\5_SensitivityAnalysis\01_labels\by_run
+directory_exists:02_model_training/by_run,pass,03_Data_Output\5_SensitivityAnalysis\02_model_training\by_run
+directory_exists:03_predictions/by_run,pass,03_Data_Output\5_SensitivityAnalysis\03_predictions\by_run
+directory_exists:04_index_construction/by_run,pass,03_Data_Output\5_SensitivityAnalysis\04_index_construction\by_run
+directory_exists:05_comparisons,pass,03_Data_Output\5_SensitivityAnalysis\05_comparisons
+directory_exists:06_logs/by_run,pass,03_Data_Output\5_SensitivityAnalysis\06_logs\by_run
+directory_exists:99_reports,pass,03_Data_Output\5_SensitivityAnalysis\99_reports
+run_registry_count,pass,27
+complete_or_reused_count,pass,"Counter({'completed_full_storage_pruned': 14, 'skipped_complete_storage_pruned': 10, 'blocked_partial': 3})"
+blocked_partial_count,pass,"C080_M000_T012,C080_M000_T018,C060_M020_T028"
+checksum_failures,pass,{'pass': 669}
+heavy_model_binary_absent,pass,"No raw_models, model binary/cache, index_weights, pkl/model/bin/joblib/sav files found in validation scan."
+gitignore_output_root,pass,03_Data_Output/** ignore rule covers 03_Data_Output/5_SensitivityAnalysis/**.
