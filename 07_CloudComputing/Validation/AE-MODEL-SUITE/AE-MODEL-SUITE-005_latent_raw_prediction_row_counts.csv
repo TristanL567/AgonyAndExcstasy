@@ -1,0 +1,17 @@
+track,folder,model,split,n_obs,n_pos,prevalence,file,columns
+dynamic_csi,temporary_csi,latent_raw,test,18111,804,0.0444,,
+dynamic_csi,temporary_csi,latent_raw,oos,18502,1170,0.0632,,
+dynamic_csi,temporary_csi,latent_raw,test_eval,18111,804,0.04439291038595329,ag_preds_test_eval.parquet,permno|year|y|p_csi
+dynamic_csi,temporary_csi,latent_raw,test_index,18111,804,0.04439291038595329,ag_preds_test.parquet,permno|year|y|p_csi
+dynamic_csi,temporary_csi,latent_raw,oos_eval,18502,1170,0.06323640687493244,ag_preds_oos_eval.parquet,permno|year|y|p_csi
+dynamic_csi,temporary_csi,latent_raw,oos_index,18502,1170,0.06323640687493244,ag_preds_oos.parquet,permno|year|y|p_csi
+dynamic_csi,temporary_csi,latent_raw,train_boundary,4663,144,0.030881406819644006,ag_preds_train_boundary.parquet,permno|year|y|p_csi
+dynamic_csi,temporary_csi,latent_raw,cv_results,72223,3119,0.043185688769505556,ag_cv_results.parquet,fold_id|permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,test,18053,542,0.03,,
+permanent_csi,permanent_csi,latent_raw,oos,26400,337,0.0128,,
+permanent_csi,permanent_csi,latent_raw,test_eval,18053,542,0.030022710906774497,ag_preds_test_eval.parquet,permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,test_index,18053,542,0.030022710906774497,ag_preds_test.parquet,permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,oos_eval,26400,337,0.012765151515151516,ag_preds_oos_eval.parquet,permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,oos_index,26400,337,0.012765151515151516,ag_preds_oos.parquet,permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,train_boundary,4663,111,0.023804417756808922,ag_preds_train_boundary.parquet,permno|year|y|p_csi
+permanent_csi,permanent_csi,latent_raw,cv_results,72223,2459,0.03404732564418537,ag_cv_results.parquet,fold_id|permno|year|y|p_csi

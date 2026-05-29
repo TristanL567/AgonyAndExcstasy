@@ -1,0 +1,3 @@
+track,folder,latent_exists,split_exists,labels_exists,latent_rows,latent_unique_keys,latent_duplicate_keys,latent_permno_na,latent_year_na,split_rows,split_unique_keys,keys_missing_from_latent_vs_split,keys_extra_in_latent_vs_split,preflight_pass
+dynamic_csi,temporary_csi,True,True,True,188460,188460,0,0,0,188460,188460,0,0,True
+permanent_csi,permanent_csi,True,True,True,188460,188460,0,0,0,188460,188460,0,0,True
