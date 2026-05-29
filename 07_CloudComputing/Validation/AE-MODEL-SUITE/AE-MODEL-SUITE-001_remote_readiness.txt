@@ -1,0 +1,15 @@
+Remote readiness check: PASS
+
+Endpoint used in report: [authorized endpoint]
+Authentication used in report: [authorized SSH key path]
+
+Observed remote smoke-test results:
+- CONNECTION_OK returned.
+- Remote root `/root/AgonyAndExcstasy` exists.
+- Remote user check returned root.
+- `01_Code/pipeline/09C_AutoGluon.py` exists remotely.
+- `01_Code/pipeline/10_Evaluation.R` exists remotely.
+- `01_Code/pipeline/config.R` exists remotely.
+- Remote root is not currently a git repository.
+
+No upload, training, evaluation, index construction, VAE regeneration, sensitivity run, or pipeline script was executed.
