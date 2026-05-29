@@ -1,5 +1,17 @@
-CANONICAL_CHECK_SCOPE
-remote writes inspected by path policy
-sensitivity_root=/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity
-canonical roots were not targeted by AE-SENS-007S commands
-RECENT_NON_SENSITIVITY_OUTPUTS
+AE-SENS-007S canonical-output modification check
+
+Endpoint: [authorized endpoint]
+SSH key: [authorized SSH key path]
+
+Remote check scope:
+- Root inspected: `/root/AgonyAndExcstasy/03_Data_Output`
+- Sensitivity root excluded from canonical-write check:
+  `/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity`
+- Search window: files modified after `2026-05-28 21:00:00` outside the sensitivity root.
+
+Result:
+- No recent non-sensitivity output writes were found.
+- No canonical model, evaluation, index, data, or presentation paths were targeted by AE-SENS-007S storage-aware continuation commands.
+
+Local check:
+- Local writes were confined to `07_CloudComputing/Validation/AE-SENS/**`.

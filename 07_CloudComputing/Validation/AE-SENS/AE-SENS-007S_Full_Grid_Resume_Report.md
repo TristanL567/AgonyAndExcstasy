@@ -2,17 +2,21 @@
 
 ## Status
 
-AE-SENS-007S is **blocked with validated partial progress**.
+AE-SENS-007S completed the storage-aware continuation with **validated partial completion**.
 
-The resumed full-grid driver respected run-id isolation and stopped after a shared resource blocker was identified. It did not restart the full grid from scratch, did not overwrite completed pilot or AE-SENS-007R outputs, and did not run non-raw or permanent-CSI sensitivity work.
+The storage-aware driver covered all 27 temporary-CSI C/M/T run IDs. It completed or reused 24 run IDs and marked 3 run IDs as `blocked_partial` because their non-empty partial directories lacked documented safe overwrite/resume semantics. It did not overwrite completed pilot, AE-SENS-007R, or earlier resumed outputs.
+
+## AEGIS Reference
+
+Before continuing the ticket, the worker cross-referenced `C:\Users\Tristan Leiter\Documents\aegis-core` as read-only reference material. Relevant AEGIS role and ticket-scope rules were found and followed: one ticket at a time, validator blockers are blocking by default, scope boundaries are binding, and unrelated files must not be staged or committed.
 
 ## Branch And Base
 
 - Local branch: `development-sensitivity`
-- Local HEAD at execution: `876b40e AE-SENS-007R: stabilize sensitivity 11C resume path`
+- Local HEAD at storage-aware continuation start: `c34cf3a AE-SENS-007S: resume full CMT sensitivity grid`
 - Required base: `876b40e` or descendant
-- SSH/SCP contract followed with explicit OpenSSH and the authorized SSH key path.
-- Reports and local evidence sanitize the endpoint and key path as `[authorized endpoint]` and `[authorized SSH key path]`.
+- Endpoint recorded in evidence as: `[authorized endpoint]`
+- SSH key recorded in evidence as: `[authorized SSH key path]`
 
 ## Execution Scope
 
@@ -25,101 +29,121 @@ Remote environment used:
 
 Allowed remote writes were confined to the sensitivity root. No canonical local or remote outputs were targeted.
 
-## Resume Driver
+## Storage-Aware Amendment
 
-Created and uploaded a ticket-local resume driver:
+The storage policy was applied before launching more configurations:
 
-- Local evidence copy: `AE-SENS-007S_resume_driver.sh`
-- Remote execution location: sensitivity log folder for `AE-SENS-007S_full_grid_resume`
+- Heavy AutoGluon predictor/model directories were pruned only after retained prediction, evaluation, compact metadata, optional-family, and 11C coverage checks passed.
+- Predictions, evaluation metrics, compact model metadata, compact hyperparameter metadata, optional-family evidence, and 11C outputs were retained.
+- Duplicate multi-GB `index_weights_by_crsp_universe.csv` files were removed where `index_weights_by_crsp_universe.rds` existed and compact checks were retained.
+- Completed runs were rechecked after pruning; final retention coverage was written to local compact CSV evidence.
 
-The first driver attempt exposed a ticket-local working-directory bug for resumed R-only steps: `11C_IndexConstruction_Revised.R` sources `config.R` relative to the pipeline directory. The driver was corrected to run resumed R steps from `MT_ROOT/01_Code/pipeline`. No project source code was changed for this fix.
+The remote filesystem had previously reached 100% usage during AE-SENS-007S. After storage-aware pruning and continuation, the final sensitivity-root disk state was:
 
-## Progress Summary
+- Size: 100G
+- Used: 66G
+- Available: 35G
+- Use: 66%
 
-Status rows recorded: 10 of 27 run IDs.
+The final retention script pass reported no further deletions because the heavy artifacts had already been pruned before the final all-run coverage snapshot. The authoritative coverage files are:
+
+- `AE-SENS-007S_storage_retention_report.csv`
+- `AE-SENS-007S_disk_after.txt`
+- `AE-SENS-007S_retained_file_inventory.csv`
+- `AE-SENS-007S_deleted_file_inventory.csv`
+- `AE-SENS-007S_metric_coverage_check.csv`
+- `AE-SENS-007S_metric_artifact_coverage.csv`
+- `AE-SENS-007S_11c_coverage_check.csv`
+
+## Final Grid Status
+
+Status rows recorded: 27 of 27 run IDs.
 
 | Status | Count | Meaning |
 |---|---:|---|
-| `skipped_complete` | 1 | Existing complete run reused |
-| `completed_resume_11c` | 4 | Previously failed runs resumed from 11C only |
-| `completed_full` | 3 | Previously not-started runs completed all four steps |
-| `blocked_partial` | 1 | Partial non-empty output state lacked documented safe resume semantics |
-| `failed_full` | 1 | Full run failed after shared disk exhaustion |
+| `completed_full_storage_pruned` | 14 | Full isolated raw-only run completed and storage policy applied |
+| `skipped_complete_storage_pruned` | 10 | Existing complete run reused and retention coverage verified |
+| `blocked_partial` | 3 | Non-empty partial outputs lacked documented safe overwrite/resume semantics |
 
-Completed/reused/resumed run IDs:
+Completed or reused run IDs:
 
-- `C060_M000_T012` reused complete from AE-SENS-007R.
-- `C060_M000_T018` resumed 11C only.
-- `C060_M000_T028` resumed 11C only.
-- `C060_M020_T012` resumed 11C only.
-- `C060_M020_T018` resumed 11C only.
-- `C060_M030_T012` completed full raw-only run.
-- `C060_M030_T018` completed full raw-only run.
-- `C060_M030_T028` completed full raw-only run.
+- `C090_M000_T012`, `C090_M000_T018`, `C090_M000_T028`
+- `C090_M020_T012`, `C090_M020_T018`, `C090_M020_T028`
+- `C090_M030_T012`, `C090_M030_T018`, `C090_M030_T028`
+- `C080_M000_T028`
+- `C080_M020_T012`, `C080_M020_T018`, `C080_M020_T028`
+- `C080_M030_T012`, `C080_M030_T018`, `C080_M030_T028`
+- `C060_M000_T012`, `C060_M000_T018`, `C060_M000_T028`
+- `C060_M020_T012`, `C060_M020_T018`
+- `C060_M030_T012`, `C060_M030_T018`, `C060_M030_T028`
 
-Incomplete/actionable run IDs:
+Blocked partial run IDs:
 
-- `C060_M020_T028`: `blocked_partial`; it had non-empty partial raw outputs but missing required AutoGluon summary/evaluation/11C outputs. No documented safe overwrite/resume point exists for that state.
-- `C080_M000_T012`: `failed_full`; failed during AutoGluon CV output writing with `OSError: [Errno 28] No space left on device`.
+- `C080_M000_T012`
+- `C080_M000_T018`
+- `C060_M020_T028`
 
-## Shared Blocker
+These were intentionally not overwritten. Each has an actionable `blocked_partial` row in `AE-SENS-007S_failed_runs.csv`.
 
-The remote filesystem filled during `C080_M000_T012`.
+## Coverage Checks
 
-Evidence:
+Metric coverage:
 
-- `df -h` showed `/`, `/root/AgonyAndExcstasy`, and `/tmp` at `100%`.
-- `df -B1` showed `107,374,182,400` bytes used and `0` bytes available on the overlay filesystem.
-- The failing log for `C080_M000_T012` showed:
-  - Stage 1 AutoGluon training completed.
-  - Prediction files were generated.
-  - Failure occurred during CV training output persistence.
-  - Error: `OSError: [Errno 28] No space left on device`.
+- 76 split-level metric rows passed coverage checks.
+- 5 split-level metric rows were missing, all tied to blocked partial runs.
+- 24 run IDs had complete prediction, evaluation, metric, and optional-family compact artifact coverage.
+- 3 run IDs were incomplete because they are blocked partials.
 
-Because disk exhaustion is a shared resource blocker, the remote driver and remaining child process were stopped before creating repeated partial failures.
+11C coverage:
+
+- 264 11C output-family rows existed.
+- 33 11C output-family rows were missing, corresponding to the 3 blocked partial runs across 11 required 11C families each.
+
+Required metric coverage retained for completed/reused runs includes AP, AUC, recall at FPR 1%, 3%, and 5%, Brier where available, row counts, and positive counts by split.
 
 ## Safety Checks
 
-- No `09C_AutoGluon.py`, `ae_sens_eval_raw.R`, `11C_IndexConstruction_Revised.R`, `run_ae_sens_raw_one.sh`, or resume-driver process remained after stopping.
-- Canonical-output check found no recent non-sensitivity output writes.
+- No AE-SENS storage-aware resume driver process remained after completion.
+- No `run_ae_sens_raw_one.sh`, `09C_AutoGluon.py`, `ae_sens_eval_raw.R`, or `11C_IndexConstruction_Revised.R` process remained after completion.
+- No recent non-sensitivity output writes were found under remote `03_Data_Output`.
+- No canonical local outputs were modified.
 - No permanent-CSI sensitivity runs were started.
 - No non-raw model families were requested beyond AutoGluon's raw model family set.
-- No full grid restart occurred over existing complete directories.
-- No endpoint, port, key contents, tokens, or credentials are recorded in this report.
+- No endpoint, port, private key contents, tokens, or credentials are recorded in this report.
 
 ## Evidence Files
 
-Local compact evidence created under `07_CloudComputing/Validation/AE-SENS/`:
+Local compact evidence under `07_CloudComputing/Validation/AE-SENS/`:
 
 - `AE-SENS-007S_full_grid_status.csv`
 - `AE-SENS-007S_full_grid_step_status.csv`
 - `AE-SENS-007S_resume_decisions.csv`
 - `AE-SENS-007S_failed_runs.csv`
-- `AE-SENS-007S_full_grid_label_counts.csv`
-- `AE-SENS-007S_full_grid_model_metrics.csv`
-- `AE-SENS-007S_full_grid_prediction_row_counts.csv`
-- `AE-SENS-007S_full_grid_11c_summary.csv`
-- `AE-SENS-007S_full_grid_optional_family_evidence.csv`
-- `AE-SENS-007S_full_grid_output_inventory.csv`
+- `AE-SENS-007S_storage_aware_status.csv`
+- `AE-SENS-007S_storage_aware_step_status.csv`
+- `AE-SENS-007S_storage_aware_resume_decisions.csv`
+- `AE-SENS-007S_storage_retention_report.csv`
+- `AE-SENS-007S_retained_file_inventory.csv`
+- `AE-SENS-007S_deleted_file_inventory.csv`
+- `AE-SENS-007S_metric_coverage_check.csv`
+- `AE-SENS-007S_metric_artifact_coverage.csv`
+- `AE-SENS-007S_11c_coverage_check.csv`
 - `AE-SENS-007S_remote_process_guard.txt`
 - `AE-SENS-007S_canonical_modification_check.txt`
-- `AE-SENS-007S_resume_driver.sh`
-- `AE-SENS-007S_collect_remote_compact.py`
+- `AE-SENS-007S_storage_aware_resume_driver.sh`
+- `AE-SENS-007S_storage_retention_remote.py`
+
+The earlier compact full-grid metric, prediction-row-count, label-count, optional-family, 11C-summary, and output-inventory files remain as previously collected evidence, while the storage-aware status and retention files are the authoritative continuation evidence for this amendment.
 
 ## Readiness Decision
 
-AE-SENS-007S should not continue on the current remote filesystem state.
+AE-SENS-007S is ready for validator review as **completed with validated partials**.
 
-Recommended next ticket:
+Recommended follow-up:
 
-- Free or provision sufficient remote disk capacity without deleting completed sensitivity evidence unless explicitly scoped.
-- Document the disk cleanup/provisioning action.
-- Resume from the current state with the same safe semantics:
-  - reuse completed runs;
-  - keep `C060_M020_T028` blocked until a scoped partial-output policy is approved;
-  - rerun or safely resume `C080_M000_T012` only after its disk-full partial outputs are classified;
-  - continue remaining not-started configs without overwriting complete outputs.
+- A narrow ticket should decide whether to clear and rerun the 3 blocked partial run IDs, or leave them excluded from AE-SENS-008 ranking with explicit caveats.
+- AE-SENS-008 can rank and compare the 24 complete/reused run IDs immediately if the validator accepts partial-grid analysis.
 
 ## Conclusion
 
-AE-SENS-007S made valid progress and then stopped on a real shared resource blocker. The correct outcome is **blocked_validated: remote disk full**, not a pipeline redesign or unsafe restart.
+The storage-aware continuation materially reduced storage pressure, completed the remaining safe C090/C080/C060 work, preserved required reporting evidence for completed runs, and avoided unsafe overwrites of partial directories. No further broad grid restart should be attempted without an explicit partial-run cleanup policy.

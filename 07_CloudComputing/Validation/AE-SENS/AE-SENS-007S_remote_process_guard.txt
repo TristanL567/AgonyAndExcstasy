@@ -1,11 +1,20 @@
-PROCESS_GUARD
-DISK
-Filesystem      Size  Used Avail Use% Mounted on
-overlay         100G  100G     0 100% /
-overlay         100G  100G     0 100% /
-overlay         100G  100G     0 100% /
-DISK_BYTES
-Filesystem        1B-blocks         Used Available Use% Mounted on
-overlay        107374182400 107374182400         0 100% /
-overlay        107374182400 107374182400         0 100% /
-overlay        107374182400 107374182400         0 100% /
+AE-SENS-007S remote process guard
+
+Endpoint: [authorized endpoint]
+SSH key: [authorized SSH key path]
+
+Final read-only check result:
+- No AE-SENS storage-aware resume driver process remained.
+- No `run_ae_sens_raw_one.sh` process remained.
+- No `09C_AutoGluon.py` process remained.
+- No `ae_sens_eval_raw.R` process remained.
+- No `11C_IndexConstruction_Revised.R` process remained.
+
+Final remote sensitivity-root disk state:
+- Filesystem: overlay
+- Size: 100G
+- Used: 66G
+- Available: 35G
+- Use: 66%
+
+No model, evaluation, index, sensitivity, or pipeline process was left running after the storage-aware continuation completed.
