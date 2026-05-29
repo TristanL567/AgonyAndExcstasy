@@ -1,0 +1,5 @@
+feature_set,track,source_ticket,source_commit,source_ref,source_path,used_for
+raw,both,AE-VALIDATE-004R,db61acf,origin/validation,07_CloudComputing/Validation/AE-VALIDATE/raw_rerun_20260528_optional_models/metric_snapshot.csv; row_counts.csv; leaderboard_model_family_rows.csv,revised-dataset raw comparator
+fund,both,AE-MODEL-SUITE-004,63d70f2,validation-model-suite,AE-MODEL-SUITE-004_fund_*,fundamentals-only comparison
+latent_raw,both,AE-MODEL-SUITE-005,3d125ad,validation-model-suite,AE-MODEL-SUITE-005_latent_raw_*,VAE-only comparison
+raw_plus_latent,both,AE-MODEL-SUITE-006,e97cf64,validation-model-suite,AE-MODEL-SUITE-006_raw_plus_latent_*,raw plus VAE comparison

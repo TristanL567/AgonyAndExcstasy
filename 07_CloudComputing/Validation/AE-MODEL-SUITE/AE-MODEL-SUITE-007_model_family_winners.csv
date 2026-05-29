@@ -1,0 +1,9 @@
+track,folder,feature_set,best_leaderboard_model,best_model_family,score_rank,best_validation_score,fit_time,predict_time
+dynamic_csi,temporary_csi,fund,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.2203204733326225,83.06077170372009,1.0241401195526123
+dynamic_csi,temporary_csi,latent_raw,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.1952943709046165,145.83306670188904,0.6330606937408447
+dynamic_csi,temporary_csi,raw,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.2306815345648569,280.22293186187744,4.280328750610352
+dynamic_csi,temporary_csi,raw_plus_latent,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.2313934367099746,202.7945671081543,3.44908094406128
+permanent_csi,permanent_csi,fund,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.1928747850737735,229.15781235694885,3.915615797042847
+permanent_csi,permanent_csi,latent_raw,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.1505295217951838,190.6823391914368,0.460256814956665
+permanent_csi,permanent_csi,raw,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.2010086044629956,126.3529977798462,0.7757766246795654
+permanent_csi,permanent_csi,raw_plus_latent,WeightedEnsemble_L2,WeightedEnsemble,1.0,0.204068778578061,291.29596757888794,3.0832409858703613

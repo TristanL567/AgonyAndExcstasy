@@ -1,0 +1,8 @@
+check,value,status
+all_four_feature_sets_represented_dynamic_csi,fund;latent_raw;raw;raw_plus_latent,PASS
+all_four_feature_sets_represented_permanent_csi,fund;latent_raw;raw;raw_plus_latent,PASS
+raw_comparator_source,origin/validation AE-VALIDATE-004R db61acf raw_rerun_20260528_optional_models,PASS
+remote_execution_used,none,PASS
+scripts_run,none,PASS
+output_area,07_CloudComputing/Validation/AE-MODEL-SUITE,PASS
+raw_missing_fpr1_fpr5_brier,documented_NA_from_committed_raw_compact_evidence,PASS
