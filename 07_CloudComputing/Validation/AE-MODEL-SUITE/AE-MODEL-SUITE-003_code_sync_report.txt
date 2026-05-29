@@ -1,0 +1,26 @@
+Code sync status: PASS
+
+Remote endpoint: [authorized endpoint]
+Authentication: [authorized SSH key path]
+
+Scope synced:
+- 01_Code/**
+- .gitignore
+
+Sync method:
+- Recursive explicit SCP for 01_Code
+- Explicit SCP for .gitignore
+
+Key file hash verification:
+- 01_Code/pipeline/config.R
+  - local/remote SHA256: ccc774ca609e95b3184d0027e65dfb9f705e3830b226488b73122f1a6fc77253
+- 01_Code/pipeline/09C_AutoGluon.py
+  - local/remote SHA256: eb71283470445e984e59780a31d6987328e1d115c6deae76bc2a0abc5bda1ed0
+- 01_Code/pipeline/10_Evaluation.R
+  - local/remote SHA256: fcabfdcd1a32122ae7c7139c3fe72fc0d25b2671b577fcd581cc6271b3ddafa8
+- 01_Code/pipeline/08B_Autoencoder.py
+  - local/remote SHA256: 6238dbc25fbb5a813fc10f75c17229ecded3c38cade03eaa8f268a9c8f45ac63
+- .gitignore
+  - local/remote SHA256: 082bce99e9a6d8a97078c4f9c73955686bdb66a3dc0419f6abfcab222e3c668e
+
+No project scripts were executed as part of code sync.

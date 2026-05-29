@@ -1,0 +1,8 @@
+component,check,status,evidence,recommendation
+09C_AutoGluon.py,MODEL=fund,pass,"Remote 09C contains MODEL_CONFIG key fund mapped to features_fund.rds.","Ready for fund training ticket."
+09C_AutoGluon.py,MODEL=latent_raw,pass,"Remote 09C contains MODEL_CONFIG key latent_raw mapped to features_latent_raw.parquet.","Ready for latent_raw training ticket."
+09C_AutoGluon.py,MODEL=raw_plus_latent,pass,"Remote 09C contains MODEL_CONFIG key raw_plus_latent mapped to features_raw_plus_latent.parquet.","Training can run, but full 10_Evaluation.R support remains a separate compatibility risk."
+09C_AutoGluon.py,MT_ROOT,pass,"Remote 09C reads MT_ROOT and reports provided root.","Use MT_ROOT=/root/AgonyAndExcstasy for training tickets."
+09C_AutoGluon.py,MT_OUTPUT_DIR,pass,"Remote 09C resolves absolute MT_OUTPUT_DIR as the output tree.","Use isolated AE-MODEL-SUITE validation output root."
+09C_AutoGluon.py,RESPONSE_TRACK,pass,"Remote 09C reads RESPONSE_TRACK and maps dynamic_csi to temporary_csi.","Run both dynamic_csi and permanent_csi explicitly."
+10_Evaluation.R,raw_plus_latent full-suite support,risk,"Remote 10_Evaluation.R includes fund and latent_raw but not raw_plus_latent in MODELS/TRACK_KEYS.","For AE-MODEL-SUITE-004/005/006 rely first on 09C compact metrics; add a later scoped 10_Evaluation compatibility ticket before full reporting."
