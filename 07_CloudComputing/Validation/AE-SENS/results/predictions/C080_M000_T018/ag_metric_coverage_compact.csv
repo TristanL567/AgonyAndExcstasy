@@ -1,0 +1,4 @@
+run_id,split,status,path,n_obs,n_pos,n_neg,prevalence,auc,ap,recall_fpr_1pct,recall_fpr_3pct,recall_fpr_5pct,brier
+C080_M000_T018,cv,missing,raw_predictions/C080_M000_T018/ag_cv_results.parquet,,,,,,,,,,
+C080_M000_T018,test,missing,raw_predictions/C080_M000_T018/ag_preds_test_eval.parquet,,,,,,,,,,
+C080_M000_T018,oos,missing,raw_predictions/C080_M000_T018/ag_preds_oos_eval.parquet,,,,,,,,,,

@@ -1,0 +1,5 @@
+run_id,family,available,matching_models
+C080_M020_T018,LightGBM,True,LightGBMXT;LightGBM;LightGBMLarge
+C080_M020_T018,CatBoost,True,CatBoost
+C080_M020_T018,XGBoost,True,XGBoost
+C080_M020_T018,FastAI,True,NeuralNetFastAI

@@ -1,0 +1,28 @@
+run_id,C,M,T,status,started_at,ended_at,exit_code,note
+C090_M000_T012,-0.90,0.00,12,completed_full_storage_pruned,2026-05-28T21:23:16+00:00,2026-05-28T21:56:30+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M000_T018,-0.90,0.00,18,completed_full_storage_pruned,2026-05-28T21:56:30+00:00,2026-05-28T22:26:47+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M000_T028,-0.90,0.00,28,completed_full_storage_pruned,2026-05-28T22:26:47+00:00,2026-05-28T22:55:26+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M020_T012,-0.90,-0.20,12,completed_full_storage_pruned,2026-05-28T22:55:26+00:00,2026-05-28T23:25:11+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M020_T018,-0.90,-0.20,18,completed_full_storage_pruned,2026-05-28T23:25:11+00:00,2026-05-28T23:55:02+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M020_T028,-0.90,-0.20,28,skipped_complete_storage_pruned,2026-05-28T23:55:02+00:00,2026-05-28T23:55:05+00:00,0,reused retained complete run
+C090_M030_T012,-0.90,-0.30,12,completed_full_storage_pruned,2026-05-28T23:55:05+00:00,2026-05-29T00:24:06+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M030_T018,-0.90,-0.30,18,completed_full_storage_pruned,2026-05-29T00:24:06+00:00,2026-05-29T00:53:19+00:00,0,full isolated raw-only run completed and storage policy applied
+C090_M030_T028,-0.90,-0.30,28,completed_full_storage_pruned,2026-05-29T00:53:19+00:00,2026-05-29T01:22:09+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M000_T012,-0.80,0.00,12,blocked_partial,2026-05-29T01:22:09+00:00,2026-05-29T01:22:10+00:00,3,non-empty partial outputs lack documented safe overwrite resume
+C080_M000_T018,-0.80,0.00,18,blocked_partial,2026-05-29T01:22:10+00:00,2026-05-29T01:22:10+00:00,3,non-empty partial outputs lack documented safe overwrite resume
+C080_M000_T028,-0.80,0.00,28,completed_full_storage_pruned,2026-05-29T01:22:10+00:00,2026-05-29T01:51:37+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M020_T012,-0.80,-0.20,12,completed_full_storage_pruned,2026-05-29T01:51:37+00:00,2026-05-29T02:21:43+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M020_T018,-0.80,-0.20,18,skipped_complete_storage_pruned,2026-05-29T02:21:43+00:00,2026-05-29T02:21:47+00:00,0,reused retained complete run
+C080_M020_T028,-0.80,-0.20,28,completed_full_storage_pruned,2026-05-29T02:21:47+00:00,2026-05-29T02:52:48+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M030_T012,-0.80,-0.30,12,completed_full_storage_pruned,2026-05-29T02:52:48+00:00,2026-05-29T03:21:36+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M030_T018,-0.80,-0.30,18,completed_full_storage_pruned,2026-05-29T03:21:36+00:00,2026-05-29T03:51:58+00:00,0,full isolated raw-only run completed and storage policy applied
+C080_M030_T028,-0.80,-0.30,28,completed_full_storage_pruned,2026-05-29T03:51:58+00:00,2026-05-29T04:22:56+00:00,0,full isolated raw-only run completed and storage policy applied
+C060_M000_T012,-0.60,0.00,12,skipped_complete_storage_pruned,2026-05-29T04:22:56+00:00,2026-05-29T04:23:01+00:00,0,reused retained complete run
+C060_M000_T018,-0.60,0.00,18,skipped_complete_storage_pruned,2026-05-29T04:23:01+00:00,2026-05-29T04:23:05+00:00,0,reused retained complete run
+C060_M000_T028,-0.60,0.00,28,skipped_complete_storage_pruned,2026-05-29T04:23:05+00:00,2026-05-29T04:23:10+00:00,0,reused retained complete run
+C060_M020_T012,-0.60,-0.20,12,skipped_complete_storage_pruned,2026-05-29T04:23:10+00:00,2026-05-29T04:23:14+00:00,0,reused retained complete run
+C060_M020_T018,-0.60,-0.20,18,skipped_complete_storage_pruned,2026-05-29T04:23:14+00:00,2026-05-29T04:23:19+00:00,0,reused retained complete run
+C060_M020_T028,-0.60,-0.20,28,blocked_partial,2026-05-29T04:23:19+00:00,2026-05-29T04:23:19+00:00,3,non-empty partial outputs lack documented safe overwrite resume
+C060_M030_T012,-0.60,-0.30,12,skipped_complete_storage_pruned,2026-05-29T04:23:19+00:00,2026-05-29T04:23:24+00:00,0,reused retained complete run
+C060_M030_T018,-0.60,-0.30,18,skipped_complete_storage_pruned,2026-05-29T04:23:24+00:00,2026-05-29T04:23:28+00:00,0,reused retained complete run
+C060_M030_T028,-0.60,-0.30,28,skipped_complete_storage_pruned,2026-05-29T04:23:28+00:00,2026-05-29T04:23:33+00:00,0,reused retained complete run

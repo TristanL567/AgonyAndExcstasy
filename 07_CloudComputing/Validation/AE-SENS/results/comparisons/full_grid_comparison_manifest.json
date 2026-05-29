@@ -1,0 +1,16 @@
+{
+  "run_ids_expected": 27,
+  "run_ids_in_status": 27,
+  "completed_or_reused": 24,
+  "blocked_partial": 3,
+  "comparison_files": [
+    "full_grid_11c_index_ranking.csv",
+    "full_grid_best_configs_by_objective.csv",
+    "full_grid_error_cost_summary.csv",
+    "full_grid_factor_summary.csv",
+    "full_grid_label_count_ranking.csv",
+    "full_grid_model_metric_ranking.csv",
+    "full_grid_prediction_distribution_summary.csv",
+    "full_grid_threshold_summary.csv"
+  ]
+}

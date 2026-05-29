@@ -1,0 +1,2 @@
+param_id,C,M,T,n_triggers,n_confirmed,n_terminal_failure_before_confirmation,n_positive,n_recovered_within_T,n_censored
+C080_M000_T028,-0.8,0,28,187790,10478,1427,11905,146563,29322

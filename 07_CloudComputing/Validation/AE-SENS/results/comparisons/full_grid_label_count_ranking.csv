@@ -1,0 +1,28 @@
+run_id,C,M,T,run_status,observable_rows,y_0,y_1,y_NA,labelled_rows,prevalence,delta_y_1_vs_baseline,delta_prevalence_vs_baseline,run_note
+C060_M000_T012,-0.60,0.00,12,skipped_complete_storage_pruned,188460,149077,31596,7787,180673,0.17487948,23079,0.12750649,reused retained complete run
+C060_M000_T018,-0.60,0.00,18,skipped_complete_storage_pruned,188460,156644,22241,9575,178885,0.12433127,13724,0.076958282,reused retained complete run
+C080_M000_T012,-0.80,0.00,12,blocked_partial,188460,161480,19843,7137,181323,0.10943454,11326,0.062061552,non-empty partial outputs lack documented safe overwrite resume
+C060_M000_T028,-0.60,0.00,28,skipped_complete_storage_pruned,188460,161970,15664,10826,177634,0.088181317,7147,0.040808329,reused retained complete run
+C060_M020_T012,-0.60,-0.20,12,skipped_complete_storage_pruned,188460,165051,15535,7874,180586,0.086025495,7018,0.038652507,reused retained complete run
+C090_M000_T012,-0.90,0.00,12,completed_full_storage_pruned,188460,168982,12761,6717,181743,0.070214534,4244,0.022841546,full isolated raw-only run completed and storage policy applied
+C060_M020_T018,-0.60,-0.20,18,skipped_complete_storage_pruned,188460,166445,11986,10029,178431,0.067174426,3469,0.019801438,reused retained complete run
+C080_M020_T012,-0.80,-0.20,12,completed_full_storage_pruned,188460,170496,10788,7176,181284,0.059508837,2271,0.012135849,full isolated raw-only run completed and storage policy applied
+C080_M000_T028,-0.80,0.00,28,completed_full_storage_pruned,188460,168523,10484,9453,179007,0.058567542,1967,0.011194554,full isolated raw-only run completed and storage policy applied
+C060_M020_T028,-0.60,-0.20,28,blocked_partial,188460,167491,9460,11509,176951,0.053461128,943,0.00608814,non-empty partial outputs lack documented safe overwrite resume
+C090_M000_T018,-0.90,0.00,18,completed_full_storage_pruned,188460,171363,9532,7565,180895,0.052693552,1015,0.005320564,full isolated raw-only run completed and storage policy applied
+C060_M030_T012,-0.60,-0.30,12,skipped_complete_storage_pruned,188460,171122,9421,7917,180543,0.052181475,904,0.004808487,reused retained complete run
+C080_M020_T018,-0.80,-0.20,18,skipped_complete_storage_pruned,188460,171269,8517,8674,179786,0.047372988,0,0,reused retained complete run
+C060_M030_T018,-0.60,-0.30,18,skipped_complete_storage_pruned,188460,170416,7863,10181,178279,0.044105026,-654,-0.003267962,reused retained complete run
+C090_M020_T012,-0.90,-0.20,12,completed_full_storage_pruned,188460,174277,7442,6741,181719,0.04095334,-1075,-0.006419648,full isolated raw-only run completed and storage policy applied
+C090_M000_T028,-0.90,0.00,28,completed_full_storage_pruned,188460,172756,7241,8463,179997,0.040228448,-1276,-0.00714454,full isolated raw-only run completed and storage policy applied
+C080_M020_T028,-0.80,-0.20,28,completed_full_storage_pruned,188460,171663,6965,9832,178628,0.038991647,-1552,-0.008381341,full isolated raw-only run completed and storage policy applied
+C060_M030_T028,-0.60,-0.30,28,skipped_complete_storage_pruned,188460,169445,6782,12233,176227,0.038484455,-1735,-0.008888533,reused retained complete run
+C080_M030_T012,-0.80,-0.30,12,completed_full_storage_pruned,188460,174286,6954,7220,181240,0.038369013,-1563,-0.009003975,full isolated raw-only run completed and storage policy applied
+C090_M020_T018,-0.90,-0.20,18,completed_full_storage_pruned,188460,174618,6035,7807,180653,0.033406586,-2482,-0.013966402,full isolated raw-only run completed and storage policy applied
+C080_M030_T018,-0.80,-0.30,18,completed_full_storage_pruned,188460,173739,5908,8813,179647,0.032886717,-2609,-0.014486271,full isolated raw-only run completed and storage policy applied
+C080_M030_T028,-0.80,-0.30,28,completed_full_storage_pruned,188460,172926,5200,10334,178126,0.029192819,-3317,-0.018180169,full isolated raw-only run completed and storage policy applied
+C090_M020_T028,-0.90,-0.20,28,skipped_complete_storage_pruned,188460,174722,5013,8725,179735,0.027891062,-3504,-0.019481926,reused retained complete run
+C090_M030_T012,-0.90,-0.30,12,completed_full_storage_pruned,188460,176637,5045,6778,181682,0.027768298,-3472,-0.01960469,full isolated raw-only run completed and storage policy applied
+C090_M030_T018,-0.90,-0.30,18,completed_full_storage_pruned,188460,176152,4374,7934,180526,0.024229197,-4143,-0.023143791,full isolated raw-only run completed and storage policy applied
+C090_M030_T028,-0.90,-0.30,28,completed_full_storage_pruned,188460,175525,3893,9042,179418,0.021697934,-4624,-0.025675054,full isolated raw-only run completed and storage policy applied
+C080_M000_T018,-0.80,0.00,18,blocked_partial,,,,,,,,,non-empty partial outputs lack documented safe overwrite resume

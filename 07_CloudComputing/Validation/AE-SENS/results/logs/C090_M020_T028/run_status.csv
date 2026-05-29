@@ -1,0 +1,5 @@
+run_id,step,status,started_at,ended_at
+C090_M020_T028,01_prepare_raw_inputs,completed,2026-05-28T14:05:35+00:00,2026-05-28T14:08:01+00:00
+C090_M020_T028,02_raw_autogluon,completed,2026-05-28T14:08:01+00:00,2026-05-28T14:29:52+00:00
+C090_M020_T028,03_raw_evaluation,completed,2026-05-28T14:29:52+00:00,2026-05-28T14:29:53+00:00
+C090_M020_T028,04_raw_11c_index,completed,2026-05-28T14:29:53+00:00,2026-05-28T14:33:16+00:00

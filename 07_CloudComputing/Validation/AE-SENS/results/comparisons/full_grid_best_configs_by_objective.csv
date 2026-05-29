@@ -1,0 +1,21 @@
+objective,direction,run_id,C,M,T,split,metric,value,run_status,note
+highest_cv_ap,max,C060_M000_T012,-0.60,0.00,12,cv,ap,0.47294068311399057,skipped_complete_storage_pruned,reused retained complete run
+highest_cv_auc,max,C090_M000_T012,-0.90,0.00,12,cv,auc,0.916241197160072,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_cv_recall_fpr_1pct,max,C090_M000_T012,-0.90,0.00,12,cv,recall_fpr_1pct,0.16807649871276203,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_cv_recall_fpr_3pct,max,C090_M000_T012,-0.90,0.00,12,cv,recall_fpr_3pct,0.36980507539536595,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_cv_recall_fpr_5pct,max,C090_M000_T012,-0.90,0.00,12,cv,recall_fpr_5pct,0.4990805443177639,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+lowest_cv_brier,min,C090_M030_T028,-0.90,-0.30,28,cv,brier,0.017485833203730813,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_test_ap,max,C060_M000_T012,-0.60,0.00,12,test,ap,0.47640612851412006,skipped_complete_storage_pruned,reused retained complete run
+highest_test_auc,max,C090_M030_T012,-0.90,-0.30,12,test,auc,0.9183952257647959,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_test_recall_fpr_1pct,max,C090_M000_T012,-0.90,0.00,12,test,recall_fpr_1pct,0.1375590020229265,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_test_recall_fpr_3pct,max,C090_M000_T012,-0.90,0.00,12,test,recall_fpr_3pct,0.3472690492245448,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_test_recall_fpr_5pct,max,C090_M030_T012,-0.90,-0.30,12,test,recall_fpr_5pct,0.5,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+lowest_test_brier,min,C090_M030_T028,-0.90,-0.30,28,test,brier,0.02135590162363834,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_oos_ap,max,C060_M000_T012,-0.60,0.00,12,oos,ap,0.5663822532811691,skipped_complete_storage_pruned,reused retained complete run
+highest_oos_auc,max,C090_M030_T028,-0.90,-0.30,28,oos,auc,0.9219831881064574,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_oos_recall_fpr_1pct,max,C090_M000_T012,-0.90,0.00,12,oos,recall_fpr_1pct,0.18927893738140417,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_oos_recall_fpr_3pct,max,C090_M000_T012,-0.90,0.00,12,oos,recall_fpr_3pct,0.40654648956356737,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_oos_recall_fpr_5pct,max,C090_M000_T012,-0.90,0.00,12,oos,recall_fpr_5pct,0.5550284629981025,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+lowest_oos_brier,min,C090_M030_T028,-0.90,-0.30,28,oos,brier,0.01770989733399141,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+highest_11c_total_market_difference_vs_benchmark,max,C090_M020_T018,-0.90,-0.20,18,,best_total_market_difference_vs_benchmark,0.00225876531289848,completed_full_storage_pruned,full isolated raw-only run completed and storage policy applied
+most_defensible_overall_composite,max,C090_M000_T012,-0.90,0.00,12,,mean percentile rank across test/oos model metrics and 11C total-market difference,0.86956522,completed_full_storage_pruned,9 components
