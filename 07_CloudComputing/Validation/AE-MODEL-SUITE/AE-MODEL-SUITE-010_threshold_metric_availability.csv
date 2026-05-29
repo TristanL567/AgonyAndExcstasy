@@ -1,0 +1,25 @@
+feature_set,track,split,source_file_path,availability,missing_reason
+fund,permanent_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\permanent_csi\ag_cv_results.parquet,computed,
+fund,permanent_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\permanent_csi\ag_preds_oos_eval.parquet,computed,
+fund,permanent_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\permanent_csi\ag_preds_test_eval.parquet,computed,
+fund,temporary_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\temporary_csi\ag_cv_results.parquet,computed,
+fund,temporary_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\temporary_csi\ag_preds_oos_eval.parquet,computed,
+fund,temporary_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\fund\temporary_csi\ag_preds_test_eval.parquet,computed,
+latent_raw,permanent_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\permanent_csi\ag_cv_results.parquet,computed,
+latent_raw,permanent_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\permanent_csi\ag_preds_oos_eval.parquet,computed,
+latent_raw,permanent_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\permanent_csi\ag_preds_test_eval.parquet,computed,
+latent_raw,temporary_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\temporary_csi\ag_cv_results.parquet,computed,
+latent_raw,temporary_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\temporary_csi\ag_preds_oos_eval.parquet,computed,
+latent_raw,temporary_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\latent_raw\temporary_csi\ag_preds_test_eval.parquet,computed,
+raw,permanent_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw,permanent_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw,permanent_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw,temporary_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw,temporary_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw,temporary_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw\metric_snapshot.csv,partial_compact_summary_only,raw prediction-level artifacts unavailable locally; FPR1/FPR5/Brier cannot be recomputed without rerun or download
+raw_plus_latent,permanent_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\permanent_csi\ag_cv_results.parquet,computed,
+raw_plus_latent,permanent_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\permanent_csi\ag_preds_oos_eval.parquet,computed,
+raw_plus_latent,permanent_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\permanent_csi\ag_preds_test_eval.parquet,computed,
+raw_plus_latent,temporary_csi,cv,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\temporary_csi\ag_cv_results.parquet,computed,
+raw_plus_latent,temporary_csi,oos,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\temporary_csi\ag_preds_oos_eval.parquet,computed,
+raw_plus_latent,temporary_csi,test,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\raw_plus_latent\temporary_csi\ag_preds_test_eval.parquet,computed,

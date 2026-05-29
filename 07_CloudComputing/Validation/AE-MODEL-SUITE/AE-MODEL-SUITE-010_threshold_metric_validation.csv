@@ -1,0 +1,9 @@
+check,value,expected,status
+expected_combinations_present,24,24,PASS
+nonraw_computed_rows,18,18,PASS
+nonraw_missing_threshold_values,0,0,PASS
+raw_partial_rows,6,6,PASS
+raw_fpr1_fpr5_marked_missing,12,12,PASS
+derived_output_path,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\derived_metrics,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite\derived_metrics,PASS
+remote_mutation,none,none,PASS
+project_scripts_run,none,none,PASS
