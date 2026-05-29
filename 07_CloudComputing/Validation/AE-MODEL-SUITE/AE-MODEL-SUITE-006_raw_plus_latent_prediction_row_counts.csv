@@ -1,0 +1,13 @@
+track,folder,model,split,file,rows,size_bytes,exists
+dynamic_csi,temporary_csi,raw_plus_latent,cv,ag_cv_results.parquet,72223,610448,true
+dynamic_csi,temporary_csi,raw_plus_latent,test,ag_preds_test.parquet,18111,161046,true
+dynamic_csi,temporary_csi,raw_plus_latent,test_eval,ag_preds_test_eval.parquet,18111,161046,true
+dynamic_csi,temporary_csi,raw_plus_latent,oos,ag_preds_oos.parquet,18502,170010,true
+dynamic_csi,temporary_csi,raw_plus_latent,oos_eval,ag_preds_oos_eval.parquet,18502,170010,true
+dynamic_csi,temporary_csi,raw_plus_latent,train_boundary,ag_preds_train_boundary.parquet,4663,55537,true
+permanent_csi,permanent_csi,raw_plus_latent,cv,ag_cv_results.parquet,72223,609653,true
+permanent_csi,permanent_csi,raw_plus_latent,test,ag_preds_test.parquet,18053,160297,true
+permanent_csi,permanent_csi,raw_plus_latent,test_eval,ag_preds_test_eval.parquet,18053,160297,true
+permanent_csi,permanent_csi,raw_plus_latent,oos,ag_preds_oos.parquet,26400,228879,true
+permanent_csi,permanent_csi,raw_plus_latent,oos_eval,ag_preds_oos_eval.parquet,26400,228879,true
+permanent_csi,permanent_csi,raw_plus_latent,train_boundary,ag_preds_train_boundary.parquet,4663,55479,true

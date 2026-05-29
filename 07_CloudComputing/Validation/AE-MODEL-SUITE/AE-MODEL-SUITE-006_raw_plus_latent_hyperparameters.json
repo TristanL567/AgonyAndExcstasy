@@ -1,0 +1,40 @@
+{
+  "dynamic_csi": {
+    "folder": "temporary_csi",
+    "leaderboard_models": [
+      "WeightedEnsemble_L2",
+      "LightGBMXT",
+      "ExtraTreesEntr",
+      "CatBoost",
+      "RandomForestEntr",
+      "ExtraTreesGini",
+      "LightGBM",
+      "NeuralNetTorch",
+      "LightGBMLarge",
+      "RandomForestGini",
+      "NeuralNetFastAI",
+      "XGBoost"
+    ],
+    "model_key": "raw_plus_latent",
+    "note": "Full fitted-model hyperparameters unavailable after storage-pruning policy; compact leaderboard metadata retained."
+  },
+  "permanent_csi": {
+    "folder": "permanent_csi",
+    "leaderboard_models": [
+      "WeightedEnsemble_L2",
+      "LightGBMXT",
+      "CatBoost",
+      "LightGBMLarge",
+      "RandomForestEntr",
+      "ExtraTreesGini",
+      "ExtraTreesEntr",
+      "LightGBM",
+      "NeuralNetTorch",
+      "NeuralNetFastAI",
+      "RandomForestGini",
+      "XGBoost"
+    ],
+    "model_key": "raw_plus_latent",
+    "note": "Full fitted-model hyperparameters unavailable after storage-pruning policy; compact leaderboard metadata retained."
+  }
+}
