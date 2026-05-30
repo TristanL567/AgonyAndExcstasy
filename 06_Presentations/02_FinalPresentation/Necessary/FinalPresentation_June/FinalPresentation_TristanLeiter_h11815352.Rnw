@@ -72,7 +72,7 @@ knit2pdf(Directory_LaTeX)
 \graphicspath{{../../../03_Output/Figures/}}
 
 \title[The Agony and the Ecstasy]{The Agony and the Ecstasy}
-\subtitle{Constructing a ”Crash-Filtered” Equity Index using Machine Learning}
+\subtitle{Constructing a ``Crash-Filtered'' Equity Index using Machine Learning}
 \author{Tristan Leiter}
 \institute[WU]{Vienna University of Business and Economics \\
         \medskip
@@ -1229,8 +1229,8 @@ Temporary-CSI C/M/T sensitivity is complete locally and supports the presentatio
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.7pt}
-\begin{tabular}{L{1.65cm}L{1.45cm}R{0.70cm}R{0.72cm}R{0.72cm}R{0.72cm}R{0.78cm}L{1.35cm}}
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{L{1.35cm}L{1.55cm}R{0.65cm}R{0.65cm}R{0.65cm}R{0.65cm}R{1.00cm}L{0.95cm}}
 \toprule
 Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
 \midrule
@@ -1619,7 +1619,7 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{L{1.0cm}L{1.1cm}L{1.35cm}L{1.35cm}R{0.70cm}R{0.70cm}R{0.70cm}}
+\begin{tabular}{L{0.85cm}L{1.00cm}L{1.75cm}L{1.40cm}R{0.65cm}R{0.65cm}R{0.65cm}}
 \toprule
 Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule

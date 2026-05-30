@@ -1,0 +1,13 @@
+check,status,evidence,notes
+title_and_metadata,pass,"pdfinfo; rendered page 1","Metadata title/author/date present; subtitle quote mojibake fixed."
+active_pages_present,pass,"pdfinfo pages=48; Rnw frame count 48","Deck compiles to 48 pages."
+unresolved_refs,pass,"pdftotext search for ?? and citation markers","No unresolved ?? or broken citation markers found."
+modelling_tables,pass,"rendered pages 14 and 15","Required CV/test columns visible and tables fit."
+index_result_tables,pass,"rendered pages 19-22","Required performance columns visible and tables fit."
+transaction_cost_slide,pass,"rendered page 23","Table and explanatory text fit."
+turnover_slide,pass,"rendered page 24","Temporary/permanent turnover tables fit."
+error_cost_slide,pass,"rendered page 25 plus pdftotext search","Error-cost slide text and source note present; table fits with no visible content cut-off."
+appendix_readability,pass,"rendered pages 28,42,43,44,47","A1 and A15 spacing fixed; dense appendix tables readable enough."
+tikz_text_overlap,pass,"rendered selected methodology/index/appendix pages","No visible overlapping TikZ/text labels in inspected pages."
+content_cutoff,pass,"rendered selected pages","No inspected slide content cut off."
+source_audit_readable,pass,"rendered page 47; source-map row count","Source audit map readable; source map has 48 rows."
