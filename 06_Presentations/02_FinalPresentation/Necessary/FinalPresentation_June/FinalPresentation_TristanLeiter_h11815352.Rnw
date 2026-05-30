@@ -72,7 +72,7 @@ knit2pdf(Directory_LaTeX)
 \graphicspath{{../../../03_Output/Figures/}}
 
 \title[The Agony and the Ecstasy]{The Agony and the Ecstasy}
-\subtitle{Constructing a ”Crash-Filtered” Equity Index using Machine Learning}
+\subtitle{Constructing a ``Crash-Filtered'' Equity Index using Machine Learning}
 \author{Tristan Leiter}
 \institute[WU]{Vienna University of Business and Economics \\
         \medskip
@@ -637,22 +637,22 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 \fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Raw market signals};
 \fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE latent};
 
-% Row: fund
-\node[anchor=east] at (2.9,2.5){\texttt{fund}};
+% Row: AG Base Dataset
+\node[anchor=east, align=right] at (2.9,2.5){AG Base\\Dataset};
 \fill[MainColour!30]     (3.0,2.3) rectangle (5.0,2.7);
 
-% Row: raw
-\node[anchor=east] at (2.9,1.85){\texttt{raw}};
+% Row: AG Expanded Dataset
+\node[anchor=east, align=right] at (2.9,1.85){AG Expanded\\Dataset};
 \fill[MainColour!30]     (3.0,1.65) rectangle (5.0,2.05);
 \fill[teal!45]           (5.0,1.65) rectangle (7.6,2.05);
 
-% Row: latent_raw
-\node[anchor=east] at (2.9,1.20){\texttt{latent\_raw}};
+% Row: AG Latent Dataset (VAE)
+\node[anchor=east, align=right] at (2.9,1.20){AG Latent\\Dataset (VAE)};
 \fill[purple!30]         (7.6,1.00) rectangle (9.6,1.40);
-\node[anchor=west, darkgrey] at (3.05,1.20){\tiny VAE-only representation};
+\node[anchor=west, darkgrey] at (3.05,1.20){\tiny Latent representation};
 
-% Row: raw_plus_latent
-\node[anchor=east] at (2.9,0.55){\texttt{raw\_plus\_latent}};
+% Row: AG Exp. Dataset + VAE
+\node[anchor=east, align=right] at (2.9,0.55){AG Exp. Dataset\\+ VAE};
 \fill[MainColour!30]     (3.0,0.35) rectangle (5.0,0.75);
 \fill[teal!45]           (5.0,0.35) rectangle (7.6,0.75);
 \fill[purple!30]         (7.6,0.35) rectangle (9.6,0.75);
@@ -669,21 +669,21 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 \scriptsize
 \begin{alertblock}{Main read}
 \scriptsize
-Temporary CSI remains highly rankable, but AP and fixed-FPR recall are the decision metrics because positives are rare. \textbf{\texttt{raw\_plus\_latent}} is strongest on train/CV and OOS AP/FPR recall; \textbf{\texttt{raw}} remains the strongest 2016--2019 test benchmark and has marginally higher OOS AUC.
+Temporary CSI remains highly rankable, but AP and fixed-FPR recall are the decision metrics because positives are rare. \textbf{AG Exp. Dataset + VAE} is strongest on train/CV and OOS AP/FPR recall; \textbf{AG Expanded Dataset} remains the strongest 2016--2019 test benchmark and has marginally higher OOS AUC.
 \end{alertblock}
 
 \vspace{0.05em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{1.15cm}L{2.05cm}R{0.85cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.9cm}L{2.3cm}}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{L{2.65cm}R{0.85cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.95cm}}
 \toprule
-Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
+Model & CV-AP & CV-AUC & CV-FPR3 & Test-AP & Test-AUC & Test-FPR3 \\
 \midrule
-Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & strongest overall CV signal \\
-Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & 0.0821 & \textbf{0.2002} & 0.2998 & benchmark wins test AP/AUC \\
-OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & best OOS AP/FPR recall \\
-OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & slightly higher OOS AUC \\
+AG Expanded Dataset & 0.2046 & 0.8635 & 0.2344 & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.2002} \\
+AG Base Dataset & 0.1923 & 0.8446 & 0.2206 & 0.1656 & 0.8538 & 0.1517 \\
+AG Latent Dataset (VAE) & 0.1659 & 0.8454 & 0.1706 & 0.1501 & 0.8438 & 0.1294 \\
+AG Exp. Dataset + VAE & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.2478} & 0.1864 & 0.8741 & 0.1779 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -691,9 +691,9 @@ OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & sligh
 \vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-VAE latent information helps most when added to raw features and evaluated OOS. The raw benchmark remains competitive, so model slides alone do not establish index-level superiority; the index section evaluates economic performance.
+VAE latent information helps most when added to the expanded feature set and evaluated OOS. The expanded-dataset benchmark remains competitive, so model slides alone do not establish index-level superiority; the index section evaluates economic performance.
 \end{block}
-\remarkfoot{R@FPRk = recall at a CV-style false-positive-rate cap of k\%. Full train/CV, test, and OOS tables are in Appendix A10.}
+\remarkfoot{CV-FPR3 and Test-FPR3 are R@FPR3. OOS, R@FPR1, R@FPR5, Brier, and full split tables are in Appendix A10.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -702,22 +702,21 @@ VAE latent information helps most when added to raw features and evaluated OOS. 
 \scriptsize
 \begin{alertblock}{Main read}
 \scriptsize
-Permanent CSI is harder: positives are rarer and OOS prevalence is much lower. \textbf{\texttt{raw\_plus\_latent}} is the best non-raw CV/test challenger, while \textbf{\texttt{latent\_raw}} is the strongest OOS robustness signal.
+Permanent CSI is harder: positives are rarer and OOS prevalence is much lower. \textbf{AG Exp. Dataset + VAE} is the best non-raw CV/test challenger, while \textbf{AG Latent Dataset (VAE)} is the strongest OOS robustness signal.
 \end{alertblock}
 
 \vspace{0.05em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{1.15cm}L{2.05cm}R{0.82cm}R{0.82cm}R{0.86cm}R{0.86cm}R{0.86cm}L{2.45cm}}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{L{2.65cm}R{0.85cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.95cm}}
 \toprule
-Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
+Model & CV-AP & CV-AUC & CV-FPR3 & Test-AP & Test-AUC & Test-FPR3 \\
 \midrule
-Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & best AP and FPR1 \\
-Train/CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & best AUC/FPR3/5 \\
-Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & best AUC/FPR3/5 \\
-Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & narrow AP/FPR1 win \\
-OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & strongest OOS robustness \\
+AG Expanded Dataset & 0.1854 & \textbf{0.8757} & \textbf{0.2607} & \textbf{0.1416} & 0.8810 & 0.1808 \\
+AG Base Dataset & 0.1785 & 0.8677 & 0.2379 & 0.1289 & 0.8627 & 0.1697 \\
+AG Latent Dataset (VAE) & 0.1426 & 0.8460 & 0.1960 & 0.1115 & 0.8496 & 0.1513 \\
+AG Exp. Dataset + VAE & \textbf{0.1883} & 0.8719 & 0.2578 & 0.1415 & \textbf{0.8838} & \textbf{0.2011} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -725,9 +724,9 @@ OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504}
 \vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-Raw remains a strong reporting baseline. For permanent CSI, \texttt{raw\_plus\_latent} is the primary non-raw challenger, while \texttt{latent\_raw} is retained for OOS robustness rather than treated as a clean replacement.
+AG Expanded Dataset remains a strong reporting baseline. For permanent CSI, AG Exp. Dataset + VAE is the primary non-raw challenger, while AG Latent Dataset (VAE) is retained for OOS robustness rather than treated as a clean replacement.
 \end{block}
-\remarkfoot{Brier is best for permanent OOS under \texttt{latent\_raw}: 0.0166. Full split tables are in Appendix A11.}
+\remarkfoot{CV-FPR3 and Test-FPR3 are R@FPR3. OOS, R@FPR1, R@FPR5, Brier, and full split tables are in Appendix A11.}
 \end{frame}
 
 
@@ -736,7 +735,7 @@ Raw remains a strong reporting baseline. For permanent CSI, \texttt{raw\_plus\_l
 \scriptsize
 \begin{alertblock}{Feature-set interpretation}
 \scriptsize
-The VAE does not replace raw predictive information. It is useful as an augmentation or robustness signal: \texttt{raw\_plus\_latent} improves temporary OOS AP/FPR recall, while \texttt{latent\_raw} is the strongest permanent OOS model.
+The VAE does not replace expanded-dataset predictive information. It is useful as an augmentation or robustness signal: AG Exp. Dataset + VAE improves temporary OOS AP/FPR recall, while AG Latent Dataset (VAE) is the strongest permanent OOS model.
 \end{alertblock}
 
 \vspace{0.15em}
@@ -744,17 +743,17 @@ The VAE does not replace raw predictive information. It is useful as an augmenta
 \begin{column}{0.49\textwidth}
 \textbf{Temporary CSI}
 \begin{itemize}
-  \item \texttt{raw\_plus\_latent} leads OOS AP: 0.3152.
+  \item AG Exp. Dataset + VAE leads OOS AP: 0.3152.
   \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
-  \item \texttt{raw} still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
+  \item AG Expanded Dataset still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
 \textbf{Permanent CSI}
 \begin{itemize}
-  \item \texttt{raw\_plus\_latent} leads test AUC and FPR3/5 recall.
-  \item \texttt{latent\_raw} leads OOS AP/AUC/Brier/FPR recall.
-  \item \texttt{fund} remains a useful fundamentals-only benchmark, not the preferred model.
+  \item AG Exp. Dataset + VAE leads test AUC and FPR3/5 recall.
+  \item AG Latent Dataset (VAE) leads OOS AP/AUC/Brier/FPR recall.
+  \item AG Base Dataset remains a useful fundamentals-only benchmark, not the preferred model.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -887,58 +886,130 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
 %==== 4b. Data findings =======================================================%
 
 
-\begin{frame}{Index Results: Temporary CSI at 20 bps}
-\fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{OOS winners by benchmark universe; benchmark is the unfiltered market-cap-weighted universe}
+\begin{frame}{Index Results: Temporary CSI at 0 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; no transaction-cost overlay}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.85pt}
-\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
 \toprule
-Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp & 0.634 & 10.4\% \\
-Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp & 0.677 & 13.0\% \\
-Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp & 0.419 & 105.9\% \\
-Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp & 0.328 & 85.5\% \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.72\% & 18.28\% & 0.636 & -23.78\% & -11.22\% & +0.43pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.43\% & 17.98\% & 0.678 & -23.89\% & -10.65\% & +0.15pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.16\% & 20.70\% & 0.429 & -24.46\% & -13.85\% & +0.51pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.29\% & 22.65\% & 0.336 & -29.33\% & -15.77\% & +0.64pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Temporary CSI conclusion}
 \scriptsize
-At 20 bps, fundamentals-only wins Total, Large, and Mid Cap. Raw + latent wins Small Cap. The strongest temporary rules are mostly Youden with longer lockouts, with FPR5 useful in Mid Cap.
+Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Exp. Dataset + VAE wins Small Cap. Delta pp is strategy net geometric return minus the matching benchmark row.
 \end{alertblock}
-\remarkfoot{Net ret. is net annualized geometric return after 20 bps transaction-cost drag. Benchmark has no strategy transaction-cost overlay. Source: \texttt{headline\_winners\_20bps.csv}.}
+\remarkfoot{Source: \texttt{best\_by\_track\_index\_cost.csv}; Ann. SD and ES 2.5\% from model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Results: Permanent CSI at 20 bps}
-\fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{OOS winners by benchmark universe; permanent-removal rule}
+\begin{frame}{Index Results: Temporary CSI at 10 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.85pt}
-\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
 \toprule
-Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp & 0.614 & 6.8\% \\
-Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp & 0.670 & 11.5\% \\
-Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp & 0.431 & 106.2\% \\
-Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp & 0.312 & 75.7\% \\
+Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.43pp \\
+Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.15pp \\
+Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.51pp \\
+Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.63pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Temporary CSI transaction-cost read}
+\scriptsize
+The 10 bps overlay leaves the temporary CSI winners unchanged. The source benchmark rows remain the unfiltered market-cap reference for each universe, reported at the matching cost row.
+\end{alertblock}
+\remarkfoot{Cost rows are source-provided net performance rows; cost overlay applies through the 11C transaction-cost contract. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Index Results: Permanent CSI at 0 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; permanent-removal rule}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
+\toprule
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
+\midrule
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.56\% & 18.82\% & 0.615 & -24.72\% & -11.45\% & +0.27pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.51\% & 18.38\% & 0.671 & -24.51\% & -10.74\% & +0.23pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.39\% & 20.58\% & 0.441 & -24.52\% & -13.90\% & +0.74pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.98\% & 23.78\% & 0.318 & -29.26\% & -16.35\% & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Permanent CSI conclusion}
 \scriptsize
-Raw + latent wins Total and Large Cap; fundamentals-only wins Mid Cap; VAE-only wins Small Cap. Permanent CSI is strongest under fixed-FPR thresholds, especially FPR3 and FPR5.
+Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Base Dataset wins Mid Cap; AG Latent Dataset (VAE) wins Small Cap.
 \end{alertblock}
-\remarkfoot{Benchmark is the unfiltered market-cap-weighted index for the same universe. Source: \texttt{headline\_winners\_20bps.csv}.}
+\remarkfoot{Benchmark rows are model-key \texttt{bench}, strategy \texttt{bench\_mw}, period \texttt{oos}. Source: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Index Results: Permanent CSI at 10 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
+\toprule
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
+\midrule
+Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.27pp \\
+Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.23pp \\
+Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.74pp \\
+Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Permanent CSI transaction-cost read}
+\scriptsize
+The 10 bps overlay leaves the permanent CSI winners unchanged. Permanent CSI gains come from fixed-FPR rules rather than Youden-style broad exclusions.
+\end{alertblock}
+\remarkfoot{Geo ret., Ann. SD, Sharpe Ratio, Max DD, and ES 2.5\% are net OOS values from source performance rows. Delta pp is zero for benchmarks.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -969,6 +1040,88 @@ Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp 
 \scriptsize
 Transaction costs do not change the top winner in any of the eight track--index comparisons. The cost drag is economically visible in Mid and Small Cap, but it is not large enough at 20 bps to overturn the ranking.
 \remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Turnover Effect}
+\fontsize{5.25pt}{5.85pt}\selectfont
+\textbf{Best strategies keep their ranking at 10 bps, but Mid and Small Cap absorb more cost drag}
+\vspace{-0.35em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
+\toprule
+\multicolumn{6}{l}{\textbf{Temporary CSI}}\\
+\midrule
+Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
+\midrule
+Total & AG Base Dataset (Youden 3yr) & 15.3\% & 13.72\% & 13.71\% & -0.01pp \\
+Large & AG Base Dataset (Youden 3yr) & 18.8\% & 14.43\% & 14.42\% & -0.01pp \\
+Mid & AG Base Dataset (FPR5 5yr) & 97.7\% & 10.16\% & 10.05\% & -0.11pp \\
+Small & AG Exp. Dataset + VAE (Youden 3yr) & 77.2\% & 8.29\% & 8.20\% & -0.09pp \\
+\bottomrule
+\end{tabular}
+\vspace{0.25em}
+\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
+\toprule
+\multicolumn{6}{l}{\textbf{Permanent CSI}}\\
+\midrule
+Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
+\midrule
+Total & AG Exp. Dataset + VAE (FPR5 perm.) & 12.2\% & 13.56\% & 13.55\% & -0.01pp \\
+Large & AG Exp. Dataset + VAE (FPR5 perm.) & 17.2\% & 14.51\% & 14.49\% & -0.01pp \\
+Mid & AG Base Dataset (FPR5 perm.) & 97.0\% & 10.39\% & 10.28\% & -0.12pp \\
+Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\scriptsize
+Mid and Small Cap exclusions create the largest annualized gross turnover, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
+\remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Error-Cost Decomposition}
+\fontsize{5.15pt}{5.75pt}\selectfont
+\textbf{OOS error-cost rows decompose the selected best strategy by confusion category}
+\vspace{-0.35em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
+\toprule
+\multicolumn{7}{l}{\textbf{Temporary CSI}}\\
+\midrule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
+Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
+Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & -0.00pp & +0.27pp & +0.51pp \\
+Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
+\bottomrule
+\end{tabular}
+\vspace{0.25em}
+\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
+\toprule
+\multicolumn{7}{l}{\textbf{Permanent CSI}}\\
+\midrule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
+Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
+Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.74pp \\
+Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\scriptsize
+False positives are opportunity-cost exclusions; true negatives preserve benchmark exposure. Net is the source OOS strategy difference versus the matched benchmark, while category signs are retained from the decomposition output.
+\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched on track, universe, model, threshold, lockout/rule, strategy id, and OOS period.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1076,8 +1229,8 @@ Temporary-CSI C/M/T sensitivity is complete locally and supports the presentatio
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.7pt}
-\begin{tabular}{L{1.65cm}L{1.45cm}R{0.70cm}R{0.72cm}R{0.72cm}R{0.72cm}R{0.78cm}L{1.35cm}}
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{L{1.35cm}L{1.55cm}R{0.65cm}R{0.65cm}R{0.65cm}R{0.65cm}R{1.00cm}L{0.95cm}}
 \toprule
 Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
 \midrule
@@ -1091,13 +1244,13 @@ Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp
 \vspace{-0.05em}
 \begin{block}{Blocked partial cases}
 \scriptsize
-The grid registry includes three incomplete cases: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. They are represented in manifests but excluded from completed-run conclusions.
+The grid represents 27 C/M/T configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. Blocked cases are represented in manifests but excluded from completed-run conclusions.
 \end{block}
 \begin{block}{Source interpretation}
 \scriptsize
 C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
 \end{block}
-\remarkfoot{Sources: \texttt{full\_grid\_label\_count\_ranking.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}; \texttt{run\_registry.csv}.}
+\remarkfoot{Sources: \texttt{05\_comparisons/full\_grid\_best\_configs\_by\_objective.csv}; \texttt{05\_comparisons/full\_grid\_*}; \texttt{99\_reports/sensitivity\_results\_readme.md}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
@@ -1333,26 +1486,26 @@ Status & Weakly supervised on training rows; test and OOS labels are not used fo
 \textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
+\begin{tabular}{L{0.7cm}L{2.35cm}R{0.72cm}R{0.72cm}R{0.76cm}R{0.76cm}R{0.76cm}R{0.72cm}}
 \toprule
 Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-CV & \texttt{raw} & 0.2046 & 0.8635 & 0.0917 & 0.2344 & 0.3415 & 0.0371 \\
-CV & \texttt{fund} & 0.1923 & 0.8446 & 0.0830 & 0.2206 & 0.3229 & 0.0374 \\
-CV & \texttt{latent\_raw} & 0.1659 & 0.8454 & 0.0670 & 0.1706 & 0.2735 & 0.0380 \\
-CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & \textbf{0.0368} \\
-Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.0821} & \textbf{0.2002} & \textbf{0.2998} & \textbf{0.0389} \\
-Test & \texttt{fund} & 0.1656 & 0.8538 & 0.0585 & 0.1517 & 0.2413 & 0.0392 \\
-Test & \texttt{latent\_raw} & 0.1501 & 0.8438 & 0.0410 & 0.1294 & 0.2264 & 0.0394 \\
-Test & \texttt{raw\_plus\_latent} & 0.1864 & 0.8741 & 0.0634 & 0.1779 & 0.2749 & 0.0394 \\
-OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & 0.0498 \\
-OOS & \texttt{fund} & 0.2526 & 0.8686 & 0.0598 & 0.1795 & 0.3017 & 0.0526 \\
-OOS & \texttt{latent\_raw} & 0.2813 & 0.8626 & 0.1009 & 0.2274 & 0.3556 & 0.0518 \\
-OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & \textbf{0.0494} \\
+CV & AG Expanded Dataset & 0.2046 & 0.8635 & 0.0917 & 0.2344 & 0.3415 & 0.0371 \\
+CV & AG Base Dataset & 0.1923 & 0.8446 & 0.0830 & 0.2206 & 0.3229 & 0.0374 \\
+CV & AG Latent Dataset (VAE) & 0.1659 & 0.8454 & 0.0670 & 0.1706 & 0.2735 & 0.0380 \\
+CV & AG Exp. Dataset + VAE & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & \textbf{0.0368} \\
+Test & AG Expanded Dataset & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.0821} & \textbf{0.2002} & \textbf{0.2998} & \textbf{0.0389} \\
+Test & AG Base Dataset & 0.1656 & 0.8538 & 0.0585 & 0.1517 & 0.2413 & 0.0392 \\
+Test & AG Latent Dataset (VAE) & 0.1501 & 0.8438 & 0.0410 & 0.1294 & 0.2264 & 0.0394 \\
+Test & AG Exp. Dataset + VAE & 0.1864 & 0.8741 & 0.0634 & 0.1779 & 0.2749 & 0.0394 \\
+OOS & AG Expanded Dataset & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & 0.0498 \\
+OOS & AG Base Dataset & 0.2526 & 0.8686 & 0.0598 & 0.1795 & 0.3017 & 0.0526 \\
+OOS & AG Latent Dataset (VAE) & 0.2813 & 0.8626 & 0.1009 & 0.2274 & 0.3556 & 0.0518 \\
+OOS & AG Exp. Dataset + VAE & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & \textbf{0.0494} \\
 \bottomrule
 \end{tabular}
 \end{center}
-\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A11: Permanent CSI Model Metrics}
@@ -1362,26 +1515,26 @@ OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & 
 \textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
+\begin{tabular}{L{0.7cm}L{2.35cm}R{0.72cm}R{0.72cm}R{0.76cm}R{0.76cm}R{0.76cm}R{0.72cm}}
 \toprule
 Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & 0.0297 \\
-CV & \texttt{fund} & 0.1785 & 0.8677 & 0.1033 & 0.2379 & 0.3469 & 0.0299 \\
-CV & \texttt{latent\_raw} & 0.1426 & 0.8460 & 0.0732 & 0.1960 & 0.2908 & 0.0308 \\
-CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & \textbf{0.0297} \\
-Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & 0.0284 \\
-Test & \texttt{fund} & 0.1289 & 0.8627 & 0.0627 & 0.1697 & 0.2620 & 0.0293 \\
-Test & \texttt{latent\_raw} & 0.1115 & 0.8496 & 0.0424 & 0.1513 & 0.2546 & \textbf{0.0280} \\
-Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & 0.0283 \\
-OOS & \texttt{raw} & 0.0323 & 0.8081 & 0.0000 & 0.0119 & 0.0623 & 0.0211 \\
-OOS & \texttt{fund} & 0.0281 & 0.7798 & 0.0000 & 0.0030 & 0.0297 & 0.0232 \\
-OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & \textbf{0.0166} \\
-OOS & \texttt{raw\_plus\_latent} & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.0207 \\
+CV & AG Expanded Dataset & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & 0.0297 \\
+CV & AG Base Dataset & 0.1785 & 0.8677 & 0.1033 & 0.2379 & 0.3469 & 0.0299 \\
+CV & AG Latent Dataset (VAE) & 0.1426 & 0.8460 & 0.0732 & 0.1960 & 0.2908 & 0.0308 \\
+CV & AG Exp. Dataset + VAE & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & \textbf{0.0297} \\
+Test & AG Expanded Dataset & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & 0.0284 \\
+Test & AG Base Dataset & 0.1289 & 0.8627 & 0.0627 & 0.1697 & 0.2620 & 0.0293 \\
+Test & AG Latent Dataset (VAE) & 0.1115 & 0.8496 & 0.0424 & 0.1513 & 0.2546 & \textbf{0.0280} \\
+Test & AG Exp. Dataset + VAE & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & 0.0283 \\
+OOS & AG Expanded Dataset & 0.0323 & 0.8081 & 0.0000 & 0.0119 & 0.0623 & 0.0211 \\
+OOS & AG Base Dataset & 0.0281 & 0.7798 & 0.0000 & 0.0030 & 0.0297 & 0.0232 \\
+OOS & AG Latent Dataset (VAE) & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & \textbf{0.0166} \\
+OOS & AG Exp. Dataset + VAE & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.0207 \\
 \bottomrule
 \end{tabular}
 \end{center}
-\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A12: Model Family Winners}
@@ -1398,14 +1551,14 @@ Every final feature-set/track run selected a \texttt{WeightedEnsemble\_L2} as th
 \toprule
 Track & Feature set & Best family & Val. score & Fit sec. \\
 \midrule
-Temporary & \texttt{raw} & WeightedEnsemble & 0.2307 & 280 \\
-Temporary & \texttt{fund} & WeightedEnsemble & 0.2203 & 83 \\
-Temporary & \texttt{latent\_raw} & WeightedEnsemble & 0.1953 & 146 \\
-Temporary & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2314} & 203 \\
-Permanent & \texttt{raw} & WeightedEnsemble & 0.2010 & 126 \\
-Permanent & \texttt{fund} & WeightedEnsemble & 0.1929 & 229 \\
-Permanent & \texttt{latent\_raw} & WeightedEnsemble & 0.1505 & 191 \\
-Permanent & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2041} & 291 \\
+Temporary & AG Expanded Dataset & WeightedEnsemble & 0.2307 & 280 \\
+Temporary & AG Base Dataset & WeightedEnsemble & 0.2203 & 83 \\
+Temporary & AG Latent Dataset (VAE) & WeightedEnsemble & 0.1953 & 146 \\
+Temporary & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2314} & 203 \\
+Permanent & AG Expanded Dataset & WeightedEnsemble & 0.2010 & 126 \\
+Permanent & AG Base Dataset & WeightedEnsemble & 0.1929 & 229 \\
+Permanent & AG Latent Dataset (VAE) & WeightedEnsemble & 0.1505 & 191 \\
+Permanent & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2041} & 291 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1422,8 +1575,8 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \begin{itemize}
   \item AP and fixed-FPR recall are emphasized because CSI positives are rare.
   \item AUC remains useful as a ranking diagnostic but can mask low-prevalence false-positive economics.
-  \item \texttt{raw\_plus\_latent} is the main enhanced feature-set challenger for temporary CSI and permanent test/CV.
-  \item \texttt{latent\_raw} is retained for permanent OOS robustness, not as a universal replacement.
+  \item AG Exp. Dataset + VAE is the main enhanced feature-set challenger for temporary CSI and permanent test/CV.
+  \item AG Latent Dataset (VAE) is retained for permanent OOS robustness, not as a universal replacement.
   \item Economic superiority is not claimed from model metrics alone; index-construction slides test benchmark-relative performance.
 \end{itemize}
 \end{frame}
@@ -1435,7 +1588,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \begin{column}{0.50\textwidth}
 \textbf{Completed grid}
 \begin{itemize}
-  \item Models: \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, \texttt{raw\_plus\_latent}.
+  \item Models: \texttt{raw} (AG Expanded Dataset), \texttt{fund} (AG Base Dataset), \texttt{latent\_raw} (AG Latent Dataset), \texttt{raw\_plus\_latent} (AG Exp. Dataset + VAE).
   \item Tracks: temporary CSI and permanent CSI.
   \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
   \item Thresholds: Youden, FPR1, FPR3, FPR5.
@@ -1456,7 +1609,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \scriptsize
 The index section uses OOS economic performance. Model metrics identify useful prediction signals; index construction tests whether those signals improve benchmark-relative returns after thresholding, exclusions, turnover, and transaction costs.
 \end{alertblock}
-\remarkfoot{Source: \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+\remarkfoot{Sources: \texttt{comparison/full\_grid\_manifest.csv}; \texttt{comparison/best\_by\_track\_index\_cost.csv}; \texttt{comparison/turnover\_summary.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
@@ -1466,7 +1619,7 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{L{1.0cm}L{1.1cm}L{1.35cm}L{1.35cm}R{0.70cm}R{0.70cm}R{0.70cm}}
+\begin{tabular}{L{0.85cm}L{1.00cm}L{1.75cm}L{1.40cm}R{0.65cm}R{0.65cm}R{0.65cm}}
 \toprule
 Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule
@@ -1568,10 +1721,13 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 \begin{itemize}
   \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
   \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
-  \item Transaction costs: \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Transaction costs: \texttt{comparison/transaction\_cost\_impact.csv}; \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Threshold-family grid: \texttt{comparison/best\_by\_track\_index\_threshold\_family.csv}
+  \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
   \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
-  \item Turnover: \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Full grid comparisons: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Error-cost decomposition: selected \texttt{fund}, \texttt{raw\_plus\_latent}, and \texttt{latent\_raw} \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
 \end{itemize}
 \vspace{0.3em}
 \begin{block}{Source discipline}

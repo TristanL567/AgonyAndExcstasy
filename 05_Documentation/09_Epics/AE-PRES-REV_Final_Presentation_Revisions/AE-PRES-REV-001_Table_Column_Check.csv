@@ -1,0 +1,3 @@
+frame,expected_header,observed_header,status,remaining_metrics_location
+"Modelling II: Results Temporary CSI","Model | CV-AP | CV-AUC | CV-FPR3 | Test-AP | Test-AUC | Test-FPR3","Model | CV-AP | CV-AUC | CV-FPR3 | Test-AP | Test-AUC | Test-FPR3","pass","Appendix A10 retains OOS, R@FPR1, R@FPR5, Brier, and full CV/test/OOS rows."
+"Modelling III: Results Permanent-CSI","Model | CV-AP | CV-AUC | CV-FPR3 | Test-AP | Test-AUC | Test-FPR3","Model | CV-AP | CV-AUC | CV-FPR3 | Test-AP | Test-AUC | Test-FPR3","pass","Appendix A11 retains OOS, R@FPR1, R@FPR5, Brier, and full CV/test/OOS rows."
