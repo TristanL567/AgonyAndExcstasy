@@ -1044,6 +1044,88 @@ Transaction costs do not change the top winner in any of the eight track--index 
 
 %==== 4b. Data findings =======================================================%
 
+\begin{frame}{Turnover Effect}
+\fontsize{5.25pt}{5.85pt}\selectfont
+\textbf{Best strategies keep their ranking at 10 bps, but Mid and Small Cap absorb more cost drag}
+\vspace{-0.35em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
+\toprule
+\multicolumn{6}{l}{\textbf{Temporary CSI}}\\
+\midrule
+Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
+\midrule
+Total & AG Base Dataset (Youden 3yr) & 15.3\% & 13.72\% & 13.71\% & -0.01pp \\
+Large & AG Base Dataset (Youden 3yr) & 18.8\% & 14.43\% & 14.42\% & -0.01pp \\
+Mid & AG Base Dataset (FPR5 5yr) & 97.7\% & 10.16\% & 10.05\% & -0.11pp \\
+Small & AG Exp. Dataset + VAE (Youden 3yr) & 77.2\% & 8.29\% & 8.20\% & -0.09pp \\
+\bottomrule
+\end{tabular}
+\vspace{0.25em}
+\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
+\toprule
+\multicolumn{6}{l}{\textbf{Permanent CSI}}\\
+\midrule
+Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
+\midrule
+Total & AG Exp. Dataset + VAE (FPR5 perm.) & 12.2\% & 13.56\% & 13.55\% & -0.01pp \\
+Large & AG Exp. Dataset + VAE (FPR5 perm.) & 17.2\% & 14.51\% & 14.49\% & -0.01pp \\
+Mid & AG Base Dataset (FPR5 perm.) & 97.0\% & 10.39\% & 10.28\% & -0.12pp \\
+Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\scriptsize
+Mid and Small Cap exclusions create the largest annualized gross turnover, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
+\remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Error-Cost Decomposition}
+\fontsize{5.15pt}{5.75pt}\selectfont
+\textbf{OOS error-cost rows decompose the selected best strategy by confusion category}
+\vspace{-0.35em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
+\toprule
+\multicolumn{7}{l}{\textbf{Temporary CSI}}\\
+\midrule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
+Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
+Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & -0.00pp & +0.27pp & +0.51pp \\
+Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
+\bottomrule
+\end{tabular}
+\vspace{0.25em}
+\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
+\toprule
+\multicolumn{7}{l}{\textbf{Permanent CSI}}\\
+\midrule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
+Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
+Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.74pp \\
+Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\scriptsize
+False positives are opportunity-cost exclusions; true negatives preserve benchmark exposure. Net is the source OOS strategy difference versus the matched benchmark, while category signs are retained from the decomposition output.
+\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched on track, universe, model, threshold, lockout/rule, strategy id, and OOS period.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
 \begin{frame}{Threshold Families and Turnover}
 \fontsize{6.1pt}{6.7pt}\selectfont
 \begin{columns}[T,onlytextwidth]

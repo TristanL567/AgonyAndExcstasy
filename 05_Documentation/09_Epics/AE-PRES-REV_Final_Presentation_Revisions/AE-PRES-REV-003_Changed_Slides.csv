@@ -1,0 +1,4 @@
+frame_title,action,source_gate_result,notes
+Turnover Effect,added,passed,"Added temporary and permanent CSI turnover-effect tables with required columns and four universes each."
+Error-Cost Decomposition,added,passed,"Added temporary and permanent CSI FP/FN/TP/TN OOS decomposition tables matched to selected best strategies."
+SLIDE_DATA_SOURCES.md,updated,passed,"Added source-map rows for Turnover Effect and Error-Cost Decomposition and renumbered following rows."
