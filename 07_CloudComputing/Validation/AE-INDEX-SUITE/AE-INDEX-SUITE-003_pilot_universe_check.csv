@@ -1,0 +1,5 @@
+index_id,represented,performance_rows,tc_performance_rows,returns_tc_rows,status
+large_cap,True,52,208,13728,pass
+mid_cap,True,52,208,13728,pass
+small_cap,True,52,208,13728,pass
+total_market,True,52,208,13728,pass

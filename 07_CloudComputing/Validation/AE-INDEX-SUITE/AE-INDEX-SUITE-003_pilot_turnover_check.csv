@@ -1,0 +1,7 @@
+check,status,rows,non_null_rows,positive_rows,detail
+turnover_buy_present_non_null,pass,13728,13728,4576,
+turnover_sell_present_non_null,pass,13728,13728,4524,
+turnover_gross_present_non_null,pass,13728,13728,4576,
+turnover_one_way_present_non_null,pass,13728,13728,4576,
+initial_formation_label_present,pass,13728,13728,52,initial portfolio formation labelled separately
+turnover_summary_non_empty,pass,52,52,52,summary rows by strategy

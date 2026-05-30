@@ -10,9 +10,9 @@
 #
 # DESIGN:
 #   - Inputs are the CRSP-like quarterly constituents from 01_Code/IndexConstruction
-#     and AutoGluon ag_raw CSI predictions from 09C.
+#     and AutoGluon CSI predictions from 09C.
 #   - Thresholds are estimated on CV predictions only:
-#       FPR <= 1%, FPR <= 3%, and Youden J.
+#       FPR <= 1%, FPR <= 3%, FPR <= 5%, and Youden J.
 #   - dynamic_csi uses 1/2/3/5-year temporary lockouts.
 #   - permanent_csi uses absorbing permanent removal.
 #   - Benchmark for each index is the unfiltered market-cap-weighted version of
@@ -24,6 +24,10 @@
 #     index_thresholds_by_crsp_universe.{rds,csv}
 #     index_weights_by_crsp_universe.{rds,csv}
 #     index_returns_by_crsp_universe.{rds,csv}
+#     index_turnover_by_month.{rds,csv}
+#     index_turnover_summary.{rds,csv}
+#     index_returns_gross_and_net_by_tc.{rds,csv}
+#     index_performance_gross_and_net_by_tc.{rds,csv}
 #     index_performance_by_crsp_universe.{rds,csv}
 #     index_exclusion_summary_by_crsp_universe.{rds,csv}
 #     error_cost_decomposition_by_crsp_universe.{rds,csv}
@@ -73,10 +77,78 @@ if (AE_SENS_MODE) {
   )
 }
 
+fn_11c_is_absolute_path <- function(path) {
+  grepl("^([A-Za-z]:)?[/\\\\]", path)
+}
+
+MT_OUTPUT_DIR_11C <- Sys.getenv("MT_OUTPUT_DIR", unset = "")
+if (!AE_SENS_MODE && nzchar(MT_OUTPUT_DIR_11C)) {
+  if (!fn_11c_is_absolute_path(MT_OUTPUT_DIR_11C)) {
+    stop("MT_OUTPUT_DIR must be an absolute path for 11C output isolation: ", MT_OUTPUT_DIR_11C)
+  }
+  DIR_DATA_OUTPUT <- MT_OUTPUT_DIR_11C
+  DIR_MODELLING <- file.path(DIR_DATA_OUTPUT, "3_Modelling_Results")
+  DIR_MODELLING_NEC <- file.path(DIR_MODELLING, "Necessary")
+  DIR_MODELLING_TRACK <- file.path(DIR_MODELLING_NEC, TRACK_FOLDER)
+  DIR_TABLES_TRACK <- DIR_MODELLING_TRACK
+  DIR_TABLES_AUTOGLUON_TRACK <- file.path(DIR_MODELLING_TRACK, "AutoGluon")
+}
+
+MODEL_ALIASES_11C <- c(
+  M1 = "fund",
+  M3 = "raw",
+  M4 = "latent_raw",
+  raw_latent = "raw_plus_latent",
+  "raw+latent" = "raw_plus_latent"
+)
+MODEL_KEY_RAW <- if (AE_SENS_MODE) "raw" else Sys.getenv("MODEL", unset = "raw")
+MODEL_KEY <- if (MODEL_KEY_RAW %in% names(MODEL_ALIASES_11C)) {
+  unname(MODEL_ALIASES_11C[[MODEL_KEY_RAW]])
+} else {
+  MODEL_KEY_RAW
+}
+
+MODEL_SPECS_11C <- list(
+  raw = list(
+    ag_dir = "ag_raw",
+    label = "AutoGluon raw",
+    out_dir_name = "11c_index_revised"
+  ),
+  fund = list(
+    ag_dir = "ag_fund",
+    label = "AutoGluon fundamental",
+    out_dir_name = "11c_index_revised_fund"
+  ),
+  latent_raw = list(
+    ag_dir = "ag_latent_raw",
+    label = "AutoGluon VAE-only raw latent",
+    out_dir_name = "11c_index_revised_latent_raw"
+  ),
+  raw_plus_latent = list(
+    ag_dir = "ag_raw_plus_latent",
+    label = "AutoGluon raw plus latent",
+    out_dir_name = "11c_index_revised_raw_plus_latent"
+  )
+)
+if (!MODEL_KEY %in% names(MODEL_SPECS_11C)) {
+  stop(
+    "Unsupported MODEL for 11C index construction: ", MODEL_KEY,
+    "\nSupported MODEL values: ", paste(names(MODEL_SPECS_11C), collapse = ", ")
+  )
+}
+MODEL_SPEC <- MODEL_SPECS_11C[[MODEL_KEY]]
+MODEL_AG_DIR <- MODEL_SPEC$ag_dir
+MODEL_LABEL <- MODEL_SPEC$label
+MODEL_PREDICTION_DIR <- if (AE_SENS_MODE) {
+  file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID)
+} else {
+  file.path(DIR_TABLES_AUTOGLUON_TRACK, MODEL_AG_DIR)
+}
+
 OUT_DIR <- if (AE_SENS_MODE) {
   file.path(AE_SENS_OUTPUT_ROOT, "index_construction", AE_SENS_RUN_ID)
 } else {
-  file.path(DIR_TABLES_TRACK, "11c_index_revised")
+  file.path(DIR_TABLES_TRACK, MODEL_SPEC$out_dir_name)
 }
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
@@ -103,6 +175,10 @@ PATH_11C_RETURNS <- file.path(OUT_DIR, "index_returns_by_crsp_universe.rds")
 PATH_11C_PERF <- file.path(OUT_DIR, "index_performance_by_crsp_universe.rds")
 PATH_11C_EXCLUSION <- file.path(OUT_DIR, "index_exclusion_summary_by_crsp_universe.rds")
 PATH_11C_DECOMP <- file.path(OUT_DIR, "error_cost_decomposition_by_crsp_universe.rds")
+PATH_11C_TURNOVER <- file.path(OUT_DIR, "index_turnover_by_month.rds")
+PATH_11C_TURNOVER_SUMMARY <- file.path(OUT_DIR, "index_turnover_summary.rds")
+PATH_11C_RETURNS_TC <- file.path(OUT_DIR, "index_returns_gross_and_net_by_tc.rds")
+PATH_11C_PERF_TC <- file.path(OUT_DIR, "index_performance_gross_and_net_by_tc.rds")
 PATH_11C_STATUS <- file.path(OUT_DIR, "run_status.csv")
 PATH_AE_SENS_11C_DIAG <- file.path(OUT_DIR, "ae_sens_11c_merge_diagnostics.csv")
 
@@ -210,13 +286,14 @@ fn_read_parquet <- function(path) {
   as.data.table(utils::read.csv(tmp, stringsAsFactors = FALSE, check.names = FALSE))
 }
 
-MODEL_KEY <- "raw"
-MODEL_LABEL <- "AutoGluon raw"
 THRESHOLD_METHODS <- c(
   fpr1 = "CV FPR <= 1%",
   fpr3 = "CV FPR <= 3%",
+  fpr5 = "CV FPR <= 5%",
   youden = "CV Youden J"
 )
+FIXED_FPR_LEVELS <- c(fpr1 = 0.01, fpr3 = 0.03, fpr5 = 0.05)
+TRANSACTION_COST_BPS <- c(0, 5, 10, 20)
 LOCKOUT_YEARS <- c("1yr" = 1L, "2yr" = 2L, "3yr" = 3L, "5yr" = 5L)
 IS_PERMANENT_TRACK <- identical(RESPONSE_TRACK, "permanent_csi")
 EXCLUSION_RULES <- if (IS_PERMANENT_TRACK) {
@@ -313,19 +390,17 @@ cat(sprintf("  Monthly rows: %d | constituents: %d | indices: %s\n",
 # 2. Load AutoGluon predictions and CV thresholds
 #==============================================================================#
 
-cat("[11C] Loading ag_raw predictions and estimating CV thresholds...\n")
+cat(sprintf(
+  "[11C] Loading %s predictions for MODEL=%s and estimating CV thresholds...\n",
+  MODEL_AG_DIR, MODEL_KEY
+))
 
 fn_load_predictions <- function() {
-  tdir <- if (AE_SENS_MODE) {
-    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID)
-  } else {
-    file.path(DIR_TABLES_AUTOGLUON_TRACK, "ag_raw")
-  }
   fmap <- c(
-    oos = file.path(tdir, "ag_preds_oos.parquet"),
-    test = file.path(tdir, "ag_preds_test.parquet"),
-    boundary = file.path(tdir, "ag_preds_train_boundary.parquet"),
-    cv = file.path(tdir, "ag_cv_results.parquet")
+    oos = file.path(MODEL_PREDICTION_DIR, "ag_preds_oos.parquet"),
+    test = file.path(MODEL_PREDICTION_DIR, "ag_preds_test.parquet"),
+    boundary = file.path(MODEL_PREDICTION_DIR, "ag_preds_train_boundary.parquet"),
+    cv = file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
   )
   fn_stop_missing(unname(fmap))
 
@@ -355,12 +430,7 @@ fn_load_predictions <- function() {
 }
 
 fn_cv_thresholds <- function() {
-  cv_path <- if (AE_SENS_MODE) {
-    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID,
-              "ag_cv_results.parquet")
-  } else {
-    file.path(DIR_TABLES_AUTOGLUON_TRACK, "ag_raw", "ag_cv_results.parquet")
-  }
+  cv_path <- file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
   cv <- fn_read_parquet(cv_path)
   y <- as.integer(cv$y)
   p_csi <- as.numeric(cv$p_csi)
@@ -404,8 +474,10 @@ fn_cv_thresholds <- function() {
 
     fpr1_idx <- which(roc_grid$fpr <= 0.01)
     fpr3_idx <- which(roc_grid$fpr <= 0.03)
+    fpr5_idx <- which(roc_grid$fpr <= 0.05)
     if (length(fpr1_idx) == 0L) stop("No CV threshold satisfies FPR <= 1%.")
     if (length(fpr3_idx) == 0L) stop("No CV threshold satisfies FPR <= 3%.")
+    if (length(fpr5_idx) == 0L) stop("No CV threshold satisfies FPR <= 5%.")
 
     pick_fpr <- function(idx) {
       idx[order(-roc_grid$recall[idx], roc_grid$fpr[idx],
@@ -414,6 +486,7 @@ fn_cv_thresholds <- function() {
     picks <- c(
       fpr1 = pick_fpr(fpr1_idx),
       fpr3 = pick_fpr(fpr3_idx),
+      fpr5 = pick_fpr(fpr5_idx),
       youden = order(-roc_grid$youden_j, -roc_grid$recall,
                      roc_grid$fpr, -roc_grid$threshold)[1L]
     )
@@ -461,45 +534,33 @@ fn_cv_thresholds <- function() {
   )]
   roc_grid[, youden_j := recall - fpr]
 
-  fpr1 <- roc_grid[fpr <= 0.01]
-  fpr3 <- roc_grid[fpr <= 0.03]
-  if (nrow(fpr1) == 0L) stop("No CV threshold satisfies FPR <= 1%.")
-  if (nrow(fpr3) == 0L) stop("No CV threshold satisfies FPR <= 3%.")
+  fixed_fpr_thresholds <- lapply(names(FIXED_FPR_LEVELS), function(method) {
+    level <- FIXED_FPR_LEVELS[[method]]
+    candidates <- roc_grid[fpr <= level]
+    if (nrow(candidates) == 0L) {
+      stop(sprintf("No CV threshold satisfies FPR <= %.0f%%.", level * 100))
+    }
+    setorder(candidates, -recall, fpr, -threshold)
+    candidates[1L, .(
+      track = RESPONSE_TRACK,
+      model_key = MODEL_KEY,
+      model_label = MODEL_LABEL,
+      threshold_method = method,
+      threshold_label = THRESHOLD_METHODS[[method]],
+      threshold,
+      cv_fpr = fpr,
+      cv_recall = recall,
+      cv_precision = precision,
+      cv_youden = youden_j,
+      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
+      cv_n_flagged = tp + fp
+    )]
+  })
 
-  setorder(fpr1, -recall, fpr, -threshold)
-  setorder(fpr3, -recall, fpr, -threshold)
   youden <- copy(roc_grid)
   setorder(youden, -youden_j, -recall, fpr, -threshold)
 
-  out <- rbindlist(list(
-    fpr1[1L, .(
-      track = RESPONSE_TRACK,
-      model_key = MODEL_KEY,
-      model_label = MODEL_LABEL,
-      threshold_method = "fpr1",
-      threshold_label = THRESHOLD_METHODS[["fpr1"]],
-      threshold,
-      cv_fpr = fpr,
-      cv_recall = recall,
-      cv_precision = precision,
-      cv_youden = youden_j,
-      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
-      cv_n_flagged = tp + fp
-    )],
-    fpr3[1L, .(
-      track = RESPONSE_TRACK,
-      model_key = MODEL_KEY,
-      model_label = MODEL_LABEL,
-      threshold_method = "fpr3",
-      threshold_label = THRESHOLD_METHODS[["fpr3"]],
-      threshold,
-      cv_fpr = fpr,
-      cv_recall = recall,
-      cv_precision = precision,
-      cv_youden = youden_j,
-      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
-      cv_n_flagged = tp + fp
-    )],
+  out <- rbindlist(c(fixed_fpr_thresholds, list(
     youden[1L, .(
       track = RESPONSE_TRACK,
       model_key = MODEL_KEY,
@@ -514,7 +575,7 @@ fn_cv_thresholds <- function() {
       cv_flag_rate = (tp + fp) / (total_pos + total_neg),
       cv_n_flagged = tp + fp
     )]
-  ), use.names = TRUE)
+  )), use.names = TRUE)
   setorder(out, threshold_method)
   out[]
 }
@@ -679,10 +740,36 @@ strategies <- unique(weights_all[, .(
 )])
 setorder(strategies, index_id, model_key, threshold_method, lockout_years)
 
+fn_turnover_event <- function(target_holdings, pre_trade_holdings) {
+  target <- copy(target_holdings[, .(permno, target_w = w)])
+  if (is.null(pre_trade_holdings) || nrow(pre_trade_holdings) == 0L) {
+    target[, pre_trade_w := 0]
+    is_initial <- TRUE
+  } else {
+    pre <- copy(pre_trade_holdings[, .(permno, pre_trade_w = w)])
+    target <- merge(target, pre, by = "permno", all = TRUE)
+    is_initial <- FALSE
+  }
+  target[is.na(target_w), target_w := 0]
+  target[is.na(pre_trade_w), pre_trade_w := 0]
+  target[, delta_w := target_w - pre_trade_w]
+  turnover_buy <- sum(pmax(target$delta_w, 0), na.rm = TRUE)
+  turnover_sell <- sum(abs(pmin(target$delta_w, 0)), na.rm = TRUE)
+  data.table(
+    turnover_buy = turnover_buy,
+    turnover_sell = turnover_sell,
+    turnover_gross = turnover_buy + turnover_sell,
+    turnover_one_way = 0.5 * (turnover_buy + turnover_sell),
+    is_initial_formation = is_initial,
+    turnover_basis = if (is_initial) "initial_target_weights" else "drifted_pre_trade_to_target"
+  )
+}
+
 fn_compute_strategy_returns <- function(w_s, sk) {
   qdates <- sort(unique(w_s$qdate))
   out <- vector("list", length(qdates) * 3L)
   out_i <- 0L
+  pre_trade_holdings <- NULL
 
   for (qi in seq_along(qdates)) {
     qd <- qdates[qi]
@@ -690,12 +777,15 @@ fn_compute_strategy_returns <- function(w_s, sk) {
     hdates <- monthly_dates[monthly_dates > qd & monthly_dates <= next_qd]
     if (length(hdates) == 0L) next
 
-    holdings <- copy(w_s[qdate == qd, .(permno, w)])
+    target_holdings <- copy(w_s[qdate == qd, .(permno, w)])
+    turnover_event <- fn_turnover_event(target_holdings, pre_trade_holdings)
+    holdings <- copy(target_holdings)
     setorder(holdings, permno)
     n_holdings_start <- nrow(holdings)
     if (n_holdings_start == 0L) next
 
-    for (hd in hdates) {
+    for (hi in seq_along(hdates)) {
+      hd <- hdates[hi]
       hd <- as.Date(hd, origin = '1970-01-01')
       active <- merge(
         holdings,
@@ -708,14 +798,26 @@ fn_compute_strategy_returns <- function(w_s, sk) {
       if (!is.finite(pre_weight_sum) || pre_weight_sum <= 0) break
 
       active[, w_pre := w / pre_weight_sum]
-      port_ret <- sum(active$w_pre * active$ret, na.rm = TRUE)
+      gross_return <- sum(active$w_pre * active$ret, na.rm = TRUE)
+      month_turnover <- if (hi == 1L) turnover_event else data.table(
+        turnover_buy = 0,
+        turnover_sell = 0,
+        turnover_gross = 0,
+        turnover_one_way = 0,
+        is_initial_formation = FALSE,
+        turnover_basis = "no_rebalance"
+      )
 
       out_i <- out_i + 1L
-      out[[out_i]] <- data.table(
+      out[[out_i]] <- cbind(data.table(
         track = RESPONSE_TRACK,
+        model = sk$model_key,
+        universe = sk$index_id,
+        strategy = sk$strategy_id,
         index_id = sk$index_id,
         index_name = sk$index_name,
         date = hd,
+        rebalance_date = qd,
         qdate = qd,
         year = as.integer(format(hd, "%Y")),
         month = as.integer(format(hd, "%m")),
@@ -729,11 +831,12 @@ fn_compute_strategy_returns <- function(w_s, sk) {
         exclusion_rule = sk$exclusion_rule,
         rule_label = sk$rule_label,
         weighting = sk$weighting,
-        port_ret = port_ret,
+        gross_return = gross_return,
+        port_ret = gross_return,
         n_holdings_start = n_holdings_start,
         n_holdings_with_return = nrow(active),
         active_weight_before_rescale = pre_weight_sum
-      )
+      ), month_turnover)
 
       active[, post_value := w_pre * (1 + ret)]
       active <- active[
@@ -744,6 +847,7 @@ fn_compute_strategy_returns <- function(w_s, sk) {
       active[, w := w / sum(w, na.rm = TRUE)]
       holdings <- active
     }
+    pre_trade_holdings <- holdings
   }
 
   rbindlist(out[seq_len(out_i)], use.names = TRUE, fill = TRUE)
@@ -773,9 +877,86 @@ returns_all[, cumulative_index := cumprod(1 + port_ret), by = .(
   index_id, model_key, threshold_method, lockout_years, strategy_id, exclusion_rule
 )]
 
+turnover_by_month <- returns_all[, .(
+  track,
+  model,
+  universe,
+  strategy,
+  index_id,
+  index_name,
+  date,
+  rebalance_date,
+  qdate,
+  year,
+  month,
+  model_key,
+  model_label,
+  threshold_method,
+  threshold_label,
+  threshold,
+  lockout_years,
+  strategy_id,
+  exclusion_rule,
+  rule_label,
+  weighting,
+  turnover_buy,
+  turnover_sell,
+  turnover_gross,
+  turnover_one_way,
+  is_initial_formation,
+  turnover_basis
+)]
+turnover_summary <- turnover_by_month[, .(
+  n_months = .N,
+  n_rebalance_months = sum(turnover_gross > 0, na.rm = TRUE),
+  n_initial_formation_months = sum(is_initial_formation, na.rm = TRUE),
+  mean_monthly_turnover_gross = mean(turnover_gross, na.rm = TRUE),
+  mean_rebalance_turnover_gross = mean(turnover_gross[turnover_gross > 0], na.rm = TRUE),
+  annualized_turnover_gross = sum(turnover_gross, na.rm = TRUE) / max(.N / 12, 1),
+  mean_monthly_turnover_one_way = mean(turnover_one_way, na.rm = TRUE),
+  annualized_turnover_one_way = sum(turnover_one_way, na.rm = TRUE) / max(.N / 12, 1)
+), by = .(
+  track, model, universe, strategy, index_id, index_name, model_key, model_label,
+  threshold_method, threshold_label, threshold, lockout_years, strategy_id,
+  exclusion_rule, rule_label, weighting
+)]
+turnover_summary[is.nan(mean_rebalance_turnover_gross), mean_rebalance_turnover_gross := 0]
+
+returns_tc_all <- rbindlist(lapply(TRANSACTION_COST_BPS, function(bps) {
+  out <- copy(returns_all)
+  out[, transaction_cost_bps := as.numeric(bps)]
+  out[, transaction_cost_return_drag := turnover_gross * transaction_cost_bps / 10000]
+  out[, net_return := gross_return - transaction_cost_return_drag]
+  out[]
+}), use.names = TRUE, fill = TRUE)
+setorder(
+  returns_tc_all,
+  index_id, model_key, threshold_method, lockout_years, strategy_id,
+  transaction_cost_bps, date
+)
+returns_tc_all[, cumulative_gross_index := cumprod(1 + gross_return), by = .(
+  index_id, model_key, threshold_method, lockout_years, strategy_id,
+  exclusion_rule, transaction_cost_bps
+)]
+returns_tc_all[, cumulative_net_index := cumprod(1 + net_return), by = .(
+  index_id, model_key, threshold_method, lockout_years, strategy_id,
+  exclusion_rule, transaction_cost_bps
+)]
+
 saveRDS(returns_all, PATH_11C_RETURNS)
 fn_write_csv(returns_all, file.path(OUT_DIR, "index_returns_by_crsp_universe.csv"))
 cat(sprintf("  Saved returns: %d rows\n", nrow(returns_all)))
+
+saveRDS(turnover_by_month, PATH_11C_TURNOVER)
+fn_write_csv(turnover_by_month, file.path(OUT_DIR, "index_turnover_by_month.csv"))
+saveRDS(turnover_summary, PATH_11C_TURNOVER_SUMMARY)
+fn_write_csv(turnover_summary, file.path(OUT_DIR, "index_turnover_summary.csv"))
+saveRDS(returns_tc_all, PATH_11C_RETURNS_TC)
+fn_write_csv(returns_tc_all, file.path(OUT_DIR, "index_returns_gross_and_net_by_tc.csv"))
+cat(sprintf(
+  "  Saved turnover rows: %d | transaction-cost return rows: %d\n",
+  nrow(turnover_by_month), nrow(returns_tc_all)
+))
 
 #==============================================================================#
 # 5. Performance metrics
@@ -885,6 +1066,82 @@ setorder(performance, period, index_id, model_key, threshold_method, lockout_yea
 saveRDS(performance, PATH_11C_PERF)
 fn_write_csv(performance, file.path(OUT_DIR, "index_performance_by_crsp_universe.csv"))
 cat(sprintf("  Saved performance rows: %d\n", nrow(performance)))
+
+perf_tc_rows <- list()
+perf_tc_i <- 0L
+for (i in seq_len(nrow(strategies))) {
+  sk <- strategies[i]
+  rdt <- returns_tc_all[
+    index_id == sk$index_id &
+      model_key == sk$model_key &
+      threshold_method == sk$threshold_method &
+      lockout_years == sk$lockout_years &
+      strategy_id == sk$strategy_id &
+      exclusion_rule == sk$exclusion_rule
+  ]
+  for (bps in TRANSACTION_COST_BPS) {
+    rdt_bps <- rdt[transaction_cost_bps == bps]
+    for (pnm in names(PERIODS)) {
+      yr <- PERIODS[[pnm]]
+      sub <- rdt_bps[year >= yr[1L] & year <= yr[2L]]
+      pf_gross <- fn_perf(sub$gross_return)
+      pf_net <- fn_perf(sub$net_return)
+      if (is.null(pf_gross) || is.null(pf_net)) next
+      bench <- returns_tc_all[
+        index_id == sk$index_id &
+          model_key == "bench" &
+          transaction_cost_bps == bps &
+          year >= yr[1L] & year <= yr[2L]
+      ]
+      bench_gross_geo <- fn_ann_geo(bench$gross_return)
+      bench_net_geo <- fn_ann_geo(bench$net_return)
+      perf_tc_i <- perf_tc_i + 1L
+      perf_tc_rows[[perf_tc_i]] <- data.table(
+        track = RESPONSE_TRACK,
+        period = pnm,
+        index_id = sk$index_id,
+        index_name = sk$index_name,
+        benchmark_index_id = sk$index_id,
+        model_key = sk$model_key,
+        model_label = sk$model_label,
+        threshold_method = sk$threshold_method,
+        threshold_label = sk$threshold_label,
+        threshold = sk$threshold,
+        lockout_years = sk$lockout_years,
+        strategy_id = sk$strategy_id,
+        exclusion_rule = sk$exclusion_rule,
+        rule_label = sk$rule_label,
+        weighting = sk$weighting,
+        transaction_cost_bps = as.numeric(bps),
+        n_months = pf_net$n_months,
+        gross_annualized_geometric_return = pf_gross$annualized_geometric_return,
+        net_annualized_geometric_return = pf_net$annualized_geometric_return,
+        net_annualized_sd = pf_net$annualized_sd,
+        net_sharpe_ratio = pf_net$sharpe_ratio,
+        net_max_drawdown = pf_net$max_drawdown,
+        net_expected_shortfall_2p5 = pf_net$expected_shortfall_2p5,
+        net_cumulative_return = pf_net$cumulative_return,
+        rf_annual = RF_ANNUAL,
+        benchmark_gross_annualized_geometric_return = bench_gross_geo,
+        benchmark_net_annualized_geometric_return = bench_net_geo,
+        net_difference_versus_benchmark = pf_net$annualized_geometric_return - bench_net_geo,
+        mean_monthly_turnover_gross = mean(sub$turnover_gross, na.rm = TRUE),
+        annualized_turnover_gross = sum(sub$turnover_gross, na.rm = TRUE) / max(nrow(sub) / 12, 1),
+        total_transaction_cost_return_drag = sum(sub$transaction_cost_return_drag, na.rm = TRUE)
+      )
+    }
+  }
+}
+performance_tc <- rbindlist(perf_tc_rows, use.names = TRUE, fill = TRUE)
+setorder(
+  performance_tc,
+  period, index_id, model_key, threshold_method, lockout_years,
+  transaction_cost_bps
+)
+
+saveRDS(performance_tc, PATH_11C_PERF_TC)
+fn_write_csv(performance_tc, file.path(OUT_DIR, "index_performance_gross_and_net_by_tc.csv"))
+cat(sprintf("  Saved transaction-cost performance rows: %d\n", nrow(performance_tc)))
 
 #==============================================================================#
 # 6. Exclusion summary
@@ -1217,10 +1474,18 @@ status <- data.table(
   elapsed_minutes = as.numeric(difftime(RUN_ENDED, RUN_STARTED, units = "mins")),
   script_path = SCRIPT_PATH,
   output_dir = OUT_DIR,
+  model_key = MODEL_KEY,
+  model_label = MODEL_LABEL,
+  prediction_dir = MODEL_PREDICTION_DIR,
+  transaction_cost_bps = paste(TRANSACTION_COST_BPS, collapse = "|"),
   n_threshold_rows = nrow(thresholds),
   n_weight_rows = nrow(weights_all),
   n_return_rows = nrow(returns_all),
+  n_turnover_rows = nrow(turnover_by_month),
+  n_turnover_summary_rows = nrow(turnover_summary),
+  n_return_tc_rows = nrow(returns_tc_all),
   n_performance_rows = nrow(performance),
+  n_performance_tc_rows = nrow(performance_tc),
   n_exclusion_rows = nrow(exclusion_summary),
   n_decomposition_rows = nrow(error_cost_decomp),
   response_track = RESPONSE_TRACK,

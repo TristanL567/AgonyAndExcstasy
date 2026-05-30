@@ -1,0 +1,7 @@
+check,status,detail
+output_root,pass,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\7_IndexConstructionValidation\nonraw_index_suite\latent_raw
+canonical_recent_write_scan,pass,No files under 03_Data_Output outside nonraw_index_suite/latent_raw were modified after run start.
+git_tracked_output_changes,pass,git status --short -- 03_Data_Output returned no tracked changes.
+model_training_not_run,pass,09C_AutoGluon.py was not run.
+evaluation_not_run,pass,10_Evaluation.R was not run.
+sensitivity_pipeline_not_run,pass,No sensitivity or pipeline regeneration scripts were run.

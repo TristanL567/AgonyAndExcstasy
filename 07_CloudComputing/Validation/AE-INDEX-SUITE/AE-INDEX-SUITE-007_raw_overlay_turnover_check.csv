@@ -1,0 +1,3 @@
+track,turnover_by_month_exists,turnover_summary_exists,turnover_rows,turnover_summary_rows,required_fields_present,required_fields_non_empty,initial_formation_rows,recurring_rows,turnover_basis_values
+dynamic_csi,True,True,13728,52,True,True,52,13676,drifted_pre_trade_to_target|initial_target_weights|no_rebalance
+permanent_csi,True,True,4224,16,True,True,16,4208,drifted_pre_trade_to_target|initial_target_weights|no_rebalance

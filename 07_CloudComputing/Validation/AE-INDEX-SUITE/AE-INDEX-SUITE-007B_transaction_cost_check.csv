@@ -1,0 +1,9 @@
+model,response_track,returns_rows,performance_rows,returns_bps,performance_bps,bps_exact,required_fields_present,formula_check_pass,max_drag_formula_abs_error,max_net_formula_abs_error
+raw,dynamic_csi,71808,1088,0|5|10|20,0|5|10|20,True,True,True,9.75781955236954e-17,7.771561172376096e-16
+raw,permanent_csi,21120,320,0|5|10|20,0|5|10|20,True,True,True,1.0007186052041206e-16,9.992007221626409e-16
+fund,dynamic_csi,71808,1088,0|5|10|20,0|5|10|20,True,True,True,8.819984673169579e-17,6.38378239159465e-16
+fund,permanent_csi,21120,320,0|5|10|20,0|5|10|20,True,True,True,1.0001765041178778e-16,9.159339953157541e-16
+latent_raw,dynamic_csi,71808,1088,0|5|10|20,0|5|10|20,True,True,True,9.161508357502512e-17,7.771561172376096e-16
+latent_raw,permanent_csi,21120,320,0|5|10|20,0|5|10|20,True,True,True,1.0001765041178778e-16,9.159339953157541e-16
+raw_plus_latent,dynamic_csi,71808,1088,0|5|10|20,0|5|10|20,True,True,True,8.819984673169579e-17,8.604228440844963e-16
+raw_plus_latent,permanent_csi,21120,320,0|5|10|20,0|5|10|20,True,True,True,1.0007186052041206e-16,9.159339953157541e-16

@@ -1,0 +1,4 @@
+check,status,observed,expected,detail
+returns_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,54912 return rows
+performance_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,832 performance rows
+transaction_cost_formula_sample,pass,max_drag_abs_error=8.819984673169579e-17; max_net_abs_error=8.604228440844963e-16,both < 1e-12,checked first 10000 non-null rows

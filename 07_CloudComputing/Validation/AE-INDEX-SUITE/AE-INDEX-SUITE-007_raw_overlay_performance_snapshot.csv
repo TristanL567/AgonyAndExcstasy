@@ -1,0 +1,17 @@
+track,universe,transaction_cost_bps,strategy,model_key,score_column,score_value,gross_mean_monthly_return,net_mean_monthly_return,gross_sharpe_ann,net_sharpe_ann,gross_max_drawdown,net_max_drawdown
+dynamic_csi,large_cap,0,fpr1,raw,,,,,,,,-0.514706852396781
+dynamic_csi,mid_cap,0,fpr1,raw,,,,,,,,-0.548880646015355
+dynamic_csi,small_cap,0,fpr1,raw,,,,,,,,-0.53949402193949
+dynamic_csi,total_market,0,fpr1,raw,,,,,,,,-0.518766503306267
+dynamic_csi,large_cap,20,fpr1,raw,,,,,,,,-0.51492423876131
+dynamic_csi,mid_cap,20,fpr1,raw,,,,,,,,-0.550555634285009
+dynamic_csi,small_cap,20,fpr1,raw,,,,,,,,-0.540964103805317
+dynamic_csi,total_market,20,fpr1,raw,,,,,,,,-0.518875370658881
+permanent_csi,large_cap,0,fpr1,raw,,,,,,,,-0.514567445412403
+permanent_csi,mid_cap,0,fpr1,raw,,,,,,,,-0.548137347801554
+permanent_csi,small_cap,0,fpr1,raw,,,,,,,,-0.537015020316558
+permanent_csi,total_market,0,fpr1,raw,,,,,,,,-0.518296557158701
+permanent_csi,large_cap,20,fpr1,raw,,,,,,,,-0.51478331962352
+permanent_csi,mid_cap,20,fpr1,raw,,,,,,,,-0.549812992012748
+permanent_csi,small_cap,20,fpr1,raw,,,,,,,,-0.53847526082162
+permanent_csi,total_market,20,fpr1,raw,,,,,,,,-0.51840378121203

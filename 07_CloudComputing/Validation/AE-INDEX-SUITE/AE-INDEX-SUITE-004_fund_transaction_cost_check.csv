@@ -1,0 +1,7 @@
+track,check,status,observed,expected,detail
+dynamic_csi,returns_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,54912 return rows
+dynamic_csi,performance_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,832 performance rows
+dynamic_csi,transaction_cost_formula_sample,pass,max_drag_abs_error=8.819984673169579e-17; max_net_abs_error=7.91033905045424e-16,both < 1e-12,checked first 10000 non-null rows
+permanent_csi,returns_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,16896 return rows
+permanent_csi,performance_transaction_cost_bps_exact,pass,0|5|10|20,0|5|10|20,256 performance rows
+permanent_csi,transaction_cost_formula_sample,pass,max_drag_abs_error=1.0001765041178778e-16; max_net_abs_error=9.159339953157541e-16,both < 1e-12,checked first 10000 non-null rows

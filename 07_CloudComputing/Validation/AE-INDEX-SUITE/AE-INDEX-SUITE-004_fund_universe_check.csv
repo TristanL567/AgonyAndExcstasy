@@ -1,0 +1,9 @@
+track,index_id,represented,performance_rows,tc_performance_rows,returns_tc_rows,status
+dynamic_csi,large_cap,True,52,208,13728,pass
+dynamic_csi,mid_cap,True,52,208,13728,pass
+dynamic_csi,small_cap,True,52,208,13728,pass
+dynamic_csi,total_market,True,52,208,13728,pass
+permanent_csi,large_cap,True,16,64,4224,pass
+permanent_csi,mid_cap,True,16,64,4224,pass
+permanent_csi,small_cap,True,16,64,4224,pass
+permanent_csi,total_market,True,16,64,4224,pass

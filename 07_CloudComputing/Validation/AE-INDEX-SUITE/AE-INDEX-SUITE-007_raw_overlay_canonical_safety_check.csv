@@ -1,0 +1,7 @@
+track,check,status,detail
+dynamic_csi,output_root_is_isolated_raw_overlay,True,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\7_IndexConstructionValidation\nonraw_index_suite\raw_overlay\3_Modelling_Results\Necessary\temporary_csi\11c_index_revised
+dynamic_csi,source_decision_reused_existing_raw_outputs,True,No isolated raw 11C rerun was required; overlay used preserved raw weights and returns.
+dynamic_csi,forbidden_scripts_not_run_by_this_ticket,True,"No model training, evaluation, sensitivity, pipeline, or non-raw model scripts were run."
+permanent_csi,output_root_is_isolated_raw_overlay,True,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\7_IndexConstructionValidation\nonraw_index_suite\raw_overlay\3_Modelling_Results\Necessary\permanent_csi\11c_index_revised
+permanent_csi,source_decision_reused_existing_raw_outputs,True,No isolated raw 11C rerun was required; overlay used preserved raw weights and returns.
+permanent_csi,forbidden_scripts_not_run_by_this_ticket,True,"No model training, evaluation, sensitivity, pipeline, or non-raw model scripts were run."

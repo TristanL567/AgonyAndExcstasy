@@ -1,0 +1,9 @@
+track,universe,legacy_performance_rows,returns_tc_rows,performance_tc_rows,turnover_rows,represented
+dynamic_csi,large_cap,52,13728,208,3432,True
+dynamic_csi,mid_cap,52,13728,208,3432,True
+dynamic_csi,small_cap,52,13728,208,3432,True
+dynamic_csi,total_market,52,13728,208,3432,True
+permanent_csi,large_cap,16,4224,64,1056,True
+permanent_csi,mid_cap,16,4224,64,1056,True
+permanent_csi,small_cap,16,4224,64,1056,True
+permanent_csi,total_market,16,4224,64,1056,True
