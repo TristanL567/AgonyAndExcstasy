@@ -1,0 +1,9 @@
+check,status,value,detail
+branch_is_development,passed,Development,`git status --short --branch` reports `## Development`
+frame_count,passed,44,Active non-commented `\begin{frame}` entries in June Rnw
+source_map_rows,passed,44,Numbered rows in `SLIDE_DATA_SOURCES.md`
+unmapped_frames,passed,0,Every active frame number has a source-map row
+missing_referenced_paths,passed,0,Every exact non-conceptual source path in the map exists locally
+future_work_marked,passed,3,Future-work rows are marked `planned / not completed result`
+no_data_outputs_modified,passed,0,No `03_Data_Output/**` files changed
+no_scripts_run,passed,0,No model/index/sensitivity/pipeline scripts were invoked

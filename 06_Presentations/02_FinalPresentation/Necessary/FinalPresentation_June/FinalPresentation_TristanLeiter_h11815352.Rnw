@@ -1578,42 +1578,48 @@ All claims in the index-result slides are sourced from the completed AE-INDEX-SU
 \end{block}
 \end{frame}
 
-% \begin{frame}{Appendix A19: Validation Caveats and Unresolved Issues}
-% \scriptsize
-% \begin{table}[ht]
-% \centering
-% \begin{tabular}{L{2.2cm}L{4.0cm}L{4.5cm}}
-% \toprule
-% Severity & Caveat & Proposal handling \\
-% \midrule
-% High & Robustness grid was not regenerated in validated 03b run because \texttt{CSI\_RUN\_GRID=0}. & Label grid slides as persisted robustness evidence only. \\
-% High & Model results are latest documented implementation artifacts, not final thesis-grade claims. & Present as current evidence and rerun if revised labels materially alter targets. \\
-% High & Panel scaffold denominators can overstate non-event cells if unobserved firm-years remain in the label panel. & Keep prevalence denominator caveat visible; validate observed eligible firm-year denominator. \\
-% Medium & \texttt{10\_Evaluation.R} convention and model registry differ from 09C summary artifacts. & Use 09C artifacts for proposal tables; align final evaluation before thesis claims. \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{frame}
+\begin{frame}{Appendix A19: Future Robustness and Extensions}
+\scriptsize
+\begin{alertblock}{Not completed results}
+\scriptsize
+The items below are explicitly future validation or extensions. They should not be read as completed empirical findings in this deck.
+\end{alertblock}
+\vspace{0.15em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{L{2.8cm}L{4.2cm}L{3.5cm}}
+\toprule
+Item & Purpose & Current status \\
+\midrule
+Permanent-CSI sensitivity grid & Test label-threshold robustness for the permanent response track. & Planned / not completed \\
+Minimum-volatility benchmark & Check whether CSI screens add value beyond a low-risk index comparator. & Planned / not completed \\
+Quality/risk-scaling benchmark & Compare exclusions with quality or risk-scaled benchmark construction. & Planned / not completed \\
+Active CSI-probability weighting & Use CSI probabilities continuously rather than thresholded exclusions. & Planned / not completed \\
+Recovered bankrupt/insolvent diagnostic & Decompose remaining terminal-failure misses and recovery cases. & Planned / not completed \\
+\bottomrule
+\end{tabular}
+\end{table}
+\remarkfoot{Source status is mapped in \texttt{SLIDE\_DATA\_SOURCES.md}; these are future-work notes, not result claims.}
+\end{frame}
 
-% \begin{frame}{Appendix A20: Source Crosswalk}
-% \scriptsize
-% \begin{table}[ht]
-% \centering
-% \begin{tabular}{L{4.1cm}L{6.0cm}}
-% \toprule
-% Deck element & Primary source \\
-% \midrule
-% Proposal narrative and model tables & \texttt{Final\_Presentation\_Content\_Baseline.md} \\
-% Temporary CSI formulas & \texttt{CSI\_Classification\_Temporary\_CSI\_Methodology.md} \\
-% Bankruptcy override counts & \texttt{Temporary\_CSI\_CRSP\_Bankruptcy\_Delisting\_Insights.md} \\
-% Robustness grid & \texttt{dynamic\_csi\_robustness\_report.md} \\
-% Permanent CSI formulas & \texttt{CSI\_Classification\_Permanent\_CSI\_Methodology.md} \\
-% Pipeline stages & \texttt{Code\_Pipeline\_Documentation.md} \\
-% Index construction results & \texttt{Results/Index\_Construction/11c\_crsp\_index\_csi\_results\_20260516.md} \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{frame}
+\begin{frame}{Appendix A20: Slide-to-Source Audit Map}
+\scriptsize
+\begin{block}{Audit artifact}
+\scriptsize
+The complete slide-to-source map is stored beside this June source deck:
+\texttt{06\_Presentations/02\_FinalPresentation/Necessary/FinalPresentation\_June/SLIDE\_DATA\_SOURCES.md}.
+\end{block}
+\vspace{0.2em}
+\begin{itemize}
+  \item Dataset and label slides map to AE-PANEL evidence and descriptive-statistics CSVs.
+  \item Model slides map to AE-MODEL-SUITE comparison files and threshold metrics.
+  \item Index slides map to AE-INDEX-SUITE final-table and comparison outputs.
+  \item Sensitivity slides map to local AE-SENS manifests and comparison artifacts.
+  \item Conceptual or future-work slides are marked as such rather than linked to empirical result files.
+\end{itemize}
+\remarkfoot{This appendix frame is a navigation pointer; the source map contains per-frame paths and source type.}
+\end{frame}
 
 \begin{frame}[allowframebreaks]{Bibliography}
 \nocite{Altman1968,Campbell2008,Cembalest2014,Penman2018,Shumway1997,Shumway2001,Tewari2024}
