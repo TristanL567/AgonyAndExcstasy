@@ -1,0 +1,9 @@
+track,index_id,model_key,strategy_id,annualized_gross_turnover,expected_10bps_annual_drag_approx,observed_net_return_drop_0_to_10bps,math_check_source,check_result
+dynamic_csi,total_market,fund,youden_3yr,0.103737705162035,0.000103737705162035,0.000116288778798,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+dynamic_csi,large_cap,fund,youden_3yr,0.130353208449157,0.000130353208449,0.000146105259147,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+dynamic_csi,mid_cap,fund,fpr5_5yr,1.05855597637233,0.001058555976372,0.001145143260933,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+dynamic_csi,small_cap,raw_plus_latent,youden_3yr,0.854928545631686,0.000854928545632,0.000908647926074,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+permanent_csi,total_market,raw_plus_latent,fpr5_permanent,0.0679953024224083,0.000067995302422,0.000076009949441,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+permanent_csi,large_cap,raw_plus_latent,fpr5_permanent,0.115136595199074,0.000115136595199,0.000129093845645,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+permanent_csi,mid_cap,fund,fpr5_permanent,1.0623824100468,0.001062382410047,0.001150739421346,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
+permanent_csi,small_cap,latent_raw,fpr3_permanent,0.757282105013082,0.000757282105013,0.000801807477080,AE-TC-AUDIT-001_best_strategy_cost_drag_summary.csv,pass
