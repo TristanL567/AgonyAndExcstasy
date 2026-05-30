@@ -1,0 +1,10 @@
+check,expected,observed,status,notes
+threshold_methods,"youden|fpr1|fpr3|fpr5","fpr1|fpr3|fpr5|youden",PASS,"THRESHOLD_METHODS now includes all required methods; output ordering remains deterministic by threshold_method."
+fixed_fpr_levels,"fpr1=0.01|fpr3=0.03|fpr5=0.05","fpr1=0.01|fpr3=0.03|fpr5=0.05",PASS,"fpr5 uses the same fixed-FPR candidate selection path as fpr1 and fpr3."
+temporary_lockout_grid,"1|2|3|5","1|2|3|5",PASS,"LOCKOUT_YEARS unchanged."
+temporary_threshold_lockout_combinations,"4 threshold methods x 4 lockouts = 16","4 threshold methods x 4 lockouts = 16",PASS,"The existing dynamic_csi loop iterates names(THRESHOLD_METHODS) x EXCLUSION_RULES."
+permanent_rule,"permanent_removal","permanent_removal",PASS,"Permanent CSI still uses a single absorbing permanent-removal rule."
+permanent_threshold_combinations,"4 threshold methods x permanent removal","4 threshold methods x permanent removal",PASS,"Permanent CSI loop now applies four threshold methods to the unchanged permanent rule."
+transaction_cost_bps,"0|5|10|20","0|5|10|20",PASS,"TRANSACTION_COST_BPS unchanged."
+model_routing,"raw|fund|latent_raw|raw_plus_latent","raw|fund|latent_raw|raw_plus_latent",PASS,"MODEL_SPECS_11C unchanged."
+parse_validation,"R parse succeeds","R_PARSE_OK",PASS,"Ran Rscript parse only; did not execute 11C."

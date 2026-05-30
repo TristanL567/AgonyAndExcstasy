@@ -12,7 +12,7 @@
 #   - Inputs are the CRSP-like quarterly constituents from 01_Code/IndexConstruction
 #     and AutoGluon CSI predictions from 09C.
 #   - Thresholds are estimated on CV predictions only:
-#       FPR <= 1%, FPR <= 3%, and Youden J.
+#       FPR <= 1%, FPR <= 3%, FPR <= 5%, and Youden J.
 #   - dynamic_csi uses 1/2/3/5-year temporary lockouts.
 #   - permanent_csi uses absorbing permanent removal.
 #   - Benchmark for each index is the unfiltered market-cap-weighted version of
@@ -188,8 +188,10 @@ fn_read_parquet <- function(path) {
 THRESHOLD_METHODS <- c(
   fpr1 = "CV FPR <= 1%",
   fpr3 = "CV FPR <= 3%",
+  fpr5 = "CV FPR <= 5%",
   youden = "CV Youden J"
 )
+FIXED_FPR_LEVELS <- c(fpr1 = 0.01, fpr3 = 0.03, fpr5 = 0.05)
 TRANSACTION_COST_BPS <- c(0, 5, 10, 20)
 LOCKOUT_YEARS <- c("1yr" = 1L, "2yr" = 2L, "3yr" = 3L, "5yr" = 5L)
 IS_PERMANENT_TRACK <- identical(RESPONSE_TRACK, "permanent_csi")
@@ -354,45 +356,33 @@ fn_cv_thresholds <- function() {
   )]
   roc_grid[, youden_j := recall - fpr]
 
-  fpr1 <- roc_grid[fpr <= 0.01]
-  fpr3 <- roc_grid[fpr <= 0.03]
-  if (nrow(fpr1) == 0L) stop("No CV threshold satisfies FPR <= 1%.")
-  if (nrow(fpr3) == 0L) stop("No CV threshold satisfies FPR <= 3%.")
+  fixed_fpr_thresholds <- lapply(names(FIXED_FPR_LEVELS), function(method) {
+    level <- FIXED_FPR_LEVELS[[method]]
+    candidates <- roc_grid[fpr <= level]
+    if (nrow(candidates) == 0L) {
+      stop(sprintf("No CV threshold satisfies FPR <= %.0f%%.", level * 100))
+    }
+    setorder(candidates, -recall, fpr, -threshold)
+    candidates[1L, .(
+      track = RESPONSE_TRACK,
+      model_key = MODEL_KEY,
+      model_label = MODEL_LABEL,
+      threshold_method = method,
+      threshold_label = THRESHOLD_METHODS[[method]],
+      threshold,
+      cv_fpr = fpr,
+      cv_recall = recall,
+      cv_precision = precision,
+      cv_youden = youden_j,
+      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
+      cv_n_flagged = tp + fp
+    )]
+  })
 
-  setorder(fpr1, -recall, fpr, -threshold)
-  setorder(fpr3, -recall, fpr, -threshold)
   youden <- copy(roc_grid)
   setorder(youden, -youden_j, -recall, fpr, -threshold)
 
-  out <- rbindlist(list(
-    fpr1[1L, .(
-      track = RESPONSE_TRACK,
-      model_key = MODEL_KEY,
-      model_label = MODEL_LABEL,
-      threshold_method = "fpr1",
-      threshold_label = THRESHOLD_METHODS[["fpr1"]],
-      threshold,
-      cv_fpr = fpr,
-      cv_recall = recall,
-      cv_precision = precision,
-      cv_youden = youden_j,
-      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
-      cv_n_flagged = tp + fp
-    )],
-    fpr3[1L, .(
-      track = RESPONSE_TRACK,
-      model_key = MODEL_KEY,
-      model_label = MODEL_LABEL,
-      threshold_method = "fpr3",
-      threshold_label = THRESHOLD_METHODS[["fpr3"]],
-      threshold,
-      cv_fpr = fpr,
-      cv_recall = recall,
-      cv_precision = precision,
-      cv_youden = youden_j,
-      cv_flag_rate = (tp + fp) / (total_pos + total_neg),
-      cv_n_flagged = tp + fp
-    )],
+  out <- rbindlist(c(fixed_fpr_thresholds, list(
     youden[1L, .(
       track = RESPONSE_TRACK,
       model_key = MODEL_KEY,
@@ -407,7 +397,7 @@ fn_cv_thresholds <- function() {
       cv_flag_rate = (tp + fp) / (total_pos + total_neg),
       cv_n_flagged = tp + fp
     )]
-  ), use.names = TRUE)
+  )), use.names = TRUE)
   setorder(out, threshold_method)
   out[]
 }

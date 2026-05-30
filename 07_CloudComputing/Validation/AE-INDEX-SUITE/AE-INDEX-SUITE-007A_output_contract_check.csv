@@ -1,0 +1,11 @@
+contract_area,expected_output_or_behavior,observed_in_code,status,notes
+model_routing,"MODEL supports raw, fund, latent_raw, raw_plus_latent","MODEL_SPECS_11C includes raw, fund, latent_raw, raw_plus_latent",PASS,"No change from AE-INDEX-SUITE-002 routing."
+raw_default,"MODEL unset defaults to raw","Sys.getenv('MODEL', unset = 'raw')",PASS,"Raw default behavior preserved."
+output_isolation,"MT_OUTPUT_DIR absolute path override remains supported","MT_OUTPUT_DIR_11C block unchanged",PASS,"No canonical output path changes introduced."
+threshold_outputs,"index_thresholds_by_crsp_universe.{rds,csv} includes fpr5 rows on future runs","THRESHOLD_METHODS includes fpr5 and fn_cv_thresholds appends fixed-FPR rows",PASS,"Full 11C run intentionally not executed in this ticket."
+turnover_by_month,"index_turnover_by_month.{rds,csv}","PATH_11C_TURNOVER and CSV writer still present",PASS,"Turnover output contract preserved."
+turnover_summary,"index_turnover_summary.{rds,csv}","PATH_11C_TURNOVER_SUMMARY and CSV writer still present",PASS,"Turnover summary contract preserved."
+gross_net_returns,"index_returns_gross_and_net_by_tc.{rds,csv}","PATH_11C_RETURNS_TC and CSV writer still present",PASS,"Gross/net return contract preserved."
+gross_net_performance,"index_performance_gross_and_net_by_tc.{rds,csv}","PATH_11C_PERF_TC and CSV writer still present",PASS,"Gross/net performance contract preserved."
+transaction_cost_levels,"0, 5, 10, 20 bps","TRANSACTION_COST_BPS <- c(0, 5, 10, 20)",PASS,"No cost-grid change."
+sensitivity_mode,"Existing AE-SENS behavior not broadened","No sensitivity-mode gates were edited",PASS,"Only threshold construction changed."
