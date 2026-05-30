@@ -886,58 +886,130 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
 %==== 4b. Data findings =======================================================%
 
 
-\begin{frame}{Index Results: Temporary CSI at 20 bps}
-\fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{OOS winners by benchmark universe; benchmark is the unfiltered market-cap-weighted universe}
+\begin{frame}{Index Results: Temporary CSI at 0 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; no transaction-cost overlay}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.85pt}
-\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
 \toprule
-Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp & 0.634 & 10.4\% \\
-Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp & 0.677 & 13.0\% \\
-Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp & 0.419 & 105.9\% \\
-Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp & 0.328 & 85.5\% \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.72\% & 18.28\% & 0.636 & -23.78\% & -11.22\% & +0.43pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.43\% & 17.98\% & 0.678 & -23.89\% & -10.65\% & +0.15pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.16\% & 20.70\% & 0.429 & -24.46\% & -13.85\% & +0.51pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.29\% & 22.65\% & 0.336 & -29.33\% & -15.77\% & +0.64pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Temporary CSI conclusion}
 \scriptsize
-At 20 bps, fundamentals-only wins Total, Large, and Mid Cap. Raw + latent wins Small Cap. The strongest temporary rules are mostly Youden with longer lockouts, with FPR5 useful in Mid Cap.
+Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Exp. Dataset + VAE wins Small Cap. Delta pp is strategy net geometric return minus the matching benchmark row.
 \end{alertblock}
-\remarkfoot{Net ret. is net annualized geometric return after 20 bps transaction-cost drag. Benchmark has no strategy transaction-cost overlay. Source: \texttt{headline\_winners\_20bps.csv}.}
+\remarkfoot{Source: \texttt{best\_by\_track\_index\_cost.csv}; Ann. SD and ES 2.5\% from model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Results: Permanent CSI at 20 bps}
-\fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{OOS winners by benchmark universe; permanent-removal rule}
+\begin{frame}{Index Results: Temporary CSI at 10 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.85pt}
-\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
 \toprule
-Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp & 0.614 & 6.8\% \\
-Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp & 0.670 & 11.5\% \\
-Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp & 0.431 & 106.2\% \\
-Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp & 0.312 & 75.7\% \\
+Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.43pp \\
+Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.15pp \\
+Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.51pp \\
+Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.63pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Temporary CSI transaction-cost read}
+\scriptsize
+The 10 bps overlay leaves the temporary CSI winners unchanged. The source benchmark rows remain the unfiltered market-cap reference for each universe, reported at the matching cost row.
+\end{alertblock}
+\remarkfoot{Cost rows are source-provided net performance rows; cost overlay applies through the 11C transaction-cost contract. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Index Results: Permanent CSI at 0 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; permanent-removal rule}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
+\toprule
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
+\midrule
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.56\% & 18.82\% & 0.615 & -24.72\% & -11.45\% & +0.27pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.51\% & 18.38\% & 0.671 & -24.51\% & -10.74\% & +0.23pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.39\% & 20.58\% & 0.441 & -24.52\% & -13.90\% & +0.74pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.98\% & 23.78\% & 0.318 & -29.26\% & -16.35\% & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Permanent CSI conclusion}
 \scriptsize
-Raw + latent wins Total and Large Cap; fundamentals-only wins Mid Cap; VAE-only wins Small Cap. Permanent CSI is strongest under fixed-FPR thresholds, especially FPR3 and FPR5.
+Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Base Dataset wins Mid Cap; AG Latent Dataset (VAE) wins Small Cap.
 \end{alertblock}
-\remarkfoot{Benchmark is the unfiltered market-cap-weighted index for the same universe. Source: \texttt{headline\_winners\_20bps.csv}.}
+\remarkfoot{Benchmark rows are model-key \texttt{bench}, strategy \texttt{bench\_mw}, period \texttt{oos}. Source: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Index Results: Permanent CSI at 10 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
+\toprule
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
+\midrule
+Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.27pp \\
+Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.23pp \\
+Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.74pp \\
+Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Permanent CSI transaction-cost read}
+\scriptsize
+The 10 bps overlay leaves the permanent CSI winners unchanged. Permanent CSI gains come from fixed-FPR rules rather than Youden-style broad exclusions.
+\end{alertblock}
+\remarkfoot{Geo ret., Ann. SD, Sharpe Ratio, Max DD, and ES 2.5\% are net OOS values from source performance rows. Delta pp is zero for benchmarks.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1568,6 +1640,8 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
   \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
   \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
   \item Transaction costs: \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
   \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
   \item Turnover: \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
   \item Full grid comparisons: \texttt{comparison/best\_by\_track\_index\_cost.csv}
