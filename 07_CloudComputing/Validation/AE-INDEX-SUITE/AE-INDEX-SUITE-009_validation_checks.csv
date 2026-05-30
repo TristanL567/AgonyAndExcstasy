@@ -1,0 +1,7 @@
+check,status,detail
+full_grid_represented,True,AE-INDEX-SUITE-008 validation checks all true.
+final_tables_readable,True,7/7 final table/source map artifacts exist.
+no_scripts_run,True,Only local CSV/Markdown summarization was performed; no 11C/model/evaluation/sensitivity/pipeline scripts were invoked.
+no_canonical_outputs_changed,True,Final tables were written only under isolated nonraw_index_suite/final_tables and evidence root.
+no_presentation_files_edited,True,No files under 06_Presentations were edited by this ticket.
+unrelated_dirty_files_unstaged,True,Known unrelated dirty files are not part of the 009 evidence set.
