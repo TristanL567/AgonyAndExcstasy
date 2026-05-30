@@ -1,0 +1,5 @@
+artifact,path,exists,size_bytes,sha256,last_write_time,role
+Final source,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,yes,70740,C254F35ACFD1EA998DD858078C2ED9FA1280B046CBB36B03AED0F34E5A96BFC7,2026-05-30T20:22:48.9589709+02:00,Editable June Beamer/Sweave source
+Final PDF,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf,yes,468610,5709C9F50808E765489BDE0EAB9D092F62A5A950DDF582412572F3D44469DC7E,2026-05-30T20:23:16.4370202+02:00,Compiled June final deck
+Slide source map,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md,yes,18036,4C1F49109A725A319CC7CA6746218BBB6FB1BF9DD48124563D1F5CA8955DDDAB,2026-05-30T20:09:47.1416008+02:00,Frame-to-source audit map
+
