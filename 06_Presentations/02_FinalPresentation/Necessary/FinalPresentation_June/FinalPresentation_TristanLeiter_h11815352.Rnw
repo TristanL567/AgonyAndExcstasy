@@ -936,118 +936,138 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Temporary CSI Performance}
-\fontsize{5.9pt}{6.45pt}\selectfont
-\textbf{Test-OOS best rules by universe: benchmark row followed by filtered strategy}
+
+\begin{frame}{Index Results: Temporary CSI at 20 bps}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{OOS winners by benchmark universe; benchmark is the unfiltered market-cap-weighted universe}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{1.5cm}L{1.45cm}R{0.85cm}R{0.85cm}R{0.7cm}R{0.9cm}R{0.85cm}R{0.75cm}}
+\setlength{\tabcolsep}{1.85pt}
+\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
 \midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / 5yr & 13.41\% & 18.50\% & 0.615 & -24.20\% & -11.44\% & +0.119 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR1 / 1yr & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.83\% & -0.020 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & Youden / 1yr & 9.68\% & 20.09\% & 0.414 & -23.55\% & -13.03\% & +0.030 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & Youden / 3yr & 9.03\% & 21.98\% & 0.370 & -29.12\% & -15.60\% & +1.372 \\
+Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp & 0.634 & 10.4\% \\
+Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp & 0.677 & 13.0\% \\
+Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp & 0.419 & 105.9\% \\
+Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp & 0.328 & 85.5\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-\remarkfoot{$\Delta$ is the annualized geometric-return difference vs benchmark.}
-\end{frame}
-
-%==== 4b. Data findings =======================================================%
-
-\begin{frame}{Index Construction Results: Temporary CSI -- Error Costs}
+\vspace{-0.15em}
+\begin{alertblock}{Temporary CSI conclusion}
 \scriptsize
-\begin{alertblock}{Where the winning temporary strategies benefit}
-\scriptsize
-The filtered portfolios give up return through false positives, but offset this mainly through retained true-negative exposure. Small Cap has the largest return improvement and also the largest false-positive drag.
+At 20 bps, fundamentals-only wins Total, Large, and Mid Cap. Raw + latent wins Small Cap. The strongest temporary rules are mostly Youden with longer lockouts, with FPR5 useful in Mid Cap.
 \end{alertblock}
-
-\vspace{0.05em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{1.8cm}L{1.65cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.75cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
-\midrule
-Total Market & FPR3 / 5yr & -0.970 & -0.003 & +0.064 & +1.028 & +0.119 \\
-Large Cap & FPR1 / 1yr & -0.018 & +0.000 & +0.000 & -0.002 & -0.020 \\
-Mid Cap & Youden / 1yr & -3.552 & +0.000 & -0.004 & +3.586 & +0.030 \\
-Small Cap & Youden / 3yr & -7.648 & -0.034 & +0.463 & +8.591 & +1.372 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.2em}
-\scriptsize
-Interpretation: The true-positive protection is positive but small. The key tradeoff is whether retained non-CSI exposure compensates for false-positive opportunity costs.
-\remarkfoot{Annualized pp terms. TN gain is the geometric-return balancing retained-exposure term, so FP+FN+TP+TN equals Net.}
+\remarkfoot{Net ret. is net annualized geometric return after 20 bps transaction-cost drag. Benchmark has no strategy transaction-cost overlay. Source: \texttt{headline\_winners\_20bps.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Permanent CSI Performance}
-\fontsize{5.9pt}{6.45pt}\selectfont
-\textbf{Test-OOS best rules by universe: benchmark row followed by filtered strategy}
+\begin{frame}{Index Results: Permanent CSI at 20 bps}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{OOS winners by benchmark universe; permanent-removal rule}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{1.5cm}L{1.45cm}R{0.85cm}R{0.85cm}R{0.7cm}R{0.9cm}R{0.85cm}R{0.75cm}}
+\setlength{\tabcolsep}{1.85pt}
+\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
 \midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / perm. & 13.76\% & 18.64\% & 0.629 & -24.21\% & -11.38\% & +0.472 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR3 / perm. & 14.62\% & 18.30\% & 0.678 & -24.10\% & -10.73\% & +0.345 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & FPR1 / perm. & 10.08\% & 20.56\% & 0.427 & -24.38\% & -13.85\% & +0.426 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & FPR3 / perm. & 7.61\% & 23.13\% & 0.306 & -29.39\% & -16.11\% & -0.042 \\
+Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp & 0.614 & 6.8\% \\
+Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp & 0.670 & 11.5\% \\
+Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp & 0.431 & 106.2\% \\
+Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp & 0.312 & 75.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-\remarkfoot{$\Delta$ is annualized geometric-return difference vs benchmark.}
+\vspace{-0.15em}
+\begin{alertblock}{Permanent CSI conclusion}
+\scriptsize
+Raw + latent wins Total and Large Cap; fundamentals-only wins Mid Cap; VAE-only wins Small Cap. Permanent CSI is strongest under fixed-FPR thresholds, especially FPR3 and FPR5.
+\end{alertblock}
+\remarkfoot{Benchmark is the unfiltered market-cap-weighted index for the same universe. Source: \texttt{headline\_winners\_20bps.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Permanent CSI - Error Costs}
-\scriptsize
-\begin{alertblock}{Where the winning permanent strategies benefit}
-\scriptsize
-Permanent CSI improves Total, Large, and Mid Cap primarily through true-negative retained exposure after absorbing removals. Small Cap remains weak because false-positive costs absorb the benefit.
-\end{alertblock}
-
-\vspace{0.05em}
+\begin{frame}{Transaction-Cost Robustness}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{Winner ranking is stable from 0 to 20 bps; evaluated costs: 0, 5, 10, 20 bps}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{1.8cm}L{1.65cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.75cm}}
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.15cm}L{1.25cm}L{1.55cm}L{1.55cm}R{0.78cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+Track & Universe & 0 bps winner & 20 bps winner & Alpha 0 & Alpha 20 \\
 \midrule
-Total Market & FPR3 / perm. & -1.261 & -0.001 & +0.022 & +1.712 & +0.472 \\
-Large Cap & FPR3 / perm. & -0.849 & +0.000 & +0.000 & +1.194 & +0.345 \\
-Mid Cap & FPR1 / perm. & -0.167 & +0.000 & +0.000 & +0.593 & +0.426 \\
-Small Cap & FPR3 / perm. & -3.109 & -0.017 & +0.076 & +3.008 & -0.042 \\
+Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
+Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
+Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
+Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\vspace{0.2em}
+\vspace{-0.1em}
 \scriptsize
-Read: the strongest permanent-CSI case is not direct true-positive protection; it is disciplined removal that preserves exposure to retained non-CSI firms while avoiding enough weak names.
-\remarkfoot{Annualized pp terms. TN gain is the geometric-return balancing retained-exposure term, so FP+FN+TP+TN equals Net.}
+Transaction costs do not change the top winner in any of the eight track--index comparisons. The cost drag is economically visible in Mid and Small Cap, but it is not large enough at 20 bps to overturn the ranking.
+\remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Threshold Families and Turnover}
+\fontsize{6.1pt}{6.7pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.50\textwidth}
+\textbf{Threshold-family result at 20 bps}
+\vspace{-0.2em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.25cm}L{1.35cm}R{0.78cm}L{1.85cm}}
+\toprule
+Track & Lead family & Mean alpha & Interpretation \\
+\midrule
+Temp. & Youden & +0.35pp & Strongest with 3--5yr lockouts \\
+Perm. & FPR3/FPR5 & +0.35/+0.33pp & Fixed-FPR dominates; Youden is -0.20pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+\scriptsize
+Temporary CSI benefits from calibrated finite lockouts; 3- and 5-year exclusions are more effective than 1-year exclusions. Permanent CSI needs stricter fixed-FPR rules because Youden over-removes under absorbing exclusion.
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Annualized gross turnover for 20 bps winners}
+\vspace{-0.2em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.15cm}R{0.85cm}R{0.85cm}}
+\toprule
+Universe & Temp. & Perm. \\
+\midrule
+Total & 15.3\% & 12.2\% \\
+Large & 18.8\% & 17.2\% \\
+Mid & 97.7\% & 97.0\% \\
+Small & 77.2\% & 72.4\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+\scriptsize
+Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is still modest: roughly 1.1pp in Mid Cap and below 0.9pp in Small Cap winners.
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv} and \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
 \section{Next Steps}
@@ -1489,205 +1509,154 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Appendix A14: Index Strategy Construction}
+
+\begin{frame}{Appendix A14: Final Index Grid Contract}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
-\textbf{Strategy menu}
+\textbf{Completed grid}
 \begin{itemize}
-  \item \textbf{Benchmark:} unfiltered market-cap-weighted index for each CRSP-like universe.
-  \item \textbf{Temporary CSI:} \dyn{} score triggers finite exclusions; firms can re-enter after lockout expiry.
-  \item Temporary thresholds: CV FPR $\leq 1\%$, CV FPR $\leq 3\%$, and Youden $J$.
-  \item Temporary lockouts: 1, 2, 3, and 5 years; this gives 12 filtered strategies per universe.
-  \item \textbf{Permanent CSI:} \perm{} score triggers absorbing removal after first active signal.
-  \item Permanent thresholds: CV FPR $\leq 1\%$, CV FPR $\leq 3\%$, and Youden $J$; this gives 3 filtered strategies per universe.
+  \item Models: \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, \texttt{raw\_plus\_latent}.
+  \item Tracks: temporary CSI and permanent CSI.
+  \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
+  \item Thresholds: Youden, FPR1, FPR3, FPR5.
 \end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
-\textbf{Portfolio rule}
-\vspace{-0.25em}
-\begin{align*}
-E_{i,t}^{temp} &= \mathbf{1}\{\hat p_{i,t}\geq \tau\}\times \mathbf{1}\{t \leq t_0 + L\},\\
-E_{i,t}^{perm} &= \mathbf{1}\{\exists s\leq t: \hat p_{i,s}\geq \tau\},\\
-w^{screen}_{i,t} &= \frac{(1-E_{i,t})MCAP_{i,t}}{\sum_{j\in U_t}(1-E_{j,t})MCAP_{j,t}}.
-\end{align*}
-\vspace{-0.7em}
+\textbf{Portfolio rules}
 \begin{itemize}
-  \item Thresholds are calibrated from model validation/CV predictions, not from index OOS returns.
-  \item Best-rule appendix rows select the highest annualized geometric return within each track, period, and universe.
-  \item Error-cost decomposition reports annualized pp contributions from false positives, false negatives, true positives, and true negatives.
+  \item Temporary CSI: 1-, 2-, 3-, and 5-year exclusion lockouts.
+  \item Permanent CSI: absorbing permanent removal after first active signal.
+  \item Costs: 0, 5, 10, and 20 bps on gross turnover.
+  \item Turnover output is populated for every model--track--universe cell.
 \end{itemize}
 \end{column}
 \end{columns}
-% \sourcefoot{\texttt{11C\_IndexConstruction\_Revised.R}; \texttt{11c\_crsp\_index\_csi\_results\_20260516.md}.}
+\vspace{0.4em}
+\begin{alertblock}{Presentation interpretation}
+\scriptsize
+The index section uses OOS economic performance. Model metrics identify useful prediction signals; index construction tests whether those signals improve benchmark-relative returns after thresholding, exclusions, turnover, and transaction costs.
+\end{alertblock}
+\remarkfoot{Source: \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
 \end{frame}
 
-\begin{frame}{Appendix A15: Temporary CSI Index Results - Test}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
+\begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
+\fontsize{5.65pt}{6.15pt}\selectfont
+\textbf{Best strategy by track and universe at 20 bps}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{1.0cm}L{1.1cm}L{1.35cm}L{1.35cm}R{0.70cm}R{0.70cm}R{0.70cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule
-Total Market & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & -- \\
- & Youden / 3yr & 14.43\% & 11.08\% & 1.011 & -12.57\% & -7.51\% & +0.676 \\
-Large Cap & Benchmark & 14.18\% & 11.60\% & 0.952 & -13.82\% & -8.02\% & -- \\
- & Youden / 3yr & 14.68\% & 10.88\% & 1.047 & -12.09\% & -7.19\% & +0.493 \\
-Mid Cap & Benchmark & 13.82\% & 12.85\% & 0.846 & -15.30\% & -8.68\% & -- \\
- & Youden / 3yr & 14.27\% & 11.91\% & 0.937 & -13.70\% & -8.05\% & +0.449 \\
-Small Cap & Benchmark & 11.44\% & 15.55\% & 0.586 & -20.07\% & -10.80\% & -- \\
- & Youden / 2yr & 12.13\% & 14.03\% & 0.678 & -18.27\% & -10.24\% & +0.692 \\
+Temp. & Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp \\
+Temp. & Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp \\
+Temp. & Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp \\
+Perm. & Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
+\scriptsize
+VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is shown as the return reference and does not receive a strategy cost overlay.
+\remarkfoot{Source: \texttt{presentation\_headline\_tables.md}; final claim from \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+\end{frame}
+
+\begin{frame}{Appendix A16: Transaction-Cost Robustness}
+\fontsize{5.75pt}{6.25pt}\selectfont
+\textbf{Top winner did not change between 0 and 20 bps}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.05cm}L{1.15cm}L{1.50cm}L{1.50cm}R{0.74cm}R{0.74cm}}
+\toprule
+Track & Universe & Winner 0 bps & Winner 20 bps & Alpha 0 & Alpha 20 \\
+\midrule
+Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
+Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
+Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
+Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\scriptsize
+Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enough for presentation, but not high enough to reverse the headline rankings.
+\remarkfoot{Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+\end{frame}
+
+\begin{frame}{Appendix A17: Threshold Family and Turnover Summary}
+\fontsize{5.85pt}{6.35pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.50\textwidth}
+\textbf{Mean best alpha by threshold family}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
+\begin{tabular}{L{1.15cm}L{1.15cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
+Track & Threshold & Mean alpha \\
 \midrule
-Total Market & Youden / 3yr & -1.528 & -0.001 & +0.084 & +2.097 \\
-Large Cap & Youden / 3yr & -1.212 & +0.000 & +0.003 & +1.715 \\
-Mid Cap & Youden / 3yr & -1.810 & +0.000 & +0.015 & +2.651 \\
-Small Cap & Youden / 2yr & -3.224 & -0.008 & +0.360 & +3.130 \\
+Temp. & Youden & +0.35pp \\
+Temp. & FPR3 & +0.19pp \\
+Temp. & FPR5 & +0.17pp \\
+Temp. & FPR1 & +0.12pp \\
+Perm. & FPR3 & +0.35pp \\
+Perm. & FPR5 & +0.33pp \\
+Perm. & FPR1 & +0.14pp \\
+Perm. & Youden & -0.20pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-% \sourcefoot{\texttt{dynamic\_index\_performance\_by\_crsp\_universe.csv}; \texttt{dynamic\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{test}. Contributions and $\Delta$ are annualized pp.}
-\end{frame}
-
-\begin{frame}{Appendix A16: Temporary CSI Index Results -- Test-OOS}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
-\midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / 5yr & 13.41\% & 18.50\% & 0.615 & -24.20\% & -11.44\% & +0.119 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR1 / 1yr & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.83\% & -0.020 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & Youden / 1yr & 9.68\% & 20.09\% & 0.414 & -23.55\% & -13.03\% & +0.030 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & Youden / 3yr & 9.03\% & 21.98\% & 0.370 & -29.12\% & -15.60\% & +1.372 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Mean annualized turnover for winners}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
+\begin{tabular}{L{1.15cm}R{0.78cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
+Universe & Temp. & Perm. \\
 \midrule
-Total Market & FPR3 / 5yr & -0.970 & -0.003 & +0.064 & +0.782 \\
-Large Cap & FPR1 / 1yr & -0.018 & +0.000 & +0.000 & +0.005 \\
-Mid Cap & Youden / 1yr & -3.552 & +0.000 & -0.004 & +2.875 \\
-Small Cap & Youden / 3yr & -7.648 & -0.034 & +0.463 & +7.455 \\
+Total & 15.3\% & 12.2\% \\
+Large & 18.8\% & 17.2\% \\
+Mid & 97.7\% & 97.0\% \\
+Small & 77.2\% & 72.4\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-% \sourcefoot{\texttt{dynamic\_index\_performance\_by\_crsp\_universe.csv}; \texttt{dynamic\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{oos}. Contributions and $\Delta$ are annualized pp.}
+\end{column}
+\end{columns}
+\vspace{0.2em}
+\scriptsize
+Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI is strongest with FPR3/FPR5. Turnover is concentrated in Mid and Small Cap, where exclusions shift more of the investable universe.
+\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}; \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A17: Permanent CSI Index Results -- Test}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
-\midrule
-Total Market & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & -- \\
- & Youden / perm. & 14.19\% & 10.39\% & 1.050 & -10.44\% & -7.06\% & +0.432 \\
-Large Cap & Benchmark & 14.18\% & 11.60\% & 0.952 & -13.82\% & -8.02\% & -- \\
- & FPR3 / perm. & 14.40\% & 11.44\% & 0.981 & -13.64\% & -7.91\% & +0.220 \\
-Mid Cap & Benchmark & 13.82\% & 12.85\% & 0.846 & -15.30\% & -8.68\% & -- \\
- & Youden / perm. & 14.63\% & 10.80\% & 1.050 & -12.15\% & -7.45\% & +0.805 \\
-Small Cap & Benchmark & 11.44\% & 15.55\% & 0.586 & -20.07\% & -10.80\% & -- \\
- & Youden / perm. & 13.09\% & 13.27\% & 0.774 & -17.90\% & -9.90\% & +1.652 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
-\midrule
-Total Market & Youden / perm. & -4.490 & -0.003 & +0.055 & +4.367 \\
-Large Cap & FPR3 / perm. & -0.429 & +0.000 & -0.000 & +0.510 \\
-Mid Cap & Youden / perm. & -4.871 & +0.000 & -0.001 & +5.308 \\
-Small Cap & Youden / perm. & -5.048 & -0.020 & +0.209 & +5.617 \\
-\bottomrule
-\end{tabular}
-\end{table}
-% \sourcefoot{\texttt{permanent\_index\_performance\_by\_crsp\_universe.csv}; \texttt{permanent\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{test}. Contributions and $\Delta$ are annualized pp.}
-\end{frame}
-
-\begin{frame}{Appendix A18: Permanent CSI Index Results -- Test-OOS}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
-\midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / perm. & 13.76\% & 18.64\% & 0.629 & -24.21\% & -11.38\% & +0.472 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR3 / perm. & 14.62\% & 18.30\% & 0.678 & -24.10\% & -10.73\% & +0.345 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & FPR1 / perm. & 10.08\% & 20.56\% & 0.427 & -24.38\% & -13.85\% & +0.426 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & FPR3 / perm. & 7.61\% & 23.13\% & 0.306 & -29.39\% & -16.11\% & -0.042 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
-\midrule
-Total Market & FPR3 / perm. & -1.261 & -0.001 & +0.022 & +1.371 \\
-Large Cap & FPR3 / perm. & -0.849 & +0.000 & +0.000 & +0.969 \\
-Mid Cap & FPR1 / perm. & -0.167 & +0.000 & +0.000 & +0.536 \\
-Small Cap & FPR3 / perm. & -3.109 & -0.017 & +0.076 & +2.938 \\
-\bottomrule
-\end{tabular}
-\end{table}
-% \sourcefoot{\texttt{permanent\_index\_performance\_by\_crsp\_universe.csv}; \texttt{permanent\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{oos}. Contributions and $\Delta$ are annualized pp.}
+\begin{frame}{Appendix A18: Index Result Source Paths}
+\scriptsize
+\begin{itemize}
+  \item Headline winners: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/headline\_winners\_20bps.csv}
+  \item Presentation tables: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/presentation\_headline\_tables.md}
+  \item Transaction costs: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Threshold families: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/threshold\_family\_summary\_20bps.csv}
+  \item Turnover: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Full grid comparisons: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/comparison/best\_by\_track\_index\_cost.csv}
+\end{itemize}
+\vspace{0.3em}
+\begin{block}{Source discipline}
+\scriptsize
+All claims in the index-result slides are sourced from the completed AE-INDEX-SUITE grid. Sensitivity-analysis results are intentionally not finalized in this section.
+\end{block}
 \end{frame}
 
 % \begin{frame}{Appendix A19: Validation Caveats and Unresolved Issues}
