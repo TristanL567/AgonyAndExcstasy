@@ -1,0 +1,3 @@
+track,returns_tc_exists,performance_tc_exists,returns_rows,performance_rows,returns_bps,performance_bps,bps_exact,required_fields_present,formula_check_pass,max_drag_formula_abs_error,max_net_formula_abs_error
+dynamic_csi,True,True,54912,832,0|5|10|20,0|5|10|20,True,True,True,9.901476340223869e-17,7.771561172376096e-16
+permanent_csi,True,True,16896,256,0|5|10|20,0|5|10|20,True,True,True,1.0007186052041206e-16,9.992007221626409e-16
