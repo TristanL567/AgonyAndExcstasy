@@ -1,0 +1,12 @@
+output_family,rds_exists,csv_exists,rds_size_bytes,csv_size_bytes,status
+index_thresholds_by_crsp_universe,True,True,543,701,pass
+index_weights_by_crsp_universe,True,True,179223886,1898785840,pass
+index_returns_by_crsp_universe,True,True,471345,5070891,pass
+index_performance_by_crsp_universe,True,True,11395,73041,pass
+index_exclusion_summary_by_crsp_universe,True,True,86785,1029346,pass
+error_cost_decomposition_by_crsp_universe,True,True,29409,371357,pass
+index_turnover_by_month,True,True,140683,3976295,pass
+index_turnover_summary,True,True,2305,15840,pass
+index_returns_gross_and_net_by_tc,True,True,1259912,23707608,pass
+index_performance_gross_and_net_by_tc,True,True,46221,352329,pass
+run_status,,True,,1033,pass
