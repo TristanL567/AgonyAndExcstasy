@@ -1,0 +1,17 @@
+track,index_id,model_key,strategy_id,transaction_cost_bps,n_months_checked,max_abs_drag_error,max_abs_net_return_error,math_check_pass
+dynamic_csi,large_cap,fund,youden_3yr,10,264,9.486769009248164e-20,5.967448757360216e-16,TRUE
+dynamic_csi,large_cap,fund,youden_3yr,20,264,5.963111948670274e-19,1.8041124150158794e-16,TRUE
+dynamic_csi,mid_cap,fund,fpr5_5yr,10,264,1.0028870095490916e-18,4.440892098500626e-16,TRUE
+dynamic_csi,mid_cap,fund,fpr5_5yr,20,264,1.0842021724855044e-18,9.159339953157541e-16,TRUE
+dynamic_csi,small_cap,raw_plus_latent,youden_3yr,10,264,5.421010862427522e-20,6.106226635438361e-16,TRUE
+dynamic_csi,small_cap,raw_plus_latent,youden_3yr,20,264,1.0842021724855044e-18,8.881784197001252e-16,TRUE
+dynamic_csi,total_market,fund,youden_3yr,10,264,9.825582188149884e-20,5.551115123125783e-16,TRUE
+dynamic_csi,total_market,fund,youden_3yr,20,264,9.75781955236954e-19,6.661338147750939e-16,TRUE
+permanent_csi,large_cap,raw_plus_latent,fpr5_permanent,10,264,1.0164395367051604e-19,6.106226635438361e-16,TRUE
+permanent_csi,large_cap,raw_plus_latent,fpr5_permanent,20,264,2.0328790734103208e-19,4.163336342344337e-16,TRUE
+permanent_csi,mid_cap,fund,fpr5_permanent,10,264,5.421010862427522e-20,6.522560269672795e-16,TRUE
+permanent_csi,mid_cap,fund,fpr5_permanent,20,264,1.0842021724855044e-18,4.718447854656915e-16,TRUE
+permanent_csi,small_cap,latent_raw,fpr3_permanent,10,264,5.421010862427522e-20,7.771561172376096e-16,TRUE
+permanent_csi,small_cap,latent_raw,fpr3_permanent,20,264,1.0842021724855044e-18,5.828670879282072e-16,TRUE
+permanent_csi,total_market,raw_plus_latent,fpr5_permanent,10,264,3.3881317890172014e-21,5.967448757360216e-16,TRUE
+permanent_csi,total_market,raw_plus_latent,fpr5_permanent,20,264,1.0842021724855044e-19,6.38378239159465e-16,TRUE
