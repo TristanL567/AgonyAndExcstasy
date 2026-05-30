@@ -1,0 +1,8 @@
+check,status,detail
+all_required_files_exist,True,8/8 model-track pairs complete
+threshold_grid_complete,True,All model-track threshold and lockout/permanent grids complete
+transaction_cost_grid_complete,True,"All model-track performance files contain 0,5,10,20 bps"
+turnover_outputs_complete,True,All model-track turnover summaries populated
+indices_complete,True,"All model-track outputs include total_market, large_cap, mid_cap, small_cap"
+comparison_reporting_only,True,No 11C/model/evaluation/sensitivity/pipeline script was invoked by this comparison ticket
+comparison_output_root,True,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\7_IndexConstructionValidation\nonraw_index_suite\comparison
