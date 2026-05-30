@@ -1,0 +1,7 @@
+slide_or_frame,location,change_type,summary
+Appendix A1,FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,appendix wording,Clarified temporary-CSI sensitivity grid coverage as 27 represented configurations with 24 complete/reused and 3 blocked_partial cases.
+Appendix A10,FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,source note,Replaced broad model-suite folder note with exact model-suite metrics source file and raw comparator path.
+Appendix A11,FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,source note,Replaced broad model-suite folder note with exact model-suite metrics source file and raw comparator path.
+Appendix A14,FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,appendix wording,Added index model-key display labels for raw, fund, latent_raw, and raw_plus_latent and pointed source note to exact grid/turnover files.
+Appendix A18,FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,source navigation,Expanded index source navigation to exact threshold-family, transaction-cost, turnover, and selected error-cost source locations.
+SLIDE_DATA_SOURCES,FinalPresentation_June/SLIDE_DATA_SOURCES.md,source map,Made appendix/data-source rows exact enough for model metrics, index grid, error-cost decomposition, sensitivity reports, and future-work status.

@@ -1244,13 +1244,13 @@ Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp
 \vspace{-0.05em}
 \begin{block}{Blocked partial cases}
 \scriptsize
-The grid registry includes three incomplete cases: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. They are represented in manifests but excluded from completed-run conclusions.
+The grid represents 27 C/M/T configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. Blocked cases are represented in manifests but excluded from completed-run conclusions.
 \end{block}
 \begin{block}{Source interpretation}
 \scriptsize
 C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
 \end{block}
-\remarkfoot{Sources: \texttt{full\_grid\_label\_count\_ranking.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}; \texttt{run\_registry.csv}.}
+\remarkfoot{Sources: \texttt{05\_comparisons/full\_grid\_best\_configs\_by\_objective.csv}; \texttt{05\_comparisons/full\_grid\_*}; \texttt{99\_reports/sensitivity\_results\_readme.md}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
@@ -1505,7 +1505,7 @@ OOS & AG Exp. Dataset + VAE & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \text
 \bottomrule
 \end{tabular}
 \end{center}
-\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A11: Permanent CSI Model Metrics}
@@ -1534,7 +1534,7 @@ OOS & AG Exp. Dataset + VAE & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.020
 \bottomrule
 \end{tabular}
 \end{center}
-\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A12: Model Family Winners}
@@ -1588,7 +1588,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \begin{column}{0.50\textwidth}
 \textbf{Completed grid}
 \begin{itemize}
-  \item Models: \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, \texttt{raw\_plus\_latent}.
+  \item Models: \texttt{raw} (AG Expanded Dataset), \texttt{fund} (AG Base Dataset), \texttt{latent\_raw} (AG Latent Dataset), \texttt{raw\_plus\_latent} (AG Exp. Dataset + VAE).
   \item Tracks: temporary CSI and permanent CSI.
   \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
   \item Thresholds: Youden, FPR1, FPR3, FPR5.
@@ -1609,7 +1609,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \scriptsize
 The index section uses OOS economic performance. Model metrics identify useful prediction signals; index construction tests whether those signals improve benchmark-relative returns after thresholding, exclusions, turnover, and transaction costs.
 \end{alertblock}
-\remarkfoot{Source: \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+\remarkfoot{Sources: \texttt{comparison/full\_grid\_manifest.csv}; \texttt{comparison/best\_by\_track\_index\_cost.csv}; \texttt{comparison/turnover\_summary.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
@@ -1721,12 +1721,13 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 \begin{itemize}
   \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
   \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
-  \item Transaction costs: \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Transaction costs: \texttt{comparison/transaction\_cost\_impact.csv}; \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
   \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Threshold-family grid: \texttt{comparison/best\_by\_track\_index\_threshold\_family.csv}
   \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
   \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
-  \item Turnover: \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Full grid comparisons: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Error-cost decomposition: selected \texttt{fund}, \texttt{raw\_plus\_latent}, and \texttt{latent\_raw} \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
 \end{itemize}
 \vspace{0.3em}
 \begin{block}{Source discipline}
