@@ -1,0 +1,2 @@
+blocker_type,item,details
+validator_scope_block,unrelated_untracked_files,"Validator blocked because unrelated untracked AE-VALIDATE reports exist outside AE-INDEX-SUITE scope: 07_CloudComputing/Validation/AE-VALIDATE/AE-VALIDATE-005R_Model_Evaluation_Rerun_Report.md and 07_CloudComputing/Validation/AE-VALIDATE/AE-VALIDATE-005_Model_Evaluation_Rerun_Report.md. Per ticket rules, no commit was made."

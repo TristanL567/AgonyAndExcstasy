@@ -1,0 +1,8 @@
+area,finding,evidence,status
+current_support,No current transaction-cost bps variants or turnover fields found in 11C.,No turnover/transaction_cost_bps/transaction_cost_return_drag/net_return fields in script.,missing
+weights_location,Quarterly target weights are computed in weights_all after fn_make_weight_rows.,weights_all saved to index_weights_by_crsp_universe.rds/csv.,available
+returns_location,Monthly returns are computed in fn_compute_strategy_returns and returns_all.,"active[, w_pre := w / pre_weight_sum] exists inside monthly loop; port_ret is gross drifted return.",feasible_insertion_point
+turnover_method,Best design is drifted pre-trade weights to new target weights at rebalance.,"w_pre exists for active holdings, but the script does not persist a prior-month/post-month target comparison yet.",methodology_decision
+fallback_method,"If drifted pre-trade weights cannot be retained cleanly, target-to-target turnover is a fallback but should be flagged as less precise.",Quarterly target weights are available in weights_all by qdate/permno.,fallback_available
+required_fields,"Next ticket should add turnover_buy, turnover_sell, turnover_gross, turnover_one_way, transaction_cost_bps, transaction_cost_return_drag, gross_return, net_return.","Ticket formula: drag = turnover_gross * bps / 10000, costs on buys and sells.",required_for_002
+cost_grid,"Add 0, 5, 10, and 20 bps variants to monthly returns and performance outputs.",No existing cost grid in 11C.,required_for_002

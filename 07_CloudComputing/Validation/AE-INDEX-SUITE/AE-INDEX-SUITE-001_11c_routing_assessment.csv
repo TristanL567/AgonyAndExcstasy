@@ -1,0 +1,5 @@
+model,ag_dir,config_path_defined,current_11c_support,hardcoded_model_key_raw,hardcoded_ag_raw,uses_env_MODEL,required_change_for_002
+raw,ag_raw,True,hardcoded_supported_only,True,True,False,Keep raw as supported comparator while replacing hardcoded path with explicit raw/default routing.
+fund,ag_fund,True,not_supported_by_11c_currently,True,True,False,Parameterize MODEL/MODEL_KEY/MODEL_LABEL and resolve prediction directory through DIR_TABLES_MODEL or a validated local model-suite input root.
+latent_raw,ag_latent_raw,True,not_supported_by_11c_currently,True,True,False,Parameterize MODEL/MODEL_KEY/MODEL_LABEL and resolve prediction directory through DIR_TABLES_MODEL or a validated local model-suite input root.
+raw_plus_latent,ag_raw_plus_latent,True,not_supported_by_11c_currently,True,True,False,Parameterize MODEL/MODEL_KEY/MODEL_LABEL and resolve prediction directory through DIR_TABLES_MODEL or a validated local model-suite input root.
