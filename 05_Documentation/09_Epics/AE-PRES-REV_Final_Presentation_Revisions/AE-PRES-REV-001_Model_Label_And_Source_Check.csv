@@ -1,0 +1,6 @@
+old_key,new_label,prefix_used,source_backing,xgb_specific_row_confirmed,notes
+raw,"Expanded Dataset","AG","Raw comparator is an AutoGluon revised-dataset rerun; row is a feature-set-level AutoGluon result, not a standalone XGBoost result.",false,"Used AG Expanded Dataset in modelling tables."
+fund,"Base Dataset","AG","Fundamentals-only outputs are AutoGluon model-suite results; best leaderboard family is WeightedEnsemble.",false,"Used AG Base Dataset in modelling tables."
+latent_raw,"Latent Dataset (VAE)","AG","VAE-only outputs are AutoGluon model-suite results; best leaderboard family is WeightedEnsemble.",false,"Used AG Latent Dataset (VAE) in modelling tables."
+raw_plus_latent,"Exp. Dataset + VAE","AG","Expanded plus latent outputs are AutoGluon model-suite results; best leaderboard family is WeightedEnsemble.",false,"Used AG Exp. Dataset + VAE in modelling tables."
+all_feature_sets,"XGB standalone label","not used","Leaderboards include model families inside AutoGluon, but the presentation rows summarize feature-set-level AutoGluon runs. No XGB-specific presentation row was source-confirmed.",false,"No XGB prefix was used."
