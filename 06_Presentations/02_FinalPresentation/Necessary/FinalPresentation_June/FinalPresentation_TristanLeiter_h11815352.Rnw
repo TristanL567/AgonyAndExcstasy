@@ -717,68 +717,103 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 
 \begin{frame}{Modelling II: Results Temporary CSI}
 \scriptsize
-\begin{alertblock}{Best current model for index construction}
+\begin{alertblock}{Main read}
 \scriptsize
-\textbf{AutoGluon \texttt{Expanded Dataset}} is the best current temporary-CSI model on CV and the 2016-2019 test set OOS portfolio testing is deliberately kept out of model selection.
+Temporary CSI remains highly rankable, but AP and fixed-FPR recall are the decision metrics because positives are rare. \textbf{\texttt{raw\_plus\_latent}} is strongest on train/CV and OOS AP/FPR recall; \textbf{\texttt{raw}} remains the strongest 2016--2019 test benchmark and has marginally higher OOS AUC.
 \end{alertblock}
 
-\vspace{0.1em}
+\vspace{0.05em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}}
+\begin{tabular}{L{1.15cm}L{2.05cm}R{0.85cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.9cm}L{2.3cm}}
 \toprule
-Model & CV AP & CV AUC & CV R3 & Test AP & Test AUC & Test R3 \\
+Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
 \midrule
-\texttt{AG Expanded Dataset} & \textbf{0.2197} & \textbf{0.9647} & \textbf{0.6127} & \textbf{0.2114} & \textbf{0.9692} & \textbf{0.6551} \\
-\texttt{AG Latent Dataset (VAE)} & 0.1639 & 0.9531 & 0.5110 & 0.1433 & 0.9549 & 0.5130 \\
-\texttt{XGB Expanded Dataset} & 0.2094 & 0.9525 & 0.5293 & 0.1813 & 0.9670 & 0.6391 \\
-\texttt{XGB Exp. Dataset + VAE} & 0.2080 & 0.9463 & 0.5275 & 0.1837 & 0.9671 & 0.6279 \\
-\texttt{XGB Latent Dataset (VAE)} & 0.1658 & 0.9406 & 0.4499 & 0.1462 & 0.9553 & 0.5179 \\
+Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & strongest overall CV signal \\
+Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & 0.0821 & \textbf{0.2002} & 0.2998 & benchmark wins test AP/AUC \\
+OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & best OOS AP/FPR recall \\
+OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & slightly higher OOS AUC \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\vspace{0.15em}
+\vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-The initial question is answered positively: temporary CSI is forecastable, but the expanded dataset derived from feature engineering and market signals is essential because Expanded Dataset + VAE alone is materially weaker. For index construction, \texttt{AG Expanded Dataset} is the clean model-selection baseline, with XGBoost as a transparent robustness challenger. False positives remain the economic constraint, so thresholds should be calibrated from CV-FPR targets before any OOS portfolio evaluation.
+VAE latent information helps most when added to raw features and evaluated OOS. The raw benchmark remains competitive, so model slides alone do not establish index-level superiority; the index section evaluates economic performance.
 \end{block}
-\remarkfoot{R3 = recall at FPR $\leq 3\%$. Full AutoGluon and XGBoost temporary-CSI tables are in Appendix A10-A11.}
+\remarkfoot{R@FPRk = recall at a CV-style false-positive-rate cap of k\%. Full train/CV, test, and OOS tables are in Appendix A10.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Modelling III: Results Permanent-CSI}
 \scriptsize
-\begin{alertblock}{Best current model evidence}
+\begin{alertblock}{Main read}
 \scriptsize
-Permanent-CSI is forecastable but more difficult than temporary CSI. \textbf{XGBoost \texttt{Expanded Dataset}} is strongest on 2016-2019 test AP/R3; \textbf{AutoGluon \texttt{Expanded Dataset}} and \textbf{\texttt{Exp. Dataset + VAE}} are the clean completed AutoGluon baselines.
+Permanent CSI is harder: positives are rarer and OOS prevalence is much lower. \textbf{\texttt{raw\_plus\_latent}} is the best non-raw CV/test challenger, while \textbf{\texttt{latent\_raw}} is the strongest OOS robustness signal.
 \end{alertblock}
 
-\vspace{0.1em}
+\vspace{0.05em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{L{1.15cm}L{2.05cm}R{0.82cm}R{0.82cm}R{0.86cm}R{0.86cm}R{0.86cm}L{2.45cm}}
 \toprule
-Model & CV AP & CV AUC & CV R3 & Test AP & Test AUC & Test R3 \\
+Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
 \midrule
-\texttt{AG Expanded Dataset} & 0.2016 & \textbf{0.9650} & \textbf{0.6216} & 0.1480 & 0.9674 & 0.6621 \\
-\texttt{AG Exp. Dataset + VAE} & \textbf{0.2019} & \textbf{0.9651} & 0.6169 & 0.1471 & 0.9670 & 0.6655 \\
-\texttt{XGB Expanded Dataset} & 0.1928 & 0.9462 & 0.5498 & \textbf{0.1549} & 0.9681 & \textbf{0.6707} \\
-\texttt{XGB Exp. Dataset + VAE} & 0.1947 & 0.9432 & 0.5501 & 0.1393 & \textbf{0.9682} & 0.6398 \\
-\texttt{AG Latent Dataset (VAE)} & 0.1529 & 0.9573 & 0.5455 & 0.1190 & 0.9600 & 0.5592 \\
+Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & best AP and FPR1 \\
+Train/CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & best AUC/FPR3/5 \\
+Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & best AUC/FPR3/5 \\
+Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & narrow AP/FPR1 win \\
+OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & strongest OOS robustness \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\vspace{0.15em}
+\vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-The permanent target has usable ranking structure, but AP is materially lower than for temporary CSI because positives are rarer. Engineered \texttt{Expanded Dataset} features remain the core signal; latent-only evidence is weaker on CV/test even though it improves on test-OOS AP. For index construction, permanent CSI should be treated as a stricter removal signal and benchmarked with conservative FPR thresholds.
+Raw remains a strong reporting baseline. For permanent CSI, \texttt{raw\_plus\_latent} is the primary non-raw challenger, while \texttt{latent\_raw} is retained for OOS robustness rather than treated as a clean replacement.
 \end{block}
-\remarkfoot{R3 = recall at FPR $\leq 3\%$. Full permanent-CSI XGBoost and AutoGluon tables are in Appendix A12-A13.}
+\remarkfoot{Brier is best for permanent OOS under \texttt{latent\_raw}: 0.0166. Full split tables are in Appendix A11.}
+\end{frame}
+
+
+
+\begin{frame}{Modelling IV: What VAE Features Add}
+\scriptsize
+\begin{alertblock}{Feature-set interpretation}
+\scriptsize
+The VAE does not replace raw predictive information. It is useful as an augmentation or robustness signal: \texttt{raw\_plus\_latent} improves temporary OOS AP/FPR recall, while \texttt{latent\_raw} is the strongest permanent OOS model.
+\end{alertblock}
+
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Temporary CSI}
+\begin{itemize}
+  \item \texttt{raw\_plus\_latent} leads OOS AP: 0.3152.
+  \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
+  \item \texttt{raw} still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
+\end{itemize}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Permanent CSI}
+\begin{itemize}
+  \item \texttt{raw\_plus\_latent} leads test AUC and FPR3/5 recall.
+  \item \texttt{latent\_raw} leads OOS AP/AUC/Brier/FPR recall.
+  \item \texttt{fund} remains a useful fundamentals-only benchmark, not the preferred model.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.15em}
+\begin{block}{Model-family note}
+\scriptsize
+Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
+\end{block}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1352,236 +1387,106 @@ Status & Weakly supervised on training rows; test and OOS labels are not used fo
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A10: AutoGluon Results for Temporary CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
+\begin{frame}{Appendix A10: Temporary CSI Model Metrics}
+\fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{CV average} {\scriptsize \quad Per-fold average across expanding-window folds 2--4.}
+\setlength{\tabcolsep}{1.8pt}
+\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
+\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
 \toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
+Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-\texttt{fund} & 0.2076 & 0.9589 & 0.5793 & 0.7588 \\
-\texttt{raw} & 0.2197 & 0.9647 & 0.6127 & 0.7803 \\
-\texttt{raw + latent} & 0.2173 & 0.9643 & 0.6002 & 0.7786 \\
-\texttt{latent raw} & 0.1639 & 0.9531 & 0.5110 & 0.6900 \\
+CV & \texttt{raw} & 0.2046 & 0.8635 & 0.0917 & 0.2344 & 0.3415 & 0.0371 \\
+CV & \texttt{fund} & 0.1923 & 0.8446 & 0.0830 & 0.2206 & 0.3229 & 0.0374 \\
+CV & \texttt{latent\_raw} & 0.1659 & 0.8454 & 0.0670 & 0.1706 & 0.2735 & 0.0380 \\
+CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & \textbf{0.0368} \\
+Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.0821} & \textbf{0.2002} & \textbf{0.2998} & \textbf{0.0389} \\
+Test & \texttt{fund} & 0.1656 & 0.8538 & 0.0585 & 0.1517 & 0.2413 & 0.0392 \\
+Test & \texttt{latent\_raw} & 0.1501 & 0.8438 & 0.0410 & 0.1294 & 0.2264 & 0.0394 \\
+Test & \texttt{raw\_plus\_latent} & 0.1864 & 0.8741 & 0.0634 & 0.1779 & 0.2749 & 0.0394 \\
+OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & 0.0498 \\
+OOS & \texttt{fund} & 0.2526 & 0.8686 & 0.0598 & 0.1795 & 0.3017 & 0.0526 \\
+OOS & \texttt{latent\_raw} & 0.2813 & 0.8626 & 0.1009 & 0.2274 & 0.3556 & 0.0518 \\
+OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & \textbf{0.0494} \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1758 & 0.9550 & 0.6069 & 0.7726 \\
-\texttt{raw} & 0.2114 & 0.9692 & 0.6551 & 0.8183 \\
-\texttt{raw + latent} & 0.1874 & 0.9680 & 0.6354 & 0.8171 \\
-\texttt{latent raw} & 0.1433 & 0.9549 & 0.5130 & 0.7095 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.2565 & 0.9300 & 0.6220 & 0.7935 \\
-\texttt{raw} & 0.2911 & 0.9552 & 0.7169 & 0.8401 \\
-\texttt{raw + latent} & 0.2951 & 0.9577 & 0.7169 & 0.8385 \\
-\texttt{latent raw} & 0.2720 & 0.9509 & 0.6436 & 0.8043 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
-\scriptsize
-\texttt{raw} is best on the 2016--2019 test set by AP, AUC, and R@FPR3. \texttt{raw + latent} is very close on AUC/R@FPR thresholds and is best on OOS AP/AUC.
-\end{block}
+\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
 \end{frame}
 
-\begin{frame}{Appendix A11: XGBoost Results for Temporary CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
+\begin{frame}{Appendix A11: Permanent CSI Model Metrics}
+\fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Finalized temporary-CSI XGBoost rerun} {\scriptsize \quad Full CV metrics stored.}
+\setlength{\tabcolsep}{1.8pt}
+\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
+\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
 \toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
+Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-\texttt{fund} & 0.1978 & 0.9330 & 0.5173 & 0.6847 \\
-\texttt{raw} & 0.2094 & 0.9525 & 0.5293 & 0.6995 \\
-\texttt{raw + latent} & 0.2080 & 0.9463 & 0.5275 & 0.6930 \\
-\texttt{latent raw} & 0.1658 & 0.9406 & 0.4499 & 0.6167 \\
+CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & 0.0297 \\
+CV & \texttt{fund} & 0.1785 & 0.8677 & 0.1033 & 0.2379 & 0.3469 & 0.0299 \\
+CV & \texttt{latent\_raw} & 0.1426 & 0.8460 & 0.0732 & 0.1960 & 0.2908 & 0.0308 \\
+CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & \textbf{0.0297} \\
+Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & 0.0284 \\
+Test & \texttt{fund} & 0.1289 & 0.8627 & 0.0627 & 0.1697 & 0.2620 & 0.0293 \\
+Test & \texttt{latent\_raw} & 0.1115 & 0.8496 & 0.0424 & 0.1513 & 0.2546 & \textbf{0.0280} \\
+Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & 0.0283 \\
+OOS & \texttt{raw} & 0.0323 & 0.8081 & 0.0000 & 0.0119 & 0.0623 & 0.0211 \\
+OOS & \texttt{fund} & 0.0281 & 0.7798 & 0.0000 & 0.0030 & 0.0297 & 0.0232 \\
+OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & \textbf{0.0166} \\
+OOS & \texttt{raw\_plus\_latent} & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.0207 \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1612 & 0.9568 & 0.5748 & 0.7812 \\
-\texttt{raw} & 0.1813 & 0.9670 & 0.6391 & 0.8232 \\
-\texttt{raw + latent} & 0.1837 & 0.9671 & 0.6279 & 0.8319 \\
-\texttt{latent raw} & 0.1462 & 0.9553 & 0.5179 & 0.7330 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.2643 & 0.9339 & 0.6520 & 0.7868 \\
-\texttt{raw} & 0.2578 & 0.9473 & 0.6769 & 0.8260 \\
-\texttt{raw + latent} & 0.2880 & 0.9494 & 0.6994 & 0.8393 \\
-\texttt{latent raw} & 0.2723 & 0.9532 & 0.6644 & 0.8060 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
-\scriptsize
-XGBoost confirms the same modelling pattern: \texttt{raw + latent} is strongest OOS by AP and R@FPR thresholds, while \texttt{latent raw} alone is not a substitute for engineered raw features.
-\end{block}
+\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
 \end{frame}
 
-\begin{frame}{Appendix A12: XGBoost Results for Permanent CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Permanent-CSI XGBoost results} {\scriptsize \quad Same feature-set variants as temporary CSI.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.1928 & 0.9462 & 0.5498 & 0.7118 \\
-\texttt{fund} & 0.1841 & 0.9268 & 0.5350 & 0.6942 \\
-\texttt{raw\_plus\_latent} & 0.1947 & 0.9432 & 0.5501 & 0.7118 \\
-\texttt{latent\_raw} & 0.1578 & 0.9428 & 0.4852 & 0.6525 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.1549 & 0.9681 & 0.6707 & 0.8336 \\
-\texttt{fund} & 0.1262 & 0.9555 & 0.6003 & 0.7856 \\
-\texttt{raw\_plus\_latent} & 0.1393 & 0.9682 & 0.6398 & 0.8388 \\
-\texttt{latent\_raw} & 0.1252 & 0.9601 & 0.5918 & 0.7839 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test-OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.0514 & 0.9424 & 0.3767 & 0.6340 \\
-\texttt{fund} & 0.0507 & 0.9249 & 0.4032 & 0.6446 \\
-\texttt{raw\_plus\_latent} & 0.0550 & 0.9433 & 0.4085 & 0.6578 \\
-\texttt{latent\_raw} & 0.0718 & 0.9401 & 0.4748 & 0.6525 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
+\begin{frame}{Appendix A12: Model Family Winners}
 \scriptsize
-\texttt{raw} is strongest on the 2016--2019 test set by AP and R@FPR3, while \texttt{raw\_plus\_latent} is marginally strongest on test AUC/R@FPR5 and CV AP. Test-OOS is weaker and unusual: \texttt{latent\_raw} has the highest AP/R@FPR3, so permanent-CSI XGBoost evidence is less stable than the temporary-CSI XGBoost pattern.
-\end{block}
+\begin{alertblock}{AutoGluon selection evidence}
+\scriptsize
+Every final feature-set/track run selected a \texttt{WeightedEnsemble\_L2} as the top leaderboard model. The useful base signal is mostly tree-based; neural nets were considered but did not dominate.
+\end{alertblock}
+\vspace{0.15em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{L{2.1cm}L{2.0cm}L{2.2cm}R{1.2cm}R{1.2cm}}
+\toprule
+Track & Feature set & Best family & Val. score & Fit sec. \\
+\midrule
+Temporary & \texttt{raw} & WeightedEnsemble & 0.2307 & 280 \\
+Temporary & \texttt{fund} & WeightedEnsemble & 0.2203 & 83 \\
+Temporary & \texttt{latent\_raw} & WeightedEnsemble & 0.1953 & 146 \\
+Temporary & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2314} & 203 \\
+Permanent & \texttt{raw} & WeightedEnsemble & 0.2010 & 126 \\
+Permanent & \texttt{fund} & WeightedEnsemble & 0.1929 & 229 \\
+Permanent & \texttt{latent\_raw} & WeightedEnsemble & 0.1505 & 191 \\
+Permanent & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2041} & 291 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\remarkfoot{Source: \texttt{AE-MODEL-SUITE-007\_model\_family\_winners.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A13: AutoGluon Results for Permanent CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Permanent-CSI AutoGluon results} {\scriptsize \quad Completed runs: \texttt{fund}, \texttt{raw}, \texttt{raw\_plus\_latent}.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1884 & 0.9584 & 0.5981 & 0.7702 \\
-\texttt{raw} & 0.2016 & 0.9650 & 0.6216 & 0.7835 \\
-\texttt{raw\_plus\_latent} & 0.2019 & 0.9651 & 0.6169 & 0.7890 \\
-\texttt{latent\_raw} & 0.1529 & 0.9573 & 0.5455 & 0.7212 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1300 & 0.9527 & 0.6364 & 0.7856 \\
-\texttt{raw} & 0.1480 & 0.9674 & 0.6621 & 0.8233 \\
-\texttt{raw\_plus\_latent} & 0.1471 & 0.9670 & 0.6655 & 0.8199 \\
-\texttt{latent\_raw} & 0.1190 & 0.9600 & 0.5592 & 0.7496 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test-OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.0521 & 0.9224 & 0.4324 & 0.6366 \\
-\texttt{raw} & 0.0587 & 0.9495 & 0.4456 & 0.7109 \\
-\texttt{raw\_plus\_latent} & 0.0581 & 0.9502 & 0.4668 & 0.6950 \\
-\texttt{latent\_raw} & 0.0696 & 0.9438 & 0.4695 & 0.6950 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
+\begin{frame}{Appendix A13: Model Metric Caveats}
 \scriptsize
-\texttt{raw} is the best AutoGluon permanent-CSI model on the 2016--2019 test set by AP and R@FPR5. \texttt{raw\_plus\_latent} is essentially tied on CV and has the best test-OOS AUC/R@FPR3, while \texttt{latent\_raw} performs best on test-OOS AP but remains weaker on CV/test AP.
+\begin{block}{Comparability}
+\scriptsize
+The raw comparator is the revised-dataset optional-library AutoGluon rerun from AE-VALIDATE. Complete local threshold metrics were later materialized under \texttt{03\_Data\_Output/6\_ModelSuite/raw/derived\_metrics}, so the presentation uses AP, AUC, Brier, and R@FPR1/3/5 consistently across feature sets.
 \end{block}
+\vspace{0.15em}
+\begin{itemize}
+  \item AP and fixed-FPR recall are emphasized because CSI positives are rare.
+  \item AUC remains useful as a ranking diagnostic but can mask low-prevalence false-positive economics.
+  \item \texttt{raw\_plus\_latent} is the main enhanced feature-set challenger for temporary CSI and permanent test/CV.
+  \item \texttt{latent\_raw} is retained for permanent OOS robustness, not as a universal replacement.
+  \item Economic superiority is not claimed from model metrics alone; index-construction slides test benchmark-relative performance.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Appendix A14: Index Strategy Construction}
