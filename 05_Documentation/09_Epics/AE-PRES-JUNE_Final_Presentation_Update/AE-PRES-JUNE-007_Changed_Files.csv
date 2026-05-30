@@ -1,0 +1,10 @@
+path,change_type,scope_status,notes
+06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,modified,in_scope,Fixed Appendix A18 source-path overflow and simplified threshold-family table layout
+06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.tex,regenerated,in_scope,Generated from June Rnw by knitr
+06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf,regenerated,in_scope,Generated PDF after successful compile
+05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-007_Compile_Visual_QA_Report.md,created,in_scope,Ticket report
+05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-007_Compile_Log_Summary.md,created,in_scope,Compile log summary
+05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-007_Visual_QA_Checklist.csv,created,in_scope,Visual QA checklist
+05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-007_Changed_Files.csv,created,in_scope,Changed-file inventory
+05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-007_Validation_Report.md,created,in_scope,Worker validation summary
+

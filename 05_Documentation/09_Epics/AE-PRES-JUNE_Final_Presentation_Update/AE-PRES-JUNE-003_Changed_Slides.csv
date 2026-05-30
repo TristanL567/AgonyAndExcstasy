@@ -1,0 +1,8 @@
+slide_number,section,frame_title,change_type,summary,source_status
+14,Modelling,Modelling II: Results Temporary CSI,edited,"Replaced obsolete model table with temporary CSI train/CV, test, and OOS AP/AUC/R@FPR1/3/5 highlights from completed model-suite threshold metrics.",model_suite_complete_threshold_metrics
+15,Modelling,Modelling III: Results Permanent-CSI,edited,"Replaced obsolete model table with permanent CSI train/CV, test, and OOS AP/AUC/R@FPR1/3/5 highlights and Brier note.",model_suite_complete_threshold_metrics
+16,Modelling,Modelling IV: What VAE Features Add,added,"Added concise feature-set interpretation covering raw benchmark strength, raw_plus_latent gains, latent_raw OOS robustness, and model-family winner pattern.",model_suite_comparison_evidence
+40,Appendix,Appendix A10: Temporary CSI Model Metrics,edited,"Replaced old AutoGluon temporary table with full four-feature-set train/CV, test, and OOS AP/AUC/Brier/R@FPR1/3/5 table.",model_suite_complete_threshold_metrics
+41,Appendix,Appendix A11: Permanent CSI Model Metrics,edited,"Replaced old XGBoost temporary table with full permanent CSI four-feature-set train/CV, test, and OOS AP/AUC/Brier/R@FPR1/3/5 table.",model_suite_complete_threshold_metrics
+42,Appendix,Appendix A12: Model Family Winners,edited,"Replaced old XGBoost permanent table with compact AutoGluon model-family winner evidence.",model_suite_family_winners
+43,Appendix,Appendix A13: Model Metric Caveats,edited,"Replaced old AutoGluon permanent table with model metric comparability caveats and downstream-index caution.",model_suite_comparison_evidence

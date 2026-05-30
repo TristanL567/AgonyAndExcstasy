@@ -1,0 +1,4 @@
+slide_order,frame_title,action,content_updated,primary_sources
+42,Appendix A19: Future Robustness and Extensions,activated_replaced,"Added active future-work appendix marking permanent sensitivity, minimum-volatility benchmark, quality/risk-scaling benchmark, active probability weighting, and residual terminal-failure diagnostics as planned/not completed","05_Documentation/09_Epics/AE-PRES-JUNE_Final_Presentation_Update/AE-PRES-JUNE-005_Sensitivity_Robustness_Update_Report.md"
+43,Appendix A20: Slide-to-Source Audit Map,activated_replaced,"Added appendix pointer to the complete slide-to-source audit map beside the June Rnw source","06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md"
+all,SLIDE_DATA_SOURCES.md,created,"Mapped every June frame to exact local source files or marked it conceptual/future-work","06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw"

@@ -1,0 +1,31 @@
+check_area,status,evidence,notes
+Branch,PASS,Development,Checked with git status --branch
+Final PDF exists,PASS,FinalPresentation_TristanLeiter_h11815352.pdf exists,Size 468610 bytes
+Final PDF generated after AE-PRES-JUNE-007,PASS,Latest git log for PDF is e6fea52 AE-PRES-JUNE-007: compile and QA final deck,No recompile was needed in AE-PRES-JUNE-008
+Final source exists,PASS,FinalPresentation_TristanLeiter_h11815352.Rnw exists,Size 70740 bytes
+Slide source map exists,PASS,SLIDE_DATA_SOURCES.md exists,Size 18036 bytes
+Active frame count,PASS,44,Counted \\begin{frame} in Rnw
+PDF page count,PASS,44,Read with local pypdf
+Source-map rows,PASS,44,One source-map row per active frame
+Source-map path resolution,PASS,0 missing paths,Conceptual and planned/future rows are explicitly marked
+Unresolved markers,PASS,0 occurrences of ?? in extracted PDF text,Read with local pypdf
+Corrected AE-PANEL counts,PASS,188460 plus temporary 8517 and permanent 6258 positives present,Checked in Rnw
+Temporary and permanent CSI methodology,PASS,Temporary and permanent CSI methodology slides present,Checked in Rnw/source map
+y=NA policy,PASS,y=NA retention and supervised-metric exclusion policy present,Checked in Rnw
+Model-suite coverage,PASS,raw fund latent_raw raw_plus_latent present,Checked in Rnw
+Model metrics coverage,PASS,AUC AP R@FPR1 R@FPR3 R@FPR5 present,Train/CV test OOS metrics are mapped in source map and appendix tables
+Index-suite coverage,PASS,Index Results section and AE-INDEX-SUITE source map entries present,Checked in Rnw/source map
+Market-weighted benchmark,PASS,market-cap-weighted benchmark language present,Checked in Rnw
+Transaction-cost coverage,PASS,"0, 5, 10, and 20 bps language present",Checked in index methodology and transaction-cost slides
+Turnover interpretation,PASS,Turnover slide and appendix turnover summary present,Checked in Rnw/source map
+Temporary-CSI sensitivity results,PASS,Sensitivity result and appendix sensitivity detail present,Checked in Rnw/source map
+Future-work caveats,PASS,Future-work slide marks planned/not completed items,Checked in Rnw
+Permanent-CSI sensitivity not claimed complete,PASS,Marked future/planned,Checked future-work slide
+Minimum-volatility benchmark not claimed complete,PASS,Marked planned/not completed,Checked future-work slide
+Quality/risk-scaling benchmark not claimed complete,PASS,Marked planned/not completed,Checked future-work slide
+Active CSI-probability weighting not claimed complete,PASS,Marked planned/not completed,Checked future-work slide
+Recovered bankrupt/insolvent diagnostics not claimed complete,PASS,Marked planned/not completed,Checked future-work slide
+No presentation edits in 008,PASS,Only closeout evidence files created,git diff before staging showed only pre-existing unrelated deletion
+No data output changes,PASS,No 03_Data_Output changes,Checked git diff
+Unrelated dirty files unstaged,PASS,Old FinalPresentation deletion and AE-VALIDATE directory remain unstaged,Checked git status
+
