@@ -1,0 +1,56 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Altman(1968)]{Altman1968}
+Edward~I. Altman.
+\newblock Financial ratios, discriminant analysis and the prediction of
+  corporate bankruptcy.
+\newblock \emph{The Journal of Finance}, 23\penalty0 (4):\penalty0 589--609,
+  1968.
+
+\bibitem[Campbell et~al.(2008)Campbell, Hilscher, and Szilagyi]{Campbell2008}
+John~Y. Campbell, Jens Hilscher, and Jan Szilagyi.
+\newblock In search of distress risk.
+\newblock \emph{The Journal of Finance}, 63\penalty0 (6):\penalty0 2899--2939,
+  2008.
+
+\bibitem[Cembalest(2014)]{Cembalest2014}
+Michael Cembalest.
+\newblock The agony \& the ecstasy: The risks and rewards of a concentrated
+  stock position.
+\newblock Eye on the market special edition, J.P. Morgan Asset Management,
+  2014.
+\newblock September 2, 2014.
+
+\bibitem[Penman and Reggiani(2018)]{Penman2018}
+Stephen Penman and Francesco Reggiani.
+\newblock Fundamentals of value versus growth investing and an explanation for
+  the value trap.
+\newblock \emph{Financial Analysts Journal}, 74\penalty0 (4):\penalty0
+  103--119, 2018.
+\newblock \doi{10.2469/faj.v74.n4.6}.
+
+\bibitem[Shumway(1997)]{Shumway1997}
+Tyler Shumway.
+\newblock The delisting bias in {CRSP} data.
+\newblock \emph{The Journal of Finance}, 52\penalty0 (1):\penalty0 327--340,
+  1997.
+
+\bibitem[Shumway(2001)]{Shumway2001}
+Tyler Shumway.
+\newblock Forecasting bankruptcy more accurately: A simple hazard model.
+\newblock \emph{The Journal of Business}, 74\penalty0 (1):\penalty0 101--124,
+  2001.
+
+\bibitem[Tewari et~al.(2024)Tewari, Galas, and Treleaven]{Tewari2024}
+Zaki Tewari, Michal Galas, and Philip Treleaven.
+\newblock Predicting catastrophic stock implosions: A machine learning
+  approach.
+\newblock Technical report, University College London, 2024.
+\newblock Working Paper.
+
+\end{thebibliography}
