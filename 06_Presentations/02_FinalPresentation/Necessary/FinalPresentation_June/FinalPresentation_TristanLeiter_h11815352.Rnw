@@ -338,38 +338,53 @@ For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. 
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Robustness I: Do CSI-firms go bankrupt?}
 
-\textbf{Validation question:} Among firms that eventually delist or bankrupt, how many had already been classified as CSI?
+\begin{frame}{Robustness I: Temporary CSI Sensitivity Grid}
+\scriptsize
+\begin{alertblock}{Completed local sensitivity evidence}
+\scriptsize
+The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}.
+\end{alertblock}
 
-\vspace{0.25em}
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\textbf{Grid design}
+\begin{itemize}
+  \item Crash threshold $C$: $-60\%$, $-80\%$, $-90\%$.
+  \item Recovery threshold $M$: $0\%$, $-20\%$, $-30\%$.
+  \item Confirmation window $T$: 12, 18, 28 months.
+  \item Track: temporary CSI only; raw model sensitivity.
+\end{itemize}
+\end{column}
+\begin{column}{0.50\textwidth}
+\textbf{Local status}
 \begin{table}[ht]
 \centering
-\scriptsize
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.2cm}R{1.0cm}R{1.45cm}R{1.0cm}R{1.0cm}R{1.35cm}}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{L{2.8cm}R{1.1cm}}
 \toprule
-Scenario & CSI rows & CSI firms & CRSP 572-574 firms & Detected & Missed & Detection rate \\
+Status & Runs \\
 \midrule
-Before: \texttt{confirmed\_csi} only & 8,369 & 5,642 & 629 & 151 & 478 & 24.0\% \\
+Represented in registry & 27 \\
+Complete or safely reused & 24 \\
+\texttt{blocked\_partial} & 3 \\
+Checksum failures & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
+\end{column}
+\end{columns}
 
-\vspace{0.35em}
-
-{\scriptsize CRSP bankruptcy-related delisting codes 572, 573, and 574 are used as the terminal-distress audit set.}
-
-\vspace{0.35em}
-
-\textbf{Core issue:} The low-detection rate causes methodological issues. If one sticks strictly to the paper, 
-then the CSI methodology should catch firms which do not recover anymore. Yet, the data shows a different result.
-
-
+\vspace{0.15em}
+\begin{block}{Blocked partial runs}
+\scriptsize
+\texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028} are listed as \texttt{blocked\_partial}; they are not treated as completed evidence.
+\end{block}
+\remarkfoot{Sources: \texttt{03\_Data\_Output/5\_SensitivityAnalysis/00\_manifest/run\_registry.csv}; \texttt{blocked\_runs.csv}; \texttt{download\_summary.json}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
-
 
 \begin{frame}{Methodology II: ``Temporary-CSI''}
 \small
@@ -430,98 +445,33 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Robustness II: Do CSI-firms recover again?}
-\vspace{0.15em}
-{\small\textbf{CSI flags mostly identify persistent declines; recovery risk appears mainly in with a smaller drawdown threshhold}}
 
-{\scriptsize After a temporary-CSI flag, the robustness grid tracks the five-year recovery bucket across alternative crash/recovery windows.}
-
-\vspace{0.2em}
-
-\begin{center}
-\resizebox{0.98\textwidth}{!}{%
-\begin{tikzpicture}[
-  font=\scriptsize,
-  bar/.style={draw=none},
-  baseframe/.style={draw=warningRed, dashed, thick, rounded corners=2pt},
-]
-% Axis: 0..100 in tikz units = 9.5cm
-\def\barH{0.55}      % bar height in cm
-\def\rowSep{0.85}    % vertical distance between rows
-\def\barX{3.6}       % bar left edge (after row label)
-\def\barW{9.5}       % bar width = 100%
-
-% Header for the right-hand-side count column
-\node[anchor=west, darkgrey] at (\barX+\barW+0.1,7.25){\tiny \# firms};
-
-% Row 1: C-90 M-30 T24 — 93.8 / 2.2 / 1.9 / 1.2 — 3,129 firms
-\node[anchor=east] at (\barX,6.7){$C{=}{-}90\%$, $M{=}{-}30\%$, $T{=}24$};
-\node[anchor=west] at (\barX+\barW+0.1,6.7){3,129};
-\fill[MainColour]      (\barX,6.45)                              rectangle ++(\barW*0.938,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.938,6.45)                  rectangle ++(\barW*0.022,\barH);
-\fill[orange!75!black] (\barX+\barW*0.960,6.45)                  rectangle ++(\barW*0.019,\barH);
-\fill[warningRed]      (\barX+\barW*0.979,6.45)                  rectangle ++(\barW*0.012,\barH);
-\node[white] at (\barX+\barW*0.469,6.725){93.8\%};
-
-% Row 2: C-80 M-30 T24 — 91.9 / 2.6 / 2.7 / 1.7 — 4,231 firms
-\node[anchor=east] at (\barX,5.85){$C{=}{-}80\%$, $M{=}{-}30\%$, $T{=}24$};
-\node[anchor=west] at (\barX+\barW+0.1,5.85){4,231};
-\fill[MainColour]      (\barX,5.60)                              rectangle ++(\barW*0.919,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.919,5.60)                  rectangle ++(\barW*0.026,\barH);
-\fill[orange!75!black] (\barX+\barW*0.945,5.60)                  rectangle ++(\barW*0.027,\barH);
-\fill[warningRed]      (\barX+\barW*0.972,5.60)                  rectangle ++(\barW*0.017,\barH);
-\node[white] at (\barX+\barW*0.460,5.875){91.9\%};
-
-% Row 3: BASE — C-80 M-20 T18 — 85.0 / 3.2 / 6.3 / 4.6 — 5,642 firms
-\node[anchor=east, warningRed] at (\barX,5.0){\textbf{$C{=}{-}80\%$, $M{=}{-}20\%$, $T{=}18$}};
-\node[anchor=west, warningRed] at (\barX+\barW+0.1,5.0){\textbf{5,642}};
-\fill[MainColour]      (\barX,4.75)                              rectangle ++(\barW*0.850,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.850,4.75)                  rectangle ++(\barW*0.032,\barH);
-\fill[orange!75!black] (\barX+\barW*0.882,4.75)                  rectangle ++(\barW*0.063,\barH);
-\fill[warningRed]      (\barX+\barW*0.945,4.75)                  rectangle ++(\barW*0.046,\barH);
-\node[white] at (\barX+\barW*0.425,5.025){85.0\%};
-
-% Row 4: C-60 M-20 T18 — 79.2 / 4.4 / 7.4 / 8.3 — 7,505 firms
-\node[anchor=east] at (\barX,4.15){$C{=}{-}60\%$, $M{=}{-}20\%$, $T{=}18$};
-\node[anchor=west] at (\barX+\barW+0.1,4.15){7,505};
-\fill[MainColour]      (\barX,3.90)                              rectangle ++(\barW*0.792,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.792,3.90)                  rectangle ++(\barW*0.044,\barH);
-\fill[orange!75!black] (\barX+\barW*0.836,3.90)                  rectangle ++(\barW*0.074,\barH);
-\fill[warningRed]      (\barX+\barW*0.910,3.90)                  rectangle ++(\barW*0.083,\barH);
-\node[white] at (\barX+\barW*0.396,4.175){79.2\%};
-
-% Row 5: C-60 M-0 T12 — 66.8 / 0.0 / 14.1 / 18.7 — 10,253 firms
-\node[anchor=east] at (\barX,3.30){$C{=}{-}60\%$, $M{=}0\%$, $T{=}12$};
-\node[anchor=west] at (\barX+\barW+0.1,3.30){10,253};
-\fill[MainColour]      (\barX,3.05)                              rectangle ++(\barW*0.668,\barH);
-\fill[orange!75!black] (\barX+\barW*0.668,3.05)                  rectangle ++(\barW*0.141,\barH);
-\fill[warningRed]      (\barX+\barW*0.809,3.05)                  rectangle ++(\barW*0.187,\barH);
-\node[white] at (\barX+\barW*0.334,3.325){66.8\%};
-
-% Axis ticks
-\draw[darkgrey, thin] (\barX,2.85) -- (\barX+\barW,2.85);
-\foreach \p/\l in {0/0\%, 0.25/25\%, 0.5/50\%, 0.75/75\%, 1.0/100\%} {
-  \draw[darkgrey, thin] (\barX+\barW*\p,2.85) -- (\barX+\barW*\p,2.75);
-  \node[anchor=north, darkgrey] at (\barX+\barW*\p,2.75){\tiny\l};
-}
-
-% Legend (below the chart)
-\fill[MainColour]      (\barX+0.00,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+0.30,2.325){No Recovery};
-
-\fill[MainColour!40]   (\barX+2.20,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+2.50,2.325){Recovery to $M=0$};
-
-\fill[orange!75!black] (\barX+4.90,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+5.20,2.325){Recovery to less than $C$};
-
-\fill[warningRed]      (\barX+7.70,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+8.00,2.325){Full Recovery};
-
-\end{tikzpicture}
-}
-\end{center}
-
+\begin{frame}{Robustness II: Sensitivity Results and Limits}
+\fontsize{5.85pt}{6.35pt}\selectfont
+\textbf{Sensitivity winners point to different objectives, not one universal setting}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.7pt}
+\begin{tabular}{L{1.65cm}L{1.45cm}L{1.8cm}R{0.70cm}R{0.70cm}R{0.78cm}}
+\toprule
+Objective & Config & Evidence & Prev. & OOS AP & 11C TM alpha \\
+\midrule
+Composite & \texttt{C090\_M000\_T012} & strongest overall rank; OOS AUC 0.920 & 7.02\% & 0.557 & +0.169pp \\
+AP winner & \texttt{C060\_M000\_T012} & highest CV/test/OOS AP & 17.49\% & 0.566 & +0.052pp \\
+11C TM & \texttt{C090\_M020\_T018} & best total-market benchmark delta & 3.34\% & 0.274 & +0.226pp \\
+Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.74\% & 0.308 & +0.065pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.05em}
+\begin{alertblock}{Interpretation}
+\scriptsize
+The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. Stricter definitions generally reduce positives and prevalence; AP can fall when positives become rarer, while AUC/Brier and fixed-FPR recall can remain stable or improve. Benchmark-relative 11C deltas remain positive for the leading configurations but can shrink.
+\end{alertblock}
+\scriptsize
+Use sensitivity as robustness evidence, not as a replacement for the final index suite: the final AE-INDEX-SUITE results use the accepted cleaned label definitions and should remain conceptually separate.
+\remarkfoot{Sources: \texttt{full\_grid\_best\_configs\_by\_objective.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}. TM alpha = total-market annualized return difference vs benchmark.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1071,114 +1021,83 @@ Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is
 \end{frame}
 
 \section{Next Steps}
-\begin{frame}{Next steps before the final presentation}
-\small
 
-\begin{alertblock}{Four key areas}
+\begin{frame}{Remaining Robustness Work}
+\small
+\begin{alertblock}{What is complete vs. still future work}
 \scriptsize
-The proposal lays the methodological and empirical foundation. Remaining work splits into data validation, model interpretability, an optional modeling extension, and an index-construction extension - each connected to a section already in the proposal.
+Temporary-CSI C/M/T sensitivity is complete locally and supports the presentation robustness narrative. The remaining items below are extensions or validation work, not completed results.
 \end{alertblock}
 
-\vspace{0.5em}
-
-\begin{columns}[t]
+\vspace{0.35em}
+\begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
 \node[draw=MainColour, fill=MainColour!8, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{MainColour}{Data validation}}\\[2pt]
-\small\textbf{Document residual misses}\\[3pt]
-\scriptsize Current audit leaves 84 CRSP 572--574 firms outside revised temporary CSI; a separate diagnostic can decompose these methodological exclusions if needed.\\[4pt]
-\scriptsize\textit{\textcolor{MainColour}{Extends Methodology II audit.}}
-};
+\scriptsize\textbf{Permanent-CSI sensitivity grid}\\[2pt]
+\scriptsize Repeat the C/M/T-style robustness logic for the permanent response track before claiming permanent-label sensitivity.};
 \end{tikzpicture}
 
-\vspace{0.5em}
-
+\vspace{0.45em}
 \begin{tikzpicture}
-\node[draw=orange!60!black, fill=orange!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{orange!60!black}{Modeling extension}}\\[2pt]
-\small\textbf{LightGBM with Bayesian HPO}\\[3pt]
-\scriptsize Transparent challenger to AutoGluon with hyperparameter optimization via Bayesian optimization.\\[4pt]
-\scriptsize\textit{\textcolor{orange!60!black}{Optional, time permitting.}}
-};
+\node[draw=orange!70!black, fill=orange!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
+\scriptsize\textbf{Benchmark extensions}\\[2pt]
+\scriptsize Minimum-volatility and quality/risk-scaling benchmarks remain future comparator work.};
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
 \node[draw=teal!60!black, fill=teal!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{teal!60!black}{Model interpretability}}\\[2pt]
-\small\textbf{Feature importance analysis}\\[3pt]
-\scriptsize Feature importance attribution as in the OeNB credit-risk modelling presentation, applied to AutoGluon \texttt{Expanded Dataset} and \texttt{Exp. Dataset + VAE}.\\[4pt]
-\scriptsize\textit{\textcolor{teal!60!black}{Answers RQ 3 directly.}}
-};
+\scriptsize\textbf{Probability-weighted strategy}\\[2pt]
+\scriptsize Active CSI-probability weighting is not yet implemented; current results use thresholded exclusions.};
 \end{tikzpicture}
 
-\vspace{0.5em}
-
+\vspace{0.45em}
 \begin{tikzpicture}
 \node[draw=warningRed, fill=warningRed!10, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{warningRed}{Index construction extension}}\\[2pt]
-\small\textbf{Low-vol \& quality variants}\\[3pt]
-\scriptsize Re-use the CSI score to build a Low-Vol benchmark; test whether retained-firm selection works as a quality substitute (lowest-risk firms instead of excluding the highest).\\[4pt]
-\scriptsize\textit{\textcolor{warningRed}{Extends Index Construction track.}}
-};
+\scriptsize\textbf{Residual terminal-failure diagnostic}\\[2pt]
+\scriptsize Recovered bankrupt/insolvent firm diagnostics remain a follow-up, not a completed robustness result.};
 \end{tikzpicture}
 \end{column}
 \end{columns}
-
+\remarkfoot{The final index suite and the temporary sensitivity grid answer different questions and are kept separate in the presentation.}
 \end{frame}
 
 %==== APPENDIX ================================================================%
 
+
 \appendix
 \section{Appendix}
 
-\begin{frame}{Appendix A1: Recovery Buckets Across C/M/T Grid}
-\fontsize{3.85pt}{4.25pt}\selectfont
-\textbf{Base grid \texttt{C080\_M020\_T018}:} stayed below $M=-20\%$: 4,793 firms (85.0\%); recovered $M$ to 0: 182 (3.2\%); recovered 0 to $|C|$: 354 (6.3\%); recovered $>|C|$: 260 (4.6\%); no follow-up: 53 (0.9\%).
+
+\begin{frame}{Appendix A1: Temporary CSI Sensitivity Detail}
+\fontsize{5.55pt}{6.05pt}\selectfont
+\textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\renewcommand{\arraystretch}{0.72}
-\setlength{\tabcolsep}{1.15pt}
-\rowcolors{3}{grey!30}{white}
-\begin{tabular}{L{2.35cm}R{0.95cm}R{1.35cm}R{1.0cm}R{1.1cm}R{1.05cm}}
+\setlength{\tabcolsep}{1.7pt}
+\begin{tabular}{L{1.65cm}L{1.45cm}R{0.70cm}R{0.72cm}R{0.72cm}R{0.72cm}R{0.78cm}L{1.35cm}}
 \toprule
-Grid & Firms & Stayed below M & M to 0 & 0 to $|C|$ & $>|C|$ \\
+Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
 \midrule
-\texttt{C090\_M030\_T012} & 3,596 & 87.2\% & 3.8\% & 4.2\% & 3.8\% \\
-\texttt{C090\_M030\_T018} & 3,316 & 91.6\% & 2.9\% & 2.7\% & 1.8\% \\
-\texttt{C090\_M030\_T024} & 3,129 & 93.8\% & 2.2\% & 1.9\% & 1.2\% \\
-\texttt{C090\_M020\_T012} & 4,437 & 82.3\% & 3.4\% & 6.7\% & 6.6\% \\
-\texttt{C090\_M020\_T018} & 4,125 & 88.4\% & 2.7\% & 4.5\% & 3.6\% \\
-\texttt{C090\_M020\_T024} & 3,911 & 91.5\% & 2.1\% & 3.1\% & 2.4\% \\
-\texttt{C090\_M000\_T012} & 5,644 & 81.3\% & 0.0\% & 8.6\% & 9.4\% \\
-\texttt{C090\_M000\_T018} & 5,350 & 86.8\% & 0.0\% & 6.2\% & 6.1\% \\
-\texttt{C090\_M000\_T024} & 5,061 & 90.5\% & 0.0\% & 4.6\% & 4.0\% \\
-\texttt{C080\_M030\_T012} & 4,843 & 83.2\% & 5.1\% & 5.6\% & 5.1\% \\
-\texttt{C080\_M030\_T018} & 4,483 & 88.7\% & 3.7\% & 4.0\% & 2.5\% \\
-\texttt{C080\_M030\_T024} & 4,231 & 91.9\% & 2.6\% & 2.7\% & 1.7\% \\
-\texttt{C080\_M020\_T012} & 6,073 & 78.1\% & 3.8\% & 8.8\% & 8.5\% \\
-\texttt{C080\_M020\_T018} & 5,642 & 85.0\% & 3.2\% & 6.3\% & 4.6\% \\
-\texttt{C080\_M020\_T024} & 5,348 & 88.9\% & 2.5\% & 4.5\% & 3.1\% \\
-\texttt{C080\_M000\_T012} & 7,562 & 74.5\% & 0.0\% & 12.1\% & 12.8\% \\
-\texttt{C080\_M000\_T018} & 7,096 & 81.5\% & 0.0\% & 9.5\% & 8.2\% \\
-\texttt{C080\_M000\_T024} & 6,760 & 85.8\% & 0.0\% & 7.2\% & 6.0\% \\
-\texttt{C060\_M030\_T012} & 6,304 & 78.3\% & 6.8\% & 6.3\% & 7.8\% \\
-\texttt{C060\_M030\_T018} & 5,850 & 84.3\% & 5.1\% & 4.7\% & 4.9\% \\
-\texttt{C060\_M030\_T024} & 5,517 & 88.7\% & 3.7\% & 3.4\% & 3.1\% \\
-\texttt{C060\_M020\_T012} & 8,068 & 71.9\% & 5.7\% & 9.6\% & 12.2\% \\
-\texttt{C060\_M020\_T018} & 7,505 & 79.2\% & 4.4\% & 7.4\% & 8.3\% \\
-\texttt{C060\_M020\_T024} & 7,098 & 84.5\% & 3.6\% & 5.5\% & 5.6\% \\
-\texttt{C060\_M000\_T012} & 10,253 & 66.8\% & 0.0\% & 14.1\% & 18.7\% \\
-\texttt{C060\_M000\_T018} & 9,621 & 74.0\% & 0.0\% & 11.8\% & 13.7\% \\
-\texttt{C060\_M000\_T024} & 9,170 & 79.7\% & 0.0\% & 9.3\% & 10.3\% \\
+Composite & \texttt{C090\_M000\_T012} & 12,761 & 7.02\% & 0.557 & 0.920 & +0.169pp & complete \\
+AP winner & \texttt{C060\_M000\_T012} & 31,596 & 17.49\% & 0.566 & 0.864 & +0.052pp & reused \\
+11C winner & \texttt{C090\_M020\_T018} & 6,035 & 3.34\% & 0.274 & 0.911 & +0.226pp & complete \\
+Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp & reused \\
 \bottomrule
 \end{tabular}
-\rowcolors{1}{}{}
 \end{table}
-\vspace{-0.35em}
-{\tiny \textit{Notes:} Firms = unique flagged firms. Stayed below M = never recovered above recovery ceiling $M$. M to 0 = recovered above $M$ but not to break-even. 0 to $|C|$ = recovered above break-even but not more than the absolute crash threshold. $>|C|$ = recovered more than the absolute crash threshold. Percentages may not sum to 100\% because no-follow-up firms are omitted from the displayed bucket columns.}
+\vspace{-0.05em}
+\begin{block}{Blocked partial cases}
+\scriptsize
+The grid registry includes three incomplete cases: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. They are represented in manifests but excluded from completed-run conclusions.
+\end{block}
+\begin{block}{Source interpretation}
+\scriptsize
+C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
+\end{block}
+\remarkfoot{Sources: \texttt{full\_grid\_label\_count\_ranking.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}; \texttt{run\_registry.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
