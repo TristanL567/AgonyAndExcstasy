@@ -1,0 +1,10 @@
+slide_number,section,frame_title,change_type,summary,source_status
+4,Dataset,Dataset,edited,"Updated observable-scaffold definition, row counts, y=NA retention policy, and split row counts.",corrected_counts_from_ticket_and_local_panel_sources
+5,Response Variable,Methodology I: Response Variable Classification,edited,"Clarified annual label alignment and separated temporary versus permanent CSI confirmation and NA policies.",corrected_methodology_from_ticket_and_local_panel_sources
+6,Response Variable,Applying the classification: Temporary CSI,edited,"Retitled and tightened temporary-CSI label count slide around terminal-failure route and retained unresolved labels.",corrected_counts_from_ticket
+7,Response Variable,Applying the classification: Permanent CSI,added,"Added permanent-CSI label count slide with full/train/test/OOS rows, positives, unresolved labels, labelled rows, and prevalence.",corrected_counts_from_ticket
+9,Response Variable,"Methodology II: ``Temporary-CSI''",edited,"Documented accepted positive event statuses, terminal-failure route, censored triggers, and unavailable 2025 labels as y=NA.",corrected_methodology_from_ticket
+11,Response Variable,"Methodology III: ``Permanent-CSI''",edited,"Documented event-window-only unresolved PCL policy and no broad no-trigger calendar censoring.",corrected_methodology_from_ticket
+13,Modelling,Modelling I: Setup and Feature Engineering,edited,"Updated feature-set keys to raw, fund, latent_raw, and raw_plus_latent without adding performance results.",model_suite_local_outputs_available
+16,E. Index Construction,Index Construction I: From Score to Portfolio Weight,edited,"Updated methodology threshold list to Youden, FPR1, FPR3, and FPR5.",index_suite_methodology_outputs_available
+17,E. Index Construction,Index Construction II: Four Benchmark Universes,edited,"Updated methodology text for 0/5/10/20 bps cost overlays and all four model score families.",index_suite_methodology_outputs_available

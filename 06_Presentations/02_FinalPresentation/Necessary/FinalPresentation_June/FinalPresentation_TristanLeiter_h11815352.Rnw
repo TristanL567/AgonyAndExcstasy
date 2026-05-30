@@ -164,7 +164,7 @@ The probabilistic implosion model follows the Catastrophic Stock Implosion appro
 
 \begin{alertblock}{Empirical design}
 \scriptsize
-The main data sources are WRDS and FRED. The OOS index testing is kept strictly seperated from the training data for walk-forward CV and the test set. Model selection is conducted based on the test set results.
+The final panel keeps only observable CRSP firm-years: each row has the required monthly return and market-cap scaffold. Temporary and permanent CSI use the same 188,460-row scaffold; unresolved $y=\mathrm{NA}$ rows are retained in the panel but excluded from supervised model metrics.
 \end{alertblock}
 
 \vspace{0.4em}
@@ -195,18 +195,19 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 \node[cardtitle, anchor=north west, teal!60!black] at (4.25,-0.15) {Universe};
 \node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-0.8) {Minimum size};
 \node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.1) {market cap $\geq$ USD 100M};
-\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-1.6) {Size buckets};
-\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.9) {CRSP-like Total Market, Large, Mid, Small Cap};
-\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (4.25,-2.85) {{$\sim$}};
+\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-1.6) {Observable scaffold};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.9) {188,460 annual firm-year rows in both tracks};
+\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-2.35) {Index buckets};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-2.65) {Total, Large, Mid, Small Cap};
 
 % Card C: Sample period
 \node[cardC] (c) at (8.2,0) {};
 \node[cardtitle, anchor=north west, orange!60!black] at (8.35,-0.15) {Sample period};
 \node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-0.8) {Coverage};
 \node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-1.1) {Jan 1993 -- Dec 2024 (32y, monthly frequency)};
-\node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-1.85) {Cross-validation};
-\node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-2.15) {3 expanding folds};
-\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (8.35,-2.85) {seed = 123};
+\node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-1.85) {Supervised labels};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-2.15) {train/test labelled; OOS may retain unresolved labels};
+\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (8.35,-2.85) {metrics use labelled rows only};
 \end{tikzpicture}
 \end{center}
 
@@ -224,16 +225,16 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 
 % Bars
 \fill[MainColour]      (0.0,0.0) rectangle (7.2,0.6);
-\node[white] at (3.6,0.42) {\textbf{Train}};
-\node[MainColour!20] at (3.6,0.18) {\tiny 1993--2015 $\cdot$ 23 years};
+\node[white] at (3.6,0.42) {\textbf{Train/CV}};
+\node[MainColour!20] at (3.6,0.18) {\tiny 143,173 rows};
 
 \fill[orange!75!black] (7.2,0.0) rectangle (8.8,0.6);
 \node[white] at (8.0,0.42) {\textbf{Test}};
-\node[orange!15] at (8.0,0.18) {\tiny 2016--2019};
+\node[orange!15] at (8.0,0.18) {\tiny 18,111 rows};
 
 \fill[warningRed]      (8.8,0.0) rectangle (11.0,0.6);
 \node[white] at (9.9,0.42) {\textbf{OOS}};
-\node[warningRed!20] at (9.9,0.18) {\tiny 2020--2024};
+\node[warningRed!20] at (9.9,0.18) {\tiny 27,176 rows};
 \end{tikzpicture}
 \end{center}
 
@@ -244,7 +245,7 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 \section{Response Variable}
 \begin{frame}{Methodology I: Response Variable Classification}
 \small
-Following Tewari et al. (2024), a stock is classified as a CSI ($y=1$) if it satisfies all three criteria:
+Following Tewari et al. (2024), a stock is classified as a CSI candidate if it satisfies all three path criteria:
 
 \vspace{0.3em}
 \begin{itemize}
@@ -254,30 +255,30 @@ Following Tewari et al. (2024), a stock is classified as a CSI ($y=1$) if it sat
   \item \textbf{Zombie Period ($T$):} duration of the confirmation window during which non-recovery must hold. \hfill \textcolor{warningRed}{\small $T = 18$ months}
 \end{itemize}
 
-\vspace{0.5em}
-Tewari et al. (2024) use a yearly prediction horizon ($h=12$ months):
+\vspace{0.35em}
+The prediction task is annual. A trigger in calendar year $t+1$ gives the firm-year observation at $t$ a positive label when the track-specific confirmation rule is met:
 \begin{equation*}
 y_{i,t} =
 \begin{cases}
-1, & \text{if stock } i \text{ triggers a crash } C \text{ within } [t,t+h] \text{ and the zombie criteria are met,}\\
+1, & \text{if stock } i \text{ triggers a qualifying CSI event within } [t,t+h],\\
 0, & \text{otherwise}.
 \end{cases}
 \end{equation*}
 
 \vspace{-0.2em}
-\begin{block}{Implementation}
+\begin{block}{Two final response tracks}
 \scriptsize
-Events are detected monthly from CRSP wealth paths and then aligned to annual feature rows: a trigger in calendar year $t+1$ gives the firm-year observation at $t$ a positive label.
+\textbf{Temporary CSI} enables the accepted terminal-failure route and keeps censored triggers plus unavailable 2025 event-year labels as $y=\mathrm{NA}$. \textbf{Permanent CSI} uses event-window-only unresolved PCL windows; broad no-trigger calendar censoring is not used.
 \end{block}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Applying the classification to the CRSP dataset}
+\begin{frame}{Applying the classification: Temporary CSI}
 \small
-\begin{alertblock}{Classification}
+\begin{alertblock}{Temporary CSI}
 \scriptsize
-The current cleaned scaffold keeps only observable CRSP firm-years. With the terminal-failure route enabled, the temporary-CSI label has 8,517 positive annual cells and 8,674 unresolved cells retained as $y=\mathrm{NA}$.
+Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold; censored triggers and unavailable 2025 event-year labels remain as $y=\mathrm{NA}$.
 \end{alertblock}
 
 \vspace{0.2em}
@@ -300,7 +301,38 @@ OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
 \vspace{0.15em}
 \begin{block}{Motivation for robustness}
 \scriptsize
-Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not deleted observations.
+Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not dropped rows.
+\end{block}
+\end{frame}
+
+\begin{frame}{Applying the classification: Permanent CSI}
+\small
+\begin{alertblock}{Permanent CSI}
+\scriptsize
+Permanent CSI uses the same 188,460 observable firm-year scaffold. Unresolved labels are limited to event-window PCL cases; broad no-trigger calendar censoring is explicitly not used.
+\end{alertblock}
+
+\vspace{0.2em}
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.7pt}
+\begin{tabular}{L{1.7cm}R{1.2cm}R{1.05cm}R{1.0cm}R{0.95cm}R{1.2cm}R{1.0cm}}
+\toprule
+Split & Obs. rows & $y=0$ & $y=1$ & $y=NA$ & Labelled & Prev. \\
+\midrule
+Full & 188,460 & 181,368 & \textbf{6,258} & 834 & 187,626 & 3.34\% \\
+Train & 143,173 & 137,794 & 5,379 & 0 & 143,173 & 3.76\% \\
+Test & 18,111 & 17,511 & 542 & 58 & 18,053 & 3.00\% \\
+OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.15em}
+\begin{block}{Metric denominator}
+\scriptsize
+For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. Unresolved rows remain in the cleaned panel but are excluded from supervised training and evaluation metrics.
 \end{block}
 \end{frame}
 
@@ -344,7 +376,7 @@ then the CSI methodology should catch firms which do not recover anymore. Yet, t
 
 \begin{alertblock}{Revision}
 \scriptsize
-Original CSI rule unchanged. A second positive route is added only after a valid drawdown trigger: if CRSP 572--574 arrives after the trigger and within the $T$-month confirmation window, the trigger becomes positive.
+Original CSI rule unchanged. Temporary CSI uses the accepted \texttt{CSI\_POSITIVE\_EVENT\_STATUSES}; a terminal-failure route is added only after a valid drawdown trigger. Censored triggers and unavailable 2025 event-year labels are retained as $y=\mathrm{NA}$.
 \end{alertblock}
 
 \vspace{0.4em}
@@ -499,7 +531,7 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 
 \begin{alertblock}{Dealing with recovering firms}
 \scriptsize
-Permanent-CSI starts from a confirmed temporary-CSI event and separates terminal failure, durable non-recovery, resolved recovery, and unresolved PCL windows.
+Permanent-CSI starts from a confirmed CSI event and separates terminal failure, durable non-recovery, resolved recovery, and unresolved PCL windows. Its $y=\mathrm{NA}$ policy is event-window-only; broad no-trigger calendar censoring is not used.
 \end{alertblock}
 
 \vspace{0.1em}
@@ -551,7 +583,7 @@ Permanent-CSI starts from a confirmed temporary-CSI event and separates terminal
 
 \begin{block}{Contrast with temporary CSI}
 \tiny
-Temporary CSI applies a finite lockout after a flag. Permanent-CSI marks terminal failure or durable non-recovery as $y^{perm}=1$, resolved recovery as $y^{perm}=0$, and unresolved PCL windows as $y=\mathrm{NA}$. Current prevalence: 6,258 positives across 187,626 labelled firm-years (3.34\%).
+Temporary CSI applies a finite lockout after a flag. Permanent-CSI marks terminal failure or durable non-recovery as $y^{perm}=1$, resolved recovery as $y^{perm}=0$, and unresolved PCL windows as $y=\mathrm{NA}$. The final full panel has 6,258 positives across 187,626 labelled firm-years (3.34\%).
 \end{block}
 
 \end{frame}
@@ -642,7 +674,7 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 
 \vspace{0.4em}
 
-\textbf{Feature engineering and feature-set keys}
+\textbf{Final feature-set keys}
 
 \vspace{0.3em}
 \begin{center}
@@ -651,26 +683,26 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
   baseline,
 ]
 % Legend row
-\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Fundamentals + macro};
-\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Feature Eng. + Market Signals};
-\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE};
+\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Fundamentals};
+\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Raw market signals};
+\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE latent};
 
-% Row: fund -> Base Data
-\node[anchor=east] at (2.9,2.5){\texttt{Base Dataset}};
+% Row: fund
+\node[anchor=east] at (2.9,2.5){\texttt{fund}};
 \fill[MainColour!30]     (3.0,2.3) rectangle (5.0,2.7);
 
-% Row: raw -> Feature Eng. Data
-\node[anchor=east] at (2.9,1.85){\texttt{Expanded Dataset}};
+% Row: raw
+\node[anchor=east] at (2.9,1.85){\texttt{raw}};
 \fill[MainColour!30]     (3.0,1.65) rectangle (5.0,2.05);
 \fill[teal!45]           (5.0,1.65) rectangle (7.6,2.05);
 
-% Row: latent_raw -> Feature Eng. + VAE Data
-\node[anchor=east] at (2.9,1.20){\texttt{Expanded Dataset + VAE}};
+% Row: latent_raw
+\node[anchor=east] at (2.9,1.20){\texttt{latent\_raw}};
 \fill[purple!30]         (7.6,1.00) rectangle (9.6,1.40);
-\node[anchor=west, darkgrey] at (3.05,1.20){\tiny trained on base data; fundamentals and macro excluded};
+\node[anchor=west, darkgrey] at (3.05,1.20){\tiny VAE-only representation};
 
-% Row: raw_plus_latent -> Latent Data
-\node[anchor=east] at (2.9,0.55){\texttt{Latent Dataset (VAE)}};
+% Row: raw_plus_latent
+\node[anchor=east] at (2.9,0.55){\texttt{raw\_plus\_latent}};
 \fill[MainColour!30]     (3.0,0.35) rectangle (5.0,0.75);
 \fill[teal!45]           (5.0,0.35) rectangle (7.6,0.75);
 \fill[purple!30]         (7.6,0.35) rectangle (9.6,0.75);
@@ -775,7 +807,7 @@ The model produces a probability of CSI next year. A threshold turns that probab
   pipearrow/.style={->, >=stealth, thick}
 ]
 \node[scorebox] (score) {\textbf{Score}\\[-1pt]\tiny probability of CSI next year\\[-1pt]\tiny from AutoGluon};
-\node[flagbox, right=8mm of score] (flag) {\textbf{Exclusion flag}\\[-1pt]\tiny 1 if score $\geq$ threshold\\[-1pt]\tiny FPR 1\%, FPR 3\%, Youden $J$};
+\node[flagbox, right=8mm of score] (flag) {\textbf{Exclusion flag}\\[-1pt]\tiny 1 if score $\geq$ threshold\\[-1pt]\tiny FPR 1\%, 3\%, 5\%, Youden $J$};
 \node[weightbox, right=8mm of flag] (weight) {\textbf{Portfolio weight}\\[-1pt]\tiny market-cap $\times$ $(1-\text{flag})$\\[-1pt]\tiny renormalized};
 \draw[pipearrow] (score) -- (flag);
 \draw[pipearrow] (flag) -- (weight);
@@ -851,16 +883,16 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
   \item Universe formed from prior-December market capitalization.
   \item Minimum market cap: USD 100 million.
   \item Quarterly rebalancing: March, June, September, December.
-  \item Market-cap weights; prototype transaction costs are 0 bps.
+  \item Market-cap weights; cost overlays use 0, 5, 10, and 20 bps.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
 \textbf{Signal discipline}
 \scriptsize
 \begin{itemize}
-  \item AutoGluon \texttt{Expanded Dataset} score is annual.
+  \item Scores are annual for \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, and \texttt{raw\_plus\_latent}.
   \item Holding-year signal uses information available before the holding year.
-  \item Thresholds calibrated from CV predictions only - never from OOS returns.
+  \item Thresholds calibrated from CV predictions only: Youden, FPR1, FPR3, FPR5.
 \end{itemize}
 \end{column}
 \end{columns}
