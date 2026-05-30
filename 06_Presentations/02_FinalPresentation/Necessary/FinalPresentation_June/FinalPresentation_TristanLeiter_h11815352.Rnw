@@ -982,18 +982,18 @@ Transaction costs do not change the top winner in any of the eight track--index 
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.25cm}L{1.35cm}R{0.78cm}L{1.85cm}}
+\begin{tabular}{L{1.20cm}L{1.45cm}R{1.05cm}}
 \toprule
-Track & Lead family & Mean alpha & Interpretation \\
+Track & Lead family & Mean alpha \\
 \midrule
-Temp. & Youden & +0.35pp & Strongest with 3--5yr lockouts \\
-Perm. & FPR3/FPR5 & +0.35/+0.33pp & Fixed-FPR dominates; Youden is -0.20pp \\
+Temp. & Youden & +0.35pp \\
+Perm. & FPR3/FPR5 & +0.35/+0.33pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{0.15em}
 \scriptsize
-Temporary CSI benefits from calibrated finite lockouts; 3- and 5-year exclusions are more effective than 1-year exclusions. Permanent CSI needs stricter fixed-FPR rules because Youden over-removes under absorbing exclusion.
+Temporary CSI benefits from calibrated finite lockouts; 3--5yr exclusions outperform 1yr exclusions. Permanent CSI needs stricter fixed-FPR rules; Youden is negative on average under absorbing exclusion.
 \end{column}
 \begin{column}{0.48\textwidth}
 \textbf{Annualized gross turnover for 20 bps winners}
@@ -1563,13 +1563,15 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 
 \begin{frame}{Appendix A18: Index Result Source Paths}
 \scriptsize
+\textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
+\vspace{0.25em}
 \begin{itemize}
-  \item Headline winners: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/headline\_winners\_20bps.csv}
-  \item Presentation tables: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/presentation\_headline\_tables.md}
-  \item Transaction costs: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/transaction\_cost\_robustness\_summary.csv}
-  \item Threshold families: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/threshold\_family\_summary\_20bps.csv}
-  \item Turnover: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Full grid comparisons: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/comparison/best\_by\_track\_index\_cost.csv}
+  \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
+  \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
+  \item Transaction costs: \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
+  \item Turnover: \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Full grid comparisons: \texttt{comparison/best\_by\_track\_index\_cost.csv}
 \end{itemize}
 \vspace{0.3em}
 \begin{block}{Source discipline}

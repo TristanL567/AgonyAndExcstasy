@@ -206,7 +206,7 @@ The probabilistic implosion model follows the Catastrophic Stock Implosion appro
 
 \begin{alertblock}{Empirical design}
 \scriptsize
-The main data sources are WRDS and FRED. The OOS index testing is kept strictly seperated from the training data for walk-forward CV and the test set. Model selection is conducted based on the test set results.
+The final panel keeps only observable CRSP firm-years: each row has the required monthly return and market-cap scaffold. Temporary and permanent CSI use the same 188,460-row scaffold; unresolved $y=\mathrm{NA}$ rows are retained in the panel but excluded from supervised model metrics.
 \end{alertblock}
 
 \vspace{0.4em}
@@ -237,18 +237,19 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 \node[cardtitle, anchor=north west, teal!60!black] at (4.25,-0.15) {Universe};
 \node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-0.8) {Minimum size};
 \node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.1) {market cap $\geq$ USD 100M};
-\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-1.6) {Size buckets};
-\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.9) {CRSP-like Total Market, Large, Mid, Small Cap};
-\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (4.25,-2.85) {{$\sim$}};
+\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-1.6) {Observable scaffold};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-1.9) {188,460 annual firm-year rows in both tracks};
+\node[fieldlabel, anchor=north west, teal!60!black] at (4.25,-2.35) {Index buckets};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (4.25,-2.65) {Total, Large, Mid, Small Cap};
 
 % Card C: Sample period
 \node[cardC] (c) at (8.2,0) {};
 \node[cardtitle, anchor=north west, orange!60!black] at (8.35,-0.15) {Sample period};
 \node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-0.8) {Coverage};
 \node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-1.1) {Jan 1993 -- Dec 2024 (32y, monthly frequency)};
-\node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-1.85) {Cross-validation};
-\node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-2.15) {3 expanding folds};
-\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (8.35,-2.85) {seed = 123};
+\node[fieldlabel, anchor=north west, orange!60!black] at (8.35,-1.85) {Supervised labels};
+\node[fieldbody, anchor=north west, text width=3.4cm] at (8.35,-2.15) {train/test labelled; OOS may retain unresolved labels};
+\node[fieldbody, anchor=north west, text width=3.4cm, font=\tiny\itshape] at (8.35,-2.85) {metrics use labelled rows only};
 \end{tikzpicture}
 \end{center}
 
@@ -266,16 +267,16 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 
 % Bars
 \fill[MainColour]      (0.0,0.0) rectangle (7.2,0.6);
-\node[white] at (3.6,0.42) {\textbf{Train}};
-\node[MainColour!20] at (3.6,0.18) {\tiny 1993--2015 $\cdot$ 23 years};
+\node[white] at (3.6,0.42) {\textbf{Train/CV}};
+\node[MainColour!20] at (3.6,0.18) {\tiny 143,173 rows};
 
 \fill[orange!75!black] (7.2,0.0) rectangle (8.8,0.6);
 \node[white] at (8.0,0.42) {\textbf{Test}};
-\node[orange!15] at (8.0,0.18) {\tiny 2016--2019};
+\node[orange!15] at (8.0,0.18) {\tiny 18,111 rows};
 
 \fill[warningRed]      (8.8,0.0) rectangle (11.0,0.6);
 \node[white] at (9.9,0.42) {\textbf{OOS}};
-\node[warningRed!20] at (9.9,0.18) {\tiny 2020--2024};
+\node[warningRed!20] at (9.9,0.18) {\tiny 27,176 rows};
 \end{tikzpicture}
 \end{center}
 
@@ -286,7 +287,7 @@ The main data sources are WRDS and FRED. The OOS index testing is kept strictly 
 \section{Response Variable}
 \begin{frame}{Methodology I: Response Variable Classification}
 \small
-Following Tewari et al. (2024), a stock is classified as a CSI ($y=1$) if it satisfies all three criteria:
+Following Tewari et al. (2024), a stock is classified as a CSI candidate if it satisfies all three path criteria:
 
 \vspace{0.3em}
 \begin{itemize}
@@ -296,30 +297,30 @@ Following Tewari et al. (2024), a stock is classified as a CSI ($y=1$) if it sat
   \item \textbf{Zombie Period ($T$):} duration of the confirmation window during which non-recovery must hold. \hfill \textcolor{warningRed}{\small $T = 18$ months}
 \end{itemize}
 
-\vspace{0.5em}
-Tewari et al. (2024) use a yearly prediction horizon ($h=12$ months):
+\vspace{0.35em}
+The prediction task is annual. A trigger in calendar year $t+1$ gives the firm-year observation at $t$ a positive label when the track-specific confirmation rule is met:
 \begin{equation*}
 y_{i,t} =
 \begin{cases}
-1, & \text{if stock } i \text{ triggers a crash } C \text{ within } [t,t+h] \text{ and the zombie criteria are met,}\\
+1, & \text{if stock } i \text{ triggers a qualifying CSI event within } [t,t+h],\\
 0, & \text{otherwise}.
 \end{cases}
 \end{equation*}
 
 \vspace{-0.2em}
-\begin{block}{Implementation}
+\begin{block}{Two final response tracks}
 \scriptsize
-Events are detected monthly from CRSP wealth paths and then aligned to annual feature rows: a trigger in calendar year $t+1$ gives the firm-year observation at $t$ a positive label.
+\textbf{Temporary CSI} enables the accepted terminal-failure route and keeps censored triggers plus unavailable 2025 event-year labels as $y=\mathrm{NA}$. \textbf{Permanent CSI} uses event-window-only unresolved PCL windows; broad no-trigger calendar censoring is not used.
 \end{block}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Applying the classification to the CRSP dataset}
+\begin{frame}{Applying the classification: Temporary CSI}
 \small
-\begin{alertblock}{Classification}
+\begin{alertblock}{Temporary CSI}
 \scriptsize
-The current cleaned scaffold keeps only observable CRSP firm-years. With the terminal-failure route enabled, the temporary-CSI label has 8,517 positive annual cells and 8,674 unresolved cells retained as $y=\mathrm{NA}$.
+Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold; censored triggers and unavailable 2025 event-year labels remain as $y=\mathrm{NA}$.
 \end{alertblock}
 
 \vspace{0.2em}
@@ -342,51 +343,97 @@ OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
 \vspace{0.15em}
 \begin{block}{Motivation for robustness}
 \scriptsize
-Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not deleted observations.
+Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not dropped rows.
+\end{block}
+\end{frame}
+
+\begin{frame}{Applying the classification: Permanent CSI}
+\small
+\begin{alertblock}{Permanent CSI}
+\scriptsize
+Permanent CSI uses the same 188,460 observable firm-year scaffold. Unresolved labels are limited to event-window PCL cases; broad no-trigger calendar censoring is explicitly not used.
+\end{alertblock}
+
+\vspace{0.2em}
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.7pt}
+\begin{tabular}{L{1.7cm}R{1.2cm}R{1.05cm}R{1.0cm}R{0.95cm}R{1.2cm}R{1.0cm}}
+\toprule
+Split & Obs. rows & $y=0$ & $y=1$ & $y=NA$ & Labelled & Prev. \\
+\midrule
+Full & 188,460 & 181,368 & \textbf{6,258} & 834 & 187,626 & 3.34\% \\
+Train & 143,173 & 137,794 & 5,379 & 0 & 143,173 & 3.76\% \\
+Test & 18,111 & 17,511 & 542 & 58 & 18,053 & 3.00\% \\
+OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.15em}
+\begin{block}{Metric denominator}
+\scriptsize
+For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. Unresolved rows remain in the cleaned panel but are excluded from supervised training and evaluation metrics.
 \end{block}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Robustness I: Do CSI-firms go bankrupt?}
 
-\textbf{Validation question:} Among firms that eventually delist or bankrupt, how many had already been classified as CSI?
+\begin{frame}{Robustness I: Temporary CSI Sensitivity Grid}
+\scriptsize
+\begin{alertblock}{Completed local sensitivity evidence}
+\scriptsize
+The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}.
+\end{alertblock}
 
-\vspace{0.25em}
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\textbf{Grid design}
+\begin{itemize}
+  \item Crash threshold $C$: $-60\%$, $-80\%$, $-90\%$.
+  \item Recovery threshold $M$: $0\%$, $-20\%$, $-30\%$.
+  \item Confirmation window $T$: 12, 18, 28 months.
+  \item Track: temporary CSI only; raw model sensitivity.
+\end{itemize}
+\end{column}
+\begin{column}{0.50\textwidth}
+\textbf{Local status}
 \begin{table}[ht]
 \centering
-\scriptsize
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.2cm}R{1.0cm}R{1.45cm}R{1.0cm}R{1.0cm}R{1.35cm}}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{L{2.8cm}R{1.1cm}}
 \toprule
-Scenario & CSI rows & CSI firms & CRSP 572-574 firms & Detected & Missed & Detection rate \\
+Status & Runs \\
 \midrule
-Before: \texttt{confirmed\_csi} only & 8,369 & 5,642 & 629 & 151 & 478 & 24.0\% \\
+Represented in registry & 27 \\
+Complete or safely reused & 24 \\
+\texttt{blocked\_partial} & 3 \\
+Checksum failures & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
+\end{column}
+\end{columns}
 
-\vspace{0.35em}
-
-{\scriptsize CRSP bankruptcy-related delisting codes 572, 573, and 574 are used as the terminal-distress audit set.}
-
-\vspace{0.35em}
-
-\textbf{Core issue:} The low-detection rate causes methodological issues. If one sticks strictly to the paper, 
-then the CSI methodology should catch firms which do not recover anymore. Yet, the data shows a different result.
-
-
+\vspace{0.15em}
+\begin{block}{Blocked partial runs}
+\scriptsize
+\texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028} are listed as \texttt{blocked\_partial}; they are not treated as completed evidence.
+\end{block}
+\remarkfoot{Sources: \texttt{03\_Data\_Output/5\_SensitivityAnalysis/00\_manifest/run\_registry.csv}; \texttt{blocked\_runs.csv}; \texttt{download\_summary.json}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
-
 
 \begin{frame}{Methodology II: ``Temporary-CSI''}
 \small
 
 \begin{alertblock}{Revision}
 \scriptsize
-Original CSI rule unchanged. A second positive route is added only after a valid drawdown trigger: if CRSP 572--574 arrives after the trigger and within the $T$-month confirmation window, the trigger becomes positive.
+Original CSI rule unchanged. Temporary CSI uses the accepted \texttt{CSI\_POSITIVE\_EVENT\_STATUSES}; a terminal-failure route is added only after a valid drawdown trigger. Censored triggers and unavailable 2025 event-year labels are retained as $y=\mathrm{NA}$.
 \end{alertblock}
 
 \vspace{0.4em}
@@ -440,98 +487,33 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Robustness II: Do CSI-firms recover again?}
-\vspace{0.15em}
-{\small\textbf{CSI flags mostly identify persistent declines; recovery risk appears mainly in with a smaller drawdown threshhold}}
 
-{\scriptsize After a temporary-CSI flag, the robustness grid tracks the five-year recovery bucket across alternative crash/recovery windows.}
-
-\vspace{0.2em}
-
-\begin{center}
-\resizebox{0.98\textwidth}{!}{%
-\begin{tikzpicture}[
-  font=\scriptsize,
-  bar/.style={draw=none},
-  baseframe/.style={draw=warningRed, dashed, thick, rounded corners=2pt},
-]
-% Axis: 0..100 in tikz units = 9.5cm
-\def\barH{0.55}      % bar height in cm
-\def\rowSep{0.85}    % vertical distance between rows
-\def\barX{3.6}       % bar left edge (after row label)
-\def\barW{9.5}       % bar width = 100%
-
-% Header for the right-hand-side count column
-\node[anchor=west, darkgrey] at (\barX+\barW+0.1,7.25){\tiny \# firms};
-
-% Row 1: C-90 M-30 T24 — 93.8 / 2.2 / 1.9 / 1.2 — 3,129 firms
-\node[anchor=east] at (\barX,6.7){$C{=}{-}90\%$, $M{=}{-}30\%$, $T{=}24$};
-\node[anchor=west] at (\barX+\barW+0.1,6.7){3,129};
-\fill[MainColour]      (\barX,6.45)                              rectangle ++(\barW*0.938,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.938,6.45)                  rectangle ++(\barW*0.022,\barH);
-\fill[orange!75!black] (\barX+\barW*0.960,6.45)                  rectangle ++(\barW*0.019,\barH);
-\fill[warningRed]      (\barX+\barW*0.979,6.45)                  rectangle ++(\barW*0.012,\barH);
-\node[white] at (\barX+\barW*0.469,6.725){93.8\%};
-
-% Row 2: C-80 M-30 T24 — 91.9 / 2.6 / 2.7 / 1.7 — 4,231 firms
-\node[anchor=east] at (\barX,5.85){$C{=}{-}80\%$, $M{=}{-}30\%$, $T{=}24$};
-\node[anchor=west] at (\barX+\barW+0.1,5.85){4,231};
-\fill[MainColour]      (\barX,5.60)                              rectangle ++(\barW*0.919,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.919,5.60)                  rectangle ++(\barW*0.026,\barH);
-\fill[orange!75!black] (\barX+\barW*0.945,5.60)                  rectangle ++(\barW*0.027,\barH);
-\fill[warningRed]      (\barX+\barW*0.972,5.60)                  rectangle ++(\barW*0.017,\barH);
-\node[white] at (\barX+\barW*0.460,5.875){91.9\%};
-
-% Row 3: BASE — C-80 M-20 T18 — 85.0 / 3.2 / 6.3 / 4.6 — 5,642 firms
-\node[anchor=east, warningRed] at (\barX,5.0){\textbf{$C{=}{-}80\%$, $M{=}{-}20\%$, $T{=}18$}};
-\node[anchor=west, warningRed] at (\barX+\barW+0.1,5.0){\textbf{5,642}};
-\fill[MainColour]      (\barX,4.75)                              rectangle ++(\barW*0.850,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.850,4.75)                  rectangle ++(\barW*0.032,\barH);
-\fill[orange!75!black] (\barX+\barW*0.882,4.75)                  rectangle ++(\barW*0.063,\barH);
-\fill[warningRed]      (\barX+\barW*0.945,4.75)                  rectangle ++(\barW*0.046,\barH);
-\node[white] at (\barX+\barW*0.425,5.025){85.0\%};
-
-% Row 4: C-60 M-20 T18 — 79.2 / 4.4 / 7.4 / 8.3 — 7,505 firms
-\node[anchor=east] at (\barX,4.15){$C{=}{-}60\%$, $M{=}{-}20\%$, $T{=}18$};
-\node[anchor=west] at (\barX+\barW+0.1,4.15){7,505};
-\fill[MainColour]      (\barX,3.90)                              rectangle ++(\barW*0.792,\barH);
-\fill[MainColour!40]   (\barX+\barW*0.792,3.90)                  rectangle ++(\barW*0.044,\barH);
-\fill[orange!75!black] (\barX+\barW*0.836,3.90)                  rectangle ++(\barW*0.074,\barH);
-\fill[warningRed]      (\barX+\barW*0.910,3.90)                  rectangle ++(\barW*0.083,\barH);
-\node[white] at (\barX+\barW*0.396,4.175){79.2\%};
-
-% Row 5: C-60 M-0 T12 — 66.8 / 0.0 / 14.1 / 18.7 — 10,253 firms
-\node[anchor=east] at (\barX,3.30){$C{=}{-}60\%$, $M{=}0\%$, $T{=}12$};
-\node[anchor=west] at (\barX+\barW+0.1,3.30){10,253};
-\fill[MainColour]      (\barX,3.05)                              rectangle ++(\barW*0.668,\barH);
-\fill[orange!75!black] (\barX+\barW*0.668,3.05)                  rectangle ++(\barW*0.141,\barH);
-\fill[warningRed]      (\barX+\barW*0.809,3.05)                  rectangle ++(\barW*0.187,\barH);
-\node[white] at (\barX+\barW*0.334,3.325){66.8\%};
-
-% Axis ticks
-\draw[darkgrey, thin] (\barX,2.85) -- (\barX+\barW,2.85);
-\foreach \p/\l in {0/0\%, 0.25/25\%, 0.5/50\%, 0.75/75\%, 1.0/100\%} {
-  \draw[darkgrey, thin] (\barX+\barW*\p,2.85) -- (\barX+\barW*\p,2.75);
-  \node[anchor=north, darkgrey] at (\barX+\barW*\p,2.75){\tiny\l};
-}
-
-% Legend (below the chart)
-\fill[MainColour]      (\barX+0.00,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+0.30,2.325){No Recovery};
-
-\fill[MainColour!40]   (\barX+2.20,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+2.50,2.325){Recovery to $M=0$};
-
-\fill[orange!75!black] (\barX+4.90,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+5.20,2.325){Recovery to less than $C$};
-
-\fill[warningRed]      (\barX+7.70,2.20) rectangle ++(0.25,0.25);
-\node[anchor=west] at (\barX+8.00,2.325){Full Recovery};
-
-\end{tikzpicture}
-}
-\end{center}
-
+\begin{frame}{Robustness II: Sensitivity Results and Limits}
+\fontsize{5.85pt}{6.35pt}\selectfont
+\textbf{Sensitivity winners point to different objectives, not one universal setting}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.7pt}
+\begin{tabular}{L{1.65cm}L{1.45cm}L{1.8cm}R{0.70cm}R{0.70cm}R{0.78cm}}
+\toprule
+Objective & Config & Evidence & Prev. & OOS AP & 11C TM alpha \\
+\midrule
+Composite & \texttt{C090\_M000\_T012} & strongest overall rank; OOS AUC 0.920 & 7.02\% & 0.557 & +0.169pp \\
+AP winner & \texttt{C060\_M000\_T012} & highest CV/test/OOS AP & 17.49\% & 0.566 & +0.052pp \\
+11C TM & \texttt{C090\_M020\_T018} & best total-market benchmark delta & 3.34\% & 0.274 & +0.226pp \\
+Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.74\% & 0.308 & +0.065pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.05em}
+\begin{alertblock}{Interpretation}
+\scriptsize
+The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. Stricter definitions generally reduce positives and prevalence; AP can fall when positives become rarer, while AUC/Brier and fixed-FPR recall can remain stable or improve. Benchmark-relative 11C deltas remain positive for the leading configurations but can shrink.
+\end{alertblock}
+\scriptsize
+Use sensitivity as robustness evidence, not as a replacement for the final index suite: the final AE-INDEX-SUITE results use the accepted cleaned label definitions and should remain conceptually separate.
+\remarkfoot{Sources: \texttt{full\_grid\_best\_configs\_by\_objective.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}. TM alpha = total-market annualized return difference vs benchmark.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -541,7 +523,7 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 
 \begin{alertblock}{Dealing with recovering firms}
 \scriptsize
-Permanent-CSI starts from a confirmed temporary-CSI event and separates terminal failure, durable non-recovery, resolved recovery, and unresolved PCL windows.
+Permanent-CSI starts from a confirmed CSI event and separates terminal failure, durable non-recovery, resolved recovery, and unresolved PCL windows. Its $y=\mathrm{NA}$ policy is event-window-only; broad no-trigger calendar censoring is not used.
 \end{alertblock}
 
 \vspace{0.1em}
@@ -593,7 +575,7 @@ Permanent-CSI starts from a confirmed temporary-CSI event and separates terminal
 
 \begin{block}{Contrast with temporary CSI}
 \tiny
-Temporary CSI applies a finite lockout after a flag. Permanent-CSI marks terminal failure or durable non-recovery as $y^{perm}=1$, resolved recovery as $y^{perm}=0$, and unresolved PCL windows as $y=\mathrm{NA}$. Current prevalence: 6,258 positives across 187,626 labelled firm-years (3.34\%).
+Temporary CSI applies a finite lockout after a flag. Permanent-CSI marks terminal failure or durable non-recovery as $y^{perm}=1$, resolved recovery as $y^{perm}=0$, and unresolved PCL windows as $y=\mathrm{NA}$. The final full panel has 6,258 positives across 187,626 labelled firm-years (3.34\%).
 \end{block}
 
 \end{frame}
@@ -684,7 +666,7 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 
 \vspace{0.4em}
 
-\textbf{Feature engineering and feature-set keys}
+\textbf{Final feature-set keys}
 
 \vspace{0.3em}
 \begin{center}
@@ -693,26 +675,26 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
   baseline,
 ]
 % Legend row
-\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Fundamentals + macro};
-\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Feature Eng. + Market Signals};
-\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE};
+\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Fundamentals};
+\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Raw market signals};
+\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE latent};
 
-% Row: fund -> Base Data
-\node[anchor=east] at (2.9,2.5){\texttt{Base Dataset}};
+% Row: fund
+\node[anchor=east] at (2.9,2.5){\texttt{fund}};
 \fill[MainColour!30]     (3.0,2.3) rectangle (5.0,2.7);
 
-% Row: raw -> Feature Eng. Data
-\node[anchor=east] at (2.9,1.85){\texttt{Expanded Dataset}};
+% Row: raw
+\node[anchor=east] at (2.9,1.85){\texttt{raw}};
 \fill[MainColour!30]     (3.0,1.65) rectangle (5.0,2.05);
 \fill[teal!45]           (5.0,1.65) rectangle (7.6,2.05);
 
-% Row: latent_raw -> Feature Eng. + VAE Data
-\node[anchor=east] at (2.9,1.20){\texttt{Expanded Dataset + VAE}};
+% Row: latent_raw
+\node[anchor=east] at (2.9,1.20){\texttt{latent\_raw}};
 \fill[purple!30]         (7.6,1.00) rectangle (9.6,1.40);
-\node[anchor=west, darkgrey] at (3.05,1.20){\tiny trained on base data; fundamentals and macro excluded};
+\node[anchor=west, darkgrey] at (3.05,1.20){\tiny VAE-only representation};
 
-% Row: raw_plus_latent -> Latent Data
-\node[anchor=east] at (2.9,0.55){\texttt{Latent Dataset (VAE)}};
+% Row: raw_plus_latent
+\node[anchor=east] at (2.9,0.55){\texttt{raw\_plus\_latent}};
 \fill[MainColour!30]     (3.0,0.35) rectangle (5.0,0.75);
 \fill[teal!45]           (5.0,0.35) rectangle (7.6,0.75);
 \fill[purple!30]         (7.6,0.35) rectangle (9.6,0.75);
@@ -727,68 +709,103 @@ The full temporary-CSI classification contains \textbf{8,517} positive annual ce
 
 \begin{frame}{Modelling II: Results Temporary CSI}
 \scriptsize
-\begin{alertblock}{Best current model for index construction}
+\begin{alertblock}{Main read}
 \scriptsize
-\textbf{AutoGluon \texttt{Expanded Dataset}} is the best current temporary-CSI model on CV and the 2016-2019 test set OOS portfolio testing is deliberately kept out of model selection.
+Temporary CSI remains highly rankable, but AP and fixed-FPR recall are the decision metrics because positives are rare. \textbf{\texttt{raw\_plus\_latent}} is strongest on train/CV and OOS AP/FPR recall; \textbf{\texttt{raw}} remains the strongest 2016--2019 test benchmark and has marginally higher OOS AUC.
 \end{alertblock}
 
-\vspace{0.1em}
+\vspace{0.05em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}}
+\begin{tabular}{L{1.15cm}L{2.05cm}R{0.85cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.9cm}L{2.3cm}}
 \toprule
-Model & CV AP & CV AUC & CV R3 & Test AP & Test AUC & Test R3 \\
+Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
 \midrule
-\texttt{AG Expanded Dataset} & \textbf{0.2197} & \textbf{0.9647} & \textbf{0.6127} & \textbf{0.2114} & \textbf{0.9692} & \textbf{0.6551} \\
-\texttt{AG Latent Dataset (VAE)} & 0.1639 & 0.9531 & 0.5110 & 0.1433 & 0.9549 & 0.5130 \\
-\texttt{XGB Expanded Dataset} & 0.2094 & 0.9525 & 0.5293 & 0.1813 & 0.9670 & 0.6391 \\
-\texttt{XGB Exp. Dataset + VAE} & 0.2080 & 0.9463 & 0.5275 & 0.1837 & 0.9671 & 0.6279 \\
-\texttt{XGB Latent Dataset (VAE)} & 0.1658 & 0.9406 & 0.4499 & 0.1462 & 0.9553 & 0.5179 \\
+Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & strongest overall CV signal \\
+Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & 0.0821 & \textbf{0.2002} & 0.2998 & benchmark wins test AP/AUC \\
+OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & best OOS AP/FPR recall \\
+OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & slightly higher OOS AUC \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\vspace{0.15em}
+\vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-The initial question is answered positively: temporary CSI is forecastable, but the expanded dataset derived from feature engineering and market signals is essential because Expanded Dataset + VAE alone is materially weaker. For index construction, \texttt{AG Expanded Dataset} is the clean model-selection baseline, with XGBoost as a transparent robustness challenger. False positives remain the economic constraint, so thresholds should be calibrated from CV-FPR targets before any OOS portfolio evaluation.
+VAE latent information helps most when added to raw features and evaluated OOS. The raw benchmark remains competitive, so model slides alone do not establish index-level superiority; the index section evaluates economic performance.
 \end{block}
-\remarkfoot{R3 = recall at FPR $\leq 3\%$. Full AutoGluon and XGBoost temporary-CSI tables are in Appendix A10-A11.}
+\remarkfoot{R@FPRk = recall at a CV-style false-positive-rate cap of k\%. Full train/CV, test, and OOS tables are in Appendix A10.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Modelling III: Results Permanent-CSI}
 \scriptsize
-\begin{alertblock}{Best current model evidence}
+\begin{alertblock}{Main read}
 \scriptsize
-Permanent-CSI is forecastable but more difficult than temporary CSI. \textbf{XGBoost \texttt{Expanded Dataset}} is strongest on 2016-2019 test AP/R3; \textbf{AutoGluon \texttt{Expanded Dataset}} and \textbf{\texttt{Exp. Dataset + VAE}} are the clean completed AutoGluon baselines.
+Permanent CSI is harder: positives are rarer and OOS prevalence is much lower. \textbf{\texttt{raw\_plus\_latent}} is the best non-raw CV/test challenger, while \textbf{\texttt{latent\_raw}} is the strongest OOS robustness signal.
 \end{alertblock}
 
-\vspace{0.1em}
+\vspace{0.05em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{L{3.15cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}R{1.0cm}}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{L{1.15cm}L{2.05cm}R{0.82cm}R{0.82cm}R{0.86cm}R{0.86cm}R{0.86cm}L{2.45cm}}
 \toprule
-Model & CV AP & CV AUC & CV R3 & Test AP & Test AUC & Test R3 \\
+Split & Best / reference & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Read \\
 \midrule
-\texttt{AG Expanded Dataset} & 0.2016 & \textbf{0.9650} & \textbf{0.6216} & 0.1480 & 0.9674 & 0.6621 \\
-\texttt{AG Exp. Dataset + VAE} & \textbf{0.2019} & \textbf{0.9651} & 0.6169 & 0.1471 & 0.9670 & 0.6655 \\
-\texttt{XGB Expanded Dataset} & 0.1928 & 0.9462 & 0.5498 & \textbf{0.1549} & 0.9681 & \textbf{0.6707} \\
-\texttt{XGB Exp. Dataset + VAE} & 0.1947 & 0.9432 & 0.5501 & 0.1393 & \textbf{0.9682} & 0.6398 \\
-\texttt{AG Latent Dataset (VAE)} & 0.1529 & 0.9573 & 0.5455 & 0.1190 & 0.9600 & 0.5592 \\
+Train/CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & best AP and FPR1 \\
+Train/CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & best AUC/FPR3/5 \\
+Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & best AUC/FPR3/5 \\
+Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & narrow AP/FPR1 win \\
+OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & strongest OOS robustness \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\vspace{0.15em}
+\vspace{0.1em}
 \begin{block}{Interpretation}
 \scriptsize
-The permanent target has usable ranking structure, but AP is materially lower than for temporary CSI because positives are rarer. Engineered \texttt{Expanded Dataset} features remain the core signal; latent-only evidence is weaker on CV/test even though it improves on test-OOS AP. For index construction, permanent CSI should be treated as a stricter removal signal and benchmarked with conservative FPR thresholds.
+Raw remains a strong reporting baseline. For permanent CSI, \texttt{raw\_plus\_latent} is the primary non-raw challenger, while \texttt{latent\_raw} is retained for OOS robustness rather than treated as a clean replacement.
 \end{block}
-\remarkfoot{R3 = recall at FPR $\leq 3\%$. Full permanent-CSI XGBoost and AutoGluon tables are in Appendix A12-A13.}
+\remarkfoot{Brier is best for permanent OOS under \texttt{latent\_raw}: 0.0166. Full split tables are in Appendix A11.}
+\end{frame}
+
+
+
+\begin{frame}{Modelling IV: What VAE Features Add}
+\scriptsize
+\begin{alertblock}{Feature-set interpretation}
+\scriptsize
+The VAE does not replace raw predictive information. It is useful as an augmentation or robustness signal: \texttt{raw\_plus\_latent} improves temporary OOS AP/FPR recall, while \texttt{latent\_raw} is the strongest permanent OOS model.
+\end{alertblock}
+
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Temporary CSI}
+\begin{itemize}
+  \item \texttt{raw\_plus\_latent} leads OOS AP: 0.3152.
+  \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
+  \item \texttt{raw} still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
+\end{itemize}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Permanent CSI}
+\begin{itemize}
+  \item \texttt{raw\_plus\_latent} leads test AUC and FPR3/5 recall.
+  \item \texttt{latent\_raw} leads OOS AP/AUC/Brier/FPR recall.
+  \item \texttt{fund} remains a useful fundamentals-only benchmark, not the preferred model.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.15em}
+\begin{block}{Model-family note}
+\scriptsize
+Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
+\end{block}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -817,7 +834,7 @@ The model produces a probability of CSI next year. A threshold turns that probab
   pipearrow/.style={->, >=stealth, thick}
 ]
 \node[scorebox] (score) {\textbf{Score}\\[-1pt]\tiny probability of CSI next year\\[-1pt]\tiny from AutoGluon};
-\node[flagbox, right=8mm of score] (flag) {\textbf{Exclusion flag}\\[-1pt]\tiny 1 if score $\geq$ threshold\\[-1pt]\tiny FPR 1\%, FPR 3\%, Youden $J$};
+\node[flagbox, right=8mm of score] (flag) {\textbf{Exclusion flag}\\[-1pt]\tiny 1 if score $\geq$ threshold\\[-1pt]\tiny FPR 1\%, 3\%, 5\%, Youden $J$};
 \node[weightbox, right=8mm of flag] (weight) {\textbf{Portfolio weight}\\[-1pt]\tiny market-cap $\times$ $(1-\text{flag})$\\[-1pt]\tiny renormalized};
 \draw[pipearrow] (score) -- (flag);
 \draw[pipearrow] (flag) -- (weight);
@@ -893,16 +910,16 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
   \item Universe formed from prior-December market capitalization.
   \item Minimum market cap: USD 100 million.
   \item Quarterly rebalancing: March, June, September, December.
-  \item Market-cap weights; prototype transaction costs are 0 bps.
+  \item Market-cap weights; cost overlays use 0, 5, 10, and 20 bps.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
 \textbf{Signal discipline}
 \scriptsize
 \begin{itemize}
-  \item AutoGluon \texttt{Expanded Dataset} score is annual.
+  \item Scores are annual for \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, and \texttt{raw\_plus\_latent}.
   \item Holding-year signal uses information available before the holding year.
-  \item Thresholds calibrated from CV predictions only - never from OOS returns.
+  \item Thresholds calibrated from CV predictions only: Youden, FPR1, FPR3, FPR5.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -911,229 +928,218 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Temporary CSI Performance}
-\fontsize{5.9pt}{6.45pt}\selectfont
-\textbf{Test-OOS best rules by universe: benchmark row followed by filtered strategy}
+
+\begin{frame}{Index Results: Temporary CSI at 20 bps}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{OOS winners by benchmark universe; benchmark is the unfiltered market-cap-weighted universe}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{1.5cm}L{1.45cm}R{0.85cm}R{0.85cm}R{0.7cm}R{0.9cm}R{0.85cm}R{0.75cm}}
+\setlength{\tabcolsep}{1.85pt}
+\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
 \midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / 5yr & 13.41\% & 18.50\% & 0.615 & -24.20\% & -11.44\% & +0.119 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR1 / 1yr & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.83\% & -0.020 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & Youden / 1yr & 9.68\% & 20.09\% & 0.414 & -23.55\% & -13.03\% & +0.030 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & Youden / 3yr & 9.03\% & 21.98\% & 0.370 & -29.12\% & -15.60\% & +1.372 \\
+Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp & 0.634 & 10.4\% \\
+Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp & 0.677 & 13.0\% \\
+Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp & 0.419 & 105.9\% \\
+Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp & 0.328 & 85.5\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-\remarkfoot{$\Delta$ is the annualized geometric-return difference vs benchmark.}
-\end{frame}
-
-%==== 4b. Data findings =======================================================%
-
-\begin{frame}{Index Construction Results: Temporary CSI -- Error Costs}
+\vspace{-0.15em}
+\begin{alertblock}{Temporary CSI conclusion}
 \scriptsize
-\begin{alertblock}{Where the winning temporary strategies benefit}
-\scriptsize
-The filtered portfolios give up return through false positives, but offset this mainly through retained true-negative exposure. Small Cap has the largest return improvement and also the largest false-positive drag.
+At 20 bps, fundamentals-only wins Total, Large, and Mid Cap. Raw + latent wins Small Cap. The strongest temporary rules are mostly Youden with longer lockouts, with FPR5 useful in Mid Cap.
 \end{alertblock}
-
-\vspace{0.05em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{1.8cm}L{1.65cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.75cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
-\midrule
-Total Market & FPR3 / 5yr & -0.970 & -0.003 & +0.064 & +1.028 & +0.119 \\
-Large Cap & FPR1 / 1yr & -0.018 & +0.000 & +0.000 & -0.002 & -0.020 \\
-Mid Cap & Youden / 1yr & -3.552 & +0.000 & -0.004 & +3.586 & +0.030 \\
-Small Cap & Youden / 3yr & -7.648 & -0.034 & +0.463 & +8.591 & +1.372 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.2em}
-\scriptsize
-Interpretation: The true-positive protection is positive but small. The key tradeoff is whether retained non-CSI exposure compensates for false-positive opportunity costs.
-\remarkfoot{Annualized pp terms. TN gain is the geometric-return balancing retained-exposure term, so FP+FN+TP+TN equals Net.}
+\remarkfoot{Net ret. is net annualized geometric return after 20 bps transaction-cost drag. Benchmark has no strategy transaction-cost overlay. Source: \texttt{headline\_winners\_20bps.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Permanent CSI Performance}
-\fontsize{5.9pt}{6.45pt}\selectfont
-\textbf{Test-OOS best rules by universe: benchmark row followed by filtered strategy}
+\begin{frame}{Index Results: Permanent CSI at 20 bps}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{OOS winners by benchmark universe; permanent-removal rule}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{1.5cm}L{1.45cm}R{0.85cm}R{0.85cm}R{0.7cm}R{0.9cm}R{0.85cm}R{0.75cm}}
+\setlength{\tabcolsep}{1.85pt}
+\begin{tabular}{L{1.35cm}L{1.45cm}L{1.45cm}R{0.72cm}R{0.72cm}R{0.70cm}R{0.68cm}R{0.72cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Universe & Winner & Rule & Net ret. & Bench. & Alpha & Sharpe & Turnover \\
 \midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / perm. & 13.76\% & 18.64\% & 0.629 & -24.21\% & -11.38\% & +0.472 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR3 / perm. & 14.62\% & 18.30\% & 0.678 & -24.10\% & -10.73\% & +0.345 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & FPR1 / perm. & 10.08\% & 20.56\% & 0.427 & -24.38\% & -13.85\% & +0.426 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & FPR3 / perm. & 7.61\% & 23.13\% & 0.306 & -29.39\% & -16.11\% & -0.042 \\
+Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp & 0.614 & 6.8\% \\
+Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp & 0.670 & 11.5\% \\
+Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp & 0.431 & 106.2\% \\
+Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp & 0.312 & 75.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-\remarkfoot{$\Delta$ is annualized geometric-return difference vs benchmark.}
+\vspace{-0.15em}
+\begin{alertblock}{Permanent CSI conclusion}
+\scriptsize
+Raw + latent wins Total and Large Cap; fundamentals-only wins Mid Cap; VAE-only wins Small Cap. Permanent CSI is strongest under fixed-FPR thresholds, especially FPR3 and FPR5.
+\end{alertblock}
+\remarkfoot{Benchmark is the unfiltered market-cap-weighted index for the same universe. Source: \texttt{headline\_winners\_20bps.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Index Construction Results: Permanent CSI - Error Costs}
-\scriptsize
-\begin{alertblock}{Where the winning permanent strategies benefit}
-\scriptsize
-Permanent CSI improves Total, Large, and Mid Cap primarily through true-negative retained exposure after absorbing removals. Small Cap remains weak because false-positive costs absorb the benefit.
-\end{alertblock}
-
-\vspace{0.05em}
+\begin{frame}{Transaction-Cost Robustness}
+\fontsize{6.0pt}{6.55pt}\selectfont
+\textbf{Winner ranking is stable from 0 to 20 bps; evaluated costs: 0, 5, 10, 20 bps}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{1.8cm}L{1.65cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.9cm}R{0.75cm}}
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.15cm}L{1.25cm}L{1.55cm}L{1.55cm}R{0.78cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+Track & Universe & 0 bps winner & 20 bps winner & Alpha 0 & Alpha 20 \\
 \midrule
-Total Market & FPR3 / perm. & -1.261 & -0.001 & +0.022 & +1.712 & +0.472 \\
-Large Cap & FPR3 / perm. & -0.849 & +0.000 & +0.000 & +1.194 & +0.345 \\
-Mid Cap & FPR1 / perm. & -0.167 & +0.000 & +0.000 & +0.593 & +0.426 \\
-Small Cap & FPR3 / perm. & -3.109 & -0.017 & +0.076 & +3.008 & -0.042 \\
+Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
+Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
+Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
+Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\vspace{0.2em}
+\vspace{-0.1em}
 \scriptsize
-Read: the strongest permanent-CSI case is not direct true-positive protection; it is disciplined removal that preserves exposure to retained non-CSI firms while avoiding enough weak names.
-\remarkfoot{Annualized pp terms. TN gain is the geometric-return balancing retained-exposure term, so FP+FN+TP+TN equals Net.}
+Transaction costs do not change the top winner in any of the eight track--index comparisons. The cost drag is economically visible in Mid and Small Cap, but it is not large enough at 20 bps to overturn the ranking.
+\remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Threshold Families and Turnover}
+\fontsize{6.1pt}{6.7pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.50\textwidth}
+\textbf{Threshold-family result at 20 bps}
+\vspace{-0.2em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.20cm}L{1.45cm}R{1.05cm}}
+\toprule
+Track & Lead family & Mean alpha \\
+\midrule
+Temp. & Youden & +0.35pp \\
+Perm. & FPR3/FPR5 & +0.35/+0.33pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+\scriptsize
+Temporary CSI benefits from calibrated finite lockouts; 3--5yr exclusions outperform 1yr exclusions. Permanent CSI needs stricter fixed-FPR rules; Youden is negative on average under absorbing exclusion.
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Annualized gross turnover for 20 bps winners}
+\vspace{-0.2em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.15cm}R{0.85cm}R{0.85cm}}
+\toprule
+Universe & Temp. & Perm. \\
+\midrule
+Total & 15.3\% & 12.2\% \\
+Large & 18.8\% & 17.2\% \\
+Mid & 97.7\% & 97.0\% \\
+Small & 77.2\% & 72.4\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+\scriptsize
+Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is still modest: roughly 1.1pp in Mid Cap and below 0.9pp in Small Cap winners.
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv} and \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
 \section{Next Steps}
-\begin{frame}{Next steps before the final presentation}
-\small
 
-\begin{alertblock}{Four key areas}
+\begin{frame}{Remaining Robustness Work}
+\small
+\begin{alertblock}{What is complete vs. still future work}
 \scriptsize
-The proposal lays the methodological and empirical foundation. Remaining work splits into data validation, model interpretability, an optional modeling extension, and an index-construction extension - each connected to a section already in the proposal.
+Temporary-CSI C/M/T sensitivity is complete locally and supports the presentation robustness narrative. The remaining items below are extensions or validation work, not completed results.
 \end{alertblock}
 
-\vspace{0.5em}
-
-\begin{columns}[t]
+\vspace{0.35em}
+\begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
 \node[draw=MainColour, fill=MainColour!8, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{MainColour}{Data validation}}\\[2pt]
-\small\textbf{Document residual misses}\\[3pt]
-\scriptsize Current audit leaves 84 CRSP 572--574 firms outside revised temporary CSI; a separate diagnostic can decompose these methodological exclusions if needed.\\[4pt]
-\scriptsize\textit{\textcolor{MainColour}{Extends Methodology II audit.}}
-};
+\scriptsize\textbf{Permanent-CSI sensitivity grid}\\[2pt]
+\scriptsize Repeat the C/M/T-style robustness logic for the permanent response track before claiming permanent-label sensitivity.};
 \end{tikzpicture}
 
-\vspace{0.5em}
-
+\vspace{0.45em}
 \begin{tikzpicture}
-\node[draw=orange!60!black, fill=orange!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{orange!60!black}{Modeling extension}}\\[2pt]
-\small\textbf{LightGBM with Bayesian HPO}\\[3pt]
-\scriptsize Transparent challenger to AutoGluon with hyperparameter optimization via Bayesian optimization.\\[4pt]
-\scriptsize\textit{\textcolor{orange!60!black}{Optional, time permitting.}}
-};
+\node[draw=orange!70!black, fill=orange!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
+\scriptsize\textbf{Benchmark extensions}\\[2pt]
+\scriptsize Minimum-volatility and quality/risk-scaling benchmarks remain future comparator work.};
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
 \node[draw=teal!60!black, fill=teal!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{teal!60!black}{Model interpretability}}\\[2pt]
-\small\textbf{Feature importance analysis}\\[3pt]
-\scriptsize Feature importance attribution as in the OeNB credit-risk modelling presentation, applied to AutoGluon \texttt{Expanded Dataset} and \texttt{Exp. Dataset + VAE}.\\[4pt]
-\scriptsize\textit{\textcolor{teal!60!black}{Answers RQ 3 directly.}}
-};
+\scriptsize\textbf{Probability-weighted strategy}\\[2pt]
+\scriptsize Active CSI-probability weighting is not yet implemented; current results use thresholded exclusions.};
 \end{tikzpicture}
 
-\vspace{0.5em}
-
+\vspace{0.45em}
 \begin{tikzpicture}
 \node[draw=warningRed, fill=warningRed!10, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{\textcolor{warningRed}{Index construction extension}}\\[2pt]
-\small\textbf{Low-vol \& quality variants}\\[3pt]
-\scriptsize Re-use the CSI score to build a Low-Vol benchmark; test whether retained-firm selection works as a quality substitute (lowest-risk firms instead of excluding the highest).\\[4pt]
-\scriptsize\textit{\textcolor{warningRed}{Extends Index Construction track.}}
-};
+\scriptsize\textbf{Residual terminal-failure diagnostic}\\[2pt]
+\scriptsize Recovered bankrupt/insolvent firm diagnostics remain a follow-up, not a completed robustness result.};
 \end{tikzpicture}
 \end{column}
 \end{columns}
-
+\remarkfoot{The final index suite and the temporary sensitivity grid answer different questions and are kept separate in the presentation.}
 \end{frame}
 
 %==== APPENDIX ================================================================%
 
+
 \appendix
 \section{Appendix}
 
-\begin{frame}{Appendix A1: Recovery Buckets Across C/M/T Grid}
-\fontsize{3.85pt}{4.25pt}\selectfont
-\textbf{Base grid \texttt{C080\_M020\_T018}:} stayed below $M=-20\%$: 4,793 firms (85.0\%); recovered $M$ to 0: 182 (3.2\%); recovered 0 to $|C|$: 354 (6.3\%); recovered $>|C|$: 260 (4.6\%); no follow-up: 53 (0.9\%).
+
+\begin{frame}{Appendix A1: Temporary CSI Sensitivity Detail}
+\fontsize{5.55pt}{6.05pt}\selectfont
+\textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\renewcommand{\arraystretch}{0.72}
-\setlength{\tabcolsep}{1.15pt}
-\rowcolors{3}{grey!30}{white}
-\begin{tabular}{L{2.35cm}R{0.95cm}R{1.35cm}R{1.0cm}R{1.1cm}R{1.05cm}}
+\setlength{\tabcolsep}{1.7pt}
+\begin{tabular}{L{1.65cm}L{1.45cm}R{0.70cm}R{0.72cm}R{0.72cm}R{0.72cm}R{0.78cm}L{1.35cm}}
 \toprule
-Grid & Firms & Stayed below M & M to 0 & 0 to $|C|$ & $>|C|$ \\
+Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
 \midrule
-\texttt{C090\_M030\_T012} & 3,596 & 87.2\% & 3.8\% & 4.2\% & 3.8\% \\
-\texttt{C090\_M030\_T018} & 3,316 & 91.6\% & 2.9\% & 2.7\% & 1.8\% \\
-\texttt{C090\_M030\_T024} & 3,129 & 93.8\% & 2.2\% & 1.9\% & 1.2\% \\
-\texttt{C090\_M020\_T012} & 4,437 & 82.3\% & 3.4\% & 6.7\% & 6.6\% \\
-\texttt{C090\_M020\_T018} & 4,125 & 88.4\% & 2.7\% & 4.5\% & 3.6\% \\
-\texttt{C090\_M020\_T024} & 3,911 & 91.5\% & 2.1\% & 3.1\% & 2.4\% \\
-\texttt{C090\_M000\_T012} & 5,644 & 81.3\% & 0.0\% & 8.6\% & 9.4\% \\
-\texttt{C090\_M000\_T018} & 5,350 & 86.8\% & 0.0\% & 6.2\% & 6.1\% \\
-\texttt{C090\_M000\_T024} & 5,061 & 90.5\% & 0.0\% & 4.6\% & 4.0\% \\
-\texttt{C080\_M030\_T012} & 4,843 & 83.2\% & 5.1\% & 5.6\% & 5.1\% \\
-\texttt{C080\_M030\_T018} & 4,483 & 88.7\% & 3.7\% & 4.0\% & 2.5\% \\
-\texttt{C080\_M030\_T024} & 4,231 & 91.9\% & 2.6\% & 2.7\% & 1.7\% \\
-\texttt{C080\_M020\_T012} & 6,073 & 78.1\% & 3.8\% & 8.8\% & 8.5\% \\
-\texttt{C080\_M020\_T018} & 5,642 & 85.0\% & 3.2\% & 6.3\% & 4.6\% \\
-\texttt{C080\_M020\_T024} & 5,348 & 88.9\% & 2.5\% & 4.5\% & 3.1\% \\
-\texttt{C080\_M000\_T012} & 7,562 & 74.5\% & 0.0\% & 12.1\% & 12.8\% \\
-\texttt{C080\_M000\_T018} & 7,096 & 81.5\% & 0.0\% & 9.5\% & 8.2\% \\
-\texttt{C080\_M000\_T024} & 6,760 & 85.8\% & 0.0\% & 7.2\% & 6.0\% \\
-\texttt{C060\_M030\_T012} & 6,304 & 78.3\% & 6.8\% & 6.3\% & 7.8\% \\
-\texttt{C060\_M030\_T018} & 5,850 & 84.3\% & 5.1\% & 4.7\% & 4.9\% \\
-\texttt{C060\_M030\_T024} & 5,517 & 88.7\% & 3.7\% & 3.4\% & 3.1\% \\
-\texttt{C060\_M020\_T012} & 8,068 & 71.9\% & 5.7\% & 9.6\% & 12.2\% \\
-\texttt{C060\_M020\_T018} & 7,505 & 79.2\% & 4.4\% & 7.4\% & 8.3\% \\
-\texttt{C060\_M020\_T024} & 7,098 & 84.5\% & 3.6\% & 5.5\% & 5.6\% \\
-\texttt{C060\_M000\_T012} & 10,253 & 66.8\% & 0.0\% & 14.1\% & 18.7\% \\
-\texttt{C060\_M000\_T018} & 9,621 & 74.0\% & 0.0\% & 11.8\% & 13.7\% \\
-\texttt{C060\_M000\_T024} & 9,170 & 79.7\% & 0.0\% & 9.3\% & 10.3\% \\
+Composite & \texttt{C090\_M000\_T012} & 12,761 & 7.02\% & 0.557 & 0.920 & +0.169pp & complete \\
+AP winner & \texttt{C060\_M000\_T012} & 31,596 & 17.49\% & 0.566 & 0.864 & +0.052pp & reused \\
+11C winner & \texttt{C090\_M020\_T018} & 6,035 & 3.34\% & 0.274 & 0.911 & +0.226pp & complete \\
+Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp & reused \\
 \bottomrule
 \end{tabular}
-\rowcolors{1}{}{}
 \end{table}
-\vspace{-0.35em}
-{\tiny \textit{Notes:} Firms = unique flagged firms. Stayed below M = never recovered above recovery ceiling $M$. M to 0 = recovered above $M$ but not to break-even. 0 to $|C|$ = recovered above break-even but not more than the absolute crash threshold. $>|C|$ = recovered more than the absolute crash threshold. Percentages may not sum to 100\% because no-follow-up firms are omitted from the displayed bucket columns.}
+\vspace{-0.05em}
+\begin{block}{Blocked partial cases}
+\scriptsize
+The grid registry includes three incomplete cases: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. They are represented in manifests but excluded from completed-run conclusions.
+\end{block}
+\begin{block}{Source interpretation}
+\scriptsize
+C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
+\end{block}
+\remarkfoot{Sources: \texttt{full\_grid\_label\_count\_ranking.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}; \texttt{run\_registry.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
@@ -1362,475 +1368,302 @@ Status & Weakly supervised on training rows; test and OOS labels are not used fo
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A10: AutoGluon Results for Temporary CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
+\begin{frame}{Appendix A10: Temporary CSI Model Metrics}
+\fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{CV average} {\scriptsize \quad Per-fold average across expanding-window folds 2--4.}
+\setlength{\tabcolsep}{1.8pt}
+\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
+\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
 \toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
+Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-\texttt{fund} & 0.2076 & 0.9589 & 0.5793 & 0.7588 \\
-\texttt{raw} & 0.2197 & 0.9647 & 0.6127 & 0.7803 \\
-\texttt{raw + latent} & 0.2173 & 0.9643 & 0.6002 & 0.7786 \\
-\texttt{latent raw} & 0.1639 & 0.9531 & 0.5110 & 0.6900 \\
+CV & \texttt{raw} & 0.2046 & 0.8635 & 0.0917 & 0.2344 & 0.3415 & 0.0371 \\
+CV & \texttt{fund} & 0.1923 & 0.8446 & 0.0830 & 0.2206 & 0.3229 & 0.0374 \\
+CV & \texttt{latent\_raw} & 0.1659 & 0.8454 & 0.0670 & 0.1706 & 0.2735 & 0.0380 \\
+CV & \texttt{raw\_plus\_latent} & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & \textbf{0.0368} \\
+Test & \texttt{raw} & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.0821} & \textbf{0.2002} & \textbf{0.2998} & \textbf{0.0389} \\
+Test & \texttt{fund} & 0.1656 & 0.8538 & 0.0585 & 0.1517 & 0.2413 & 0.0392 \\
+Test & \texttt{latent\_raw} & 0.1501 & 0.8438 & 0.0410 & 0.1294 & 0.2264 & 0.0394 \\
+Test & \texttt{raw\_plus\_latent} & 0.1864 & 0.8741 & 0.0634 & 0.1779 & 0.2749 & 0.0394 \\
+OOS & \texttt{raw} & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & 0.0498 \\
+OOS & \texttt{fund} & 0.2526 & 0.8686 & 0.0598 & 0.1795 & 0.3017 & 0.0526 \\
+OOS & \texttt{latent\_raw} & 0.2813 & 0.8626 & 0.1009 & 0.2274 & 0.3556 & 0.0518 \\
+OOS & \texttt{raw\_plus\_latent} & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & \textbf{0.0494} \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1758 & 0.9550 & 0.6069 & 0.7726 \\
-\texttt{raw} & 0.2114 & 0.9692 & 0.6551 & 0.8183 \\
-\texttt{raw + latent} & 0.1874 & 0.9680 & 0.6354 & 0.8171 \\
-\texttt{latent raw} & 0.1433 & 0.9549 & 0.5130 & 0.7095 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.2565 & 0.9300 & 0.6220 & 0.7935 \\
-\texttt{raw} & 0.2911 & 0.9552 & 0.7169 & 0.8401 \\
-\texttt{raw + latent} & 0.2951 & 0.9577 & 0.7169 & 0.8385 \\
-\texttt{latent raw} & 0.2720 & 0.9509 & 0.6436 & 0.8043 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
-\scriptsize
-\texttt{raw} is best on the 2016--2019 test set by AP, AUC, and R@FPR3. \texttt{raw + latent} is very close on AUC/R@FPR thresholds and is best on OOS AP/AUC.
-\end{block}
+\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
 \end{frame}
 
-\begin{frame}{Appendix A11: XGBoost Results for Temporary CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
+\begin{frame}{Appendix A11: Permanent CSI Model Metrics}
+\fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Finalized temporary-CSI XGBoost rerun} {\scriptsize \quad Full CV metrics stored.}
+\setlength{\tabcolsep}{1.8pt}
+\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
 \vspace{-0.25em}
 \begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
+\begin{tabular}{L{0.8cm}L{1.8cm}R{0.78cm}R{0.78cm}R{0.82cm}R{0.82cm}R{0.82cm}R{0.78cm}}
 \toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
+Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
 \midrule
-\texttt{fund} & 0.1978 & 0.9330 & 0.5173 & 0.6847 \\
-\texttt{raw} & 0.2094 & 0.9525 & 0.5293 & 0.6995 \\
-\texttt{raw + latent} & 0.2080 & 0.9463 & 0.5275 & 0.6930 \\
-\texttt{latent raw} & 0.1658 & 0.9406 & 0.4499 & 0.6167 \\
+CV & \texttt{raw} & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & 0.0297 \\
+CV & \texttt{fund} & 0.1785 & 0.8677 & 0.1033 & 0.2379 & 0.3469 & 0.0299 \\
+CV & \texttt{latent\_raw} & 0.1426 & 0.8460 & 0.0732 & 0.1960 & 0.2908 & 0.0308 \\
+CV & \texttt{raw\_plus\_latent} & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & \textbf{0.0297} \\
+Test & \texttt{raw} & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & 0.0284 \\
+Test & \texttt{fund} & 0.1289 & 0.8627 & 0.0627 & 0.1697 & 0.2620 & 0.0293 \\
+Test & \texttt{latent\_raw} & 0.1115 & 0.8496 & 0.0424 & 0.1513 & 0.2546 & \textbf{0.0280} \\
+Test & \texttt{raw\_plus\_latent} & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & 0.0283 \\
+OOS & \texttt{raw} & 0.0323 & 0.8081 & 0.0000 & 0.0119 & 0.0623 & 0.0211 \\
+OOS & \texttt{fund} & 0.0281 & 0.7798 & 0.0000 & 0.0030 & 0.0297 & 0.0232 \\
+OOS & \texttt{latent\_raw} & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & \textbf{0.0166} \\
+OOS & \texttt{raw\_plus\_latent} & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.0207 \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1612 & 0.9568 & 0.5748 & 0.7812 \\
-\texttt{raw} & 0.1813 & 0.9670 & 0.6391 & 0.8232 \\
-\texttt{raw + latent} & 0.1837 & 0.9671 & 0.6279 & 0.8319 \\
-\texttt{latent raw} & 0.1462 & 0.9553 & 0.5179 & 0.7330 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.2643 & 0.9339 & 0.6520 & 0.7868 \\
-\texttt{raw} & 0.2578 & 0.9473 & 0.6769 & 0.8260 \\
-\texttt{raw + latent} & 0.2880 & 0.9494 & 0.6994 & 0.8393 \\
-\texttt{latent raw} & 0.2723 & 0.9532 & 0.6644 & 0.8060 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
-\scriptsize
-XGBoost confirms the same modelling pattern: \texttt{raw + latent} is strongest OOS by AP and R@FPR thresholds, while \texttt{latent raw} alone is not a substitute for engineered raw features.
-\end{block}
+\remarkfoot{Source: local model-suite complete threshold metrics under \texttt{03\_Data\_Output/6\_ModelSuite}.}
 \end{frame}
 
-\begin{frame}{Appendix A12: XGBoost Results for Permanent CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Permanent-CSI XGBoost results} {\scriptsize \quad Same feature-set variants as temporary CSI.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.1928 & 0.9462 & 0.5498 & 0.7118 \\
-\texttt{fund} & 0.1841 & 0.9268 & 0.5350 & 0.6942 \\
-\texttt{raw\_plus\_latent} & 0.1947 & 0.9432 & 0.5501 & 0.7118 \\
-\texttt{latent\_raw} & 0.1578 & 0.9428 & 0.4852 & 0.6525 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.1549 & 0.9681 & 0.6707 & 0.8336 \\
-\texttt{fund} & 0.1262 & 0.9555 & 0.6003 & 0.7856 \\
-\texttt{raw\_plus\_latent} & 0.1393 & 0.9682 & 0.6398 & 0.8388 \\
-\texttt{latent\_raw} & 0.1252 & 0.9601 & 0.5918 & 0.7839 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test-OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{raw} & 0.0514 & 0.9424 & 0.3767 & 0.6340 \\
-\texttt{fund} & 0.0507 & 0.9249 & 0.4032 & 0.6446 \\
-\texttt{raw\_plus\_latent} & 0.0550 & 0.9433 & 0.4085 & 0.6578 \\
-\texttt{latent\_raw} & 0.0718 & 0.9401 & 0.4748 & 0.6525 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
+\begin{frame}{Appendix A12: Model Family Winners}
 \scriptsize
-\texttt{raw} is strongest on the 2016--2019 test set by AP and R@FPR3, while \texttt{raw\_plus\_latent} is marginally strongest on test AUC/R@FPR5 and CV AP. Test-OOS is weaker and unusual: \texttt{latent\_raw} has the highest AP/R@FPR3, so permanent-CSI XGBoost evidence is less stable than the temporary-CSI XGBoost pattern.
-\end{block}
+\begin{alertblock}{AutoGluon selection evidence}
+\scriptsize
+Every final feature-set/track run selected a \texttt{WeightedEnsemble\_L2} as the top leaderboard model. The useful base signal is mostly tree-based; neural nets were considered but did not dominate.
+\end{alertblock}
+\vspace{0.15em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{L{2.1cm}L{2.0cm}L{2.2cm}R{1.2cm}R{1.2cm}}
+\toprule
+Track & Feature set & Best family & Val. score & Fit sec. \\
+\midrule
+Temporary & \texttt{raw} & WeightedEnsemble & 0.2307 & 280 \\
+Temporary & \texttt{fund} & WeightedEnsemble & 0.2203 & 83 \\
+Temporary & \texttt{latent\_raw} & WeightedEnsemble & 0.1953 & 146 \\
+Temporary & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2314} & 203 \\
+Permanent & \texttt{raw} & WeightedEnsemble & 0.2010 & 126 \\
+Permanent & \texttt{fund} & WeightedEnsemble & 0.1929 & 229 \\
+Permanent & \texttt{latent\_raw} & WeightedEnsemble & 0.1505 & 191 \\
+Permanent & \texttt{raw\_plus\_latent} & WeightedEnsemble & \textbf{0.2041} & 291 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\remarkfoot{Source: \texttt{AE-MODEL-SUITE-007\_model\_family\_winners.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A13: AutoGluon Results for Permanent CSI}
-\fontsize{5.6pt}{6.1pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{3.5pt}
-\textbf{Permanent-CSI AutoGluon results} {\scriptsize \quad Completed runs: \texttt{fund}, \texttt{raw}, \texttt{raw\_plus\_latent}.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1884 & 0.9584 & 0.5981 & 0.7702 \\
-\texttt{raw} & 0.2016 & 0.9650 & 0.6216 & 0.7835 \\
-\texttt{raw\_plus\_latent} & 0.2019 & 0.9651 & 0.6169 & 0.7890 \\
-\texttt{latent\_raw} & 0.1529 & 0.9573 & 0.5455 & 0.7212 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test: 2016--2019}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.1300 & 0.9527 & 0.6364 & 0.7856 \\
-\texttt{raw} & 0.1480 & 0.9674 & 0.6621 & 0.8233 \\
-\texttt{raw\_plus\_latent} & 0.1471 & 0.9670 & 0.6655 & 0.8199 \\
-\texttt{latent\_raw} & 0.1190 & 0.9600 & 0.5592 & 0.7496 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.45em}
-\textbf{Test-OOS: 2020--2024}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{3.0cm}R{1.25cm}R{1.25cm}R{1.35cm}R{1.35cm}}
-\toprule
-Model & AP & AUC & R@FPR3 & R@FPR5 \\
-\midrule
-\texttt{fund} & 0.0521 & 0.9224 & 0.4324 & 0.6366 \\
-\texttt{raw} & 0.0587 & 0.9495 & 0.4456 & 0.7109 \\
-\texttt{raw\_plus\_latent} & 0.0581 & 0.9502 & 0.4668 & 0.6950 \\
-\texttt{latent\_raw} & 0.0696 & 0.9438 & 0.4695 & 0.6950 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\vspace{-0.3em}
-\begin{block}{Main read}
+\begin{frame}{Appendix A13: Model Metric Caveats}
 \scriptsize
-\texttt{raw} is the best AutoGluon permanent-CSI model on the 2016--2019 test set by AP and R@FPR5. \texttt{raw\_plus\_latent} is essentially tied on CV and has the best test-OOS AUC/R@FPR3, while \texttt{latent\_raw} performs best on test-OOS AP but remains weaker on CV/test AP.
+\begin{block}{Comparability}
+\scriptsize
+The raw comparator is the revised-dataset optional-library AutoGluon rerun from AE-VALIDATE. Complete local threshold metrics were later materialized under \texttt{03\_Data\_Output/6\_ModelSuite/raw/derived\_metrics}, so the presentation uses AP, AUC, Brier, and R@FPR1/3/5 consistently across feature sets.
 \end{block}
+\vspace{0.15em}
+\begin{itemize}
+  \item AP and fixed-FPR recall are emphasized because CSI positives are rare.
+  \item AUC remains useful as a ranking diagnostic but can mask low-prevalence false-positive economics.
+  \item \texttt{raw\_plus\_latent} is the main enhanced feature-set challenger for temporary CSI and permanent test/CV.
+  \item \texttt{latent\_raw} is retained for permanent OOS robustness, not as a universal replacement.
+  \item Economic superiority is not claimed from model metrics alone; index-construction slides test benchmark-relative performance.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Appendix A14: Index Strategy Construction}
+
+\begin{frame}{Appendix A14: Final Index Grid Contract}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
-\textbf{Strategy menu}
+\textbf{Completed grid}
 \begin{itemize}
-  \item \textbf{Benchmark:} unfiltered market-cap-weighted index for each CRSP-like universe.
-  \item \textbf{Temporary CSI:} \dyn{} score triggers finite exclusions; firms can re-enter after lockout expiry.
-  \item Temporary thresholds: CV FPR $\leq 1\%$, CV FPR $\leq 3\%$, and Youden $J$.
-  \item Temporary lockouts: 1, 2, 3, and 5 years; this gives 12 filtered strategies per universe.
-  \item \textbf{Permanent CSI:} \perm{} score triggers absorbing removal after first active signal.
-  \item Permanent thresholds: CV FPR $\leq 1\%$, CV FPR $\leq 3\%$, and Youden $J$; this gives 3 filtered strategies per universe.
+  \item Models: \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, \texttt{raw\_plus\_latent}.
+  \item Tracks: temporary CSI and permanent CSI.
+  \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
+  \item Thresholds: Youden, FPR1, FPR3, FPR5.
 \end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
-\textbf{Portfolio rule}
-\vspace{-0.25em}
-\begin{align*}
-E_{i,t}^{temp} &= \mathbf{1}\{\hat p_{i,t}\geq \tau\}\times \mathbf{1}\{t \leq t_0 + L\},\\
-E_{i,t}^{perm} &= \mathbf{1}\{\exists s\leq t: \hat p_{i,s}\geq \tau\},\\
-w^{screen}_{i,t} &= \frac{(1-E_{i,t})MCAP_{i,t}}{\sum_{j\in U_t}(1-E_{j,t})MCAP_{j,t}}.
-\end{align*}
-\vspace{-0.7em}
+\textbf{Portfolio rules}
 \begin{itemize}
-  \item Thresholds are calibrated from model validation/CV predictions, not from index OOS returns.
-  \item Best-rule appendix rows select the highest annualized geometric return within each track, period, and universe.
-  \item Error-cost decomposition reports annualized pp contributions from false positives, false negatives, true positives, and true negatives.
+  \item Temporary CSI: 1-, 2-, 3-, and 5-year exclusion lockouts.
+  \item Permanent CSI: absorbing permanent removal after first active signal.
+  \item Costs: 0, 5, 10, and 20 bps on gross turnover.
+  \item Turnover output is populated for every model--track--universe cell.
 \end{itemize}
 \end{column}
 \end{columns}
-% \sourcefoot{\texttt{11C\_IndexConstruction\_Revised.R}; \texttt{11c\_crsp\_index\_csi\_results\_20260516.md}.}
+\vspace{0.4em}
+\begin{alertblock}{Presentation interpretation}
+\scriptsize
+The index section uses OOS economic performance. Model metrics identify useful prediction signals; index construction tests whether those signals improve benchmark-relative returns after thresholding, exclusions, turnover, and transaction costs.
+\end{alertblock}
+\remarkfoot{Source: \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
 \end{frame}
 
-\begin{frame}{Appendix A15: Temporary CSI Index Results - Test}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
+\begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
+\fontsize{5.65pt}{6.15pt}\selectfont
+\textbf{Best strategy by track and universe at 20 bps}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{1.0cm}L{1.1cm}L{1.35cm}L{1.35cm}R{0.70cm}R{0.70cm}R{0.70cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule
-Total Market & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & -- \\
- & Youden / 3yr & 14.43\% & 11.08\% & 1.011 & -12.57\% & -7.51\% & +0.676 \\
-Large Cap & Benchmark & 14.18\% & 11.60\% & 0.952 & -13.82\% & -8.02\% & -- \\
- & Youden / 3yr & 14.68\% & 10.88\% & 1.047 & -12.09\% & -7.19\% & +0.493 \\
-Mid Cap & Benchmark & 13.82\% & 12.85\% & 0.846 & -15.30\% & -8.68\% & -- \\
- & Youden / 3yr & 14.27\% & 11.91\% & 0.937 & -13.70\% & -8.05\% & +0.449 \\
-Small Cap & Benchmark & 11.44\% & 15.55\% & 0.586 & -20.07\% & -10.80\% & -- \\
- & Youden / 2yr & 12.13\% & 14.03\% & 0.678 & -18.27\% & -10.24\% & +0.692 \\
+Temp. & Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp \\
+Temp. & Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp \\
+Temp. & Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp \\
+Perm. & Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
+\scriptsize
+VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is shown as the return reference and does not receive a strategy cost overlay.
+\remarkfoot{Source: \texttt{presentation\_headline\_tables.md}; final claim from \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+\end{frame}
+
+\begin{frame}{Appendix A16: Transaction-Cost Robustness}
+\fontsize{5.75pt}{6.25pt}\selectfont
+\textbf{Top winner did not change between 0 and 20 bps}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.05cm}L{1.15cm}L{1.50cm}L{1.50cm}R{0.74cm}R{0.74cm}}
+\toprule
+Track & Universe & Winner 0 bps & Winner 20 bps & Alpha 0 & Alpha 20 \\
+\midrule
+Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
+Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
+Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
+Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
+Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
+Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
+Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
+Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\scriptsize
+Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enough for presentation, but not high enough to reverse the headline rankings.
+\remarkfoot{Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+\end{frame}
+
+\begin{frame}{Appendix A17: Threshold Family and Turnover Summary}
+\fontsize{5.85pt}{6.35pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.50\textwidth}
+\textbf{Mean best alpha by threshold family}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
+\begin{tabular}{L{1.15cm}L{1.15cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
+Track & Threshold & Mean alpha \\
 \midrule
-Total Market & Youden / 3yr & -1.528 & -0.001 & +0.084 & +2.097 \\
-Large Cap & Youden / 3yr & -1.212 & +0.000 & +0.003 & +1.715 \\
-Mid Cap & Youden / 3yr & -1.810 & +0.000 & +0.015 & +2.651 \\
-Small Cap & Youden / 2yr & -3.224 & -0.008 & +0.360 & +3.130 \\
+Temp. & Youden & +0.35pp \\
+Temp. & FPR3 & +0.19pp \\
+Temp. & FPR5 & +0.17pp \\
+Temp. & FPR1 & +0.12pp \\
+Perm. & FPR3 & +0.35pp \\
+Perm. & FPR5 & +0.33pp \\
+Perm. & FPR1 & +0.14pp \\
+Perm. & Youden & -0.20pp \\
 \bottomrule
 \end{tabular}
 \end{table}
-% \sourcefoot{\texttt{dynamic\_index\_performance\_by\_crsp\_universe.csv}; \texttt{dynamic\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{test}. Contributions and $\Delta$ are annualized pp.}
-\end{frame}
-
-\begin{frame}{Appendix A16: Temporary CSI Index Results -- Test-OOS}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
-\midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / 5yr & 13.41\% & 18.50\% & 0.615 & -24.20\% & -11.44\% & +0.119 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR1 / 1yr & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.83\% & -0.020 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & Youden / 1yr & 9.68\% & 20.09\% & 0.414 & -23.55\% & -13.03\% & +0.030 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & Youden / 3yr & 9.03\% & 21.98\% & 0.370 & -29.12\% & -15.60\% & +1.372 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Mean annualized turnover for winners}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
+\begin{tabular}{L{1.15cm}R{0.78cm}R{0.78cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
+Universe & Temp. & Perm. \\
 \midrule
-Total Market & FPR3 / 5yr & -0.970 & -0.003 & +0.064 & +0.782 \\
-Large Cap & FPR1 / 1yr & -0.018 & +0.000 & +0.000 & +0.005 \\
-Mid Cap & Youden / 1yr & -3.552 & +0.000 & -0.004 & +2.875 \\
-Small Cap & Youden / 3yr & -7.648 & -0.034 & +0.463 & +7.455 \\
+Total & 15.3\% & 12.2\% \\
+Large & 18.8\% & 17.2\% \\
+Mid & 97.7\% & 97.0\% \\
+Small & 77.2\% & 72.4\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-% \sourcefoot{\texttt{dynamic\_index\_performance\_by\_crsp\_universe.csv}; \texttt{dynamic\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{oos}. Contributions and $\Delta$ are annualized pp.}
+\end{column}
+\end{columns}
+\vspace{0.2em}
+\scriptsize
+Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI is strongest with FPR3/FPR5. Turnover is concentrated in Mid and Small Cap, where exclusions shift more of the investable universe.
+\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}; \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A17: Permanent CSI Index Results -- Test}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
-\midrule
-Total Market & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & -- \\
- & Youden / perm. & 14.19\% & 10.39\% & 1.050 & -10.44\% & -7.06\% & +0.432 \\
-Large Cap & Benchmark & 14.18\% & 11.60\% & 0.952 & -13.82\% & -8.02\% & -- \\
- & FPR3 / perm. & 14.40\% & 11.44\% & 0.981 & -13.64\% & -7.91\% & +0.220 \\
-Mid Cap & Benchmark & 13.82\% & 12.85\% & 0.846 & -15.30\% & -8.68\% & -- \\
- & Youden / perm. & 14.63\% & 10.80\% & 1.050 & -12.15\% & -7.45\% & +0.805 \\
-Small Cap & Benchmark & 11.44\% & 15.55\% & 0.586 & -20.07\% & -10.80\% & -- \\
- & Youden / perm. & 13.09\% & 13.27\% & 0.774 & -17.90\% & -9.90\% & +1.652 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
-\midrule
-Total Market & Youden / perm. & -4.490 & -0.003 & +0.055 & +4.367 \\
-Large Cap & FPR3 / perm. & -0.429 & +0.000 & -0.000 & +0.510 \\
-Mid Cap & Youden / perm. & -4.871 & +0.000 & -0.001 & +5.308 \\
-Small Cap & Youden / perm. & -5.048 & -0.020 & +0.209 & +5.617 \\
-\bottomrule
-\end{tabular}
-\end{table}
-% \sourcefoot{\texttt{permanent\_index\_performance\_by\_crsp\_universe.csv}; \texttt{permanent\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{test}. Contributions and $\Delta$ are annualized pp.}
+\begin{frame}{Appendix A18: Index Result Source Paths}
+\scriptsize
+\textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
+\vspace{0.25em}
+\begin{itemize}
+  \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
+  \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
+  \item Transaction costs: \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
+  \item Turnover: \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Full grid comparisons: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+\end{itemize}
+\vspace{0.3em}
+\begin{block}{Source discipline}
+\scriptsize
+All claims in the index-result slides are sourced from the completed AE-INDEX-SUITE grid. Sensitivity-analysis results are intentionally not finalized in this section.
+\end{block}
 \end{frame}
 
-\begin{frame}{Appendix A18: Permanent CSI Index Results -- Test-OOS}
-\fontsize{4.65pt}{5.05pt}\selectfont
-\textbf{Performance: benchmark row followed by selected best rule}
-\vspace{-0.35em}
+\begin{frame}{Appendix A19: Future Robustness and Extensions}
+\scriptsize
+\begin{alertblock}{Not completed results}
+\scriptsize
+The items below are explicitly future validation or extensions. They should not be read as completed empirical findings in this deck.
+\end{alertblock}
+\vspace{0.15em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.35pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.65cm}R{0.82cm}R{0.78cm}R{0.65cm}}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{L{2.8cm}L{4.2cm}L{3.5cm}}
 \toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe & Max DD & ES 2.5\% & $\Delta$ pp \\
+Item & Purpose & Current status \\
 \midrule
-Total Market & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & -- \\
- & FPR3 / perm. & 13.76\% & 18.64\% & 0.629 & -24.21\% & -11.38\% & +0.472 \\
-Large Cap & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & -- \\
- & FPR3 / perm. & 14.62\% & 18.30\% & 0.678 & -24.10\% & -10.73\% & +0.345 \\
-Mid Cap & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & -- \\
- & FPR1 / perm. & 10.08\% & 20.56\% & 0.427 & -24.38\% & -13.85\% & +0.426 \\
-Small Cap & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & -- \\
- & FPR3 / perm. & 7.61\% & 23.13\% & 0.306 & -29.39\% & -16.11\% & -0.042 \\
+Permanent-CSI sensitivity grid & Test label-threshold robustness for the permanent response track. & Planned / not completed \\
+Minimum-volatility benchmark & Check whether CSI screens add value beyond a low-risk index comparator. & Planned / not completed \\
+Quality/risk-scaling benchmark & Compare exclusions with quality or risk-scaled benchmark construction. & Planned / not completed \\
+Active CSI-probability weighting & Use CSI probabilities continuously rather than thresholded exclusions. & Planned / not completed \\
+Recovered bankrupt/insolvent diagnostic & Decompose remaining terminal-failure misses and recovery cases. & Planned / not completed \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{-0.85em}
-\textbf{Error-cost contribution of selected best rule}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.55cm}L{1.55cm}R{0.85cm}R{0.85cm}R{0.85cm}R{0.85cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain \\
-\midrule
-Total Market & FPR3 / perm. & -1.261 & -0.001 & +0.022 & +1.371 \\
-Large Cap & FPR3 / perm. & -0.849 & +0.000 & +0.000 & +0.969 \\
-Mid Cap & FPR1 / perm. & -0.167 & +0.000 & +0.000 & +0.536 \\
-Small Cap & FPR3 / perm. & -3.109 & -0.017 & +0.076 & +2.938 \\
-\bottomrule
-\end{tabular}
-\end{table}
-% \sourcefoot{\texttt{permanent\_index\_performance\_by\_crsp\_universe.csv}; \texttt{permanent\_error\_cost\_decomposition\_by\_crsp\_universe.csv}; period = \texttt{oos}. Contributions and $\Delta$ are annualized pp.}
+\remarkfoot{Source status is mapped in \texttt{SLIDE\_DATA\_SOURCES.md}; these are future-work notes, not result claims.}
 \end{frame}
 
-% \begin{frame}{Appendix A19: Validation Caveats and Unresolved Issues}
-% \scriptsize
-% \begin{table}[ht]
-% \centering
-% \begin{tabular}{L{2.2cm}L{4.0cm}L{4.5cm}}
-% \toprule
-% Severity & Caveat & Proposal handling \\
-% \midrule
-% High & Robustness grid was not regenerated in validated 03b run because \texttt{CSI\_RUN\_GRID=0}. & Label grid slides as persisted robustness evidence only. \\
-% High & Model results are latest documented implementation artifacts, not final thesis-grade claims. & Present as current evidence and rerun if revised labels materially alter targets. \\
-% High & Panel scaffold denominators can overstate non-event cells if unobserved firm-years remain in the label panel. & Keep prevalence denominator caveat visible; validate observed eligible firm-year denominator. \\
-% Medium & \texttt{10\_Evaluation.R} convention and model registry differ from 09C summary artifacts. & Use 09C artifacts for proposal tables; align final evaluation before thesis claims. \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{frame}
-
-% \begin{frame}{Appendix A20: Source Crosswalk}
-% \scriptsize
-% \begin{table}[ht]
-% \centering
-% \begin{tabular}{L{4.1cm}L{6.0cm}}
-% \toprule
-% Deck element & Primary source \\
-% \midrule
-% Proposal narrative and model tables & \texttt{Final\_Presentation\_Content\_Baseline.md} \\
-% Temporary CSI formulas & \texttt{CSI\_Classification\_Temporary\_CSI\_Methodology.md} \\
-% Bankruptcy override counts & \texttt{Temporary\_CSI\_CRSP\_Bankruptcy\_Delisting\_Insights.md} \\
-% Robustness grid & \texttt{dynamic\_csi\_robustness\_report.md} \\
-% Permanent CSI formulas & \texttt{CSI\_Classification\_Permanent\_CSI\_Methodology.md} \\
-% Pipeline stages & \texttt{Code\_Pipeline\_Documentation.md} \\
-% Index construction results & \texttt{Results/Index\_Construction/11c\_crsp\_index\_csi\_results\_20260516.md} \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{frame}
+\begin{frame}{Appendix A20: Slide-to-Source Audit Map}
+\scriptsize
+\begin{block}{Audit artifact}
+\scriptsize
+The complete slide-to-source map is stored beside this June source deck:
+\texttt{06\_Presentations/02\_FinalPresentation/Necessary/FinalPresentation\_June/SLIDE\_DATA\_SOURCES.md}.
+\end{block}
+\vspace{0.2em}
+\begin{itemize}
+  \item Dataset and label slides map to AE-PANEL evidence and descriptive-statistics CSVs.
+  \item Model slides map to AE-MODEL-SUITE comparison files and threshold metrics.
+  \item Index slides map to AE-INDEX-SUITE final-table and comparison outputs.
+  \item Sensitivity slides map to local AE-SENS manifests and comparison artifacts.
+  \item Conceptual or future-work slides are marked as such rather than linked to empirical result files.
+\end{itemize}
+\remarkfoot{This appendix frame is a navigation pointer; the source map contains per-frame paths and source type.}
+\end{frame}
 
 \begin{frame}[allowframebreaks]{Bibliography}
 \nocite{Altman1968,Campbell2008,Cembalest2014,Penman2018,Shumway1997,Shumway2001,Tewari2024}
