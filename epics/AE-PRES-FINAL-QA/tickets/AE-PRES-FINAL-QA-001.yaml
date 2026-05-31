@@ -1,0 +1,30 @@
+ticket_id: AE-PRES-FINAL-QA-001
+goal: "Remove y=NA rows/columns from the presentation's displayed cleaned-label count tables where those rows are not needed for the final story."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-QA_Final_Deck_QA/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-QA/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Update main presentation tables so y=NA rows/columns are not shown where the intended displayed sample is the labelled/training/evaluation sample."
+  - "Preserve a concise note that unresolved labels are excluded from labelled prevalence/training/evaluation, without showing them in the main table."
+  - "Do not alter source data or computed outputs."
+  - "Update SLIDE_DATA_SOURCES.md and scoped evidence."
+non_goals:
+  - "Do not rerun data/model/index/sensitivity scripts."
+  - "Do not remove appendix/source evidence unless it is presentation text only and clearly scoped."
+acceptance_criteria:
+  - "Main count table no longer displays y=NA as a core table column/row."
+  - "Labelled rows and prevalence remain correct."
+  - "Source map and evidence are updated."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

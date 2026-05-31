@@ -1,0 +1,29 @@
+ticket_id: AE-PRES-QA-FIX-002
+goal: "Investigate CRSP bankruptcy/insolvency firms that later reentered the index and identify relevant CRSP codes."
+dependencies:
+  - AE-PRES-QA-FIX-001 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inspect existing inputs/outputs/code read-only to identify CRSP bankruptcy/insolvency code source and reentry evidence."
+  - "Report count/list of firms if possible; otherwise return needs_clarification with precise missing information."
+  - "Do not change methodology."
+non_goals:
+  - "Do not modify data, code, presentation, or outputs."
+acceptance_criteria:
+  - "Diagnostic report exists or blocker is explicit."
+  - "CRSP code basis is documented."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human reviews whether any methodology decision is needed."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

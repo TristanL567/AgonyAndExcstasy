@@ -1,0 +1,27 @@
+ticket_id: AE-PRES-QA-FIX-003
+goal: "Update Slide 10 to show CV and test model results, not OOS."
+dependencies:
+  - AE-PRES-QA-FIX-002 approved or non-blocking
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Replace OOS results on Slide 10 with CV-AP, CV-AUC, CV-FPR3, Test-AP, Test-AUC, Test-FPR3."
+  - "Use final model-suite metrics and current model labels."
+  - "Update source map and evidence."
+non_goals:
+  - "Do not recompute metrics."
+acceptance_criteria:
+  - "Slide 10 contains CV/test columns only."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

@@ -1,0 +1,15 @@
+check,expected,observed,status
+aegis_runbooks_read,required,"multi-master-dispatch, shared-orchestration-loop, epic-contract, swarm-contract, ticket-contract read",pass
+chart_png_exists,true,"05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/charts/slide48_cv_metrics_vs_cv_test_alpha.png",pass
+chart_pdf_exists,true,"05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/charts/slide48_cv_metrics_vs_cv_test_alpha.pdf",pass
+cv_metrics_included,"AP; AUC; R@FPR3; R@FPR5","CV AP; CV AUC; CV R@FPR3; CV R@FPR5",pass
+alpha_periods_included,"insample/CV-proxy; test","insample/CV-proxy; test",pass
+insample_limitation_documented,true,"Slide/report state insample is a CV-proxy because 11C source period is named insample",pass
+source_map_updated,true,"SLIDE_DATA_SOURCES.md row 48 updated",pass
+no_03_data_output_modified,true,"No writes made under 03_Data_Output",pass
+no_code_or_input_modified,true,"No 01_Code or 02_Data_Input files modified",pass
+no_cloud_modified,true,"No 07_CloudComputing files modified",pass
+no_remote_or_rerun,true,"No Vast.ai, SSH, model, index, or sensitivity reruns used",pass
+deck_compile_passed,true,"knitr, bibtex, and pdflatex passes completed; final PDF has 51 pages in compile log",pass
+frame_source_map_count_match,true,"Rnw frame count 51; SLIDE_DATA_SOURCES.md mapped rows 51",pass
+slide48_visual_qa_passed,true,"Rendered visual_qa/AE-PRES-QA-FIX-008_slide48-48.png; chart and interpretation bullets fit without observed clipping",pass

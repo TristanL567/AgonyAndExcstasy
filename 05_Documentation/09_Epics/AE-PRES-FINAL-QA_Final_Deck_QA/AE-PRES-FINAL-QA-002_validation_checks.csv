@@ -1,0 +1,10 @@
+check,result,notes
+ticket_scope_respected,pass,"Changed files are limited to June presentation/source map, scoped evidence, and epic ledger."
+source_outputs_unchanged,pass,"No 03_Data_Output files were modified or created."
+code_data_cloud_unchanged,pass,"No 01_Code, 02_Data_Input, or 07_CloudComputing files were modified."
+error_cost_audited,pass,"Displayed error-cost rows were compared against best_by_track_index_cost.csv and model-specific error_cost_decomposition_by_crsp_universe.csv files."
+net_alpha_definition_preserved,pass,"Geo alpha is defined as strategy annualized geometric return minus benchmark annualized geometric return for the same selected row."
+non_additive_components_labelled,pass,"Slides now state FP/FN/TP/TN are non-additive annualized category diagnostics."
+misleading_sum_claim_removed,pass,"Slide notes no longer claim FP/FN/TP/TN exactly sum to geometric alpha."
+source_map_updated,pass,"SLIDE_DATA_SOURCES.md rows for slides 21 and 24 were updated."
+scripts_not_run,pass,"No model, data, index, sensitivity, or presentation compile script was run."

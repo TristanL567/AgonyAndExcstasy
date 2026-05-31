@@ -1,0 +1,27 @@
+ticket_id: AE-PRES-QA-FIX-004
+goal: "Add error decomposition slides after the main performance comparison slides."
+dependencies:
+  - AE-PRES-QA-FIX-003 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "After each relevant performance comparison slide, add error decomposition covering FP, FN, TP, TN, and total alpha split-up."
+  - "Use existing decomposition outputs only."
+  - "If decomposition outputs are missing, stop and recommend a separate computation ticket."
+non_goals:
+  - "Do not run index construction or generate new output data."
+acceptance_criteria:
+  - "Error decomposition slides/tables are inserted and sourced, or blocker is explicit."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

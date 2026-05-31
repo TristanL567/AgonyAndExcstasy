@@ -1,0 +1,8 @@
+check,status,evidence
+AEGIS runbooks/contracts inspected,pass,"multi-master-dispatch; shared-orchestration-loop; epic/ticket/swarm contracts"
+ticket envelope read,pass,"epics/AE-PRES-QA-FIX/tickets/AE-PRES-QA-FIX-001.yaml"
+slide 6 explains OOS y=NA count,pass,"Rnw states 3,342 censored trigger labels plus 5,332 observable 2024 rows requiring unavailable 2025 event-year labels"
+unresolved rows distinguished from dropped observations,pass,"Rnw states retained y=NA rows are observable firm-years with unresolved labels, not dropped rows"
+training/evaluation/prevalence policy stated,pass,"Rnw states y=NA rows are excluded from supervised training, label-based evaluation, and prevalence denominator"
+source map updated,pass,"SLIDE_DATA_SOURCES.md row 6 includes AE-PANEL-004 and count source"
+restricted data/code/output areas untouched,pass,"No intended edits outside allowed presentation/evidence/epic areas"

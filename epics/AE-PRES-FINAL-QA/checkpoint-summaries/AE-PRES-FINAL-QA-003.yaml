@@ -1,0 +1,16 @@
+ticket_id: AE-PRES-FINAL-QA-003
+checkpoint_type: final_validation
+human_checkpoint_ticket: true
+human_approved_before_dispatch: true
+status: completed
+summary: "Final June deck compiled and validated after count-table and error-cost diagnostic QA edits."
+pdf_path: "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf"
+frame_count: 51
+page_count: 51
+source_map_rows: 51
+visual_qa: pass
+merge_gate: "not executed; remains separate"
+residual_notes:
+  - "MiKTeX user-log write warnings are nonblocking."
+  - "Compact-table overfull warnings remain nonblocking after visual QA."
+  - "Known unrelated dirty files remain unstaged."

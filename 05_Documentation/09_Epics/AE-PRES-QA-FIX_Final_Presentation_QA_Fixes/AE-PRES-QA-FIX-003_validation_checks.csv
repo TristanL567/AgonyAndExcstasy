@@ -1,0 +1,7 @@
+check,status,evidence
+ticket envelope read,pass,"epics/AE-PRES-QA-FIX/tickets/AE-PRES-QA-FIX-003.yaml"
+slide 10 table uses CV/test columns only,pass,"Columns: CV AP, CV AUC, CV FPR3, Test AP, Test AUC, Test FPR3"
+OOS columns removed from slide 10 table,pass,"No OOS AP/OOS AUC columns remain in Slide 10 table"
+source map updated,pass,"SLIDE_DATA_SOURCES.md row 10 references CV/test sensitivity model summary evidence"
+no recomputation,pass,"Values read from existing presentation_ready/sensitivity_cmt_model_summary.csv"
+restricted paths untouched,pass,"No intended modifications under 01_Code, 02_Data_Input, 03_Data_Output, or 07_CloudComputing"

@@ -1,0 +1,31 @@
+ticket_id: AE-PRES-QA-FIX-007
+goal: "Compile, visually QA, validate source map, and close the presentation QA fix epic."
+dependencies:
+  - AE-PRES-QA-FIX-006 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compile final presentation."
+  - "Visual QA changed slides."
+  - "Confirm source map row count matches frame count."
+  - "Create closeout report and checkpoint summary."
+non_goals:
+  - "Do not merge the epic branch."
+acceptance_criteria:
+  - "PDF compiles."
+  - "Visual QA passes or nonblocking risks are documented."
+  - "Closeout report exists."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human reviews final deck and decides whether merge gate may proceed."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

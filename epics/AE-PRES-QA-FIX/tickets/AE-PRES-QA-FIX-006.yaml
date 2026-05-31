@@ -1,0 +1,26 @@
+ticket_id: AE-PRES-QA-FIX-006
+goal: "Restructure and update the appendix to match the logical flow of the presentation."
+dependencies:
+  - AE-PRES-QA-FIX-005 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Appendix should follow: dataset/labels, feature/model setup, CV/test metrics, OOS robustness, index construction, error decomposition, transaction costs/turnover, sensitivity, model-index linkage, future work, source audit."
+  - "Update headings/order and source map."
+non_goals:
+  - "Do not create new analytical outputs."
+acceptance_criteria:
+  - "Appendix is coherent and source map remains complete."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

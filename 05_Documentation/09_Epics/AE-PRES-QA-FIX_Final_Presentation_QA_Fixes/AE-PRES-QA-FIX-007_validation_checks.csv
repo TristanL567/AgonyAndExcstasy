@@ -1,0 +1,12 @@
+check,result,details
+ticket_scope,pass,"Executed only AE-PRES-QA-FIX-007."
+compile_knitr,pass,"knitr::knit regenerated FinalPresentation_TristanLeiter_h11815352.tex."
+compile_pdflatex,pass,"pdflatex/bibtex/pdflatex/pdflatex completed and produced a 51-page PDF."
+pdf_exists,pass,"FinalPresentation_TristanLeiter_h11815352.pdf exists and is non-empty."
+visual_qa,pass,"Rendered pages 6, 10, 21, 24, 28, and 30-50; no blocking clipping or missing content observed."
+source_map_count,pass,"Frame count is 51 and SLIDE_DATA_SOURCES.md has 51 mapped rows."
+appendix_source_map_alignment,pass,"Appendix frame titles and source-map appendix rows match after AE-PRES-QA-FIX-006 reorder."
+checkpoint_summary,pass,"AE-PRES-QA-FIX-007_Checkpoint_Summary.md created."
+forbidden_paths,pass,"No 01_Code, 02_Data_Input, 03_Data_Output, or 07_CloudComputing paths were modified."
+no_merge,pass,"No merge command was run; merge gate remains separate."
+nonblocking_warnings,pass,"MiKTeX user-log write warnings and compact-table overfull hboxes documented as nonblocking."

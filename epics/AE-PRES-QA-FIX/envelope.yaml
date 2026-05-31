@@ -1,0 +1,34 @@
+epic_id: AE-PRES-QA-FIX
+goal: "Resolve final-presentation QA fixes: NA explanation, CRSP bankruptcy/reentry diagnostic, model table correction, error decomposition placement, sensitivity chart/table addition, appendix restructuring, and final compile QA."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-PRES-QA-FIX-002
+  - AE-PRES-QA-FIX-007
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-PRES-QA-FIX-001
+  - AE-PRES-QA-FIX-002
+  - AE-PRES-QA-FIX-003
+  - AE-PRES-QA-FIX-004
+  - AE-PRES-QA-FIX-005
+  - AE-PRES-QA-FIX-006
+  - AE-PRES-QA-FIX-007
+  - AE-PRES-QA-FIX-008
+depends_on_epics:
+  - AE-SENS-CHART
+  - AE-MODEL-INDEX-LINK
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

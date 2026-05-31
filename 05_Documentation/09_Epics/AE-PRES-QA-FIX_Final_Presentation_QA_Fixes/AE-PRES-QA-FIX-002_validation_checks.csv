@@ -1,0 +1,7 @@
+check,status,evidence
+source delisting exists,pass,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/02_Data_Input/01_CRSP/Necessary/delisting_raw.rds
+source index constituents exists,pass,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/02_Data_Input/04_Index_Replication/Necessary/crsp_like_index_constituents_quarterly.rds
+bankruptcy codes documented by repo code,pass,config.R CSI_TERMINAL_FAILURE_CODES <- 572:574; 13b labels 574 and 572-574
+detail csv written,pass,AE-PRES-QA-FIX-002_bankruptcy_reentry_firm_detail.csv
+summary csv written,pass,AE-PRES-QA-FIX-002_bankruptcy_reentry_summary.csv
+no methodology change,pass,diagnostic only

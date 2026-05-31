@@ -1,0 +1,9 @@
+check,status,evidence
+ticket envelope read,pass,"epics/AE-PRES-QA-FIX/tickets/AE-PRES-QA-FIX-004.yaml"
+decomposition outputs exist,pass,"Existing error_cost_decomposition_by_crsp_universe.csv files found under nonraw_index_suite"
+temporary decomposition slide inserted,pass,"Frame 21: Temporary CSI: Error-Cost Decomposition"
+permanent decomposition slide inserted,pass,"Frame 24: Permanent CSI: Error-Cost Decomposition"
+required decomposition columns present,pass,"FP cost; FN cost; TP gain; TN gain; Net"
+source map updated,pass,"SLIDE_DATA_SOURCES.md has 51 rows for 51 frames"
+no new output data generated,pass,"No writes under 03_Data_Output"
+restricted paths untouched,pass,"No intended modifications under 01_Code, 02_Data_Input, 03_Data_Output, or 07_CloudComputing"
