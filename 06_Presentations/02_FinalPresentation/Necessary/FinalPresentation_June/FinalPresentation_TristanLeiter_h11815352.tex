@@ -1278,45 +1278,69 @@ Values are benchmark-relative geometric return deltas in percentage points.
 
 \section{Next Steps}
 
-\begin{frame}{Remaining Robustness Work}
+\begin{frame}{CRSP Bankruptcy Reentry Check}
 \small
-\begin{alertblock}{What is complete vs. still future work}
+\begin{alertblock}{Checked evidence}
 \scriptsize
-Temporary-CSI C/M/T sensitivity is complete locally and supports the presentation robustness narrative. The remaining items below are extensions or validation work, not completed results.
+For firms with CRSP 572--574 bankruptcy-related delisting codes, the checked local evidence shows no reentry into the annual sample after the delisting year and no later reentry into the CRSP-like index constituents after the delisting date.
 \end{alertblock}
 
-\vspace{0.35em}
+\vspace{0.25em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{L{3.75cm}R{1.15cm}}
+\toprule
+Read-only check & Count \\
+\midrule
+CRSP 572--574 firms checked & 629 \\
+Annual sample rows after delisting year & 0 \\
+CRSP-like index rows after delisting date & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\begin{column}{0.49\textwidth}
+\begin{block}{CRSP coding implication}
+\scriptsize
+The checked artifacts use CRSP 572--574 as terminal bankruptcy-related delisting evidence. They do not contain a specific CRSP reentry code for companies that later reenter.
+\end{block}
+
+\vspace{0.2em}
+\scriptsize
+This keeps the bankruptcy override as an additive terminal-failure rule: it validates a CSI-like trigger inside the timing window, but it is not a standalone reentry classifier.
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{F\_bankruptcy\_detection\_firm\_detail.csv}; \texttt{panel\_raw.rds}; \texttt{crsp\_like\_index\_constituents\_quarterly.rds}; AE-PRES-FINAL-REV2-004 evidence.}
+\end{frame}
+
+\begin{frame}{To-Do: Index Construction}
+\small
+\begin{alertblock}{Future index-construction checks only}
+\scriptsize
+The remaining To-Do items below are comparator-construction tasks, not completed empirical results.
+\end{alertblock}
+
+\vspace{0.55em}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
-\node[draw=MainColour, fill=MainColour!8, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{Permanent-CSI sensitivity grid}\\[2pt]
-\scriptsize Repeat the C/M/T-style robustness logic for the permanent response track before claiming permanent-label sensitivity.};
-\end{tikzpicture}
-
-\vspace{0.45em}
-\begin{tikzpicture}
-\node[draw=orange!70!black, fill=orange!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{Benchmark extensions}\\[2pt]
-\scriptsize Minimum-volatility and quality/risk-scaling benchmarks remain future comparator work.};
+\node[draw=orange!70!black, fill=orange!12, rounded corners=4pt, inner sep=9pt, text width=5.3cm, align=left] {%
+\scriptsize\textbf{Low-volatility approach}\\[2pt]
+\scriptsize Build a low-volatility index-construction comparator for the same benchmark universes and cost convention.};
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.49\textwidth}
 \begin{tikzpicture}
-\node[draw=teal!60!black, fill=teal!12, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{Probability-weighted strategy}\\[2pt]
-\scriptsize Active CSI-probability weighting is not yet implemented; current results use thresholded exclusions.};
-\end{tikzpicture}
-
-\vspace{0.45em}
-\begin{tikzpicture}
-\node[draw=warningRed, fill=warningRed!10, rounded corners=4pt, inner sep=8pt, text width=5.2cm, align=left] {%
-\scriptsize\textbf{Residual terminal-failure diagnostic}\\[2pt]
-\scriptsize Recovered bankrupt/insolvent firm diagnostics remain a follow-up, not a completed robustness result.};
+\node[draw=teal!60!black, fill=teal!12, rounded corners=4pt, inner sep=9pt, text width=5.3cm, align=left] {%
+\scriptsize\textbf{Quality approach}\\[2pt]
+\scriptsize Build a quality-oriented index-construction comparator before claiming quality-adjusted robustness.};
 \end{tikzpicture}
 \end{column}
 \end{columns}
-\remarkfoot{The final index suite and the temporary sensitivity grid answer different questions and are kept separate in the presentation.}
+\remarkfoot{Source status: planned / not completed result.}
 \end{frame}
 
 %==== APPENDIX ================================================================%
