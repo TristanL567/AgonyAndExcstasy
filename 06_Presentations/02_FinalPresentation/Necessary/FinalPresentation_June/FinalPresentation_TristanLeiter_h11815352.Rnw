@@ -278,7 +278,7 @@ y_{i,t} =
 \small
 \begin{alertblock}{Temporary CSI}
 \scriptsize
-Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold; censored triggers and unavailable 2025 event-year labels remain as $y=\mathrm{NA}$.
+Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold. The 8,674 OOS $y=\mathrm{NA}$ rows are unresolved labels: 3,342 censored trigger labels plus 5,332 observable 2024 rows that would require unavailable 2025 event-year labels.
 \end{alertblock}
 
 \vspace{0.2em}
@@ -301,7 +301,7 @@ OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
 \vspace{0.15em}
 \begin{block}{Motivation for robustness}
 \scriptsize
-Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not dropped rows.
+Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not dropped rows; they are excluded from supervised training and label-based evaluation.
 \end{block}
 \end{frame}
 
