@@ -1,0 +1,22 @@
+ticket_id: AE-FEAT-IMPORT-002
+goal: "Compute or summarize metagroup-level feature importance in log-odds terms."
+dependencies:
+  - AE-FEAT-IMPORT-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Report importance for Base Features, Feature Engineered, and VAE groups."
+  - "Separate temporary CSI and permanent CSI."
+  - "Use CV/training evidence unless a later ticket explicitly scopes test/OOS reporting."
+acceptance_criteria:
+  - "Metagroup importance table and report exist."
+completion_report_required: true

@@ -1,0 +1,23 @@
+ticket_id: AE-FEAT-IMPORT-005
+goal: "Cross-check feature importance against model performance and false-positive diagnostics."
+dependencies:
+  - AE-FEAT-IMPORT-004
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compare important features/groups to the FP-vs-TP diagnostic findings."
+  - "Identify whether high-importance features plausibly explain false positives or true positives."
+acceptance_criteria:
+  - "Interpretation report exists with clear caveats."
+completion_report_required: true

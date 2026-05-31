@@ -1,0 +1,31 @@
+epic_id: AE-FEAT-IMPORT
+goal: "Compute and summarize feature importance in log-odds terms at three granularities: metagroups, feature groups, and individual features."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-FEAT-IMPORT-001
+  - AE-FEAT-IMPORT-006
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-FEAT-IMPORT-001
+  - AE-FEAT-IMPORT-002
+  - AE-FEAT-IMPORT-003
+  - AE-FEAT-IMPORT-004
+  - AE-FEAT-IMPORT-005
+  - AE-FEAT-IMPORT-006
+depends_on_epics:
+  - AE-MODEL-SUITE
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

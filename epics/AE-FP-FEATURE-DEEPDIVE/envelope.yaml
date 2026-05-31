@@ -1,0 +1,28 @@
+epic_id: AE-FP-FEATURE-DEEPDIVE
+goal: "Resolve the false-positive diagnostic limitation by locating or producing CV-only row-level feature evidence and identifying which features separate false positives from true positives without test/OOS leakage."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-FP-FEATURE-DEEPDIVE-001
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-FP-FEATURE-DEEPDIVE-001
+  - AE-FP-FEATURE-DEEPDIVE-002
+  - AE-FP-FEATURE-DEEPDIVE-003
+  - AE-FP-FEATURE-DEEPDIVE-004
+depends_on_epics:
+  - AE-FP-DIAG
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

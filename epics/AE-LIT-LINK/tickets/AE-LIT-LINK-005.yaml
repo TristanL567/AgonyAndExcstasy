@@ -1,0 +1,23 @@
+ticket_id: AE-LIT-LINK-005
+goal: "Create a thesis-to-literature linkage matrix and close the literature epic."
+dependencies:
+  - AE-LIT-LINK-004
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+may_read:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Map each key thesis claim/result to supporting or contrasting literature."
+  - "Flag gaps where claims need more cautious wording."
+  - "Do not edit slides or thesis docs unless explicitly requested later."
+acceptance_criteria:
+  - "Literature linkage matrix exists."
+  - "Closeout report exists."
+completion_report_required: true

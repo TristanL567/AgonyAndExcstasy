@@ -1,0 +1,22 @@
+ticket_id: AE-FEAT-IMPORT-004
+goal: "Compute or summarize individual-feature importance in log-odds terms."
+dependencies:
+  - AE-FEAT-IMPORT-003
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Rank individual features by absolute and signed log-odds impact where meaningful."
+  - "Separate temporary CSI and permanent CSI."
+  - "Flag unstable or unavailable feature-level estimates."
+acceptance_criteria:
+  - "Individual feature importance table and report exist."
+completion_report_required: true
