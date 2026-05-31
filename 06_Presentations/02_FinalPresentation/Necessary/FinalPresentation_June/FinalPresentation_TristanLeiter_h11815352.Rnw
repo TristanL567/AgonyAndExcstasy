@@ -1,4 +1,4 @@
-%==== KNITR ===================================================================%
+﻿%==== KNITR ===================================================================%
 
 <<echo=FALSE, eval=FALSE>>=
 library(knitr)
@@ -509,14 +509,14 @@ Permanent-CSI starts from a confirmed CSI event and separates terminal failure, 
 % Tier (ii)
 \node[csicheck, below=9mm of t1] (t2) {\textbf{Tier (ii): 5 years observed}\\[-1pt]\tiny recovered above $M$ within 5y?};
 
-% Single left-side red outcome — placed between the two tiers, offset left
+% Single left-side red outcome â€” placed between the two tiers, offset left
 \coordinate (midy) at ($(t1.south)!0.5!(t2.north)$);
 \node[csipos, anchor=east] at ([xshift=-2mm]t1.west |- midy) (term) {$y^{perm}=1$};
 
-% Right-side outcome — same height as Tier (ii)
+% Right-side outcome â€” same height as Tier (ii)
 \node[csipos, right=5mm of t2] (dur) {$y^{perm}=1$};
 
-% Below Tier (ii) — Recovered branch
+% Below Tier (ii) â€” Recovered branch
 \node[csineg, below=5mm of t2] (recov) {$y^{perm}=0$};
 
 % Edges
@@ -1281,58 +1281,7 @@ Temporary-CSI C/M/T sensitivity is complete locally and supports the presentatio
 \section{Appendix}
 
 
-\begin{frame}{Appendix A1: Temporary CSI Sensitivity Detail}
-\fontsize{5.55pt}{6.05pt}\selectfont
-\textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.6pt}
-\begin{tabular}{L{1.35cm}L{1.55cm}R{0.65cm}R{0.65cm}R{0.65cm}R{0.65cm}R{1.00cm}L{0.95cm}}
-\toprule
-Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
-\midrule
-Composite & \texttt{C090\_M000\_T012} & 12,761 & 7.02\% & 0.557 & 0.920 & +0.169pp & complete \\
-AP winner & \texttt{C060\_M000\_T012} & 31,596 & 17.49\% & 0.566 & 0.864 & +0.052pp & reused \\
-11C winner & \texttt{C090\_M020\_T018} & 6,035 & 3.34\% & 0.274 & 0.911 & +0.226pp & complete \\
-Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp & reused \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.05em}
-\begin{block}{Blocked partial cases}
-\scriptsize
-The grid represents 27 C/M/T configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. Blocked cases are represented in manifests but excluded from completed-run conclusions.
-\end{block}
-\begin{block}{Source interpretation}
-\scriptsize
-C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
-\end{block}
-\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix: Model AP Versus Index Alpha}
-\fontsize{6.0pt}{6.6pt}\selectfont
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
-\centering
-\includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart2_model_vs_index_sensitivity_scatter_refined.png}
-\end{column}
-\begin{column}{0.32\textwidth}
-\textbf{Model versus portfolio objective}
-\vspace{-0.15em}
-\begin{itemize}
-  \item AP and index alpha are related robustness diagnostics, but they are not the same objective.
-  \item The AP winner and total-market alpha winner differ across C/M/T settings.
-  \item The continuity baseline remains defensible, but it is not top-ranked.
-  \item This supports presenting sensitivity as a robustness check rather than a replacement for the accepted main run.
-\end{itemize}
-\end{column}
-\end{columns}
-\remarkfoot{Sources: \texttt{chart2\_model\_vs\_index\_sensitivity\_scatter\_refined.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; AE-SENS-CHART-001R interpretation.}
-\end{frame}
-
-\begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
+\begin{frame}{Appendix A1: Delisting and Bankruptcy Detection}
 \scriptsize
 \begin{table}[ht]
 \centering
@@ -1354,7 +1303,7 @@ The CRSP signal is not an independent default label. It only turns a CSI-like tr
 \end{block}
 \end{frame}
 
-\begin{frame}{Appendix A3: Revised Annual Prevalence}
+\begin{frame}{Appendix A2: Revised Annual Prevalence}
 \scriptsize
 \begin{columns}[t]
 \begin{column}{0.45\textwidth}
@@ -1401,7 +1350,7 @@ The current overlap audit supports the 545/84/86.65\% story. A full reason break
 \end{alertblock}
 \end{frame}
 
-\begin{frame}{Appendix A4: Cleaned Label Counts}
+\begin{frame}{Appendix A3: Cleaned Label Counts}
 \fontsize{4.8pt}{5.35pt}\selectfont
 \begin{table}[ht]
 \centering
@@ -1430,7 +1379,7 @@ Both targets remain rare after the observable-scaffold cleanup. $y=NA$ rows stay
 \sourcefoot{Labelled rows = $y=0+y=1$; prevalence = $y=1$/labelled rows.}
 \end{frame}
 
-\begin{frame}{Appendix A5: Descriptive Statistics -- Market Cap}
+\begin{frame}{Appendix A4: Descriptive Statistics -- Market Cap}
 \fontsize{5.7pt}{6.25pt}\selectfont
 \textbf{Market cap, USD millions}
 \vspace{-0.25em}
@@ -1461,7 +1410,7 @@ CSI-positive firms are much smaller across both definitions. In the full sample,
 \sourcefoot{Market cap is USD millions.}
 \end{frame}
 
-\begin{frame}{Appendix A6: Descriptive Statistics -- Other Medians}
+\begin{frame}{Appendix A5: Descriptive Statistics -- Other Medians}
 \fontsize{5.55pt}{6.1pt}\selectfont
 \begin{table}[ht]
 \centering
@@ -1490,7 +1439,7 @@ The positive class has sharply lower realized returns, smaller operating scale, 
 \sourcefoot{Assets and sales are USD millions.}
 \end{frame}
 
-\begin{frame}{Appendix A7: CV Folds, Leakage Controls, and Training Metric}
+\begin{frame}{Appendix A6: CV Folds, Leakage Controls, and Training Metric}
 \scriptsize
 \textbf{Expanding-window CV}
 
@@ -1521,7 +1470,7 @@ Fold & Training years & Validation years \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Appendix A8: Feature Family Inventory}
+\begin{frame}{Appendix A7: Feature Family Inventory}
 \scriptsize
 \begin{table}[ht]
 \centering
@@ -1539,7 +1488,7 @@ Metadata excluded & Labels, event dates, confirmation dates, censoring flags, an
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A9: VAE Architecture Details}
+\begin{frame}{Appendix A8: VAE Architecture Details}
 \scriptsize
 \begin{table}[ht]
 \centering
@@ -1558,7 +1507,7 @@ Status & Weakly supervised on training rows; test and OOS labels are not used fo
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A10: Temporary CSI Model Metrics}
+\begin{frame}{Appendix A9: Temporary CSI CV/Test/OOS Model Metrics}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
 \setlength{\tabcolsep}{1.8pt}
@@ -1587,7 +1536,7 @@ OOS & AG Exp. Dataset + VAE & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \text
 \remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A11: Permanent CSI Model Metrics}
+\begin{frame}{Appendix A10: Permanent CSI CV/Test/OOS Model Metrics}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
 \setlength{\tabcolsep}{1.8pt}
@@ -1616,7 +1565,7 @@ OOS & AG Exp. Dataset + VAE & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.020
 \remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A12: Model Family Winners}
+\begin{frame}{Appendix A11: Model Family Winners}
 \scriptsize
 \begin{alertblock}{AutoGluon selection evidence}
 \scriptsize
@@ -1644,7 +1593,7 @@ Permanent & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2041} & 291 \\
 \remarkfoot{Source: \texttt{AE-MODEL-SUITE-007\_model\_family\_winners.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A13: Model Metric Caveats}
+\begin{frame}{Appendix A12: Model Metric Caveats and OOS Robustness}
 \scriptsize
 \begin{block}{Comparability}
 \scriptsize
@@ -1661,7 +1610,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \end{frame}
 
 
-\begin{frame}{Appendix A14: Final Index Grid Contract}
+\begin{frame}{Appendix A13: Final Index Grid Contract}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
@@ -1691,7 +1640,7 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \remarkfoot{Sources: \texttt{comparison/full\_grid\_manifest.csv}; \texttt{comparison/best\_by\_track\_index\_cost.csv}; \texttt{comparison/turnover\_summary.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
+\begin{frame}{Appendix A14: 20 bps Winners With Benchmarks}
 \fontsize{5.65pt}{6.15pt}\selectfont
 \textbf{Best strategy by track and universe at 20 bps}
 \vspace{-0.25em}
@@ -1716,6 +1665,28 @@ Perm. & Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp 
 \scriptsize
 VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is shown as the return reference and does not receive a strategy cost overlay.
 \remarkfoot{Source: \texttt{presentation\_headline\_tables.md}; final claim from \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+\end{frame}
+
+\begin{frame}{Appendix A15: Error Decomposition and Index Source Paths}
+\scriptsize
+\textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
+\vspace{0.25em}
+\begin{itemize}
+  \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
+  \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
+  \item Transaction costs: \texttt{comparison/transaction\_cost\_impact.csv}; \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
+  \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
+  \item Threshold-family grid: \texttt{comparison/best\_by\_track\_index\_threshold\_family.csv}
+  \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
+  \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
+  \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
+  \item Error-cost decomposition: selected \texttt{fund}, \texttt{raw\_plus\_latent}, and \texttt{latent\_raw} \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
+\end{itemize}
+\vspace{0.3em}
+\begin{block}{Source discipline}
+\scriptsize
+All claims in the index-result slides are sourced from the completed AE-INDEX-SUITE grid. Sensitivity-analysis results are intentionally not finalized in this section.
+\end{block}
 \end{frame}
 
 \begin{frame}{Appendix A16: Transaction-Cost Robustness}
@@ -1793,29 +1764,58 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 \remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}; \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A18: Index Result Source Paths}
+\begin{frame}{Appendix A18: Temporary CSI Sensitivity Detail}
+\fontsize{5.55pt}{6.05pt}\selectfont
+\textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{L{1.35cm}L{1.55cm}R{0.65cm}R{0.65cm}R{0.65cm}R{0.65cm}R{1.00cm}L{0.95cm}}
+\toprule
+Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
+\midrule
+Composite & \texttt{C090\_M000\_T012} & 12,761 & 7.02\% & 0.557 & 0.920 & +0.169pp & complete \\
+AP winner & \texttt{C060\_M000\_T012} & 31,596 & 17.49\% & 0.566 & 0.864 & +0.052pp & reused \\
+11C winner & \texttt{C090\_M020\_T018} & 6,035 & 3.34\% & 0.274 & 0.911 & +0.226pp & complete \\
+Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp & reused \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.05em}
+\begin{block}{Blocked partial cases}
 \scriptsize
-\textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
-\vspace{0.25em}
-\begin{itemize}
-  \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
-  \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
-  \item Transaction costs: \texttt{comparison/transaction\_cost\_impact.csv}; \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
-  \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
-  \item Threshold-family grid: \texttt{comparison/best\_by\_track\_index\_threshold\_family.csv}
-  \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
-  \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
-  \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Error-cost decomposition: selected \texttt{fund}, \texttt{raw\_plus\_latent}, and \texttt{latent\_raw} \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
-\end{itemize}
-\vspace{0.3em}
-\begin{block}{Source discipline}
-\scriptsize
-All claims in the index-result slides are sourced from the completed AE-INDEX-SUITE grid. Sensitivity-analysis results are intentionally not finalized in this section.
+The grid represents 27 C/M/T configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. Blocked cases are represented in manifests but excluded from completed-run conclusions.
 \end{block}
+\begin{block}{Source interpretation}
+\scriptsize
+C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
+\end{block}
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A19: Future Robustness and Extensions}
+\begin{frame}{Appendix A19: Model AP Versus Index Alpha}
+\fontsize{6.0pt}{6.6pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.66\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart2_model_vs_index_sensitivity_scatter_refined.png}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Model versus portfolio objective}
+\vspace{-0.15em}
+\begin{itemize}
+  \item AP and index alpha are related robustness diagnostics, but they are not the same objective.
+  \item The AP winner and total-market alpha winner differ across C/M/T settings.
+  \item The continuity baseline remains defensible, but it is not top-ranked.
+  \item This supports presenting sensitivity as a robustness check rather than a replacement for the accepted main run.
+\end{itemize}
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{chart2\_model\_vs\_index\_sensitivity\_scatter\_refined.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; AE-SENS-CHART-001R interpretation.}
+\end{frame}
+
+\begin{frame}{Appendix A20: Future Robustness and Extensions}
 \scriptsize
 \begin{alertblock}{Not completed results}
 \scriptsize
@@ -1840,7 +1840,7 @@ Recovered bankrupt/insolvent diagnostic & Decompose remaining terminal-failure m
 \remarkfoot{Source status is mapped in \texttt{SLIDE\_DATA\_SOURCES.md}; these are future-work notes, not result claims.}
 \end{frame}
 
-\begin{frame}{Appendix A20: Slide-to-Source Audit Map}
+\begin{frame}{Appendix A21: Slide-to-Source Audit Map}
 \scriptsize
 \begin{block}{Audit artifact}
 \scriptsize

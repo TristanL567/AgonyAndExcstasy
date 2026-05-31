@@ -1,0 +1,8 @@
+check,result,details
+ticket_scope,pass,"Executed only AE-PRES-QA-FIX-006; ticket 007 was not executed."
+appendix_order,pass,"Appendix follows dataset/labels, feature/model setup, metrics, OOS robustness, index construction, error decomposition, transaction costs/turnover, sensitivity, model-index linkage, future work, and source audit."
+source_map_order,pass,"SLIDE_DATA_SOURCES.md rows 30-50 were reordered and retitled to match the appendix."
+frame_source_map_count,pass,"Frame count and source-map row count match after edit."
+forbidden_paths,pass,"No 01_Code, 02_Data_Input, 03_Data_Output, or 07_CloudComputing paths were modified."
+new_analytical_outputs,pass,"No new analytical outputs were created."
+computation,pass,"No model, index, sensitivity, pipeline, SSH, or Vast.ai commands were run."
