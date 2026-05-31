@@ -1,0 +1,8 @@
+check,status,observed,details
+temporary_csi_split_source_cv_only,pass,cv,rows=577784; forbidden_split_rows=0; source=03_Data_Output/8_FalsePositiveDiagnostics/temporary_csi_cv_cohorts.parquet
+temporary_csi_cohort_values_available,pass,FN;FP;TN;TP,source=03_Data_Output/8_FalsePositiveDiagnostics/temporary_csi_cv_cohorts.parquet
+permanent_csi_split_source_cv_only,pass,cv,rows=577784; forbidden_split_rows=0; source=03_Data_Output/8_FalsePositiveDiagnostics/permanent_csi_cv_cohorts.parquet
+permanent_csi_cohort_values_available,pass,FN;FP;TN;TP,source=03_Data_Output/8_FalsePositiveDiagnostics/permanent_csi_cv_cohorts.parquet
+row_level_input_features_available,blocked_missing_source,none_found_in_allowed_evidence,No inspected parquet under 03_Data_Output had permno/year plus engineered feature columns; documentation and JSON metadata are not row-level feature values.
+forbidden_test_oos_feature_rows_used,pass,0,"No test/OOS prediction, label, outcome, or feature rows were joined for AE-FP-DIAG-003. Only AE-FP-DIAG-002 CV cohort rows were used for computed profile contrasts."
+input_feature_contrasts_computed,blocked_missing_source,0,"Raw, fundamental, latent, and combined input-feature distributions cannot be computed until row-level CV feature matrices keyed by permno/year are available in ticket-allowed evidence."
