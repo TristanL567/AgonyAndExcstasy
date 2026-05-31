@@ -1,0 +1,24 @@
+check,expected,observed,result
+branch,Development,Development,pass
+starting_head,AE-SENS-PRES-004 commit,84933bc,pass
+ticket_001_complete,true,AE-SENS-PRES-001 inventory artifacts exist,pass
+ticket_002_complete,true,AE-SENS-PRES-002 coverage audit artifacts exist,pass
+ticket_003_complete_and_repaired,true,cced316 contains AE-SENS-PRES-003 documentation/evidence only and no presentation_ready data files,pass
+ticket_004_complete,true,84933bc updates sensitivity slides/source map/evidence,pass
+presentation_ready_local_exists,true,8 CSV files present under 03_Data_Output/5_SensitivityAnalysis/presentation_ready,pass
+presentation_ready_not_tracked,true,no HEAD paths under 03_Data_Output/5_SensitivityAnalysis/presentation_ready,pass
+no_03_data_staged,true,no staged 03_Data_Output files,pass
+slides_disclose_27_configs,true,Robustness I and Appendix A1 state 27 represented,pass
+slides_disclose_24_complete_reused,true,Robustness I and Appendix A1 state 24 complete/reused,pass
+slides_disclose_3_blocked,true,"C080_M000_T012; C080_M000_T018; C060_M020_T028 are listed as blocked_partial",pass
+strongest_composite_claim,true,C090_M000_T012 appears in sensitivity table,pass
+ap_winner_claim,true,C060_M000_T012 appears in sensitivity table,pass
+strongest_total_market_claim,true,C090_M020_T018 appears in sensitivity table,pass
+continuity_baseline_claim,true,C080_M020_T018 appears and is described as not top-ranked,pass
+gross_turnover_wording,true,gross buy+sell turnover wording appears,pass
+permanent_sensitivity_future_work,true,Permanent-CSI sensitivity grid marked planned/not completed,pass
+source_map_updated,true,SLIDE_DATA_SOURCES rows 8 10 28 map to local summaries and AE-SENS evidence,pass
+no_presentation_modified_this_ticket,true,this ticket created closeout evidence only,pass
+no_code_modified,true,no code files modified by this ticket,pass
+no_scripts_run,true,no model/index/sensitivity scripts run,pass
+unrelated_dirty_unstaged,true,known old presentation deletion June Rnw hunk and AE-VALIDATE reports remain unstaged,pass
