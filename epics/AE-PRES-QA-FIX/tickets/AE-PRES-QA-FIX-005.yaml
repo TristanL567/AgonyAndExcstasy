@@ -1,0 +1,27 @@
+ticket_id: AE-PRES-QA-FIX-005
+goal: "Add sensitivity Chart 1 plus an aggregated key-results table after Slide 27."
+dependencies:
+  - AE-PRES-QA-FIX-004 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Insert a slide after current Slide 27 with Chart 1 and compact key-results table."
+  - "Message: main run is not an outlier; sensitivity changes magnitude more than direction."
+  - "Update source map and evidence."
+non_goals:
+  - "Do not recompute sensitivity results."
+acceptance_criteria:
+  - "Chart/table slide exists and is sourced."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

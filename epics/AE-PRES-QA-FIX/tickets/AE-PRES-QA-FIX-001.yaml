@@ -1,0 +1,27 @@
+ticket_id: AE-PRES-QA-FIX-001
+goal: "Clarify why Slide 6 reports 8,674 OOS y=NA rows for temporary CSI."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Update Slide 6 to explain 8,674 OOS temporary-CSI y=NA rows as unresolved labels, not dropped observations."
+  - "Clarify retained observable rows are excluded from supervised training/evaluation where labels are required and excluded from prevalence."
+  - "Update SLIDE_DATA_SOURCES.md and scoped evidence."
+non_goals:
+  - "Do not rerun data/model/index/sensitivity scripts."
+acceptance_criteria:
+  - "Slide 6 explanation is present and sourced."
+  - "No data/code/output/cloud files are modified."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
