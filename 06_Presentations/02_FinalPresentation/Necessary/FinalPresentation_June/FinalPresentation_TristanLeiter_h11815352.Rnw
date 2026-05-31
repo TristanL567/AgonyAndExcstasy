@@ -762,6 +762,7 @@ The VAE does not replace expanded-dataset predictive information. It is useful a
 \begin{block}{Model-family note}
 \scriptsize
 Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
+Standalone XGBoost diagnostics exist for the main model runs, but they are not relabelled here because the final index grid has no XGB-only strategy rows.
 \end{block}
 \end{frame}
 
