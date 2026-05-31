@@ -1,0 +1,31 @@
+ticket_id: AE-PRES-FINAL-QA-003
+goal: "Compile and validate the current final presentation state after final QA edits."
+dependencies:
+  - AE-PRES-FINAL-QA-002 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-QA_Final_Deck_QA/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-QA/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compile the final presentation."
+  - "Validate source map row count equals frame/page count."
+  - "Visually QA changed count-table and error-decomposition slides, plus overall appendix flow."
+  - "Create closeout evidence and checkpoint summary."
+non_goals:
+  - "Do not merge the epic branch."
+acceptance_criteria:
+  - "PDF compiles."
+  - "Visual QA passes or nonblocking risks are documented."
+  - "Closeout report exists."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human reviews final deck and decides whether merge gate may proceed."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

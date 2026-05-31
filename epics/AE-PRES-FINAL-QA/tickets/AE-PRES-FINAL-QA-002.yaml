@@ -1,0 +1,31 @@
+ticket_id: AE-PRES-FINAL-QA-002
+goal: "Validate and fix the presentation error-cost decomposition so FP/FN/TP/TN components reconcile to the displayed net geometric-return alpha."
+dependencies:
+  - AE-PRES-FINAL-QA-001 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-QA_Final_Deck_QA/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-QA/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Audit the existing error-cost decomposition tables against source files and the displayed net alpha."
+  - "Net value must be the strategy geometric return minus benchmark geometric return for the same universe/track/cost/rule."
+  - "If FP/FN/TP/TN components do not sum to net alpha because the source components are arithmetic or decomposition approximations, label the table accordingly or replace with a source-consistent table that reconciles."
+  - "Do not recompute index construction or modify source outputs."
+  - "Update slide text/source map/evidence."
+non_goals:
+  - "Do not create new 03_Data_Output files."
+  - "Do not change the underlying index results."
+acceptance_criteria:
+  - "Each displayed error-cost table either reconciles to net alpha within documented tolerance or is clearly labelled as a non-additive contribution diagnostic."
+  - "Validator confirms no misleading claim that non-additive components exactly sum to geometric alpha."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
