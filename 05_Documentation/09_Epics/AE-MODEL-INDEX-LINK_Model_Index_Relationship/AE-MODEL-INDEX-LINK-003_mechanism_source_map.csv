@@ -1,0 +1,10 @@
+source_id,mechanism,path,use
+ticket_002_joined_dataset,correlation baseline,05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/AE-MODEL-INDEX-LINK-002_joined_metric_index_dataset.csv,Starting point for model-index linkage.
+ticket_002_correlations,correlation baseline,05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/AE-MODEL-INDEX-LINK-002_metric_alpha_correlations.csv,Quantifies weak AP-alpha relation and stronger but incomplete R@FPR3 relation.
+sens_stability_table,CMT AP-alpha examples,05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/tables/sensitivity_index_stability_table.csv,"AP winner, alpha winner, main run comparison."
+universe_stability_summary,universe/market-cap channel,05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/tables/universe_stability_summary.csv,Shows main run below/above median depending on universe.
+cmt_index_summary,threshold/lockout channel,03_Data_Output/5_SensitivityAnalysis/presentation_ready/sensitivity_cmt_index_summary.csv,Best total-market strategy per CMT run.
+transaction_cost_impact,turnover and transaction-cost channel,03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/comparison/transaction_cost_impact.csv,Turnover and cost drag examples.
+turnover_summary,turnover channel,03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/comparison/turnover_summary.csv,Universe and strategy turnover summaries.
+error_cost_summary,confusion-category contribution channel,03_Data_Output/5_SensitivityAnalysis/05_comparisons/full_grid_error_cost_summary.csv,FP/FN/TP/TN contribution examples.
+model_family_comparison,feature-family portfolio channel,03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/comparison/model_family_comparison.csv,Best model family by track/universe/cost.
