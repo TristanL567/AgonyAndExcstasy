@@ -1,0 +1,36 @@
+checkpoint_id: AE-MODEL-INDEX-LINK-004
+ticket_id: AE-MODEL-INDEX-LINK-004
+status: ready_for_human_review
+checkpoint_type: reporting_recommendation
+human_approval_status: preapproved_for_automated_continuation
+summary: >
+  Reporting recommendation created for model-performance versus index-construction evidence.
+  The recommended stance is that model metrics are predictive-quality diagnostics, while
+  index alpha is the realized portfolio consequence after thresholding, market-cap weighting,
+  timing, universe choice, and costs.
+key_findings:
+  - "OOS AP does not map cleanly to total-market alpha across the 24 completed/reused temporary-CSI CMT runs."
+  - "OOS AP versus total-market alpha: Pearson r = -0.042425; Spearman rho = -0.100870."
+  - "OOS R@FPR3 is more aligned than AP but still incomplete: Pearson r = 0.336036; Spearman rho = 0.320870."
+  - "AP winner C060_M000_T012 is not the total-market alpha winner."
+  - "Total-market alpha winner is C090_M020_T018."
+  - "Main run C080_M020_T018 is not an outlier and should remain a continuity baseline rather than a cherry-picked optimum."
+recommended_claims:
+  - "Predictive metrics and index alpha are related but distinct objectives."
+  - "AP alone should not be used to choose the final index rule."
+  - "Sensitivity evidence supports robustness, not replacement of the accepted headline configuration."
+claims_to_avoid:
+  - "Higher AP mechanically implies higher alpha."
+  - "The AP-best run is the best index strategy."
+  - "The temporary-CSI CMT sensitivity conclusions apply to permanent CSI."
+  - "The observed correlations are causal estimates."
+artifacts:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/AE-MODEL-INDEX-LINK-004_Reporting_Recommendation.md"
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/AE-MODEL-INDEX-LINK-004_claim_boundaries.csv"
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/AE-MODEL-INDEX-LINK-004_validation_checks.csv"
+scope_hygiene:
+  modified_forbidden_paths: false
+  presentation_edited: false
+  output_data_edited: false
+  model_or_index_scripts_run: false
+next_recommended_action: "Proceed to AE-MODEL-INDEX-LINK-005 closeout if the human accepts the reporting recommendation."
