@@ -1520,7 +1520,38 @@ Metadata excluded & Labels, event dates, confirmation dates, censoring flags, an
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A8: VAE Architecture Details}
+\begin{frame}{Appendix A8: Best-Model Hyperparameters and Choices}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{What won locally}
+\begin{itemize}
+  \item All eight track $\times$ feature-set runs rank \texttt{WeightedEnsemble\_L2} first.
+  \item Selection uses average precision, matching the rare-positive CSI setting.
+  \item Temporary CSI: \texttt{raw\_plus\_latent} has the strongest CV/OOS AP case; raw remains the test/AUC comparator.
+  \item Permanent CSI: \texttt{raw\_plus\_latent} is the main non-raw challenger; \texttt{latent\_raw} is only an OOS robustness sensitivity.
+\end{itemize}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Hyperparameter/model-choice evidence}
+\begin{itemize}
+  \item \texttt{WeightedEnsemble\_L2}: stack level 2, greedy ensemble, \texttt{save\_bag\_folds = TRUE}, target ensemble size 25.
+  \item Base menu: LightGBM variants, CatBoost, XGBoost, ExtraTrees/RandomForest, and neural nets.
+  \item Retained \texttt{LightGBMLarge}: learning rate 0.03, 128 leaves, feature fraction 0.9, minimum leaf size 3.
+  \item Full fitted hyperparameters are pruned for some compact evidence, so missing tuning details are not inferred.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.25em}
+\begin{alertblock}{Story}
+\scriptsize
+The local evidence favors nonlinear mixtures over one stable parametric form. Ensembles dominate the validation leaderboards; tree and boosted-tree families carry much of the signal, while XGBoost appears as a candidate/component rather than the final standalone winner.
+\end{alertblock}
+\remarkfoot{Source: model-suite comparison files, family-winner CSV, compact hyperparameter JSONs, ensemble-weight JSONs, and AutoGluon log excerpts under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\end{frame}
+
+\begin{frame}{Appendix A9: VAE Architecture Details}
 \scriptsize
 \begin{table}[ht]
 \centering
@@ -1539,7 +1570,7 @@ Status & Weakly supervised on training rows; test and OOS labels are not used fo
 \end{table}
 \end{frame}
 
-\begin{frame}{Appendix A9: Temporary CSI CV/Test/OOS Model Metrics}
+\begin{frame}{Appendix A10: Temporary CSI CV/Test/OOS Model Metrics}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
 \setlength{\tabcolsep}{1.8pt}
@@ -1568,7 +1599,7 @@ OOS & AG Exp. Dataset + VAE & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \text
 \remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A10: Permanent CSI CV/Test/OOS Model Metrics}
+\begin{frame}{Appendix A11: Permanent CSI CV/Test/OOS Model Metrics}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \renewcommand{\arraystretch}{0.78}
 \setlength{\tabcolsep}{1.8pt}
@@ -1597,7 +1628,7 @@ OOS & AG Exp. Dataset + VAE & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.020
 \remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A11: Model Family Winners}
+\begin{frame}{Appendix A12: Model Family Winners}
 \scriptsize
 \begin{alertblock}{AutoGluon selection evidence}
 \scriptsize
@@ -1625,7 +1656,7 @@ Permanent & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2041} & 291 \\
 \remarkfoot{Source: \texttt{AE-MODEL-SUITE-007\_model\_family\_winners.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A12: Model Metric Caveats and OOS Robustness}
+\begin{frame}{Appendix A13: Model Metric Caveats and OOS Robustness}
 \scriptsize
 \begin{block}{Comparability}
 \scriptsize
@@ -1642,7 +1673,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \end{frame}
 
 
-\begin{frame}{Appendix A13: Final Index Grid Contract}
+\begin{frame}{Appendix A14: Final Index Grid Contract}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
@@ -1672,7 +1703,7 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \remarkfoot{Sources: \texttt{comparison/full\_grid\_manifest.csv}; \texttt{comparison/best\_by\_track\_index\_cost.csv}; \texttt{comparison/turnover\_summary.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A14: 20 bps Winners With Benchmarks}
+\begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
 \fontsize{5.65pt}{6.15pt}\selectfont
 \textbf{Best strategy by track and universe at 20 bps}
 \vspace{-0.25em}
@@ -1699,7 +1730,7 @@ VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market
 \remarkfoot{Source: \texttt{presentation\_headline\_tables.md}; final claim from \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
 \end{frame}
 
-\begin{frame}{Appendix A15: Error Decomposition and Index Source Paths}
+\begin{frame}{Appendix A16: Error Decomposition and Index Source Paths}
 \scriptsize
 \textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
 \vspace{0.25em}
@@ -1721,7 +1752,7 @@ All claims in the index-result slides are sourced from the completed AE-INDEX-SU
 \end{block}
 \end{frame}
 
-\begin{frame}{Appendix A16: Transaction-Cost Robustness}
+\begin{frame}{Appendix A17: Transaction-Cost Robustness}
 \fontsize{5.75pt}{6.25pt}\selectfont
 \textbf{Top winner did not change between 0 and 20 bps}
 \vspace{-0.25em}
@@ -1748,7 +1779,7 @@ Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enoug
 \remarkfoot{Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A17: Threshold Family and Turnover Summary}
+\begin{frame}{Appendix A18: Threshold Family and Turnover Summary}
 \fontsize{5.85pt}{6.35pt}\selectfont
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
@@ -1796,7 +1827,7 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 \remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}; \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A18: Temporary CSI Sensitivity Detail}
+\begin{frame}{Appendix A19: Temporary CSI Sensitivity Detail}
 \fontsize{5.55pt}{6.05pt}\selectfont
 \textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
 \vspace{-0.25em}
@@ -1826,7 +1857,7 @@ C/M/T sensitivity tests label-threshold robustness for temporary CSI. It support
 \remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A19: CV Metrics Versus Index Alpha}
+\begin{frame}{Appendix A20: CV Metrics Versus Index Alpha}
 \fontsize{5.35pt}{5.85pt}\selectfont
 \centering
 \includegraphics[width=\linewidth,height=0.71\textheight,keepaspectratio]{../../../../05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/charts/slide48_cv_metrics_vs_cv_test_alpha.png}
@@ -1839,7 +1870,7 @@ C/M/T sensitivity tests label-threshold robustness for temporary CSI. It support
 \remarkfoot{Sources: \texttt{slide48\_cv\_metrics\_vs\_cv\_test\_alpha.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{combined\_11c\_performance.csv}; AE-PRES-QA-FIX-008 evidence.}
 \end{frame}
 
-\begin{frame}{Appendix A20: Future Robustness and Extensions}
+\begin{frame}{Appendix A21: Future Robustness and Extensions}
 \scriptsize
 \begin{alertblock}{Not completed results}
 \scriptsize
@@ -1864,7 +1895,7 @@ Recovered bankrupt/insolvent diagnostic & Decompose remaining terminal-failure m
 \remarkfoot{Source status is mapped in \texttt{SLIDE\_DATA\_SOURCES.md}; these are future-work notes, not result claims.}
 \end{frame}
 
-\begin{frame}{Appendix A21: Slide-to-Source Audit Map}
+\begin{frame}{Appendix A22: Slide-to-Source Audit Map}
 \scriptsize
 \begin{block}{Audit artifact}
 \scriptsize
