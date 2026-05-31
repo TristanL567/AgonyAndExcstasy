@@ -1,0 +1,37 @@
+check,status,observed,details
+dynamic_csi_raw_plus_latent_performance_periods,pass,test,rows=272; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised_raw_plus_latent/index_performance_gross_and_net_by_tc.csv
+dynamic_csi_raw_plus_latent_performance_oos_rows,pass,0,OOS rows must be zero after period=test filter.
+dynamic_csi_raw_plus_latent_returns_test_years,pass,2016|2017|2018|2019,rows=13056; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised_raw_plus_latent/index_returns_gross_and_net_by_tc.csv
+dynamic_csi_raw_plus_latent_returns_oos_year_rows,pass,0,OOS years are defined as 2020+ for these preserved index outputs.
+dynamic_csi_raw_plus_latent_weights_test_holding_years,pass,2016|2017|2018|2019,rows=1595938; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised_raw_plus_latent/index_weights_by_crsp_universe.csv
+dynamic_csi_raw_plus_latent_weights_oos_holding_rows,pass,0,OOS holding years are 2020+ and must be absent.
+dynamic_csi_raw_performance_periods,pass,test,rows=272; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised/index_performance_gross_and_net_by_tc.csv
+dynamic_csi_raw_performance_oos_rows,pass,0,OOS rows must be zero after period=test filter.
+dynamic_csi_raw_returns_test_years,pass,2016|2017|2018|2019,rows=13056; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised/index_returns_gross_and_net_by_tc.csv
+dynamic_csi_raw_returns_oos_year_rows,pass,0,OOS years are defined as 2020+ for these preserved index outputs.
+dynamic_csi_raw_weights_test_holding_years,pass,2016|2017|2018|2019,rows=1613011; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised/index_weights_by_crsp_universe.csv
+dynamic_csi_raw_weights_oos_holding_rows,pass,0,OOS holding years are 2020+ and must be absent.
+permanent_csi_raw_plus_latent_performance_periods,pass,test,rows=80; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised_raw_plus_latent/index_performance_gross_and_net_by_tc.csv
+permanent_csi_raw_plus_latent_performance_oos_rows,pass,0,OOS rows must be zero after period=test filter.
+permanent_csi_raw_plus_latent_returns_test_years,pass,2016|2017|2018|2019,rows=3840; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised_raw_plus_latent/index_returns_gross_and_net_by_tc.csv
+permanent_csi_raw_plus_latent_returns_oos_year_rows,pass,0,OOS years are defined as 2020+ for these preserved index outputs.
+permanent_csi_raw_plus_latent_weights_test_holding_years,pass,2016|2017|2018|2019,rows=449371; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw_plus_latent/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised_raw_plus_latent/index_weights_by_crsp_universe.csv
+permanent_csi_raw_plus_latent_weights_oos_holding_rows,pass,0,OOS holding years are 2020+ and must be absent.
+permanent_csi_raw_performance_periods,pass,test,rows=80; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised/index_performance_gross_and_net_by_tc.csv
+permanent_csi_raw_performance_oos_rows,pass,0,OOS rows must be zero after period=test filter.
+permanent_csi_raw_returns_test_years,pass,2016|2017|2018|2019,rows=3840; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised/index_returns_gross_and_net_by_tc.csv
+permanent_csi_raw_returns_oos_year_rows,pass,0,OOS years are defined as 2020+ for these preserved index outputs.
+permanent_csi_raw_weights_test_holding_years,pass,2016|2017|2018|2019,rows=451556; source=03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/permanent_csi/11c_index_revised/index_weights_by_crsp_universe.csv
+permanent_csi_raw_weights_oos_holding_rows,pass,0,OOS holding years are 2020+ and must be absent.
+combined_performance_only_test_period,pass,test,rows=704
+combined_performance_oos_rows,pass,0,No OOS period rows in isolated performance table.
+combined_returns_years,pass,2016|2017|2018|2019,rows=33792
+combined_returns_oos_year_rows,pass,0,No 2020+ rows in isolated returns table.
+combined_weights_holding_years,pass,2016|2017|2018|2019,Compact holdings summary only; row-level test holdings were not retained because the isolated file would be about 1.9 GB.
+combined_weights_oos_holding_rows,pass,0,Compact holdings summary only; source chunk filtering found no 2020+ holding-year rows.
+tracks_covered,pass,dynamic_csi|permanent_csi,Temporary and permanent CSI both covered.
+model_configs_covered,pass,raw|raw_plus_latent,Main deck raw_plus_latent and raw comparator covered.
+universes_covered,pass,large_cap|mid_cap|small_cap|total_market,Four CRSP universes covered.
+transaction_costs_covered,pass,0|5|10|20,Transaction-cost variants covered where available.
+row_level_weight_output_policy,pass,summarized_only,Ticket-owned row-level weights were intentionally omitted due size; compact holdings summary by config is written instead.
+weights_summary_rows_written,pass,704,AE-FP-DIAG-006_test_index_weights_summary_by_config.csv contains grouped test holdings row counts.
