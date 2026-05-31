@@ -1193,20 +1193,37 @@ Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is
 \end{frame}
 
 \begin{frame}{Sensitivity: Main Run Versus C/M/T Grid}
-\fontsize{6.0pt}{6.6pt}\selectfont
+\fontsize{5.55pt}{6.05pt}\selectfont
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
+\begin{column}{0.58\textwidth}
 \centering
 \includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart1_sensitivity_stability_distribution.png}
 \end{column}
-\begin{column}{0.32\textwidth}
-\textbf{Robustness read}
-\vspace{-0.15em}
+\begin{column}{0.40\textwidth}
+\textbf{Key results: best alpha distribution}
+\vspace{-0.35em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.4pt}
+\begin{tabular}{L{0.72cm}R{0.40cm}R{0.58cm}R{0.58cm}R{0.88cm}}
+\toprule
+Univ. & Runs & Main & Median & Range \\
+\midrule
+Total & 24 & 0.06 & 0.10 & 0.02--0.23 \\
+Large & 24 & 0.04 & 0.07 & 0.02--0.19 \\
+Mid & 24 & 0.18 & 0.13 & 0.03--0.33 \\
+Small & 24 & 0.38 & 0.18 & 0.03--0.66 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.35em}
+\scriptsize
+Values are benchmark-relative geometric return deltas in percentage points.
+\vspace{0.15em}
 \begin{itemize}
-  \item 24 complete/reused temporary-CSI C/M/T runs are available.
-  \item The accepted main run is inside the completed-run distribution, not an outlier.
+  \item The accepted main run sits inside the completed-run distribution.
   \item Main-run alpha is below the median for Total/Large and above the median for Mid/Small.
-  \item Sensitivity changes magnitude more than direction across universes.
+  \item Sensitivity changes magnitude more than direction: completed runs remain positive across all four universes.
   \item Three blocked partial C/M/T configs remain excluded from completed-run conclusions.
 \end{itemize}
 \end{column}

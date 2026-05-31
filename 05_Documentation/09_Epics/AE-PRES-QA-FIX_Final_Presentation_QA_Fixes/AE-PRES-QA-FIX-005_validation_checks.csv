@@ -1,0 +1,10 @@
+check,result,details
+ticket_scope,pass,"Executed only AE-PRES-QA-FIX-005; ticket 006 was not executed."
+chart_source_exists,pass,"Chart 1 exists at 05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart1_sensitivity_stability_distribution.png."
+table_source_exists,pass,"Aggregated table values sourced from 05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/tables/universe_stability_summary.csv."
+slide_updated,pass,"Sensitivity: Main Run Versus C/M/T Grid contains Chart 1 and a compact key-results table."
+message_present,pass,"Slide states the main run is inside the completed-run distribution and sensitivity changes magnitude more than direction."
+source_map_updated,pass,"SLIDE_DATA_SOURCES.md row 28 maps chart and table sources."
+frame_source_map_count,pass,"Frame count and source-map row count match after edit."
+forbidden_paths,pass,"No 01_Code, 02_Data_Input, 03_Data_Output, or 07_CloudComputing paths were modified."
+recompute,pass,"No sensitivity recomputation was run."
