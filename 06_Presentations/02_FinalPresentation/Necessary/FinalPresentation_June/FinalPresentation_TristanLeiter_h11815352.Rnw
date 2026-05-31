@@ -950,16 +950,16 @@ The 10 bps overlay leaves the temporary CSI winners unchanged. Costs apply to gr
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Temporary CSI: Error-Cost Decomposition}
+\begin{frame}{Temporary CSI: Error-Cost Diagnostic}
 \fontsize{5.65pt}{6.2pt}\selectfont
-\textbf{OOS alpha decomposition for the selected temporary-CSI best strategies}
+\textbf{OOS non-additive contribution diagnostic for the selected temporary-CSI best strategies}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.65pt}
 \begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo alpha \\
 \midrule
 Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
 Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
@@ -974,7 +974,7 @@ Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
 The strongest gains come from preserving benchmark exposure to correctly retained firms, while false-positive exclusions are the main offset. Small Cap adds visible true-positive gains, but the net result still depends on avoiding too much opportunity cost.
 \end{alertblock}
 \scriptsize
-FP and FN are opportunity-cost terms; TP and TN are gains versus the matched benchmark decomposition. Net matches the selected OOS strategy alpha before cost overlays.
+FP/FN/TP/TN are annualized category diagnostics from the source decomposition and are not additive under geometric compounding. Geo alpha is the exact selected OOS strategy geometric return minus the matched benchmark return before cost overlays.
 \remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, lockout, strategy id, and OOS period.}
 \end{frame}
 
@@ -1044,16 +1044,16 @@ The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gr
 
 %==== 4b. Data findings =======================================================%
 
-\begin{frame}{Permanent CSI: Error-Cost Decomposition}
+\begin{frame}{Permanent CSI: Error-Cost Diagnostic}
 \fontsize{5.65pt}{6.2pt}\selectfont
-\textbf{OOS alpha decomposition for the selected permanent-CSI best strategies}
+\textbf{OOS non-additive contribution diagnostic for the selected permanent-CSI best strategies}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.65pt}
 \begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo alpha \\
 \midrule
 Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
 Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
@@ -1068,7 +1068,7 @@ Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp 
 The permanent rule adds value mostly by keeping exposure to correctly retained firms and avoiding broad over-exclusion. True-positive gains are small because bankrupt/permanent-loss positives are rare, but fixed-FPR rules limit the false-positive cost.
 \end{alertblock}
 \scriptsize
-FP and FN are opportunity-cost terms; TP and TN are gains versus the matched benchmark decomposition. Net matches the selected OOS strategy alpha before cost overlays.
+FP/FN/TP/TN are annualized category diagnostics from the source decomposition and are not additive under geometric compounding. Geo alpha is the exact selected OOS strategy geometric return minus the matched benchmark return before cost overlays.
 \remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, permanent rule, strategy id, and OOS period.}
 \end{frame}
 
