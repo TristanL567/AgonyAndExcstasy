@@ -1,0 +1,40 @@
+checkpoint_id: AE-MODEL-INDEX-LINK-005
+ticket_id: AE-MODEL-INDEX-LINK-005
+status: ready_for_human_closeout_review
+checkpoint_type: epic_closeout
+human_approval_status: preapproved_for_automated_ticket_completion
+summary: >
+  AE-MODEL-INDEX-LINK ticket execution is complete through ticket 005.
+  The epic produced source inventory, metric-alpha correlation evidence,
+  mechanism diagnostics, reporting recommendation, claim boundaries, and final
+  source traceability. Merge gate remains separate and requires planner/human action.
+completed_tickets:
+  - AE-MODEL-INDEX-LINK-001
+  - AE-MODEL-INDEX-LINK-002
+  - AE-MODEL-INDEX-LINK-003
+  - AE-MODEL-INDEX-LINK-004
+  - AE-MODEL-INDEX-LINK-005
+final_recommendation: >
+  Report model metrics as predictive-quality diagnostics and index alpha as the
+  realized portfolio consequence after thresholding, market-cap weighting,
+  timing, universe choice, turnover, and costs.
+key_results:
+  - "OOS AP versus total-market alpha: Pearson r = -0.042425; Spearman rho = -0.100870."
+  - "OOS R@FPR3 versus total-market alpha: Pearson r = 0.336036; Spearman rho = 0.320870."
+  - "AP winner C060_M000_T012 is not the total-market alpha winner."
+  - "Total-market alpha winner is C090_M020_T018."
+  - "Main run C080_M020_T018 is not an outlier."
+scope_hygiene:
+  modified_forbidden_paths: false
+  presentation_edited: false
+  output_data_edited: false
+  code_edited: false
+  model_or_index_scripts_run: false
+merge_gate:
+  ready_for_merge_gate: true
+  merge_performed_by_ticket: false
+  target_base: main
+  strategy: no_ff
+  requires_epic_validator: true
+  requires_human_approval: true
+next_recommended_action: "Master-planner should run the separate merge gate if human approves."
