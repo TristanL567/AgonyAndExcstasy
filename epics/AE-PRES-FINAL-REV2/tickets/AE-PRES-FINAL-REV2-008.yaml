@@ -1,0 +1,27 @@
+ticket_id: AE-PRES-FINAL-REV2-008
+goal: "Compile, visually QA, and close the final-revision presentation epic."
+dependencies:
+  - AE-PRES-FINAL-REV2-007
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compile the June final presentation."
+  - "Perform visual QA on all edited/new slides and source-map coverage checks."
+  - "Fix layout issues caused by this epic within allowed areas."
+  - "Create a closeout report with final PDF path, frame/page count, source-map row count, and any residual nonblocking layout warnings."
+acceptance_criteria:
+  - "Final PDF compiles successfully."
+  - "Frame/page count and source-map rows are consistent or any discrepancy is explained."
+  - "Edited/new slides render without blocking clipping, overlap, or unreadable tables."
+  - "Epic closeout evidence exists."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

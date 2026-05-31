@@ -1,0 +1,25 @@
+ticket_id: AE-PRES-FINAL-REV2-001
+goal: "Audit why XGBoost/XGB does not appear in the final deck and update the presentation only if the audit shows a needed clarification."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use local evidence only to determine whether XGB-specific results exist for temporary/permanent main runs and the 24 completed/reused sensitivity runs."
+  - "Distinguish AutoGluon ensemble/model-family evidence from standalone XGB-only strategy results."
+  - "If XGB exists only as an AutoGluon candidate/family and not as a standalone final strategy, document that clearly in scoped evidence and add a concise deck/source-map clarification where useful."
+  - "Do not invent or relabel aggregate AutoGluon results as XGB-specific results."
+acceptance_criteria:
+  - "A scoped XGB audit report exists and answers the user's question directly."
+  - "Any deck edits use only verified labels and preserve the established AG dataset naming."
+  - "No data/model/index/sensitivity scripts are run and no output data are modified."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

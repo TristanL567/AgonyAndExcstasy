@@ -1,0 +1,32 @@
+epic_id: AE-PRES-FINAL-REV2
+goal: "Apply final user-requested presentation revisions covering XGB visibility, error-cost reconciliation, slide ordering, labels, robustness/to-do slides, appendix flow, feature-engineering explanation, and best-model hyperparameters."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-PRES-FINAL-REV2-008
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-PRES-FINAL-REV2-001
+  - AE-PRES-FINAL-REV2-002
+  - AE-PRES-FINAL-REV2-003
+  - AE-PRES-FINAL-REV2-004
+  - AE-PRES-FINAL-REV2-005
+  - AE-PRES-FINAL-REV2-006
+  - AE-PRES-FINAL-REV2-007
+  - AE-PRES-FINAL-REV2-008
+depends_on_epics:
+  - AE-PRES-FINAL-QA
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

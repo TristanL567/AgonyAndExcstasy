@@ -1,0 +1,25 @@
+ticket_id: AE-PRES-FINAL-REV2-007
+goal: "Add a slide before current slide 38 describing optimal hyperparameters/model choices for the best models and the story they tell."
+dependencies:
+  - AE-PRES-FINAL-REV2-006
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use existing local model-suite metadata/hyperparameter evidence to identify the best models and their key hyperparameters."
+  - "Place the new slide before the current slide 38."
+  - "Explain the story cautiously: which model families/settings appear strongest, whether ensembles dominate, and what that implies for nonlinear distress-risk modelling."
+  - "Do not rerun training or fabricate missing hyperparameters."
+acceptance_criteria:
+  - "A new hyperparameters/model-choice slide exists in the requested position."
+  - "The slide cites or maps to precise local evidence in SLIDE_DATA_SOURCES.md."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

@@ -1,0 +1,24 @@
+ticket_id: AE-PRES-FINAL-REV2-005
+goal: "Make slide 32's explanation of why 84 observations/firms are not in the sample concise and clear."
+dependencies:
+  - AE-PRES-FINAL-REV2-004
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inspect the existing slide 32 wording and the local evidence behind the count of 84."
+  - "Rewrite the explanation concisely so the reason the 84 are outside the sample is clear to a reader."
+  - "If the evidence is ambiguous, state the ambiguity in scoped evidence and use a cautious slide wording rather than inventing a reason."
+acceptance_criteria:
+  - "Slide 32 has a concise explanation of the 84 outside-sample cases."
+  - "Scoped evidence records the source used for the explanation."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

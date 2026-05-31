@@ -1,0 +1,28 @@
+ticket_id: AE-PRES-FINAL-REV2-002
+goal: "Reorder index/error slides and fix the error-cost decomposition so each row reconciles to net/geometric alpha."
+dependencies:
+  - AE-PRES-FINAL-REV2-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Move the current slide 21 directly after slide 19."
+  - "Move slide 24 directly after slide 22."
+  - "Recheck the error-cost analysis row by row against the net/geometric alpha definition: strategy geometric return minus benchmark geometric return."
+  - "Revise the displayed table so FP cost + FN cost + TP gain + TN gain plus any explicitly named residual/reconciliation term equals net/geometric alpha row by row, or replace the table with an additive reconciliation available from existing local evidence."
+  - "Do not merely label the existing table non-additive; the slide must let the user verify the row total."
+  - "Update source-map and scoped validation evidence."
+acceptance_criteria:
+  - "Slide order matches the user's requested sequence."
+  - "Displayed decomposition rows reconcile numerically to net/geometric alpha within rounding."
+  - "A validation evidence file records row-level reconciliation checks."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

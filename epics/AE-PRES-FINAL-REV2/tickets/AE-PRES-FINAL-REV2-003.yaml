@@ -1,0 +1,25 @@
+ticket_id: AE-PRES-FINAL-REV2-003
+goal: "Clean up remaining model/dataset labels, especially slide 25."
+dependencies:
+  - AE-PRES-FINAL-REV2-002
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Replace raw/fund/latent_raw/raw_plus_latent labels in slide 25 and nearby affected table text with the accepted names: Expanded Dataset, Base Dataset, Latent Dataset (VAE), Exp. Dataset + VAE."
+  - "Use AG prefix for AutoGluon aggregate rows where model-family context is needed."
+  - "Do not introduce XGB labels unless ticket 001 verified standalone XGB-specific results."
+  - "Update source-map or scoped evidence if edited slides/sources change."
+acceptance_criteria:
+  - "Slide 25 no longer contains raw, fund, latent_raw, or raw_plus_latent as user-facing labels."
+  - "Accepted labels are used consistently in the edited presentation area."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
