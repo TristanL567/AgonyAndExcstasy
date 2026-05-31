@@ -447,31 +447,31 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 
 
 \begin{frame}{Robustness II: Sensitivity Results and Limits}
-\fontsize{5.85pt}{6.35pt}\selectfont
+\fontsize{5.25pt}{5.85pt}\selectfont
 \textbf{Sensitivity winners point to different objectives, not one universal setting}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.7pt}
-\begin{tabular}{L{1.45cm}L{1.45cm}R{0.62cm}R{0.62cm}R{0.68cm}R{0.82cm}}
+\setlength{\tabcolsep}{1.15pt}
+\begin{tabular}{L{1.25cm}L{1.35cm}R{0.54cm}R{0.54cm}R{0.57cm}R{0.58cm}R{0.58cm}R{0.62cm}}
 \toprule
-Objective & Config & OOS AP & OOS AUC & R@FPR3 & 11C TM alpha \\
+Objective & Config & CV AP & CV AUC & CV FPR3 & Test AP & Test AUC & Test FPR3 \\
 \midrule
-Composite & \texttt{C090\_M000\_T012} & 0.557 & 0.920 & 0.407 & +0.169pp \\
-AP winner & \texttt{C060\_M000\_T012} & 0.566 & 0.864 & 0.204 & +0.052pp \\
-11C TM & \texttt{C090\_M020\_T018} & 0.274 & 0.911 & 0.316 & +0.226pp \\
-Baseline & \texttt{C080\_M020\_T018} & 0.308 & 0.896 & 0.255 & +0.065pp \\
+Composite & \texttt{C090\_M000\_T012} & 0.442 & 0.916 & 0.370 & 0.438 & 0.917 & 0.347 \\
+AP winner & \texttt{C060\_M000\_T012} & \textbf{0.473} & 0.825 & 0.171 & \textbf{0.476} & 0.859 & 0.173 \\
+11C TM & \texttt{C090\_M020\_T018} & 0.198 & 0.897 & 0.279 & 0.209 & 0.906 & 0.271 \\
+Baseline & \texttt{C080\_M020\_T018} & 0.203 & 0.862 & 0.230 & 0.199 & 0.877 & 0.200 \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.05em}
 \begin{alertblock}{Interpretation}
 \scriptsize
-The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. Stricter definitions generally reduce positives and prevalence; AP can fall when positives become rarer, while AUC/Brier and fixed-FPR recall can remain stable or improve. Benchmark-relative 11C deltas remain positive for the leading configurations but can shrink.
+The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. CV/test metrics show that the AP winner is not the index-alpha winner, so predictive ranking and portfolio performance are related but distinct objectives.
 \end{alertblock}
 \scriptsize
-Use sensitivity as robustness evidence, not as a replacement for the final index suite. The accepted-label temporary index grid is separately complete for Youden/FPR1/FPR3/FPR5, lockouts 1/2/3/5, universes, and 0/5/10/20 bps.
-\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_presentation\_key\_findings.csv}. TM alpha = total-market annualized return difference vs benchmark.}
+Use sensitivity as robustness evidence, not as a replacement for the final index suite. OOS index-alpha comparisons are shown later in the index and robustness sections.
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{temporary\_presentation\_key\_findings.csv}. FPR3 columns are R@FPR3.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
