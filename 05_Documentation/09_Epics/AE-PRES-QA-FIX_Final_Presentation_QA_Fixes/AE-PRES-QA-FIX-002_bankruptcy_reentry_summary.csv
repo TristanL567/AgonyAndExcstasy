@@ -1,0 +1,13 @@
+metric,value,note
+bankruptcy_events_572_574,1056,Rows in delisting_raw with dlstcd in 572:574 and non-missing dlstdt
+bankruptcy_permnos_572_574,1056,Unique PERMNOs with dlstcd in 572:574
+same_permno_reentry_events,0,Same PERMNO appears in CRSP-like index constituents after bankruptcy date
+same_permno_reentry_permnos,0,Unique PERMNOs with same-PERMNO reentry
+same_permco_reentry_events,0,Same PERMCO appears in index constituents after bankruptcy date
+same_permco_reentry_permnos,0,Original bankruptcy PERMNOs with same-PERMCO reentry
+any_reentry_events,0,Same-PERMNO or same-PERMCO reentry evidence
+any_reentry_permnos,0,Original bankruptcy PERMNOs with any reentry evidence
+temporary_csi_classified_any_y1_permnos,537,Unique bankruptcy PERMNOs with any temporary y=1 label
+temporary_csi_classified_before_or_at_bankruptcy_events,537,Bankruptcy events where temporary y=1 is present before or at bankruptcy year
+temporary_terminal_failure_event_permnos,429,Unique bankruptcy PERMNOs present in terminal_failure_before_confirmation events
+permanent_csi_classified_any_y1_permnos,479,Unique bankruptcy PERMNOs with any permanent y=1 label
