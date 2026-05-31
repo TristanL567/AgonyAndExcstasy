@@ -1,0 +1,7 @@
+check,expected,observed,result
+completed_or_reused_runs,24,24,pass
+blocked_runs,3,3,pass
+chart_png_count,2,2,pass
+table_csv_count,>=4,4,pass
+presentation_files_modified,0,0,pass
+source_data_modified,0,0,pass
