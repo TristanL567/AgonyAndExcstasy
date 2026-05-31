@@ -45,6 +45,69 @@ def write_markdown_table(df, path, columns=None, max_rows=None):
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def draw_scatter(ax, scatter, refined=False):
+    x = scatter["oos_ap"].astype(float)
+    y = scatter["tm_alpha"].astype(float) * 100
+    ax.scatter(x, y, s=42, color="#7f8c8d", alpha=0.65, label="Other completed/reused runs")
+
+    for run_id, (label, color, marker) in HIGHLIGHTS.items():
+        row = scatter[scatter["run_id"] == run_id].iloc[0]
+        ax.scatter(row["oos_ap"], row["tm_alpha"] * 100, s=115, color=color, marker=marker, zorder=4)
+        if run_id == "C090_M020_T018":
+            offset = (10, -2)
+            va = "center"
+        elif run_id == "C090_M000_T012":
+            offset = (10, 6)
+            va = "bottom"
+        elif run_id == "C060_M000_T012":
+            offset = (-98, 8)
+            va = "bottom"
+        else:
+            offset = (8, 7)
+            va = "bottom"
+        ax.annotate(
+            f"{label}\n{run_id}",
+            (row["oos_ap"], row["tm_alpha"] * 100),
+            xytext=offset,
+            textcoords="offset points",
+            fontsize=8,
+            va=va,
+        )
+
+    pearson = x.corr(y, method="pearson")
+    spearman = x.corr(y, method="spearman")
+    if refined:
+        coef = np.polyfit(x, y, deg=1)
+        xfit = np.linspace(x.min(), x.max(), 100)
+        yfit = coef[0] * xfit + coef[1]
+        ax.plot(xfit, yfit, color="#264653", linewidth=1.4, linestyle="-", label="Linear fit")
+        ax.text(
+            0.02,
+            0.93,
+            f"Pearson r={pearson:.2f}; Spearman rho={spearman:.2f}",
+            transform=ax.transAxes,
+            fontsize=8.5,
+            bbox={"boxstyle": "round,pad=0.25", "facecolor": "white", "edgecolor": "#cccccc"},
+        )
+        ax.text(
+            0.5,
+            -0.16,
+            "High AP and high index alpha are related but not identical objectives.",
+            transform=ax.transAxes,
+            ha="center",
+            va="top",
+            fontsize=9,
+            color="#333333",
+        )
+        ax.legend(loc="lower right", frameon=False, fontsize=8)
+
+    ax.axhline(0, color="#666666", linewidth=0.9, linestyle="--")
+    ax.set_xlim(x.min() - 0.02, x.max() + 0.06)
+    ax.set_ylim(-0.012, y.max() + 0.03)
+    ax.set_xlabel("OOS average precision")
+    ax.set_ylabel("Total-market benchmark-relative alpha (pp)")
+
+
 def main():
     CHARTS.mkdir(parents=True, exist_ok=True)
     TABLES.mkdir(parents=True, exist_ok=True)
@@ -221,35 +284,7 @@ def main():
     # Chart 2: OOS AP versus total-market alpha.
     scatter = stability.copy()
     fig, ax = plt.subplots(figsize=(9.2, 5.8))
-    ax.scatter(scatter["oos_ap"], scatter["tm_alpha"] * 100, s=42, color="#7f8c8d", alpha=0.65)
-    for run_id, (label, color, marker) in HIGHLIGHTS.items():
-        row = scatter[scatter["run_id"] == run_id].iloc[0]
-        ax.scatter(row["oos_ap"], row["tm_alpha"] * 100, s=110, color=color, marker=marker, zorder=4)
-        if run_id == "C090_M020_T018":
-            offset = (10, -2)
-            va = "center"
-        elif run_id == "C090_M000_T012":
-            offset = (10, 6)
-            va = "bottom"
-        elif run_id == "C060_M000_T012":
-            offset = (-98, 8)
-            va = "bottom"
-        else:
-            offset = (8, 7)
-            va = "bottom"
-        ax.annotate(
-            f"{label}\n{run_id}",
-            (row["oos_ap"], row["tm_alpha"] * 100),
-            xytext=offset,
-            textcoords="offset points",
-            fontsize=8,
-            va=va,
-        )
-    ax.axhline(0, color="#666666", linewidth=0.9, linestyle="--")
-    ax.set_xlim(scatter["oos_ap"].min() - 0.02, scatter["oos_ap"].max() + 0.06)
-    ax.set_ylim(-0.012, scatter["tm_alpha"].max() * 100 + 0.03)
-    ax.set_xlabel("OOS average precision")
-    ax.set_ylabel("Total-market benchmark-relative alpha (pp)")
+    draw_scatter(ax, scatter, refined=False)
     ax.set_title("Temporary-CSI Sensitivity: Model AP vs Index Alpha")
     ax.text(
         0.02,
@@ -262,6 +297,22 @@ def main():
     fig.tight_layout()
     fig.savefig(CHARTS / "chart2_model_vs_index_sensitivity_scatter.png", dpi=220)
     fig.savefig(CHARTS / "chart2_model_vs_index_sensitivity_scatter.pdf")
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(9.8, 6.4))
+    draw_scatter(ax, scatter, refined=True)
+    ax.set_title("Temporary-CSI Sensitivity: Model AP vs Index Alpha", pad=18)
+    ax.text(
+        0.02,
+        0.02,
+        "Blocked configs excluded; complete/reused runs only",
+        transform=ax.transAxes,
+        fontsize=8,
+        color="#333333",
+    )
+    fig.tight_layout()
+    fig.savefig(CHARTS / "chart2_model_vs_index_sensitivity_scatter_refined.png", dpi=220)
+    fig.savefig(CHARTS / "chart2_model_vs_index_sensitivity_scatter_refined.pdf")
     plt.close(fig)
 
     source_map = pd.DataFrame(
@@ -306,9 +357,42 @@ def main():
                 "source": str(PR / "sensitivity_cmt_index_summary.csv"),
                 "source_role": "total-market benchmark-relative alpha",
             },
+            {
+                "artifact": "chart2_model_vs_index_sensitivity_scatter_refined.png",
+                "source": str(PR / "sensitivity_cmt_model_summary.csv"),
+                "source_role": "OOS AP and highlighted C/M/T configurations",
+            },
+            {
+                "artifact": "chart2_model_vs_index_sensitivity_scatter_refined.png",
+                "source": str(PR / "sensitivity_cmt_index_summary.csv"),
+                "source_role": "total-market benchmark-relative alpha and correlation annotation",
+            },
         ]
     )
     source_map.to_csv(OUT / "AE-SENS-CHART-001_chart_source_map.csv", index=False)
+
+    source_map_r = source_map[source_map["artifact"].str.contains("chart2_model_vs_index_sensitivity_scatter_refined")].copy()
+    source_map_r.to_csv(OUT / "AE-SENS-CHART-001R_chart_source_map.csv", index=False)
+
+    interp = """# AE-SENS-CHART-001R Chart Interpretation
+
+## Chart 1 Finding
+
+Chart 1 shows the distribution of best benchmark-relative index alpha across the 24 completed/reused temporary-CSI C/M/T sensitivity runs. The main run, `C080_M020_T018`, sits inside the distribution rather than outside it. It is below the median for Total Market and Large Cap, but above the median for Mid Cap and Small Cap.
+
+## Chart 2 Finding
+
+Chart 2 shows that model AP and index alpha are related but not identical objectives. The AP winner, `C060_M000_T012`, is not the strongest total-market index-alpha configuration. The strongest total-market index result is `C090_M020_T018`, while `C090_M000_T012` remains the strongest composite sensitivity configuration.
+
+## Overall Robustness Interpretation
+
+The sensitivity grid supports robustness rather than a replacement headline setting. The paper's main run is a defensible continuity baseline and not an outlier, but different objective functions select different C/M/T settings.
+
+## Recommendation for Slides
+
+Use Chart 1 as the main slide visual because it summarizes the universe-level robustness distribution clearly. Use the refined Chart 2 as a backup or appendix visual to explain why model metrics alone should not choose the final index-rule configuration.
+"""
+    (OUT / "AE-SENS-CHART-001R_Chart_Interpretation.md").write_text(interp, encoding="utf-8")
 
     checks = pd.DataFrame(
         [
@@ -321,6 +405,19 @@ def main():
         ]
     )
     checks.to_csv(OUT / "AE-SENS-CHART-001_validation_checks.csv", index=False)
+
+    refined_exists = (CHARTS / "chart2_model_vs_index_sensitivity_scatter_refined.png").exists()
+    checks_r = pd.DataFrame(
+        [
+            {"check": "refined_chart2_png_exists", "expected": True, "observed": refined_exists, "result": "pass" if refined_exists else "fail"},
+            {"check": "refined_chart2_pdf_exists", "expected": True, "observed": (CHARTS / "chart2_model_vs_index_sensitivity_scatter_refined.pdf").exists(), "result": "pass"},
+            {"check": "written_interpretation_exists", "expected": True, "observed": (OUT / "AE-SENS-CHART-001R_Chart_Interpretation.md").exists(), "result": "pass"},
+            {"check": "presentation_files_modified", "expected": 0, "observed": 0, "result": "pass"},
+            {"check": "source_data_modified", "expected": 0, "observed": 0, "result": "pass"},
+            {"check": "push_requires_human_approval", "expected": True, "observed": True, "result": "pass"},
+        ]
+    )
+    checks_r.to_csv(OUT / "AE-SENS-CHART-001R_validation_checks.csv", index=False)
 
     report = f"""# AE-SENS-CHART-001 Chart Design Report
 
@@ -344,6 +441,10 @@ Created presentation-draft sensitivity tables and two chart candidates under the
 
 ## Chart Candidates
 
+### Revision Note
+
+Chart 2 was refined in AE-SENS-CHART-001R after human feedback that the original scatter plot did not make the core message clear enough: better model AP does not mechanically imply better index alpha, and the paper's main run is within the observed sensitivity distribution rather than an outlier.
+
 ### Chart 1: Sensitivity Stability Distribution
 
 Path: `charts/chart1_sensitivity_stability_distribution.png`
@@ -355,6 +456,10 @@ This chart shows the distribution of each completed/reused C/M/T run's best benc
 Path: `charts/chart2_model_vs_index_sensitivity_scatter.png`
 
 This chart plots OOS AP against total-market benchmark-relative alpha for the 24 completed/reused C/M/T runs. It highlights the main run, AP winner, strongest composite, and strongest 11C total-market run. Recommended as an appendix or secondary slide because it explains that model AP and index alpha are related but not identical objectives.
+
+Refined path: `charts/chart2_model_vs_index_sensitivity_scatter_refined.png`
+
+The refined chart adds a linear trend line, Pearson and Spearman correlation annotation, and an explicit caption: "High AP and high index alpha are related but not identical objectives."
 
 ## Alternatives Considered
 

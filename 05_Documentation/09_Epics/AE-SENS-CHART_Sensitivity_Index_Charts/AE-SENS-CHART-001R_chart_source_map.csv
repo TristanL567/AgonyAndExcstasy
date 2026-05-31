@@ -1,0 +1,3 @@
+artifact,source,source_role
+chart2_model_vs_index_sensitivity_scatter_refined.png,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\5_SensitivityAnalysis\presentation_ready\sensitivity_cmt_model_summary.csv,OOS AP and highlighted C/M/T configurations
+chart2_model_vs_index_sensitivity_scatter_refined.png,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\5_SensitivityAnalysis\presentation_ready\sensitivity_cmt_index_summary.csv,total-market benchmark-relative alpha and correlation annotation

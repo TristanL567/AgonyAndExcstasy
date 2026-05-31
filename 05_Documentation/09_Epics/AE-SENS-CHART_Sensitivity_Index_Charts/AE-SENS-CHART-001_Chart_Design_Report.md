@@ -20,6 +20,10 @@ Created presentation-draft sensitivity tables and two chart candidates under the
 
 ## Chart Candidates
 
+### Revision Note
+
+Chart 2 was refined in AE-SENS-CHART-001R after human feedback that the original scatter plot did not make the core message clear enough: better model AP does not mechanically imply better index alpha, and the paper's main run is within the observed sensitivity distribution rather than an outlier.
+
 ### Chart 1: Sensitivity Stability Distribution
 
 Path: `charts/chart1_sensitivity_stability_distribution.png`
@@ -31,6 +35,10 @@ This chart shows the distribution of each completed/reused C/M/T run's best benc
 Path: `charts/chart2_model_vs_index_sensitivity_scatter.png`
 
 This chart plots OOS AP against total-market benchmark-relative alpha for the 24 completed/reused C/M/T runs. It highlights the main run, AP winner, strongest composite, and strongest 11C total-market run. Recommended as an appendix or secondary slide because it explains that model AP and index alpha are related but not identical objectives.
+
+Refined path: `charts/chart2_model_vs_index_sensitivity_scatter_refined.png`
+
+The refined chart adds a linear trend line, Pearson and Spearman correlation annotation, and an explicit caption: "High AP and high index alpha are related but not identical objectives."
 
 ## Alternatives Considered
 
