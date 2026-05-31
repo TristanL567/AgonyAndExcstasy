@@ -1,0 +1,13 @@
+check,result,notes
+ticket_scope_respected,pass,"Changed files are limited to June presentation compile outputs, scoped evidence, and epic checkpoint/ledger files."
+pdf_compile,pass,"knitr, pdflatex, bibtex, and final pdflatex passes completed; PDF was generated."
+frame_count,pass,"Rnw frame count is 51."
+pdf_page_count,pass,"PDF page count is 51."
+source_map_count,pass,"SLIDE_DATA_SOURCES.md has 51 mapped rows."
+count_table_visual_qa,pass,"Slides 6 and 7 rendered without visible clipping or overlap."
+error_diagnostic_visual_qa,pass,"Slides 21 and 24 rendered with non-additive diagnostic language and no visible clipping."
+appendix_flow_visual_qa,pass,"Appendix pages 31-51 were rendered in sequence and inspected through a contact sheet."
+no_data_output_modified,pass,"No 03_Data_Output files were modified."
+no_code_input_cloud_modified,pass,"No 01_Code, 02_Data_Input, or 07_CloudComputing files were modified."
+no_merge_performed,pass,"Ticket 003 did not merge Development into main."
+known_unrelated_dirty_untouched,pass,"Old deleted presentation file and untracked AE-VALIDATE folder remain unstaged."
