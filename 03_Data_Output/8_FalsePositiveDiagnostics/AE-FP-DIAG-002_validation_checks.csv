@@ -1,0 +1,17 @@
+track,feature_set,threshold_method,split_source,n_obs,tp,fp,fn,tn,sum_confusion,confusion_reconciles_to_cv_rows,positive_reconciles,negative_reconciles,flagged_reconciles_to_threshold_file,threshold_file_cv_n_flagged,computed_flagged,threshold_boundary_tolerance,threshold_boundary_tolerance_rows,test_oos_rows_used,forbidden_sources_read
+dynamic_csi,raw_plus_latent,fpr3,cv,72223,773,2059,2346,67045,72223,True,True,True,True,2832,2832,1e-12,0,0,none
+dynamic_csi,raw_plus_latent,fpr1,cv,72223,306,690,2813,68414,72223,True,True,True,True,996,996,1e-12,1,0,none
+dynamic_csi,raw_plus_latent,fpr5,cv,72223,1117,3453,2002,65651,72223,True,True,True,True,4570,4570,1e-12,0,0,none
+dynamic_csi,raw_plus_latent,youden,cv,72223,2717,18568,402,50536,72223,True,True,True,True,21285,21285,1e-12,1,0,none
+dynamic_csi,raw,fpr3,cv,72223,731,2073,2388,67031,72223,True,True,True,True,2804,2804,1e-12,1,0,none
+dynamic_csi,raw,fpr1,cv,72223,286,690,2833,68414,72223,True,True,True,True,976,976,1e-12,0,0,none
+dynamic_csi,raw,fpr5,cv,72223,1065,3446,2054,65658,72223,True,True,True,True,4511,4511,1e-12,0,0,none
+dynamic_csi,raw,youden,cv,72223,2682,18265,437,50839,72223,True,True,True,True,20947,20947,1e-12,0,0,none
+permanent_csi,raw_plus_latent,fpr3,cv,72223,634,2092,1825,67672,72223,True,True,True,True,2726,2726,1e-12,0,0,none
+permanent_csi,raw_plus_latent,fpr1,cv,72223,294,696,2165,69068,72223,True,True,True,True,990,990,1e-12,1,0,none
+permanent_csi,raw_plus_latent,fpr5,cv,72223,905,3478,1554,66286,72223,True,True,True,True,4383,4383,1e-12,0,0,none
+permanent_csi,raw_plus_latent,youden,cv,72223,2163,18639,296,51125,72223,True,True,True,True,20802,20802,1e-12,0,0,none
+permanent_csi,raw,fpr3,cv,72223,641,2092,1818,67672,72223,True,True,True,True,2733,2733,1e-12,0,0,none
+permanent_csi,raw,fpr1,cv,72223,270,697,2189,69067,72223,True,True,True,True,967,967,1e-12,0,0,none
+permanent_csi,raw,fpr5,cv,72223,909,3482,1550,66282,72223,True,True,True,True,4391,4391,1e-12,1,0,none
+permanent_csi,raw,youden,cv,72223,2127,17473,332,52291,72223,True,True,True,True,19600,19600,1e-12,0,0,none
