@@ -1836,25 +1836,17 @@ C/M/T sensitivity tests label-threshold robustness for temporary CSI. It support
 \remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
 
-\begin{frame}{Appendix A19: Model AP Versus Index Alpha}
-\fontsize{6.0pt}{6.6pt}\selectfont
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.66\textwidth}
+\begin{frame}{Appendix A19: CV Metrics Versus Index Alpha}
+\fontsize{5.35pt}{5.85pt}\selectfont
 \centering
-\includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart2_model_vs_index_sensitivity_scatter_refined.png}
-\end{column}
-\begin{column}{0.32\textwidth}
-\textbf{Model versus portfolio objective}
-\vspace{-0.15em}
+\includegraphics[width=\linewidth,height=0.71\textheight,keepaspectratio]{../../../../05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/charts/slide48_cv_metrics_vs_cv_test_alpha.png}
+\vspace{-0.35em}
 \begin{itemize}
-  \item AP and index alpha are related robustness diagnostics, but they are not the same objective.
-  \item The AP winner and total-market alpha winner differ across C/M/T settings.
-  \item The continuity baseline remains defensible, but it is not top-ranked.
-  \item This supports presenting sensitivity as a robustness check rather than a replacement for the accepted main run.
+  \item CV-only AP/AUC/R@FPR3/R@FPR5 do not map cleanly into total-market alpha; AP is near zero against test alpha.
+  \item Index performance is the realized result after thresholding, timing, universe weights, and returns, not a generic ML metric.
+  \item The 11C source period is named \texttt{insample}; this slide labels it as in-sample/CV-proxy alpha.
 \end{itemize}
-\end{column}
-\end{columns}
-\remarkfoot{Sources: \texttt{chart2\_model\_vs\_index\_sensitivity\_scatter\_refined.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; AE-SENS-CHART-001R interpretation.}
+\remarkfoot{Sources: \texttt{slide48\_cv\_metrics\_vs\_cv\_test\_alpha.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{combined\_11c\_performance.csv}; AE-PRES-QA-FIX-008 evidence.}
 \end{frame}
 
 \begin{frame}{Appendix A20: Future Robustness and Extensions}

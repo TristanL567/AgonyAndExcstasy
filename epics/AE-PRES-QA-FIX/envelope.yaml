@@ -23,6 +23,7 @@ tickets:
   - AE-PRES-QA-FIX-005
   - AE-PRES-QA-FIX-006
   - AE-PRES-QA-FIX-007
+  - AE-PRES-QA-FIX-008
 depends_on_epics:
   - AE-SENS-CHART
   - AE-MODEL-INDEX-LINK

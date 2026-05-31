@@ -1,0 +1,31 @@
+ticket_id: AE-PRES-QA-FIX-008
+goal: "Recreate Slide 48 model-index chart using CV-only ML metrics against CV/in-sample and test alpha outcomes."
+dependencies:
+  - AE-PRES-QA-FIX-007 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-QA-FIX/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Recreate the Slide 48 / Appendix model-index scatter chart so ML-side x-axis metrics use CV only: AP, AUC, R@FPR3, and R@FPR5."
+  - "Compare those CV-only ML metrics against alpha in CV/in-sample and alpha in test where available."
+  - "If the index source uses period name 'insample' rather than explicit CV alpha, label it clearly as in-sample/CV-proxy alpha and document the limitation."
+  - "Update the slide, source map, evidence, and compile/visual QA the deck."
+non_goals:
+  - "Do not recompute model predictions, model metrics, or index construction outputs."
+  - "Do not modify source data/output folders."
+acceptance_criteria:
+  - "Updated chart exists and is used on Slide 48 or the corresponding appendix model-index slide."
+  - "Chart includes CV AP, CV AUC, CV R@FPR3, and CV R@FPR5 against CV/in-sample alpha and test alpha."
+  - "Deck compiles and visual QA passes for the changed slide."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

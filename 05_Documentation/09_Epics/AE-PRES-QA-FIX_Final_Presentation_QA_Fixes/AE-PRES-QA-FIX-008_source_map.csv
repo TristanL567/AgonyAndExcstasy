@@ -1,0 +1,5 @@
+artifact,source,usage
+05_Documentation\09_Epics\AE-PRES-QA-FIX_Final_Presentation_QA_Fixes\charts\slide48_cv_metrics_vs_cv_test_alpha.png,03_Data_Output\5_SensitivityAnalysis\presentation_ready\sensitivity_cmt_model_summary.csv,"CV AP, CV AUC, CV R@FPR3, CV R@FPR5 by C/M/T run"
+05_Documentation\09_Epics\AE-PRES-QA-FIX_Final_Presentation_QA_Fixes\charts\slide48_cv_metrics_vs_cv_test_alpha.png,03_Data_Output\5_SensitivityAnalysis\04_index_construction\combined_11c_performance.csv,total-market in-sample/test benchmark-relative alpha by C/M/T run
+05_Documentation\09_Epics\AE-PRES-QA-FIX_Final_Presentation_QA_Fixes\AE-PRES-QA-FIX-008_cv_metric_alpha_joined_data.csv,03_Data_Output\5_SensitivityAnalysis\presentation_ready\sensitivity_cmt_model_summary.csv,joined CV metric fields
+05_Documentation\09_Epics\AE-PRES-QA-FIX_Final_Presentation_QA_Fixes\AE-PRES-QA-FIX-008_cv_metric_alpha_joined_data.csv,03_Data_Output\5_SensitivityAnalysis\04_index_construction\combined_11c_performance.csv,joined alpha fields
