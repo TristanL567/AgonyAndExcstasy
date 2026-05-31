@@ -343,7 +343,7 @@ For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. 
 \scriptsize
 \begin{alertblock}{Completed local sensitivity evidence}
 \scriptsize
-The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}.
+The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}. Derived presentation summaries remain local-only under \texttt{03\_Data\_Output}.
 \end{alertblock}
 
 \vspace{0.15em}
@@ -381,7 +381,7 @@ Checksum failures & 0 \\
 \scriptsize
 \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028} are listed as \texttt{blocked\_partial}; they are not treated as completed evidence.
 \end{block}
-\remarkfoot{Sources: \texttt{03\_Data\_Output/5\_SensitivityAnalysis/00\_manifest/run\_registry.csv}; \texttt{blocked\_runs.csv}; \texttt{download\_summary.json}.}
+\remarkfoot{Sources: local \texttt{presentation\_ready/sensitivity\_cmt\_model\_summary.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}; AE-SENS-PRES-003 evidence.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -453,14 +453,14 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.7pt}
-\begin{tabular}{L{1.65cm}L{1.45cm}L{1.8cm}R{0.70cm}R{0.70cm}R{0.78cm}}
+\begin{tabular}{L{1.45cm}L{1.45cm}R{0.62cm}R{0.62cm}R{0.68cm}R{0.82cm}}
 \toprule
-Objective & Config & Evidence & Prev. & OOS AP & 11C TM alpha \\
+Objective & Config & OOS AP & OOS AUC & R@FPR3 & 11C TM alpha \\
 \midrule
-Composite & \texttt{C090\_M000\_T012} & strongest overall rank; OOS AUC 0.920 & 7.02\% & 0.557 & +0.169pp \\
-AP winner & \texttt{C060\_M000\_T012} & highest CV/test/OOS AP & 17.49\% & 0.566 & +0.052pp \\
-11C TM & \texttt{C090\_M020\_T018} & best total-market benchmark delta & 3.34\% & 0.274 & +0.226pp \\
-Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.74\% & 0.308 & +0.065pp \\
+Composite & \texttt{C090\_M000\_T012} & 0.557 & 0.920 & 0.407 & +0.169pp \\
+AP winner & \texttt{C060\_M000\_T012} & 0.566 & 0.864 & 0.204 & +0.052pp \\
+11C TM & \texttt{C090\_M020\_T018} & 0.274 & 0.911 & 0.316 & +0.226pp \\
+Baseline & \texttt{C080\_M020\_T018} & 0.308 & 0.896 & 0.255 & +0.065pp \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -470,8 +470,8 @@ Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.7
 The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. Stricter definitions generally reduce positives and prevalence; AP can fall when positives become rarer, while AUC/Brier and fixed-FPR recall can remain stable or improve. Benchmark-relative 11C deltas remain positive for the leading configurations but can shrink.
 \end{alertblock}
 \scriptsize
-Use sensitivity as robustness evidence, not as a replacement for the final index suite: the final AE-INDEX-SUITE results use the accepted cleaned label definitions and should remain conceptually separate.
-\remarkfoot{Sources: \texttt{full\_grid\_best\_configs\_by\_objective.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}. TM alpha = total-market annualized return difference vs benchmark.}
+Use sensitivity as robustness evidence, not as a replacement for the final index suite. The accepted-label temporary index grid is separately complete for Youden/FPR1/FPR3/FPR5, lockouts 1/2/3/5, universes, and 0/5/10/20 bps.
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_presentation\_key\_findings.csv}. TM alpha = total-market annualized return difference vs benchmark.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1248,9 +1248,9 @@ The grid represents 27 C/M/T configurations: 24 are complete or reused, and thre
 \end{block}
 \begin{block}{Source interpretation}
 \scriptsize
-C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
+C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
 \end{block}
-\remarkfoot{Sources: \texttt{05\_comparisons/full\_grid\_best\_configs\_by\_objective.csv}; \texttt{05\_comparisons/full\_grid\_*}; \texttt{99\_reports/sensitivity\_results\_readme.md}.}
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}

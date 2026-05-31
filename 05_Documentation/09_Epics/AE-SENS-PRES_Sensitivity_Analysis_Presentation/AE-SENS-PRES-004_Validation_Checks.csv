@@ -1,0 +1,10 @@
+check,expected,observed,result
+branch,Development,Development,pass
+ae_sens_pres_003_commit_repaired,no 03_Data_Output files in HEAD AE-SENS-PRES-003 commit,cced316 contains only AE-SENS-PRES-003 documentation/evidence,pass
+presentation_ready_exists,true,8 CSV files present locally,pass
+no_03_data_staged,true,no staged 03_Data_Output files,pass
+blocked_configs_disclosed,"C080_M000_T012; C080_M000_T018; C060_M020_T028","all three listed in slide text/evidence",pass
+gross_turnover_wording,true,"transaction costs are described as applied to gross buy+sell turnover",pass
+source_map_updated,true,"SLIDE_DATA_SOURCES rows 8, 10, and 28 updated",pass
+no_scripts_run,true,"no model/index/sensitivity scripts run",pass
+allowed_files_only,true,"June Rnw, SLIDE_DATA_SOURCES.md, and AE-SENS-PRES-004 evidence only",pass
