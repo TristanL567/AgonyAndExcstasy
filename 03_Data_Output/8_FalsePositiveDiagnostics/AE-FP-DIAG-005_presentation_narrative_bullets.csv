@@ -1,0 +1,8 @@
+slide_section,track,bullet_order,cv_only_bullet
+headline,both,1,"CV-only diagnostic: most false positives are ambiguous in score space, not clearly removable errors."
+temporary_csi,dynamic_csi,1,"Temporary CSI, main raw+latent FPR3: 2,059 FPs; 16.6% are within +0.01 of threshold, but 72.7% overlap the TP score range and 44.5% are at or above the TP median."
+temporary_csi,dynamic_csi,2,Raising the threshold by +0.01 removes the near-threshold subset but costs about 31.6 TPs per 100 near-threshold FPs removed.
+permanent_csi,permanent_csi,1,"Permanent CSI, main raw+latent FPR3: 2,092 FPs; 18.6% are within +0.01 of threshold, while 64.3% overlap the TP score range and 37.0% are at or above the TP median."
+permanent_csi,permanent_csi,2,The permanent main model has a milder +0.01 threshold tradeoff: about 20.0 TPs lost per 100 near-threshold FPs removed.
+blocked_claims,both,1,Do not claim raw/fundamental/latent feature separability yet: row-level CV feature matrices keyed by permno/year were not found in allowed evidence.
+blocked_claims,both,2,"Do not assign label-window, macro/sector, or balance-sheet mechanisms from these outputs; the CV-only evidence supports only threshold proximity and TP score-overlap categories."
