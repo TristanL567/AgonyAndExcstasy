@@ -804,6 +804,7 @@ The VAE does not replace expanded-dataset predictive information. It is useful a
 \begin{block}{Model-family note}
 \scriptsize
 Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
+Standalone XGBoost diagnostics exist for the main model runs, but they are not relabelled here because the final index grid has no XGB-only strategy rows.
 \end{block}
 \end{frame}
 
@@ -960,6 +961,36 @@ Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Ex
 
 %==== 4b. Data findings =======================================================%
 
+\begin{frame}{Temporary CSI: Error-Cost Diagnostic}
+\fontsize{4.95pt}{5.45pt}\selectfont
+\textbf{OOS contribution diagnostic reconciled to selected strategy geometric alpha}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.15pt}
+\begin{tabular}{L{0.74cm}L{1.82cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.67cm}R{0.70cm}}
+\toprule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Recon. & Geo alpha \\
+\midrule
+Total & AG Base, Youden 3yr & -2.03pp & +0.00pp & +0.08pp & +1.79pp & +0.59pp & +0.43pp \\
+Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & +0.00pp & +1.24pp & +0.41pp & +0.15pp \\
+Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & +0.00pp & +0.27pp & +0.19pp & +0.51pp \\
+Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.27pp & +0.64pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Why temporary CSI outperforms}
+\scriptsize
+The strongest gains come from preserving benchmark exposure to correctly retained firms, while false-positive exclusions are the main offset. Small Cap adds visible true-positive gains, but the net result still depends on avoiding too much opportunity cost.
+\end{alertblock}
+\scriptsize
+Recon. is the row-level reconciliation term that makes the displayed diagnostics sum to Geo alpha after rounding. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
+\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-002 reconciliation evidence.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
 \begin{frame}{Index Results: Temporary CSI at 10 bps}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
@@ -988,36 +1019,6 @@ Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% 
 The 10 bps overlay leaves the temporary CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
 \remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
-\end{frame}
-
-%==== 4b. Data findings =======================================================%
-
-\begin{frame}{Temporary CSI: Error-Cost Diagnostic}
-\fontsize{5.65pt}{6.2pt}\selectfont
-\textbf{OOS non-additive contribution diagnostic for the selected temporary-CSI best strategies}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo alpha \\
-\midrule
-Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
-Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
-Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & -0.00pp & +0.27pp & +0.51pp \\
-Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.05em}
-\begin{alertblock}{Why temporary CSI outperforms}
-\scriptsize
-The strongest gains come from preserving benchmark exposure to correctly retained firms, while false-positive exclusions are the main offset. Small Cap adds visible true-positive gains, but the net result still depends on avoiding too much opportunity cost.
-\end{alertblock}
-\scriptsize
-FP/FN/TP/TN are annualized category diagnostics from the source decomposition and are not additive under geometric compounding. Geo alpha is the exact selected OOS strategy geometric return minus the matched benchmark return before cost overlays.
-\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, lockout, strategy id, and OOS period.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1054,6 +1055,36 @@ Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Ba
 
 %==== 4b. Data findings =======================================================%
 
+\begin{frame}{Permanent CSI: Error-Cost Diagnostic}
+\fontsize{4.95pt}{5.45pt}\selectfont
+\textbf{OOS contribution diagnostic reconciled to selected strategy geometric alpha}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.15pt}
+\begin{tabular}{L{0.74cm}L{1.82cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.67cm}R{0.70cm}}
+\toprule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Recon. & Geo alpha \\
+\midrule
+Total & AG +VAE, FPR5 perm. & -0.49pp & +0.00pp & +0.01pp & +0.52pp & +0.23pp & +0.27pp \\
+Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.19pp & +0.23pp \\
+Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.39pp & +0.74pp \\
+Small & AG Latent, FPR3 perm. & -0.74pp & +0.00pp & +0.04pp & +1.03pp & -0.01pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Why permanent CSI outperforms}
+\scriptsize
+The permanent rule adds value mostly by keeping exposure to correctly retained firms and avoiding broad over-exclusion. True-positive gains are small because bankrupt/permanent-loss positives are rare, but fixed-FPR rules limit the false-positive cost.
+\end{alertblock}
+\scriptsize
+Recon. is the row-level reconciliation term that makes the displayed diagnostics sum to Geo alpha after rounding. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
+\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-002 reconciliation evidence.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
 \begin{frame}{Index Results: Permanent CSI at 10 bps}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
@@ -1082,36 +1113,6 @@ Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\
 The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
 \remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Delta pp compares against the unchanged benchmark row.}
-\end{frame}
-
-%==== 4b. Data findings =======================================================%
-
-\begin{frame}{Permanent CSI: Error-Cost Diagnostic}
-\fontsize{5.65pt}{6.2pt}\selectfont
-\textbf{OOS non-additive contribution diagnostic for the selected permanent-CSI best strategies}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.65pt}
-\begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
-\toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo alpha \\
-\midrule
-Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
-Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
-Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.74pp \\
-Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.05em}
-\begin{alertblock}{Why permanent CSI outperforms}
-\scriptsize
-The permanent rule adds value mostly by keeping exposure to correctly retained firms and avoiding broad over-exclusion. True-positive gains are small because bankrupt/permanent-loss positives are rare, but fixed-FPR rules limit the false-positive cost.
-\end{alertblock}
-\scriptsize
-FP/FN/TP/TN are annualized category diagnostics from the source decomposition and are not additive under geometric compounding. Geo alpha is the exact selected OOS strategy geometric return minus the matched benchmark return before cost overlays.
-\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, permanent rule, strategy id, and OOS period.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
