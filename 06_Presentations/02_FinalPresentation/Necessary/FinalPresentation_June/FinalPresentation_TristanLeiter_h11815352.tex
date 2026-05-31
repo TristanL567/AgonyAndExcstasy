@@ -993,6 +993,36 @@ Geo adj. is the geometric compounding/weight-interaction adjustment: Geo alpha m
 
 %==== 4b. Data findings =======================================================%
 
+\begin{frame}{Temporary CSI: Realized Active Attribution}
+\fontsize{4.95pt}{5.45pt}\selectfont
+\textbf{Selected OOS strategies at 10 bps; attribution reconciles to realized alpha}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.15pt}
+\begin{tabular}{L{0.74cm}L{1.82cm}R{0.62cm}R{0.62cm}R{0.66cm}R{0.62cm}R{0.65cm}R{0.66cm}}
+\toprule
+Universe & Strategy & TP excl. & FP excl. & Retained & TC & Geo adj. & Alpha \\
+\midrule
+Total & AG Base, Youden 3yr & +0.08pp & -2.03pp & +1.79pp & -0.01pp & +0.59pp & +0.42pp \\
+Large & AG Base, Youden 3yr & -0.00pp & -1.50pp & +1.24pp & -0.01pp & +0.41pp & +0.14pp \\
+Mid & AG Base, FPR5 5yr & -0.00pp & +0.05pp & +0.27pp & -0.11pp & +0.18pp & +0.39pp \\
+Small & AG +VAE, Youden 3yr & +0.42pp & -4.00pp & +3.94pp & -0.09pp & +0.28pp & +0.55pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{What changes relative to the diagnostic slide}
+\scriptsize
+TP/FP are direct exclusion effects. FN/TN are not direct realized-alpha columns; retained names affect alpha through the retained-stock reweighting term. Each row satisfies TP excl. + FP excl. + retained + TC + geo adj. = realized alpha.
+\end{alertblock}
+\scriptsize
+At 10 bps, temporary CSI alpha is mostly the net of false-positive opportunity cost and retained-stock reweighting, with Small Cap receiving the clearest direct TP exclusion gain.
+\remarkfoot{Source: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; selected OOS rows, \texttt{transaction\_cost\_bps=10}; validation in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
 \begin{frame}{Index Results: Temporary CSI at 10 bps}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \textbf{OOS benchmark and best strategy by universe; 10 bps cost rows}
@@ -1083,6 +1113,36 @@ The permanent rule adds value mostly by keeping exposure to correctly retained f
 \scriptsize
 Geo adj. is the geometric compounding/weight-interaction adjustment: Geo alpha minus the four annualized FP/FN/TP/TN diagnostics. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
 \remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-009 decomposition audit.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Permanent CSI: Realized Active Attribution}
+\fontsize{4.95pt}{5.45pt}\selectfont
+\textbf{Selected OOS strategies at 10 bps; attribution reconciles to realized alpha}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.15pt}
+\begin{tabular}{L{0.74cm}L{1.82cm}R{0.62cm}R{0.62cm}R{0.66cm}R{0.62cm}R{0.65cm}R{0.66cm}}
+\toprule
+Universe & Strategy & TP excl. & FP excl. & Retained & TC & Geo adj. & Alpha \\
+\midrule
+Total & AG +VAE, FPR5 perm. & +0.01pp & -0.49pp & +0.52pp & -0.01pp & +0.23pp & +0.26pp \\
+Large & AG +VAE, FPR5 perm. & +0.00pp & -0.26pp & +0.30pp & -0.01pp & +0.19pp & +0.22pp \\
+Mid & AG Base, FPR5 perm. & +0.00pp & -0.55pp & +0.90pp & -0.12pp & +0.39pp & +0.62pp \\
+Small & AG Latent, FPR3 perm. & +0.04pp & -0.74pp & +1.02pp & -0.08pp & -0.00pp & +0.24pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{What changes relative to the diagnostic slide}
+\scriptsize
+The realized view separates direct exclusion effects from retained-stock reweighting. Permanent CSI has small TP exclusion gains because positives are rare; retained-stock reweighting and controlled FP cost drive most realized alpha.
+\end{alertblock}
+\scriptsize
+FN/TN remain diagnostics for missed or correctly retained names; they enter realized alpha only through active retained-stock weights after portfolio renormalization.
+\remarkfoot{Source: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; selected OOS rows, \texttt{transaction\_cost\_bps=10}; validation in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%

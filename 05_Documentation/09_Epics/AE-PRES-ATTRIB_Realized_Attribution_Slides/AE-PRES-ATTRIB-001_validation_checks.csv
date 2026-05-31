@@ -1,0 +1,9 @@
+﻿check,status,detail
+branch,pass,Development branch required; worker validation executed on Development
+protected_paths,pass,No edits under 01_Code 02_Data_Input 03_Data_Output or 07_CloudComputing
+slide_insertions,pass,Temporary attribution slide is page 21 after diagnostic page 20; permanent attribution slide is page 25 after diagnostic page 24
+source_map,pass,SLIDE_DATA_SOURCES.md has 55 mapped rows and entries for slides 21 and 25
+row_reconciliation,pass,Displayed TP+FP+retained+TC+geo adjustment equals displayed alpha row-by-row after percentage-point rounding
+compile,pass,knitr plus two pdflatex passes succeeded; final PDF has 55 pages
+visual_qa,pass,Rendered pages 20-26; new slides 21 and 25 and adjacent diagnostic slides 20 and 24 are readable with no clipping
+validator,pass,Blocking validation checks passed locally; unrelated pre-existing dirty files remained unstaged
