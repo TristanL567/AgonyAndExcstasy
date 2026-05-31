@@ -1,0 +1,25 @@
+slide_number,frame_title,track,transaction_cost_bps,universe,row_type,displayed_geo_return_pct,source_or_reference_geo_return_pct,check_result,notes
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,total_market,benchmark,13.29,13.29,pass,Benchmark uses unchanged 0 bps market-cap reference
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,total_market,strategy,13.71,13.71,pass,10 bps strategy row from best_by_track_index_cost
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,large_cap,benchmark,14.28,14.28,pass,Benchmark uses unchanged 0 bps market-cap reference
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,large_cap,strategy,14.42,14.42,pass,10 bps strategy row from best_by_track_index_cost
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,mid_cap,benchmark,9.65,9.65,pass,Benchmark uses unchanged 0 bps market-cap reference
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,mid_cap,strategy,10.05,10.05,pass,10 bps strategy row from best_by_track_index_cost
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,small_cap,benchmark,7.65,7.65,pass,Benchmark uses unchanged 0 bps market-cap reference
+20,Index Results: Temporary CSI at 10 bps,dynamic_csi,10,small_cap,strategy,8.20,8.20,pass,10 bps strategy row from best_by_track_index_cost
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,total_market,benchmark,13.29,13.29,pass,0 bps reference row
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,total_market,strategy,13.56,13.56,pass,0 bps strategy row from best_by_track_index_cost
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,large_cap,benchmark,14.28,14.28,pass,0 bps reference row
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,large_cap,strategy,14.51,14.51,pass,0 bps strategy row from best_by_track_index_cost
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,mid_cap,benchmark,9.65,9.65,pass,0 bps reference row
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,mid_cap,strategy,10.39,10.39,pass,0 bps strategy row from best_by_track_index_cost
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,small_cap,benchmark,7.65,7.65,pass,0 bps reference row
+21,Index Results: Permanent CSI at 0 bps,permanent_csi,0,small_cap,strategy,7.98,7.98,pass,0 bps strategy row from best_by_track_index_cost
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,total_market,benchmark,13.29,13.29,pass,Benchmark uses unchanged 0 bps market-cap reference
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,total_market,strategy,13.55,13.55,pass,10 bps strategy row from best_by_track_index_cost
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,large_cap,benchmark,14.28,14.28,pass,Benchmark uses unchanged 0 bps market-cap reference
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,large_cap,strategy,14.49,14.49,pass,10 bps strategy row from best_by_track_index_cost
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,mid_cap,benchmark,9.65,9.65,pass,Benchmark uses unchanged 0 bps market-cap reference
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,mid_cap,strategy,10.28,10.28,pass,10 bps strategy row from best_by_track_index_cost
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,small_cap,benchmark,7.65,7.65,pass,Benchmark uses unchanged 0 bps market-cap reference
+22,Index Results: Permanent CSI at 10 bps,permanent_csi,10,small_cap,strategy,7.90,7.90,pass,10 bps strategy row from best_by_track_index_cost

@@ -971,23 +971,23 @@ Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Ex
 \toprule
 Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
-Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.43pp \\
-Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
-Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.15pp \\
-Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
-Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.51pp \\
-Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
-Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.63pp \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.42pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.14pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.39pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.55pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Temporary CSI transaction-cost read}
 \scriptsize
-The 10 bps overlay leaves the temporary CSI winners unchanged. The source benchmark rows remain the unfiltered market-cap reference for each universe, reported at the matching cost row.
+The 10 bps overlay leaves the temporary CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
-\remarkfoot{Cost rows are source-provided net performance rows; cost overlay applies through the 11C transaction-cost contract. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
+\remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1035,30 +1035,30 @@ Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Ba
 \toprule
 Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
-Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.27pp \\
-Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
-Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.23pp \\
-Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
-Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.74pp \\
-Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
-Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.32pp \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.26pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.22pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.62pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.24pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Permanent CSI transaction-cost read}
 \scriptsize
-The 10 bps overlay leaves the permanent CSI winners unchanged. Permanent CSI gains come from fixed-FPR rules rather than Youden-style broad exclusions.
+The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
-\remarkfoot{Geo ret., Ann. SD, Sharpe Ratio, Max DD, and ES 2.5\% are net OOS values from source performance rows. Delta pp is zero for benchmarks.}
+\remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Delta pp compares against the unchanged benchmark row.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Transaction-Cost Robustness}
 \fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{Winner ranking is stable from 0 to 20 bps; evaluated costs: 0, 5, 10, 20 bps}
+\textbf{Winner ranking is stable from 0 to 20 bps; costs apply to gross buy+sell turnover}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
@@ -1088,7 +1088,7 @@ Transaction costs do not change the top winner in any of the eight track--index 
 
 \begin{frame}{Turnover Effect}
 \fontsize{5.25pt}{5.85pt}\selectfont
-\textbf{Best strategies keep their ranking at 10 bps, but Mid and Small Cap absorb more cost drag}
+\textbf{Best strategies keep their ranking at 10 bps; turnover is gross buy+sell traded weight}
 \vspace{-0.35em}
 \begin{table}[ht]
 \centering
@@ -1121,7 +1121,7 @@ Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08p
 \end{table}
 \vspace{-0.15em}
 \scriptsize
-Mid and Small Cap exclusions create the largest annualized gross turnover, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
+Mid and Small Cap exclusions create the largest annualized gross turnover, measured as buy plus sell traded weight, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
 \remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
 \end{frame}
 

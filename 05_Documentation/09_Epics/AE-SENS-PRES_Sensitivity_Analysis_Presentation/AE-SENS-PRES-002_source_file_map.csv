@@ -1,0 +1,8 @@
+"source_role","path","used_for"
+"sensitivity_run_registry","03_Data_Output/5_SensitivityAnalysis/00_manifest/run_registry.csv","CMT run representation and status counts"
+"sensitivity_blocked_runs","03_Data_Output/5_SensitivityAnalysis/00_manifest/blocked_runs.csv","Three blocked partial CMT configs"
+"sensitivity_11c_performance","03_Data_Output/5_SensitivityAnalysis/04_index_construction/combined_11c_performance.csv","CMT-grid threshold/lockout/universe 0 bps benchmark-comparison coverage"
+"sensitivity_threshold_summary","03_Data_Output/5_SensitivityAnalysis/05_comparisons/full_grid_threshold_summary.csv","Confirms sensitivity threshold methods: youden, fpr1, fpr3 only"
+"index_suite_manifest","03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/comparison/full_grid_manifest.csv","Confirms AE-INDEX-SUITE full temporary grid completeness"
+"index_suite_raw_performance","03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/raw/3_Modelling_Results/Necessary/temporary_csi/11c_index_revised/index_performance_gross_and_net_by_tc.csv","Observed 4x4x4x4 temporary grid with transaction costs and benchmark deltas"
+"presentation_source_map","06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md","Existing presentation mapping for sensitivity and index-suite outputs"

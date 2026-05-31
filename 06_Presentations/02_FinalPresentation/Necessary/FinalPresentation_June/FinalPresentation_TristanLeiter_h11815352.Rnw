@@ -343,7 +343,7 @@ For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. 
 \scriptsize
 \begin{alertblock}{Completed local sensitivity evidence}
 \scriptsize
-The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}.
+The temporary-CSI C/M/T sensitivity grid is available locally. All 27 run IDs are represented; 24 have complete/reused compact results and 3 are explicitly marked \texttt{blocked\_partial}. Derived presentation summaries remain local-only under \texttt{03\_Data\_Output}.
 \end{alertblock}
 
 \vspace{0.15em}
@@ -381,7 +381,7 @@ Checksum failures & 0 \\
 \scriptsize
 \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028} are listed as \texttt{blocked\_partial}; they are not treated as completed evidence.
 \end{block}
-\remarkfoot{Sources: \texttt{03\_Data\_Output/5\_SensitivityAnalysis/00\_manifest/run\_registry.csv}; \texttt{blocked\_runs.csv}; \texttt{download\_summary.json}.}
+\remarkfoot{Sources: local \texttt{presentation\_ready/sensitivity\_cmt\_model\_summary.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}; AE-SENS-PRES-003 evidence.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -453,14 +453,14 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.7pt}
-\begin{tabular}{L{1.65cm}L{1.45cm}L{1.8cm}R{0.70cm}R{0.70cm}R{0.78cm}}
+\begin{tabular}{L{1.45cm}L{1.45cm}R{0.62cm}R{0.62cm}R{0.68cm}R{0.82cm}}
 \toprule
-Objective & Config & Evidence & Prev. & OOS AP & 11C TM alpha \\
+Objective & Config & OOS AP & OOS AUC & R@FPR3 & 11C TM alpha \\
 \midrule
-Composite & \texttt{C090\_M000\_T012} & strongest overall rank; OOS AUC 0.920 & 7.02\% & 0.557 & +0.169pp \\
-AP winner & \texttt{C060\_M000\_T012} & highest CV/test/OOS AP & 17.49\% & 0.566 & +0.052pp \\
-11C TM & \texttt{C090\_M020\_T018} & best total-market benchmark delta & 3.34\% & 0.274 & +0.226pp \\
-Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.74\% & 0.308 & +0.065pp \\
+Composite & \texttt{C090\_M000\_T012} & 0.557 & 0.920 & 0.407 & +0.169pp \\
+AP winner & \texttt{C060\_M000\_T012} & 0.566 & 0.864 & 0.204 & +0.052pp \\
+11C TM & \texttt{C090\_M020\_T018} & 0.274 & 0.911 & 0.316 & +0.226pp \\
+Baseline & \texttt{C080\_M020\_T018} & 0.308 & 0.896 & 0.255 & +0.065pp \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -470,8 +470,8 @@ Baseline & \texttt{C080\_M020\_T018} & continuity baseline; not top ranked & 4.7
 The baseline remains defensible as a continuity setting, but it is not the top-ranked sensitivity configuration. Stricter definitions generally reduce positives and prevalence; AP can fall when positives become rarer, while AUC/Brier and fixed-FPR recall can remain stable or improve. Benchmark-relative 11C deltas remain positive for the leading configurations but can shrink.
 \end{alertblock}
 \scriptsize
-Use sensitivity as robustness evidence, not as a replacement for the final index suite: the final AE-INDEX-SUITE results use the accepted cleaned label definitions and should remain conceptually separate.
-\remarkfoot{Sources: \texttt{full\_grid\_best\_configs\_by\_objective.csv}; \texttt{full\_grid\_model\_metric\_ranking.csv}; \texttt{full\_grid\_11c\_index\_ranking.csv}. TM alpha = total-market annualized return difference vs benchmark.}
+Use sensitivity as robustness evidence, not as a replacement for the final index suite. The accepted-label temporary index grid is separately complete for Youden/FPR1/FPR3/FPR5, lockouts 1/2/3/5, universes, and 0/5/10/20 bps.
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_presentation\_key\_findings.csv}. TM alpha = total-market annualized return difference vs benchmark.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -929,23 +929,23 @@ Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Ex
 \toprule
 Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
-Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.43pp \\
-Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
-Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.15pp \\
-Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
-Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.51pp \\
-Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
-Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.63pp \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Base Dataset; Youden/3yr & 13.71\% & 18.28\% & 0.635 & -23.79\% & -11.22\% & +0.42pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Base Dataset; Youden/3yr & 14.42\% & 17.98\% & 0.677 & -23.90\% & -10.65\% & +0.14pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/5yr & 10.05\% & 20.70\% & 0.424 & -24.46\% & -13.85\% & +0.39pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/3yr & 8.20\% & 22.64\% & 0.332 & -29.33\% & -15.77\% & +0.55pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Temporary CSI transaction-cost read}
 \scriptsize
-The 10 bps overlay leaves the temporary CSI winners unchanged. The source benchmark rows remain the unfiltered market-cap reference for each universe, reported at the matching cost row.
+The 10 bps overlay leaves the temporary CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
-\remarkfoot{Cost rows are source-provided net performance rows; cost overlay applies through the 11C transaction-cost contract. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
+\remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Source: \texttt{best\_by\_track\_index\_cost.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -993,30 +993,30 @@ Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Ba
 \toprule
 Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
 \midrule
-Total & Benchmark & 13.28\% & 19.03\% & 0.597 & -25.04\% & -11.62\% & 0.00pp \\
-Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.27pp \\
-Large & Benchmark & 14.26\% & 18.49\% & 0.656 & -24.79\% & -10.84\% & 0.00pp \\
-Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.23pp \\
-Mid & Benchmark & 9.54\% & 20.72\% & 0.401 & -24.58\% & -13.83\% & 0.00pp \\
-Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.74pp \\
-Small & Benchmark & 7.57\% & 23.80\% & 0.302 & -29.05\% & -16.12\% & 0.00pp \\
-Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.32pp \\
+Total & Benchmark & 13.29\% & 19.03\% & 0.598 & -25.03\% & -11.62\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; FPR5/perm. & 13.55\% & 18.82\% & 0.614 & -24.72\% & -11.45\% & +0.26pp \\
+Large & Benchmark & 14.28\% & 18.49\% & 0.657 & -24.79\% & -10.84\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; FPR5/perm. & 14.49\% & 18.38\% & 0.670 & -24.51\% & -10.74\% & +0.22pp \\
+Mid & Benchmark & 9.65\% & 20.72\% & 0.406 & -24.58\% & -13.83\% & 0.00pp \\
+Mid & AG Base Dataset; FPR5/perm. & 10.28\% & 20.58\% & 0.436 & -24.52\% & -13.90\% & +0.62pp \\
+Small & Benchmark & 7.65\% & 23.80\% & 0.305 & -29.05\% & -16.12\% & 0.00pp \\
+Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\% & -16.35\% & +0.24pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Permanent CSI transaction-cost read}
 \scriptsize
-The 10 bps overlay leaves the permanent CSI winners unchanged. Permanent CSI gains come from fixed-FPR rules rather than Youden-style broad exclusions.
+The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
-\remarkfoot{Geo ret., Ann. SD, Sharpe Ratio, Max DD, and ES 2.5\% are net OOS values from source performance rows. Delta pp is zero for benchmarks.}
+\remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Delta pp compares against the unchanged benchmark row.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Transaction-Cost Robustness}
 \fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{Winner ranking is stable from 0 to 20 bps; evaluated costs: 0, 5, 10, 20 bps}
+\textbf{Winner ranking is stable from 0 to 20 bps; costs apply to gross buy+sell turnover}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
@@ -1046,7 +1046,7 @@ Transaction costs do not change the top winner in any of the eight track--index 
 
 \begin{frame}{Turnover Effect}
 \fontsize{5.25pt}{5.85pt}\selectfont
-\textbf{Best strategies keep their ranking at 10 bps, but Mid and Small Cap absorb more cost drag}
+\textbf{Best strategies keep their ranking at 10 bps; turnover is gross buy+sell traded weight}
 \vspace{-0.35em}
 \begin{table}[ht]
 \centering
@@ -1079,7 +1079,7 @@ Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08p
 \end{table}
 \vspace{-0.15em}
 \scriptsize
-Mid and Small Cap exclusions create the largest annualized gross turnover, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
+Mid and Small Cap exclusions create the largest annualized gross turnover, measured as buy plus sell traded weight, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
 \remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
 \end{frame}
 
@@ -1248,9 +1248,9 @@ The grid represents 27 C/M/T configurations: 24 are complete or reused, and thre
 \end{block}
 \begin{block}{Source interpretation}
 \scriptsize
-C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE.
+C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
 \end{block}
-\remarkfoot{Sources: \texttt{05\_comparisons/full\_grid\_best\_configs\_by\_objective.csv}; \texttt{05\_comparisons/full\_grid\_*}; \texttt{99\_reports/sensitivity\_results\_readme.md}.}
+\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}
