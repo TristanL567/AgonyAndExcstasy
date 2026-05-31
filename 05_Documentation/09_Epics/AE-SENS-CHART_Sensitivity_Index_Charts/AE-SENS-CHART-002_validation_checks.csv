@@ -1,0 +1,13 @@
+check,result,evidence
+branch_is_development,pass,"git branch --show-current returned Development"
+approved_chart_commits_pushed,pass,"git push origin Development advanced origin from 644ca56 to 253159a before integration"
+no_03_data_staged_or_committed,pass,"git diff --cached was empty before preflight push; scoped staging excludes 03_Data_Output/**"
+main_chart_inserted,pass,"Rnw contains frame 'Sensitivity: Main Run Versus C/M/T Grid' and chart1 includegraphics path"
+appendix_chart_inserted,pass,"Rnw contains frame 'Appendix: Model AP Versus Index Alpha' and refined chart2 includegraphics path"
+source_map_updated,pass,"SLIDE_DATA_SOURCES.md contains 50 numbered rows including rows 27 and 30 for the added chart slides"
+compile_passed,pass,"knitr + bibtex + pdflatex completed and produced a 50-page PDF"
+fatal_latex_errors_absent,pass,"rg found no Fatal error, Emergency stop, Undefined control sequence, Citation, or undefined warnings after corrected BibTeX pass"
+visual_qa_page_27,pass,"Rendered page 27 shows Chart 1 with readable bullets and no observed clipping"
+visual_qa_page_30,pass,"Rendered page 30 shows refined Chart 2 with readable bullets and no observed clipping"
+no_forbidden_scripts_or_remote_use,pass,"No model/index/sensitivity scripts, Vast.ai, SSH, or 03_Data_Output writes were used"
+unrelated_dirty_files_unstaged,pass,"Old deleted FinalPresentation file and untracked AE-VALIDATE folder remain unstaged"
