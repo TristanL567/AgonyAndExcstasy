@@ -965,14 +965,14 @@ Without transaction costs, AG Base Dataset wins Total, Large, and Mid Cap. AG Ex
 
 \begin{frame}{Temporary CSI: Error-Cost Diagnostic}
 \fontsize{4.95pt}{5.45pt}\selectfont
-\textbf{OOS contribution diagnostic reconciled to selected strategy geometric alpha}
+\textbf{OOS contribution diagnostic with geometric attribution adjustment}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.15pt}
 \begin{tabular}{L{0.74cm}L{1.82cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.67cm}R{0.70cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Recon. & Geo alpha \\
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo adj. & Geo alpha \\
 \midrule
 Total & AG Base, Youden 3yr & -2.03pp & +0.00pp & +0.08pp & +1.79pp & +0.59pp & +0.43pp \\
 Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & +0.00pp & +1.24pp & +0.41pp & +0.15pp \\
@@ -987,8 +987,8 @@ Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.27pp & 
 The strongest gains come from preserving benchmark exposure to correctly retained firms, while false-positive exclusions are the main offset. Small Cap adds visible true-positive gains, but the net result still depends on avoiding too much opportunity cost.
 \end{alertblock}
 \scriptsize
-Recon. is the row-level reconciliation term that makes the displayed diagnostics sum to Geo alpha after rounding. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
-\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-002 reconciliation evidence.}
+Geo adj. is the geometric compounding/weight-interaction adjustment: Geo alpha minus the four annualized FP/FN/TP/TN diagnostics. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
+\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-009 decomposition audit.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1059,14 +1059,14 @@ Without transaction costs, AG Exp. Dataset + VAE wins Total and Large Cap; AG Ba
 
 \begin{frame}{Permanent CSI: Error-Cost Diagnostic}
 \fontsize{4.95pt}{5.45pt}\selectfont
-\textbf{OOS contribution diagnostic reconciled to selected strategy geometric alpha}
+\textbf{OOS contribution diagnostic with geometric attribution adjustment}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{1.15pt}
 \begin{tabular}{L{0.74cm}L{1.82cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.64cm}R{0.67cm}R{0.70cm}}
 \toprule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Recon. & Geo alpha \\
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Geo adj. & Geo alpha \\
 \midrule
 Total & AG +VAE, FPR5 perm. & -0.49pp & +0.00pp & +0.01pp & +0.52pp & +0.23pp & +0.27pp \\
 Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.19pp & +0.23pp \\
@@ -1081,8 +1081,8 @@ Small & AG Latent, FPR3 perm. & -0.74pp & +0.00pp & +0.04pp & +1.03pp & -0.01pp 
 The permanent rule adds value mostly by keeping exposure to correctly retained firms and avoiding broad over-exclusion. True-positive gains are small because bankrupt/permanent-loss positives are rare, but fixed-FPR rules limit the false-positive cost.
 \end{alertblock}
 \scriptsize
-Recon. is the row-level reconciliation term that makes the displayed diagnostics sum to Geo alpha after rounding. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
-\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-002 reconciliation evidence.}
+Geo adj. is the geometric compounding/weight-interaction adjustment: Geo alpha minus the four annualized FP/FN/TP/TN diagnostics. Geo alpha is selected OOS strategy geometric return minus matched benchmark return before cost overlays.
+\remarkfoot{Sources: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{best\_by\_track\_index\_cost.csv}; AE-PRES-FINAL-REV2-009 decomposition audit.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
