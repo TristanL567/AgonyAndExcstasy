@@ -1366,14 +1366,14 @@ Detection rate & 86.65\% \\
 
 \vspace{-0.2em}
 \scriptsize
-The remaining misses are not treated as current pipeline errors. Under the additive rule, CRSP bankruptcy codes only validate an already triggered CSI event within the timing window; they are not standalone default labels.
+The 84 are CRSP 572--574 firms not captured by a valid drawdown trigger within the terminal-failure timing window. They remain outside labelled positives, not known pipeline errors.
 \end{column}
 \end{columns}
 
 \vspace{0.2em}
 \begin{alertblock}{Methodological status}
 \scriptsize
-The current overlap audit supports the 545/84/86.65\% story. A full reason breakdown for all 84 CRSP 572--574 misses would require a separate diagnostic; the current slide treats them as exclusions under the retained trigger-and-window definition.
+The local overlap audit supports 545 detected and 84 missed. It does not decompose every miss, so the wording stays limited to the retained trigger-and-window rule.
 \end{alertblock}
 \end{frame}
 
