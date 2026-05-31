@@ -1,0 +1,10 @@
+check,result,notes
+required_aegis_context_read,pass,"Read multi-master-dispatch, shared-orchestration-loop, epic-contract, swarm-contract, and ticket-contract."
+ticket_scope_respected,pass,"Changed files are limited to June presentation/source map, scoped evidence, and epic ledger."
+source_data_unchanged,pass,"No 03_Data_Output files were modified."
+code_data_cloud_unchanged,pass,"No 01_Code, 02_Data_Input, or 07_CloudComputing files were modified."
+main_tables_remove_y_na_column,pass,"Temporary and permanent main count table headers no longer include y=NA."
+appendix_table_remove_y_na_column,pass,"Appendix A3 cleaned-label count table header no longer includes y=NA."
+labelled_denominator_preserved,pass,"Displayed labelled rows and prevalence values remain unchanged."
+source_map_updated,pass,"SLIDE_DATA_SOURCES.md rows 6, 7, and 32 were updated."
+scripts_not_run,pass,"No model, index, data, or sensitivity scripts were run."

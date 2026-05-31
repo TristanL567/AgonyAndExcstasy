@@ -278,22 +278,22 @@ y_{i,t} =
 \small
 \begin{alertblock}{Temporary CSI}
 \scriptsize
-Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold. The 8,674 OOS $y=\mathrm{NA}$ rows are unresolved labels: 3,342 censored trigger labels plus 5,332 observable 2024 rows that would require unavailable 2025 event-year labels.
+Terminal-failure route enabled. The temporary-CSI label has 8,517 positive annual cells in the full observable scaffold. Unresolved end-of-sample labels remain in the canonical panel, but are excluded from the labelled sample shown below.
 \end{alertblock}
 
 \vspace{0.2em}
 \begin{table}[ht]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2.7pt}
-\begin{tabular}{L{1.7cm}R{1.2cm}R{1.05cm}R{1.0cm}R{0.95cm}R{1.2cm}R{1.0cm}}
+\setlength{\tabcolsep}{4.4pt}
+\begin{tabular}{L{1.7cm}R{1.25cm}R{1.1cm}R{1.1cm}R{1.25cm}R{1.0cm}}
 \toprule
-Split & Obs. rows & $y=0$ & $y=1$ & $y=NA$ & Labelled & Prev. \\
+Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
 \midrule
-Full & 188,460 & 171,269 & \textbf{8,517} & 8,674 & 179,786 & 4.74\% \\
-Train & 143,173 & 136,630 & 6,543 & 0 & 143,173 & 4.57\% \\
-Test & 18,111 & 17,307 & 804 & 0 & 18,111 & 4.44\% \\
-OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
+Full & 188,460 & 171,269 & \textbf{8,517} & 179,786 & 4.74\% \\
+Train & 143,173 & 136,630 & 6,543 & 143,173 & 4.57\% \\
+Test & 18,111 & 17,307 & 804 & 18,111 & 4.44\% \\
+OOS & 27,176 & 17,332 & 1,170 & 18,502 & 6.32\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -301,7 +301,7 @@ OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
 \vspace{0.15em}
 \begin{block}{Motivation for robustness}
 \scriptsize
-Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. The retained $y=\mathrm{NA}$ rows are observable firm-years with unresolved labels, not dropped rows; they are excluded from supervised training and label-based evaluation.
+Prevalence is computed on labelled cells only: $y=1/(y=0+y=1)$. Unresolved labels are retained in canonical artifacts for scaffold consistency, but excluded from supervised training, label-based evaluation, and this displayed count table.
 \end{block}
 \end{frame}
 
@@ -316,15 +316,15 @@ Permanent CSI uses the same 188,460 observable firm-year scaffold. Unresolved la
 \begin{table}[ht]
 \centering
 \scriptsize
-\setlength{\tabcolsep}{2.7pt}
-\begin{tabular}{L{1.7cm}R{1.2cm}R{1.05cm}R{1.0cm}R{0.95cm}R{1.2cm}R{1.0cm}}
+\setlength{\tabcolsep}{4.4pt}
+\begin{tabular}{L{1.7cm}R{1.25cm}R{1.1cm}R{1.1cm}R{1.25cm}R{1.0cm}}
 \toprule
-Split & Obs. rows & $y=0$ & $y=1$ & $y=NA$ & Labelled & Prev. \\
+Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
 \midrule
-Full & 188,460 & 181,368 & \textbf{6,258} & 834 & 187,626 & 3.34\% \\
-Train & 143,173 & 137,794 & 5,379 & 0 & 143,173 & 3.76\% \\
-Test & 18,111 & 17,511 & 542 & 58 & 18,053 & 3.00\% \\
-OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
+Full & 188,460 & 181,368 & \textbf{6,258} & 187,626 & 3.34\% \\
+Train & 143,173 & 137,794 & 5,379 & 143,173 & 3.76\% \\
+Test & 18,111 & 17,511 & 542 & 18,053 & 3.00\% \\
+OOS & 27,176 & 26,063 & 337 & 26,400 & 1.28\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -332,7 +332,7 @@ OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
 \vspace{0.15em}
 \begin{block}{Metric denominator}
 \scriptsize
-For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. Unresolved rows remain in the cleaned panel but are excluded from supervised training and evaluation metrics.
+For both tracks, labelled rows are $y=0+y=1$ and prevalence is $y=1/(y=0+y=1)$. Unresolved rows remain in the cleaned panel but are excluded from supervised training, evaluation metrics, and this displayed count table.
 \end{block}
 \end{frame}
 
@@ -1355,18 +1355,18 @@ The current overlap audit supports the 545/84/86.65\% story. A full reason break
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.4cm}L{0.85cm}R{1.05cm}R{0.95cm}R{0.85cm}R{0.85cm}R{1.05cm}R{0.8cm}}
+\begin{tabular}{L{1.4cm}L{0.85cm}R{1.05cm}R{0.95cm}R{0.85cm}R{1.05cm}R{0.8cm}}
 \toprule
-CSI type & Split & Obs. rows & $y=0$ & $y=1$ & $y=NA$ & Labelled & Prev. \\
+CSI type & Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
 \midrule
-Temporary & Full & 188,460 & 171,269 & \textbf{8,517} & 8,674 & 179,786 & 4.74\% \\
-Temporary & Train & 143,173 & 136,630 & 6,543 & 0 & 143,173 & 4.57\% \\
-Temporary & Test & 18,111 & 17,307 & 804 & 0 & 18,111 & 4.44\% \\
-Temporary & OOS & 27,176 & 17,332 & 1,170 & 8,674 & 18,502 & 6.32\% \\
-Permanent & Full & 188,460 & 181,368 & 6,258 & 834 & 187,626 & 3.34\% \\
-Permanent & Train & 143,173 & 137,794 & 5,379 & 0 & 143,173 & 3.76\% \\
-Permanent & Test & 18,111 & 17,511 & 542 & 58 & 18,053 & 3.00\% \\
-Permanent & OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
+Temporary & Full & 188,460 & 171,269 & \textbf{8,517} & 179,786 & 4.74\% \\
+Temporary & Train & 143,173 & 136,630 & 6,543 & 143,173 & 4.57\% \\
+Temporary & Test & 18,111 & 17,307 & 804 & 18,111 & 4.44\% \\
+Temporary & OOS & 27,176 & 17,332 & 1,170 & 18,502 & 6.32\% \\
+Permanent & Full & 188,460 & 181,368 & 6,258 & 187,626 & 3.34\% \\
+Permanent & Train & 143,173 & 137,794 & 5,379 & 143,173 & 3.76\% \\
+Permanent & Test & 18,111 & 17,511 & 542 & 18,053 & 3.00\% \\
+Permanent & OOS & 27,176 & 26,063 & 337 & 26,400 & 1.28\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1374,7 +1374,7 @@ Permanent & OOS & 27,176 & 26,063 & 337 & 776 & 26,400 & 1.28\% \\
 \vspace{0.25em}
 \begin{block}{Read}
 \scriptsize
-Both targets remain rare after the observable-scaffold cleanup. $y=NA$ rows stay in canonical artifacts but are excluded from supervised training and label-based evaluation.
+Both targets remain rare after the observable-scaffold cleanup. Unresolved labels stay in canonical artifacts for scaffold consistency, but are excluded from labelled counts shown here, supervised training, and label-based evaluation.
 \end{block}
 \sourcefoot{Labelled rows = $y=0+y=1$; prevalence = $y=1$/labelled rows.}
 \end{frame}
