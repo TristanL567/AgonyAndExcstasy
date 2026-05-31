@@ -1,0 +1,25 @@
+ticket_id: AE-PRES-FINAL-REV2-004
+goal: "Update the CRSP reentry slide and add a narrow To-Do slide."
+dependencies:
+  - AE-PRES-FINAL-REV2-003
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Edit slide 29 to add that no firms reentered the sample/index after having CRSP 572-574 bankruptcy-related codes."
+  - "Make clear there is no specific reentry CRSP code for companies that reenter in the checked evidence."
+  - "Add a To-Do slide containing only index-construction future tasks: low-volatility and quality approaches."
+  - "Do not add broader future-work items to the To-Do slide."
+acceptance_criteria:
+  - "Slide 29 contains the requested CRSP/reentry clarification."
+  - "The new To-Do slide is present and limited to low-volatility and quality index-construction approaches."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

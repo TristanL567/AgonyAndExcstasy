@@ -1,0 +1,24 @@
+ticket_id: AE-PRES-FINAL-REV2-006
+goal: "Expand slide 36's feature-engineering explanation, adding another slide only if needed for readability."
+dependencies:
+  - AE-PRES-FINAL-REV2-005
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-FINAL-REV2_Final_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-PRES-FINAL-REV2/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Add how feature engineering creates groups and how the groups work, including rank-style transformations, dispersion/cross-sectional signal summaries, and time-series or level/momentum groupings where supported by local code/evidence."
+  - "Keep the slide readable; if it overflows, split into one additional slide."
+  - "Do not claim unsupported feature families."
+acceptance_criteria:
+  - "Feature-engineering group logic is explained clearly in the main deck or one added slide."
+  - "No visible text block is knowingly overloaded before the compile/QA ticket."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
