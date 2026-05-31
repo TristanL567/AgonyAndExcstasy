@@ -1539,18 +1539,23 @@ Fold & Training years & Validation years \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Appendix A7: Feature Family Inventory}
-\scriptsize
+\begin{frame}{Appendix A7: Feature Engineering Groups}
+\fontsize{6.9pt}{7.55pt}\selectfont
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{3.0pt}
+
 \begin{table}[ht]
 \centering
-\begin{tabular}{L{3.0cm}L{7.5cm}}
+\begin{tabular}{L{2.55cm}L{8.15cm}}
 \toprule
-Family & Examples / purpose \\
+Group & How it works in the final model inputs \\
 \midrule
-Fundamentals & Balance sheet, income statement, profitability, leverage, liquidity, accounting dynamics. \\
-Market and price & Returns, drawdowns, volatility, momentum, market capitalization, price-path information. \\
-Macro & FRED macro series and macro interaction terms. \\
-Latent & VAE latent factors from fundamentals or raw features plus reconstruction error. \\
+Firm fundamentals & Point-in-time ratios turn accounting levels into leverage, liquidity, coverage, profitability, accrual, cash-flow, and Altman-style signals. \\
+Level and momentum & First differences, second differences, lagged expanding means, peak/trough moves, consecutive-decline counters, accounting momentum, and 3/5-year rolling mean/min/max/trend/autocorrelation summarize each firm's own history. \\
+Dispersion and price distress & Within-firm dispersion appears through lagged expanding volatility, rolling standard deviation, monthly return volatility, trailing momentum, and 12/60-month drawdown features. These are time-series distress summaries, not peer-universe cross-sectional ranks. \\
+Macro and interactions & Macro levels and regimes enter directly, with selected firm \(\times\) macro interactions such as leverage/rates, coverage/rates, debt/high-yield spreads, profitability/GDP growth, and returns/VIX. \\
+Rank-style VAE scaling & Before VAE fitting, continuous inputs are imputed using train-fitted rules and transformed by train-fitted PIT/quantile scaling to a percentile-like \([0,1]\) scale; test and OOS rows reuse those fitted transforms. \\
+Feature-set assembly & \textbf{Base} strips price-direction features; \textbf{Expanded} uses the full engineered matrix; \textbf{Latent} uses VAE \(z_1,\ldots,z_{24}\) plus reconstruction error; \textbf{Exp. + VAE} concatenates expanded and latent signals. \\
 Metadata excluded & Labels, event dates, confirmation dates, censoring flags, and diagnostics are retained for audit but excluded from model features. \\
 \bottomrule
 \end{tabular}
