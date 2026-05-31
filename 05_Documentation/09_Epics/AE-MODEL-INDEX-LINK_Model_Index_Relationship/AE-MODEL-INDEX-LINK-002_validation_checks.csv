@@ -1,0 +1,9 @@
+check_id,check,result,evidence
+branch,Current branch is Development,pass,checked before execution
+aegis_context,Required AEGIS runbooks/contracts inspected,pass,multi-master-dispatch; shared-orchestration-loop; epic-contract; swarm-contract; ticket-contract
+inputs_read_only,Inputs read only from local evidence/output summaries,pass,No source output paths were opened for writing
+joined_dataset,Compact joined metric-index dataset created,pass,56 rows
+correlations,Metric-outcome correlation table created,pass,291 rows
+missingness,Missingness summary created,pass,25 rows
+limitations,Report records caveats and limitations,pass,CMT missing turnover/cost; model-suite repeated metrics; permanent-CSI sensitivity unavailable
+no_reruns,No model/evaluation/index/sensitivity scripts run,pass,Only CSV reads and documentation writes performed
