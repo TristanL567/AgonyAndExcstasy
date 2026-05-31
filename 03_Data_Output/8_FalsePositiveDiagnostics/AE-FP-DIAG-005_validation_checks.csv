@@ -1,0 +1,6 @@
+check,status,observed,details
+source_validation_from_004_all_pass,pass,pass,"AE-FP-DIAG-005 summarizes only AE-FP-DIAG-004 outputs, whose validation checks all passed."
+summary_rows_cv_only,pass,cv,Presentation summary table is filtered to FPR3 rows and carries split_source=cv.
+test_oos_rows_used,pass,0,No test/OOS files were read or joined; source inputs are AE-FP-DIAG-004 CV-only outputs.
+slide_files_modified,pass,0,No 06_Presentations files were created or edited by this ticket.
+feature_separability_overclaim,pass,blocked_carried_forward,Summary explicitly states raw/fundamental/latent/combined separability is blocked by missing row-level CV feature matrices.

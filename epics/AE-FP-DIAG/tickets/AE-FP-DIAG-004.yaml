@@ -1,0 +1,29 @@
+ticket_id: AE-FP-DIAG-004
+goal: "Assess whether CV false positives are detectably different, ambiguous, or likely unavoidable."
+dependencies:
+  - AE-FP-DIAG-003
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use only CV-only outputs from tickets 002 and 003."
+  - "Assess whether FPs cluster near the decision threshold, resemble TPs in feature space, or are separable by specific feature families."
+  - "Classify FP mechanisms into interpretable categories such as high-score near-miss, label-window mismatch, macro/sector distress lookalike, balance-sheet distress without labelled CSI, and likely noise."
+  - "Quantify how much FP mass appears potentially avoidable versus structurally ambiguous."
+acceptance_criteria:
+  - "A mechanism report exists for temporary and permanent CSI."
+  - "The report answers whether FPs appear undetectable or feature-separable."
+  - "No test/OOS data enter the mechanism assessment."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

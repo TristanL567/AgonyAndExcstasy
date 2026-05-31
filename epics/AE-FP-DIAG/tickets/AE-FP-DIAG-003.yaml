@@ -1,0 +1,30 @@
+ticket_id: AE-FP-DIAG-003
+goal: "Compare CV false positives and true positives by feature profile."
+dependencies:
+  - AE-FP-DIAG-002
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use CV-only cohort assignments from ticket 002."
+  - "Compare FP vs TP feature distributions for available raw, fundamental, latent, and combined feature families where in scope."
+  - "Report standardized mean differences, rank shifts, missingness differences, and top differentiating features/groups."
+  - "Separate temporary CSI and permanent CSI."
+  - "Avoid fitting supervised models on test/OOS data."
+acceptance_criteria:
+  - "Feature contrast tables and a concise report exist."
+  - "Top differentiating features/groups are listed for both tracks."
+  - "All source rows are CV-only."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

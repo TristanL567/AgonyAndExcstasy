@@ -1,0 +1,35 @@
+epic_id: AE-FP-DIAG
+goal: "Diagnose false positives using cross-validation data only, identify which features separate false positives from true positives, assess whether false positives are plausibly undetectable, and add separate test-set index-construction reporting."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-FP-DIAG-006
+  - AE-FP-DIAG-008
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "03_Data_Output/9_TestIndexConstruction/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-FP-DIAG/**"
+epic_must_not_touch:
+  - "02_Data_Input/**"
+  - "01_Code/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-FP-DIAG-001
+  - AE-FP-DIAG-002
+  - AE-FP-DIAG-003
+  - AE-FP-DIAG-004
+  - AE-FP-DIAG-005
+  - AE-FP-DIAG-006
+  - AE-FP-DIAG-007
+  - AE-FP-DIAG-008
+depends_on_epics:
+  - AE-ATTRIB
+  - AE-PRES-FINAL-REV2
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

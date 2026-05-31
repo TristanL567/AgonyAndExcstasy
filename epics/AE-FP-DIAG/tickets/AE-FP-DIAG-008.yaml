@@ -1,0 +1,33 @@
+ticket_id: AE-FP-DIAG-008
+goal: "Compile, visually QA, and close the false-positive diagnostics epic."
+dependencies:
+  - AE-FP-DIAG-007
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "03_Data_Output/9_TestIndexConstruction/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compile the deck."
+  - "Visually QA all new/edited FP diagnostic and test-set index slides."
+  - "Validate source-map coverage and frame/page consistency."
+  - "Create closeout report with final PDF path and residual risks."
+acceptance_criteria:
+  - "Final PDF compiles successfully."
+  - "Visual QA passes for affected slides."
+  - "Epic closeout evidence exists."
+  - "Leakage guard and test/OOS separation are documented in closeout."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human approves final integration/merge to main."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

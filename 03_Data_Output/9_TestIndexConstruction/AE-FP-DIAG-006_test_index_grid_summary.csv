@@ -1,0 +1,5 @@
+track,model,role,period,performance_rows,model_performance_rows,benchmark_rows,universes,threshold_methods,transaction_cost_bps,lockout_years,n_months_values,oos_rows
+dynamic_csi,raw,raw_comparator,test,272,256,16,large_cap|mid_cap|small_cap|total_market,fpr1|fpr3|fpr5|youden,0|5|10|20,1|2|3|5,48,0
+dynamic_csi,raw_plus_latent,main_nonraw,test,272,256,16,large_cap|mid_cap|small_cap|total_market,fpr1|fpr3|fpr5|youden,0|5|10|20,1|2|3|5,48,0
+permanent_csi,raw,raw_comparator,test,80,64,16,large_cap|mid_cap|small_cap|total_market,fpr1|fpr3|fpr5|youden,0|5|10|20,0,48,0
+permanent_csi,raw_plus_latent,main_nonraw,test,80,64,16,large_cap|mid_cap|small_cap|total_market,fpr1|fpr3|fpr5|youden,0|5|10|20,0,48,0
