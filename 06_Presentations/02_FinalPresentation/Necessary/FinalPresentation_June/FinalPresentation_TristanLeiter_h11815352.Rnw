@@ -67,8 +67,10 @@ knit2pdf(Directory_LaTeX)
 \newcommand{\status}[1]{\textcolor{warningRed}{\textbf{#1}}}
 \newcommand{\dyn}{\texttt{dynamic\_csi}}
 \newcommand{\perm}{\texttt{permanent\_csi}}
-\newcommand{\rawplus}{\texttt{raw\_plus\_latent}}
-\newcommand{\latraw}{\texttt{latent\_raw}}
+\newcommand{\agbase}{AG Base Dataset}
+\newcommand{\agexp}{AG Expanded Dataset}
+\newcommand{\aglatent}{AG Latent Dataset (VAE)}
+\newcommand{\agvae}{AG Exp. Dataset + VAE}
 \graphicspath{{../../../03_Output/Figures/}}
 
 \title[The Agony and the Ecstasy]{The Agony and the Ecstasy}
@@ -875,7 +877,7 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
 \textbf{Signal discipline}
 \scriptsize
 \begin{itemize}
-  \item Scores are annual for \texttt{raw}, \texttt{fund}, \texttt{latent\_raw}, and \texttt{raw\_plus\_latent}.
+  \item Scores are annual for AG Expanded Dataset, AG Base Dataset, AG Latent Dataset (VAE), and AG Exp. Dataset + VAE.
   \item Holding-year signal uses information available before the holding year.
   \item Thresholds calibrated from CV predictions only: Youden, FPR1, FPR3, FPR5.
 \end{itemize}
@@ -1086,14 +1088,14 @@ The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gr
 \toprule
 Track & Universe & 0 bps winner & 20 bps winner & Alpha 0 & Alpha 20 \\
 \midrule
-Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
-Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
-Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
-Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
-Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
-Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
-Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
-Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
+Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.42pp \\
+Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.15pp \\
+Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.51pp \\
+Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.62pp \\
+Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.27pp \\
+Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.23pp \\
+Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.74pp \\
+Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1617,7 +1619,7 @@ The raw comparator is the revised-dataset optional-library AutoGluon rerun from 
 \begin{column}{0.50\textwidth}
 \textbf{Completed grid}
 \begin{itemize}
-  \item Models: \texttt{raw} (AG Expanded Dataset), \texttt{fund} (AG Base Dataset), \texttt{latent\_raw} (AG Latent Dataset), \texttt{raw\_plus\_latent} (AG Exp. Dataset + VAE).
+  \item Models: AG Expanded Dataset, AG Base Dataset, AG Latent Dataset (VAE), and AG Exp. Dataset + VAE.
   \item Tracks: temporary CSI and permanent CSI.
   \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
   \item Thresholds: Youden, FPR1, FPR3, FPR5.
@@ -1652,14 +1654,14 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \toprule
 Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule
-Temp. & Total & \texttt{fund} & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp \\
-Temp. & Large & \texttt{fund} & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp \\
-Temp. & Mid & \texttt{fund} & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp \\
-Temp. & Small & \texttt{raw\_plus\_latent} & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp \\
-Perm. & Total & \texttt{raw\_plus\_latent} & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp \\
-Perm. & Large & \texttt{raw\_plus\_latent} & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp \\
-Perm. & Mid & \texttt{fund} & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp \\
-Perm. & Small & \texttt{latent\_raw} & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp \\
+Temp. & Total & AG Base Dataset & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp \\
+Temp. & Large & AG Base Dataset & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp \\
+Temp. & Mid & AG Base Dataset & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp \\
+Temp. & Small & AG Exp. Dataset + VAE & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp \\
+Perm. & Total & AG Exp. Dataset + VAE & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp \\
+Perm. & Large & AG Exp. Dataset + VAE & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp \\
+Perm. & Mid & AG Base Dataset & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp \\
+Perm. & Small & AG Latent Dataset (VAE) & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1681,7 +1683,7 @@ VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market
   \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
   \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
   \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Error-cost decomposition: selected \texttt{fund}, \texttt{raw\_plus\_latent}, and \texttt{latent\_raw} \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
+  \item Error-cost decomposition: selected AG Base Dataset, AG Exp. Dataset + VAE, and AG Latent Dataset (VAE) \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
 \end{itemize}
 \vspace{0.3em}
 \begin{block}{Source discipline}
@@ -1701,14 +1703,14 @@ All claims in the index-result slides are sourced from the completed AE-INDEX-SU
 \toprule
 Track & Universe & Winner 0 bps & Winner 20 bps & Alpha 0 & Alpha 20 \\
 \midrule
-Temp. & Total & \texttt{fund} & \texttt{fund} & +0.43pp & +0.42pp \\
-Temp. & Large & \texttt{fund} & \texttt{fund} & +0.15pp & +0.15pp \\
-Temp. & Mid & \texttt{fund} & \texttt{fund} & +0.51pp & +0.51pp \\
-Temp. & Small & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.64pp & +0.62pp \\
-Perm. & Total & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.27pp & +0.27pp \\
-Perm. & Large & \texttt{raw\_plus\_latent} & \texttt{raw\_plus\_latent} & +0.23pp & +0.23pp \\
-Perm. & Mid & \texttt{fund} & \texttt{fund} & +0.74pp & +0.74pp \\
-Perm. & Small & \texttt{latent\_raw} & \texttt{latent\_raw} & +0.32pp & +0.32pp \\
+Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.42pp \\
+Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.15pp \\
+Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.51pp \\
+Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.62pp \\
+Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.27pp \\
+Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.23pp \\
+Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.74pp \\
+Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.32pp \\
 \bottomrule
 \end{tabular}
 \end{table}
