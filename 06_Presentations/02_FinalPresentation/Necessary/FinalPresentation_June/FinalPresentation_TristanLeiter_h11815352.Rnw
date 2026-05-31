@@ -950,6 +950,36 @@ The 10 bps overlay leaves the temporary CSI winners unchanged. Costs apply to gr
 
 %==== 4b. Data findings =======================================================%
 
+\begin{frame}{Temporary CSI: Error-Cost Decomposition}
+\fontsize{5.65pt}{6.2pt}\selectfont
+\textbf{OOS alpha decomposition for the selected temporary-CSI best strategies}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.65pt}
+\begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
+\toprule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
+Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
+Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & -0.00pp & +0.27pp & +0.51pp \\
+Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.05em}
+\begin{alertblock}{Why temporary CSI outperforms}
+\scriptsize
+The strongest gains come from preserving benchmark exposure to correctly retained firms, while false-positive exclusions are the main offset. Small Cap adds visible true-positive gains, but the net result still depends on avoiding too much opportunity cost.
+\end{alertblock}
+\scriptsize
+FP and FN are opportunity-cost terms; TP and TN are gains versus the matched benchmark decomposition. Net matches the selected OOS strategy alpha before cost overlays.
+\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, lockout, strategy id, and OOS period.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
 \begin{frame}{Index Results: Permanent CSI at 0 bps}
 \fontsize{4.85pt}{5.35pt}\selectfont
 \textbf{OOS benchmark and best strategy by universe; permanent-removal rule}
@@ -1010,6 +1040,36 @@ Small & AG Latent Dataset (VAE); FPR3/perm. & 7.90\% & 23.78\% & 0.315 & -29.26\
 The 10 bps overlay leaves the permanent CSI winners unchanged. Costs apply to gross buy+sell turnover; benchmark rows stay at the unfiltered market-cap reference with no strategy cost overlay.
 \end{alertblock}
 \remarkfoot{Strategy rows use source-provided 10 bps net performance; expected annual drag is approximately annualized gross turnover $\times$ 0.001. Delta pp compares against the unchanged benchmark row.}
+\end{frame}
+
+%==== 4b. Data findings =======================================================%
+
+\begin{frame}{Permanent CSI: Error-Cost Decomposition}
+\fontsize{5.65pt}{6.2pt}\selectfont
+\textbf{OOS alpha decomposition for the selected permanent-CSI best strategies}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.65pt}
+\begin{tabular}{L{0.78cm}L{2.15cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}R{0.80cm}}
+\toprule
+Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
+\midrule
+Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
+Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
+Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.74pp \\
+Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.05em}
+\begin{alertblock}{Why permanent CSI outperforms}
+\scriptsize
+The permanent rule adds value mostly by keeping exposure to correctly retained firms and avoiding broad over-exclusion. True-positive gains are small because bankrupt/permanent-loss positives are rare, but fixed-FPR rules limit the false-positive cost.
+\end{alertblock}
+\scriptsize
+FP and FN are opportunity-cost terms; TP and TN are gains versus the matched benchmark decomposition. Net matches the selected OOS strategy alpha before cost overlays.
+\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched to \texttt{best\_by\_track\_index\_cost.csv} by track, universe, model, threshold, permanent rule, strategy id, and OOS period.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
@@ -1081,47 +1141,6 @@ Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08p
 \scriptsize
 Mid and Small Cap exclusions create the largest annualized gross turnover, measured as buy plus sell traded weight, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
 \remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
-\end{frame}
-
-%==== 4b. Data findings =======================================================%
-
-\begin{frame}{Error-Cost Decomposition}
-\fontsize{5.15pt}{5.75pt}\selectfont
-\textbf{OOS error-cost rows decompose the selected best strategy by confusion category}
-\vspace{-0.35em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
-\toprule
-\multicolumn{7}{l}{\textbf{Temporary CSI}}\\
-\midrule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
-\midrule
-Total & AG Base, Youden 3yr & -2.03pp & -0.00pp & +0.08pp & +1.79pp & +0.43pp \\
-Large & AG Base, Youden 3yr & -1.50pp & +0.00pp & -0.00pp & +1.24pp & +0.15pp \\
-Mid & AG Base, FPR5 5yr & +0.05pp & +0.00pp & -0.00pp & +0.27pp & +0.51pp \\
-Small & AG +VAE, Youden 3yr & -4.00pp & -0.02pp & +0.42pp & +3.97pp & +0.64pp \\
-\bottomrule
-\end{tabular}
-\vspace{0.25em}
-\begin{tabular}{L{0.78cm}L{1.95cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}R{0.78cm}}
-\toprule
-\multicolumn{7}{l}{\textbf{Permanent CSI}}\\
-\midrule
-Universe & Best rule & FP cost & FN cost & TP gain & TN gain & Net \\
-\midrule
-Total & AG +VAE, FPR5 perm. & -0.49pp & -0.00pp & +0.01pp & +0.52pp & +0.27pp \\
-Large & AG +VAE, FPR5 perm. & -0.26pp & +0.00pp & +0.00pp & +0.30pp & +0.23pp \\
-Mid & AG Base, FPR5 perm. & -0.55pp & +0.00pp & +0.00pp & +0.90pp & +0.74pp \\
-Small & AG Latent, FPR3 perm. & -0.74pp & -0.00pp & +0.04pp & +1.03pp & +0.32pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.15em}
-\scriptsize
-False positives are opportunity-cost exclusions; true negatives preserve benchmark exposure. Net is the source OOS strategy difference versus the matched benchmark, while category signs are retained from the decomposition output.
-\remarkfoot{Source: model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; matched on track, universe, model, threshold, lockout/rule, strategy id, and OOS period.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
