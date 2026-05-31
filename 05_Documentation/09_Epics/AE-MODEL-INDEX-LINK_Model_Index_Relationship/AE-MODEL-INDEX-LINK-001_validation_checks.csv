@@ -1,0 +1,15 @@
+check_id,check,result,evidence
+branch,Current branch is Development,pass,git rev-parse --abbrev-ref HEAD returned Development
+aegis_context,Required AEGIS runbooks and contracts were inspected,pass,"multi-master-dispatch; shared-orchestration-loop; epic-contract; swarm-contract; ticket-contract"
+epic_envelope,Epic envelope read and respected,pass,epics/AE-MODEL-INDEX-LINK/envelope.yaml
+ticket_envelope,Only ticket 001 envelope was read for execution,pass,epics/AE-MODEL-INDEX-LINK/tickets/AE-MODEL-INDEX-LINK-001.yaml
+allowed_writes,Created files only under allowed AE-MODEL-INDEX-LINK documentation path,pass,05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship
+must_not_touch_outputs,No 03_Data_Output files modified,pass,validated by git status and git diff --name-only
+must_not_touch_presentation,No 06_Presentations files modified by this ticket,pass,pre-existing deleted presentation file remains unrelated and unstaged
+must_not_touch_code,No 01_Code files modified,pass,validated by git status and git diff --name-only
+must_not_touch_data,No 02_Data_Input files modified,pass,validated by git status and git diff --name-only
+must_not_touch_cloud,No 07_CloudComputing files modified by this ticket,pass,pre-existing untracked AE-VALIDATE directory remains unrelated and unstaged
+no_scripts_run,No model/evaluation/index/sensitivity scripts were run,pass,only read-only shell inspection and scoped file creation were used
+brief_summary,Report includes Brief Result Summary,pass,AE-MODEL-INDEX-LINK-001_Status_Quo_Diagnostic.md
+source_inventory,Available sources CSV exists,pass,AE-MODEL-INDEX-LINK-001_available_sources.csv
+linkage_inventory,Linkage inventory CSV exists,pass,AE-MODEL-INDEX-LINK-001_linkage_inventory.csv

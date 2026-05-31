@@ -1,0 +1,30 @@
+epic_id: AE-MODEL-INDEX-LINK
+goal: "Investigate and explain how model-performance metrics relate to index-construction performance."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-MODEL-INDEX-LINK-004
+  - AE-MODEL-INDEX-LINK-005
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+epic_must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-MODEL-INDEX-LINK-001
+  - AE-MODEL-INDEX-LINK-002
+  - AE-MODEL-INDEX-LINK-003
+  - AE-MODEL-INDEX-LINK-004
+  - AE-MODEL-INDEX-LINK-005
+depends_on_epics:
+  - AE-SENS-CHART
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

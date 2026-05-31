@@ -1,0 +1,30 @@
+ticket_id: AE-MODEL-INDEX-LINK-002
+goal: "Compute and document correlation evidence between model-performance metrics and index-construction performance outcomes."
+dependencies:
+  - AE-MODEL-INDEX-LINK-001 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use local evidence read-only."
+  - "Compare AP, AUC, fixed-FPR recall, and related metrics against index alpha, Sharpe, drawdown, turnover, and cost outcomes where available."
+  - "Record methods, joins, missingness, and caveats."
+non_goals:
+  - "Do not rerun training, evaluation, index construction, or sensitivity scripts."
+  - "Do not modify local data outputs."
+acceptance_criteria:
+  - "Correlation analysis report and compact result tables exist under the epic documentation folder."
+  - "Inputs and join keys are documented."
+  - "Limitations are explicit."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

@@ -1,0 +1,19 @@
+# AE-MODEL-INDEX-LINK Ledger
+
+| timestamp | ticket_id | event_type | decision | notes | commit_sha |
+|---|---|---|---|---|---|
+| 2026-05-31T00:00:00+02:00 | AE-MODEL-INDEX-LINK | initialization | workspace initialized, no tickets dispatched | Non-transition metadata entry for AE-AEGIS-AUTO-001. `initialization` is not an allowed epic-contract transition event; no planner dispatch state has changed. | null |
+| 2026-05-31T13:20:32+02:00 | AE-MODEL-INDEX-LINK-001 | dispatched | dispatched AE-MODEL-INDEX-LINK-001 to master-agent | One-ticket dispatch under checkpointed policy. No checkpoint on ticket 001. | null |
+| 2026-05-31T13:25:36+02:00 | AE-MODEL-INDEX-LINK-001 | validator_approved | validator approved AE-MODEL-INDEX-LINK-001 diagnostic output | Scoped evidence files created; no output/data/code/presentation/cloud files modified by ticket. | null |
+| 2026-05-31T13:28:52+02:00 | AE-MODEL-INDEX-LINK-002 | dispatched | dispatched AE-MODEL-INDEX-LINK-002 to master-agent | One-ticket dispatch under checkpointed policy. No checkpoint on ticket 002. | null |
+| 2026-05-31T13:34:49+02:00 | AE-MODEL-INDEX-LINK-002 | validator_approved | validator approved AE-MODEL-INDEX-LINK-002 correlation analysis | Compact documentation-only correlation artifacts created; no output/data/code/presentation/cloud files modified by ticket. | null |
+| 2026-05-31T13:36:56+02:00 | AE-MODEL-INDEX-LINK-003 | dispatched | dispatched AE-MODEL-INDEX-LINK-003 to master-agent | One-ticket dispatch under checkpointed policy. No checkpoint on ticket 003. | null |
+| 2026-05-31T13:40:38+02:00 | AE-MODEL-INDEX-LINK-003 | validator_approved | validator approved AE-MODEL-INDEX-LINK-003 mechanism diagnostic | Mechanism examples and source map created; no output/data/code/presentation/cloud files modified by ticket. | null |
+| 2026-05-31T13:42:36+02:00 | AE-MODEL-INDEX-LINK-004 | checkpoint_hit | human checkpoint reached before AE-MODEL-INDEX-LINK-004 dispatch | Ticket 004 is listed in human_checkpoint_tickets. Human instructed planner to automate until epic completion. | null |
+| 2026-05-31T13:42:36+02:00 | AE-MODEL-INDEX-LINK-004 | human_approved | approved continuation through AE-MODEL-INDEX-LINK-004 checkpoint | Human approval carried by explicit instruction to directly dispatch and automate until epic completion. | null |
+| 2026-05-31T13:42:36+02:00 | AE-MODEL-INDEX-LINK-004 | dispatched | dispatched AE-MODEL-INDEX-LINK-004 to master-agent | One-ticket dispatch under checkpointed policy after human approval. | null |
+| 2026-05-31T13:45:31+02:00 | AE-MODEL-INDEX-LINK-004 | validator_approved | validator approved AE-MODEL-INDEX-LINK-004 reporting recommendation | Reporting recommendation, claim boundaries, and checkpoint summary created; no output/data/code/presentation/cloud files modified by ticket. | null |
+| 2026-05-31T13:48:11+02:00 | AE-MODEL-INDEX-LINK-005 | checkpoint_hit | human checkpoint reached before AE-MODEL-INDEX-LINK-005 dispatch | Ticket 005 is listed in human_checkpoint_tickets. Human instructed planner to automate until epic completion. | null |
+| 2026-05-31T13:48:11+02:00 | AE-MODEL-INDEX-LINK-005 | human_approved | approved continuation through AE-MODEL-INDEX-LINK-005 checkpoint | Human approval carried by explicit instruction to directly dispatch and automate until epic completion. | null |
+| 2026-05-31T13:48:11+02:00 | AE-MODEL-INDEX-LINK-005 | dispatched | dispatched AE-MODEL-INDEX-LINK-005 to master-agent | One-ticket dispatch under checkpointed policy after human approval. Merge gate remains separate. | null |
+| 2026-05-31T13:50:58+02:00 | AE-MODEL-INDEX-LINK-005 | validator_approved | validator approved AE-MODEL-INDEX-LINK-005 closeout | Closeout report, traceability, validation checks, and checkpoint summary created. Merge gate remains separate. | null |

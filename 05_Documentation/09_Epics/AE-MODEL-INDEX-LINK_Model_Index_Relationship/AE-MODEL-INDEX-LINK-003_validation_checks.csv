@@ -1,0 +1,9 @@
+check_id,check,result,evidence
+branch,Current branch is Development,pass,checked before execution
+ticket_scope,Executed only AE-MODEL-INDEX-LINK-003,pass,ticket envelope read; no ticket 004 execution
+inputs_read_only,Source outputs read only,pass,No source output paths opened for writing
+mechanism_report,Mechanism diagnostic report created,pass,AE-MODEL-INDEX-LINK-003_Mechanism_Diagnostic.md
+examples,Alignment/divergence examples created,pass,23 examples
+source_map,Mechanism source map created,pass,9 sources
+channels,"Threshold, universe, turnover, transaction cost, and error-cost channels assessed",pass,Report sections and examples file
+no_reruns,No model/evaluation/index/sensitivity scripts run,pass,Only CSV reads and documentation writes performed

@@ -1,0 +1,12 @@
+check_id,check,result,evidence
+branch,Current branch is Development,pass,checked before execution
+ticket_scope,Executed only AE-MODEL-INDEX-LINK-004,pass,ticket envelope read; no ticket 005 execution
+checkpoint,Checkpoint hit and human approval recorded before dispatch,pass,epics/AE-MODEL-INDEX-LINK/ledger.md
+recommendation_report,Reporting recommendation exists,pass,AE-MODEL-INDEX-LINK-004_Reporting_Recommendation.md
+claim_boundaries,Claim boundary table exists,pass,AE-MODEL-INDEX-LINK-004_claim_boundaries.csv
+checkpoint_summary,Checkpoint summary exists,pass,epics/AE-MODEL-INDEX-LINK/checkpoint-summaries/AE-MODEL-INDEX-LINK-004.yaml
+no_presentation_edits,No presentation files modified by ticket,pass,known old deleted presentation file remains unrelated and unstaged
+no_output_edits,No 03_Data_Output files modified,pass,validated by git status and git diff --name-only
+no_code_or_data_edits,No 01_Code or 02_Data_Input files modified,pass,validated by git status and git diff --name-only
+no_cloud_edits,No 07_CloudComputing files modified by ticket,pass,known untracked AE-VALIDATE folder remains unrelated and unstaged
+no_reruns,No model/evaluation/index/sensitivity scripts run,pass,documentation synthesis only

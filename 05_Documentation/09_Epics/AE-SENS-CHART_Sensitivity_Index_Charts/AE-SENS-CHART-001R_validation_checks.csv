@@ -1,0 +1,7 @@
+check,expected,observed,result
+refined_chart2_png_exists,True,True,pass
+refined_chart2_pdf_exists,True,True,pass
+written_interpretation_exists,True,True,pass
+presentation_files_modified,0,0,pass
+source_data_modified,0,0,pass
+push_requires_human_approval,True,True,pass

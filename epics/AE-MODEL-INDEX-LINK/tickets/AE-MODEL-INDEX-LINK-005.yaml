@@ -1,0 +1,31 @@
+ticket_id: AE-MODEL-INDEX-LINK-005
+goal: "Close the AE-MODEL-INDEX-LINK epic with final validation, source traceability, and merge-gate readiness evidence."
+dependencies:
+  - AE-MODEL-INDEX-LINK-004 human checkpoint approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Validate all epic artifacts and source traceability."
+  - "Confirm no forbidden outputs/code/presentation files were modified."
+  - "Prepare final checkpoint and merge-gate readiness notes."
+non_goals:
+  - "Do not merge the epic branch."
+  - "Do not edit presentation or data outputs."
+acceptance_criteria:
+  - "Closeout report exists."
+  - "Validation checks pass."
+  - "Checkpoint summary exists for human closeout review."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human reviews closeout and decides whether merge-gate work may proceed."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

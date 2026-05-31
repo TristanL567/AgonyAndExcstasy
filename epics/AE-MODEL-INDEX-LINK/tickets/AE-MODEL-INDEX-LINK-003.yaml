@@ -1,0 +1,30 @@
+ticket_id: AE-MODEL-INDEX-LINK-003
+goal: "Diagnose mechanisms explaining where model metrics and index-construction performance align or diverge."
+dependencies:
+  - AE-MODEL-INDEX-LINK-002 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use existing outputs and evidence read-only."
+  - "Assess threshold choice, universe, turnover, transaction cost, and error-cost decomposition as possible mechanism channels."
+  - "Identify examples where AP/AUC and index alpha rank configurations differently."
+non_goals:
+  - "Do not run new computations outside scoped documentation helpers."
+  - "Do not modify output data, code, or presentations."
+acceptance_criteria:
+  - "Mechanism diagnostic report exists."
+  - "Examples of alignment and divergence are documented with source paths."
+  - "No forbidden paths are modified."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

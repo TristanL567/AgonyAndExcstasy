@@ -4,8 +4,8 @@
 library(knitr)
 
 Path <- file.path(here::here(""))
-Directory <- file.path(Path, "01_Code/Presentation/FinalPresentation")
-Directory_LaTeX <- file.path(Directory, "ProposalPresentation_ValidatedCSI_TristanLeiter_h11815352.Rnw")
+Directory <- file.path(Path, "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June")
+Directory_LaTeX <- file.path(Directory, "FinalPresentation_TristanLeiter_h11815352.Rnw")
 setwd(Directory)
 
 knit2pdf(Directory_LaTeX)
@@ -1173,6 +1173,28 @@ Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is
 \remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv} and \texttt{winner\_turnover\_summary\_20bps.csv}.}
 \end{frame}
 
+\begin{frame}{Sensitivity: Main Run Versus C/M/T Grid}
+\fontsize{6.0pt}{6.6pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.66\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart1_sensitivity_stability_distribution.png}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Robustness read}
+\vspace{-0.15em}
+\begin{itemize}
+  \item 24 complete/reused temporary-CSI C/M/T runs are available.
+  \item The accepted main run is inside the completed-run distribution, not an outlier.
+  \item Main-run alpha is below the median for Total/Large and above the median for Mid/Small.
+  \item Sensitivity changes magnitude more than direction across universes.
+  \item Three blocked partial C/M/T configs remain excluded from completed-run conclusions.
+\end{itemize}
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{chart1\_sensitivity\_stability\_distribution.png}; \texttt{universe\_stability\_summary.csv}; \texttt{sensitivity\_index\_stability\_table.csv}; AE-SENS-CHART-001R interpretation.}
+\end{frame}
+
 \section{Next Steps}
 
 \begin{frame}{Remaining Robustness Work}
@@ -1251,6 +1273,27 @@ The grid represents 27 C/M/T configurations: 24 are complete or reused, and thre
 C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
 \end{block}
 \remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
+\end{frame}
+
+\begin{frame}{Appendix: Model AP Versus Index Alpha}
+\fontsize{6.0pt}{6.6pt}\selectfont
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.66\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart2_model_vs_index_sensitivity_scatter_refined.png}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Model versus portfolio objective}
+\vspace{-0.15em}
+\begin{itemize}
+  \item AP and index alpha are related robustness diagnostics, but they are not the same objective.
+  \item The AP winner and total-market alpha winner differ across C/M/T settings.
+  \item The continuity baseline remains defensible, but it is not top-ranked.
+  \item This supports presenting sensitivity as a robustness check rather than a replacement for the accepted main run.
+\end{itemize}
+\end{column}
+\end{columns}
+\remarkfoot{Sources: \texttt{chart2\_model\_vs\_index\_sensitivity\_scatter\_refined.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; AE-SENS-CHART-001R interpretation.}
 \end{frame}
 
 \begin{frame}{Appendix A2: Delisting and Bankruptcy Detection}

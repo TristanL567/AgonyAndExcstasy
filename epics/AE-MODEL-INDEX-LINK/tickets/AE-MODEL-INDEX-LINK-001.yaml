@@ -1,0 +1,31 @@
+ticket_id: AE-MODEL-INDEX-LINK-001
+goal: "Create a status quo diagnostic inventory of available model-performance and index-construction evidence for linking model metrics to index outcomes."
+dependencies:
+  - AE-SENS-CHART closed
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inspect local committed evidence and existing local outputs read-only."
+  - "Inventory model metric files, index performance files, and source maps relevant to model-index relationship diagnostics."
+  - "Clearly separate model-suite metrics, index-suite performance, and sensitivity-chart evidence."
+non_goals:
+  - "Do not compute new metrics."
+  - "Do not edit presentation files."
+  - "Do not run model, index, sensitivity, or pipeline scripts."
+acceptance_criteria:
+  - "Status quo diagnostic report exists."
+  - "Source inventory exists and identifies the evidence needed for correlation analysis."
+  - "No output/data/code/presentation files are modified."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

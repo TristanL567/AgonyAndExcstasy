@@ -1,0 +1,8 @@
+concurrency_cap: 2
+per_epic_token_budget: null
+per_epic_wall_clock_budget: null
+default_autonomy_policy: checkpointed
+notes:
+  - "Planner must follow aegis-core execution/runbooks/multi-master-dispatch.md."
+  - "Validators are blocking by default."
+  - "Merge gates require explicit human approval unless an epic envelope says otherwise."

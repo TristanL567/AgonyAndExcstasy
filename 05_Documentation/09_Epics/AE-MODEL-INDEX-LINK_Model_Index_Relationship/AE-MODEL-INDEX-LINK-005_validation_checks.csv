@@ -1,0 +1,17 @@
+check_id,check,result,evidence
+branch,Current branch is Development,pass,checked before execution
+ticket_scope,Executed only AE-MODEL-INDEX-LINK-005,pass,ticket envelope read; no merge and no ticket beyond 005
+checkpoint,Checkpoint hit and human approval recorded before dispatch,pass,epics/AE-MODEL-INDEX-LINK/ledger.md
+ticket_001_artifacts,Ticket 001 artifacts exist,pass,4 required ticket 001 files found
+ticket_002_artifacts,Ticket 002 artifacts exist,pass,5 required ticket 002 files found
+ticket_003_artifacts,Ticket 003 artifacts exist,pass,4 required ticket 003 files found
+ticket_004_artifacts,Ticket 004 artifacts and checkpoint summary exist,pass,3 evidence files plus checkpoint summary found
+source_traceability,Source traceability file exists,pass,AE-MODEL-INDEX-LINK-005_source_traceability.csv
+closeout_report,Closeout report exists,pass,AE-MODEL-INDEX-LINK-005_Closeout_Report.md
+checkpoint_summary,Ticket 005 checkpoint summary exists,pass,epics/AE-MODEL-INDEX-LINK/checkpoint-summaries/AE-MODEL-INDEX-LINK-005.yaml
+no_output_edits,No 03_Data_Output files modified,pass,validated by git status and git diff --name-only
+no_presentation_edits,No presentation files modified by ticket,pass,known old deleted presentation file remains unrelated and unstaged
+no_code_or_data_edits,No 01_Code or 02_Data_Input files modified,pass,validated by git status and git diff --name-only
+no_cloud_edits,No 07_CloudComputing files modified by ticket,pass,known untracked AE-VALIDATE folder remains unrelated and unstaged
+no_reruns,No model/evaluation/index/sensitivity scripts run,pass,documentation validation only
+no_merge,No branch merge performed,pass,merge gate remains separate planner/human step
