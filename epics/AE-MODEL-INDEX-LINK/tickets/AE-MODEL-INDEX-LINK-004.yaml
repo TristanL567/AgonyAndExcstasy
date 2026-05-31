@@ -1,0 +1,31 @@
+ticket_id: AE-MODEL-INDEX-LINK-004
+goal: "Write a human-reviewed recommendation explaining how to report model-performance versus index-construction evidence."
+dependencies:
+  - AE-MODEL-INDEX-LINK-003 approved
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-MODEL-INDEX-LINK_Model_Index_Relationship/**"
+  - "epics/AE-MODEL-INDEX-LINK/**"
+must_not_touch:
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Summarize status quo, correlation evidence, mechanism diagnostics, and reporting implications."
+  - "Explicitly state what can and cannot be claimed from model metrics alone."
+  - "Prepare checkpoint summary for human review before further epic dispatch."
+non_goals:
+  - "Do not edit the final presentation."
+  - "Do not create new model or index outputs."
+acceptance_criteria:
+  - "Recommendation report exists."
+  - "Checkpoint summary exists under checkpoint-summaries."
+  - "Human checkpoint is recorded before dispatching ticket 005."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human reviews the recommendation and approves continuation to closeout."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
