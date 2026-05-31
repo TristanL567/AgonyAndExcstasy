@@ -1,0 +1,8 @@
+check,status,observed,details
+temporary_csi_source_split_cv_only,pass,cv,rows=577784; forbidden_rows=0; source=03_Data_Output/8_FalsePositiveDiagnostics/temporary_csi_cv_cohorts.parquet
+permanent_csi_source_split_cv_only,pass,cv,rows=577784; forbidden_rows=0; source=03_Data_Output/8_FalsePositiveDiagnostics/permanent_csi_cv_cohorts.parquet
+inputs_limited_to_tickets_002_003,pass,true,Computed from AE-FP-DIAG-002 cohort parquet files and AE-FP-DIAG-003 documented blocker/profile context only.
+forbidden_test_oos_rows_used,pass,0,"No test/OOS prediction, label, outcome, or feature file was read or joined."
+input_feature_separability_claimed,pass,false,Outputs mark raw/fundamental/latent/combined separability as blocked_missing_row_level_feature_matrix.
+mechanism_categories_supported_by_available_evidence,pass,score_threshold_only,Assigned categories use threshold margin and TP score-overlap only; unsupported mechanisms are listed separately as not assigned.
+tracks_covered,pass,dynamic_csi;permanent_csi,Mechanism summaries cover temporary and permanent CSI.

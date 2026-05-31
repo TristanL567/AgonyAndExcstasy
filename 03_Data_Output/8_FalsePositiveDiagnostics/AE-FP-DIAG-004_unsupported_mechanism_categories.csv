@@ -1,0 +1,7 @@
+candidate_mechanism,status,reason
+label_window_mismatch,not_assigned,Requires event timing or future/alternate label-window evidence; ticket may use only CV cohort/profile outputs from 002/003.
+macro_or_sector_distress_lookalike,not_assigned,Requires macro/sector/factor or row-level feature values; unavailable in 002/003 CV-only outputs.
+balance_sheet_distress_without_labelled_csi,not_assigned,Requires row-level fundamental features; AE-FP-DIAG-003 documented those matrices as missing in allowed evidence.
+raw_feature_separable_fp,blocked,Requires row-level raw input-feature matrix keyed by permno/year.
+latent_feature_separable_fp,blocked,Requires row-level latent or raw_plus_latent input-feature matrix keyed by permno/year.
+likely_noise,cautious_score_only_possible,Only assigned indirectly as unresolved score-only mass; no feature or label evidence supports a stronger noise claim.
