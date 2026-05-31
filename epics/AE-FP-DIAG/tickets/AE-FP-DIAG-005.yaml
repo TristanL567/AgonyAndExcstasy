@@ -1,0 +1,29 @@
+ticket_id: AE-FP-DIAG-005
+goal: "Produce a concise FP diagnostic summary for later presentation use, without editing slides."
+dependencies:
+  - AE-FP-DIAG-004
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create presentation-ready summary tables and narrative bullets for temporary and permanent CSI."
+  - "Keep all results explicitly labelled CV-only."
+  - "Summarize what differentiates FP from TP, and what remains ambiguous."
+  - "Do not edit the presentation."
+acceptance_criteria:
+  - "Presentation-ready local summaries exist."
+  - "The summary is short enough to convert into one or two slides later."
+  - "No slide files are modified."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

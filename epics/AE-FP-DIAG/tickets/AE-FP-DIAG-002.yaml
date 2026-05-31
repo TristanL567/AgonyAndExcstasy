@@ -1,0 +1,30 @@
+ticket_id: AE-FP-DIAG-002
+goal: "Compute CV-only false-positive and true-positive cohorts for temporary and permanent CSI."
+dependencies:
+  - AE-FP-DIAG-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use only CV/out-of-fold predictions and training/CV labels."
+  - "Create FP/TP/FN/TN cohort files for temporary CSI and permanent CSI under 03_Data_Output/8_FalsePositiveDiagnostics."
+  - "Cover the selected main model/threshold configurations from ticket 001."
+  - "Include counts, prevalence, score distributions, and firm-year identifiers needed for follow-up analysis."
+  - "Do not read or join test/OOS labels or outcomes."
+acceptance_criteria:
+  - "Cohort outputs exist for both tracks."
+  - "Validation evidence proves no test/OOS rows were used."
+  - "Counts reconcile to CV confusion matrices."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

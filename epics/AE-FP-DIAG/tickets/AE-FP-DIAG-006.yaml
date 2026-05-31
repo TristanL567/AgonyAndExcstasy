@@ -1,0 +1,33 @@
+ticket_id: AE-FP-DIAG-006
+goal: "Generate or validate test-set-only index-construction result tables separate from OOS."
+dependencies:
+  - AE-FP-DIAG-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "03_Data_Output/9_TestIndexConstruction/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Determine whether test-set index-construction results already exist separately from OOS."
+  - "If absent and feasible with existing outputs, compute isolated test-set-only index tables under 03_Data_Output/9_TestIndexConstruction without modifying canonical outputs."
+  - "Cover temporary CSI and permanent CSI, model configurations used in the main deck, four universes, thresholds, and transaction-cost variants where available."
+  - "Do not use OOS rows in test-set result construction."
+  - "Do not modify production index-construction code unless a later scoped ticket explicitly allows it."
+acceptance_criteria:
+  - "A test-set index availability/creation report exists."
+  - "Test-set tables exist or blockers are clearly documented."
+  - "OOS rows are excluded and validation evidence proves this."
+manual_verification_required: true
+manual_verification_steps:
+  - "Human/planner confirms whether generated test-set index tables should be added to presentation slides in ticket 007."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

@@ -1,0 +1,31 @@
+ticket_id: AE-FP-DIAG-007
+goal: "Add approved FP-diagnostic and test-set index results to the presentation."
+dependencies:
+  - AE-FP-DIAG-005
+  - AE-FP-DIAG-006
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "03_Data_Output/9_TestIndexConstruction/**"
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Add concise false-positive diagnostic results to the deck, clearly marked CV-only."
+  - "Add separate test-set index result tables/slides if ticket 006 produced or validated them and the checkpoint approved inclusion."
+  - "Keep OOS index-construction results distinct from test-set results."
+  - "Update SLIDE_DATA_SOURCES.md."
+acceptance_criteria:
+  - "Deck distinguishes CV-only FP diagnostics, test-set index results, and OOS index results."
+  - "Source map points to exact FP/test-index artifacts."
+  - "No data output files are modified."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true

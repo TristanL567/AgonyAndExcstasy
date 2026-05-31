@@ -1,0 +1,30 @@
+ticket_id: AE-FP-DIAG-001
+goal: "Create the CV-only false-positive diagnostic design and data/source inventory."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/**"
+  - "epics/AE-FP-DIAG/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inventory available CV/out-of-fold prediction, label, split, threshold, and feature-summary sources for temporary CSI and permanent CSI."
+  - "Define false positives and true positives strictly on cross-validation/training data only."
+  - "Explicitly prohibit use of test or OOS labels/features for feature discovery or threshold selection."
+  - "Define which model/configuration rows are in scope for the first pass, prioritizing the final/main model choices and threshold rules already used in the deck."
+  - "Identify any missing CV prediction or feature artifacts before computation tickets run."
+acceptance_criteria:
+  - "A design report and source inventory exist."
+  - "Leakage guard is explicit and test/OOS are excluded from diagnostic discovery."
+  - "Missing inputs are listed with recommended remediation."
+verification_commands:
+  - "git status --short"
+  - "git diff --name-only"
+completion_report_required: true
