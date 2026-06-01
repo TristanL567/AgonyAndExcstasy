@@ -1,0 +1,39 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-004R
+goal: "Close the FP feature deep dive with concise, presentation-ready findings synthesized from 002R, 003R, and local CV-only feature contrast outputs, without editing slides."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-002R
+  - AE-FP-FEATURE-DEEPDIVE-003R
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create a closeout report summarizing separating features, important feature groups, temporary/permanent differences, separability versus distress-like behavior, and remaining uncertainty."
+  - "Create a presentation-ready summary with 3-5 bullets for temporary CSI, 3-5 bullets for permanent CSI, and one concise caveat paragraph."
+  - "State explicitly that evidence is CV-only, no test/OOS inference is claimed, results are associations not causal mechanisms, and false positives are moderately separable not cleanly separable."
+  - "Record final epic status in the ledger as closed only after validator approval."
+non_goals:
+  - "Do not edit slides or presentation assets."
+  - "Do not modify or create files under 03_Data_Output/**."
+  - "Do not rerun feature construction, model training, index construction, sensitivity, or pipeline scripts."
+acceptance_criteria:
+  - "AE-FP-FEATURE-DEEPDIVE-004R_Closeout_Report.md exists."
+  - "AE-FP-FEATURE-DEEPDIVE-004R_Presentation_Ready_Summary.md exists."
+  - "AE-FP-FEATURE-DEEPDIVE-004R_validation_report.md exists."
+  - "No slides were edited."
+  - "No 03_Data_Output/** files are staged or committed."
+  - "Conclusions are supported by 002R and 003R."
+  - "Summary is explicitly CV-only and makes no test/OOS claims."
+  - "Ledger marks the epic closed only after validator approval."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short --untracked-files=all"
+  - "git diff --name-only -- 01_Code 02_Data_Input 03_Data_Output 06_Presentations 07_CloudComputing"
+  - "git diff --cached --name-only -- 03_Data_Output 06_Presentations"
+completion_report_required: true
