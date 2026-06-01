@@ -1,0 +1,60 @@
+ticket_id: AE-FEAT-IMPORT-002R
+objective: "Resolve fitted AutoGluon predictor availability for true model-based log-odds perturbation."
+goal: "Determine whether fitted AutoGluon predictors for raw, fund, latent_raw, and raw_plus_latent can be recovered locally or remotely, and define the restore or retrain path if unavailable."
+dependencies:
+  - "AE-FEAT-IMPORT-001R methodology/readiness artifacts."
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/6_ModelSuite/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "07_CloudComputing/Validation/AE-MODEL-SUITE/**"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "01_Code/pipeline/09C_AutoGluon.py"
+  - "01_Code/pipeline/config.R"
+  - "Remote /root/AgonyAndExcstasy read-only if explicit OpenSSH is reachable."
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "Confirm the local fitted-predictor absence found in AE-FEAT-IMPORT-001R."
+  - "If SSH is reachable, inspect the remote validation/model-suite output roots for fitted AutoGluon predictor directories."
+  - "Cover raw, fund, latent_raw, and raw_plus_latent for temporary_csi and permanent_csi."
+  - "Classify every model-track predictor as available locally, available remotely, pruned/unavailable, recoverable without retraining, or requiring retraining."
+  - "If remote predictors are available, define a later-ticket safe download plan into an ignored local folder under 03_Data_Output/10_FeatureImportance/predictors/ without downloading now."
+  - "If predictors are unavailable, define the minimum retraining/rebuild plan required for later perturbation."
+  - "Do not write endpoint details, credential material, key paths, or tokens into committed reports."
+non_goals:
+  - "No model training."
+  - "No model evaluation."
+  - "No index construction."
+  - "No sensitivity scripts."
+  - "No pipeline regeneration."
+  - "No feature-importance computation."
+  - "No predictor downloads."
+acceptance_criteria:
+  - "Predictor availability report exists."
+  - "Predictor inventory CSV covers all 8 model-track combinations."
+  - "Recovery or retrain plan CSV states a next action for every model-track combination."
+  - "Report states whether AE-FEAT-IMPORT-003R can compute true perturbation directly."
+  - "Validation report confirms no protected paths or 03_Data_Output/** files were created, modified, staged, or committed."
+  - "Reports do not contain endpoint, key path, token, or credential leakage."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git branch --show-current"
+  - "git status --short"
+  - "git diff --name-only"
+  - "git diff --cached --name-only"
+completion_report_required: true
+business_context: "True model-response feature importance requires frozen fitted predictors. This ticket decides whether later perturbation can proceed or needs a predictor restore/retrain gate."
+user_or_operator_outcome: "A clear availability inventory and restore/retrain plan for the eight required fitted predictors."
+design_concept: "Read-only artifact availability audit with committed documentation only."
+architecture_boundary: "Documentation and epic metadata only; output artifacts and model objects remain read-only or remote-read-only."
+success_signal: "Every required predictor has a documented availability class and next action."
+tradeoffs_or_constraints: "Heavy AutoGluon predictor artifacts may have been intentionally pruned by model-suite storage policy."
