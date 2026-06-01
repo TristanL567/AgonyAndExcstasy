@@ -1,0 +1,24 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-001
+goal: "Locate or define how to produce CV-only row-level feature matrices keyed by permno/year for FP-vs-TP analysis."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inventory available row-level feature artifacts and confirm whether they are keyed by permno/year and split."
+  - "Confirm whether CV-only feature rows can be joined to AE-FP-DIAG cohorts without test/OOS leakage."
+  - "If no valid feature matrices exist, define the minimal scoped data-production ticket required, without executing it."
+acceptance_criteria:
+  - "A feature-evidence availability report exists."
+  - "Leakage risks are explicitly documented."
+  - "The next ticket is either unblocked or has a precise blocker/remediation."
+completion_report_required: true

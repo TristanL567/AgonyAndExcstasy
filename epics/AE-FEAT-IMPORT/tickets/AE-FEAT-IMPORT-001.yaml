@@ -1,0 +1,25 @@
+ticket_id: AE-FEAT-IMPORT-001
+goal: "Inventory model artifacts and define the log-odds feature-importance methodology."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/6_ModelSuite/**"
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Determine which model outputs expose log-odds, coefficients, SHAP/logit approximations, or prediction perturbations."
+  - "Define how feature importance will be expressed in log-odds terms for AutoGluon/ensemble models."
+  - "Define feature mapping for metagroups: Base Features, Feature Engineered, VAE."
+  - "Define feature groups such as dispersion, rank, level, momentum, macro interaction, and latent groups only where supported by evidence."
+acceptance_criteria:
+  - "Methodology report exists."
+  - "Any limitation of true log-odds interpretation for non-logistic ensembles is explicit."
+completion_report_required: true

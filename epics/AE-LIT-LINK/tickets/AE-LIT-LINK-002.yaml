@@ -1,0 +1,20 @@
+ticket_id: AE-LIT-LINK-002
+goal: "Look up and summarize papers on distress prediction, bankruptcy modelling, and CSI-like labels."
+dependencies:
+  - AE-LIT-LINK-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use web/literature lookup with citations."
+  - "Prioritize peer-reviewed papers, working papers with strong provenance, and standard references."
+  - "Summarize relevance to label construction and model evaluation."
+acceptance_criteria:
+  - "Cited literature summary exists."
+completion_report_required: true

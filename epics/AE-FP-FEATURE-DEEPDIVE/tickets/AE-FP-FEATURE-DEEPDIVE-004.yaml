@@ -1,0 +1,23 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-004
+goal: "Close the FP feature deep-dive with presentation-ready findings, without editing slides unless explicitly requested later."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-003
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Summarize which features separate FP from TP and which do not."
+  - "Create a concise slide-ready narrative."
+  - "Do not edit presentation files."
+acceptance_criteria:
+  - "Closeout report exists."
+  - "Open blockers or caveats are explicit."
+completion_report_required: true

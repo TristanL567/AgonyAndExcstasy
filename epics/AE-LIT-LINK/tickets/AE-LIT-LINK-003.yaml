@@ -1,0 +1,19 @@
+ticket_id: AE-LIT-LINK-003
+goal: "Look up and summarize papers on ML/AutoML/VAE feature learning for financial distress and rare-event classification."
+dependencies:
+  - AE-LIT-LINK-002
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use web/literature lookup with citations."
+  - "Connect literature to AutoGluon/ensembles, VAE latent features, AP/AUC, and fixed-FPR recall."
+acceptance_criteria:
+  - "Cited ML/VAE literature summary exists."
+completion_report_required: true

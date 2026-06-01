@@ -1,0 +1,23 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-003
+goal: "Assess whether false positives are feature-separable, ambiguous, or likely undetectable."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-002
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Classify FP cases by feature evidence: separable, distress-lookalike, threshold-near-miss, or ambiguous."
+  - "Quantify what share of FP mass appears avoidable by additional features versus likely unavoidable under current labels."
+  - "Keep claims CV-only and avoid test/OOS leakage."
+acceptance_criteria:
+  - "A mechanism/separability report exists."
+  - "Feature-based conclusions are supported by CV evidence."
+completion_report_required: true

@@ -1,0 +1,22 @@
+ticket_id: AE-FEAT-IMPORT-006
+goal: "Close feature-importance epic with presentation-ready summary tables."
+dependencies:
+  - AE-FEAT-IMPORT-005
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/10_FeatureImportance/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create concise summary tables for metagroups, feature groups, and individual features."
+  - "Do not edit slides."
+acceptance_criteria:
+  - "Closeout report exists."
+  - "Presentation-ready summaries exist."
+completion_report_required: true

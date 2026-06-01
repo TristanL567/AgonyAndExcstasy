@@ -1,0 +1,29 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-001C
+goal: "Produce full CV-only model-suite feature matrices for FP-vs-TP separability, keeping generated data local and ignored by git."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-001B
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use existing local model-suite or prepared feature artifacts to build CV/training-only row-level feature matrices keyed by permno/year."
+  - "Cover raw, fundamental, latent, and raw-plus-latent feature families where possible."
+  - "Keep generated matrix files under 03_Data_Output/8_FalsePositiveDiagnostics and do not stage or commit them."
+  - "Commit only documentation, manifests, validation summaries, and ledger entries."
+  - "Validate all matrix rows are CV/training rows and exclude test/OOS."
+  - "Validate join coverage against AE-FP-DIAG temporary and permanent CV cohort files."
+acceptance_criteria:
+  - "Local full feature matrices exist or a precise technical blocker is documented."
+  - "No 03_Data_Output files are staged or committed."
+  - "Documentation records matrix paths, row counts, feature-family coverage, and join coverage."
+  - "AE-FP-FEATURE-DEEPDIVE-002 is either unblocked or explicitly blocked with an actionable reason."
+completion_report_required: true

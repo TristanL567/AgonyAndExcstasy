@@ -1,0 +1,48 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-002R
+goal: "Rebuild CV-only row-level feature evidence from approved local model input artifacts and compare FP-vs-TP feature separability for temporary and permanent CSI."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-001C
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "02_Data_Input/05_PipelineResults/Necessary/**"
+  - "02_Data_Input/02_Compustat/**"
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use only cross-validation/training rows for feature discovery."
+  - "Exclude test and OOS rows from feature discovery."
+  - "Record source paths and schemas for raw, fund, latent_raw, and raw_plus_latent feature artifacts."
+  - "Join CV/training feature rows to existing AE-FP-DIAG CV FP/TP cohorts by permno/year."
+  - "Validate FP/TP/FN/TN coverage."
+  - "Compute FP-vs-TP mean, median, standardized mean difference, rank-percentile gap, missingness gap, and distributional overlap where feasible."
+  - "Create local generated CSV outputs under 03_Data_Output/8_FalsePositiveDiagnostics/feature_matrices/."
+  - "Commit only documentation, reports, source script, ledger, and ticket envelope; do not stage or commit 03_Data_Output files."
+non_goals:
+  - "Do not modify production source code under 01_Code/**."
+  - "Do not edit or regenerate protected input data under 02_Data_Input/**."
+  - "Do not edit presentation or cloud-computing areas."
+  - "Do not stage, commit, push, or open a pull request."
+  - "Do not create new model predictions, refit models, or change AE-FP-DIAG cohort definitions."
+acceptance_criteria:
+  - "Local contrast tables exist under 03_Data_Output/8_FalsePositiveDiagnostics/feature_matrices/."
+  - "Reports state available and missing feature families/cohort families."
+  - "All feature rows used are CV/training only."
+  - "Test and OOS rows are excluded."
+  - "Join coverage is reported for FP, TP, FN, and TN."
+  - "No 03_Data_Output files are staged or committed."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git status --short --branch"
+  - "& 'C:\\Program Files\\R\\R-4.5.2\\bin\\Rscript.exe' '05_Documentation\\09_Epics\\AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability\\AE-FP-FEATURE-DEEPDIVE-002R_build_feature_separability.R'"
+  - "Import-Csv 03_Data_Output\\8_FalsePositiveDiagnostics\\feature_matrices\\AE-FP-FEATURE-DEEPDIVE-002R_validation_checks.csv"
+  - "git diff --name-only --cached"
+completion_report_required: true

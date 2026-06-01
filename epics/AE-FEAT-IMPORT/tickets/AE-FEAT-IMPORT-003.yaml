@@ -1,0 +1,21 @@
+ticket_id: AE-FEAT-IMPORT-003
+goal: "Compute or summarize feature-group-level importance in log-odds terms."
+dependencies:
+  - AE-FEAT-IMPORT-002
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "03_Data_Output/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Report importance by supported feature group, including dispersion, rank, level, momentum, macro interaction, fundamentals, and latent groups as available."
+  - "Document unsupported or unmapped groups explicitly."
+acceptance_criteria:
+  - "Feature-group importance table and report exist."
+completion_report_required: true

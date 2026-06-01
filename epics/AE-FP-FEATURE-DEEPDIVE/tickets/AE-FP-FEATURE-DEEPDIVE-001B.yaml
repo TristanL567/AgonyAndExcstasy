@@ -1,0 +1,28 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-001B
+goal: "Produce or expose CV-only row-level feature matrices keyed by permno/year for FP-vs-TP analysis."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create or expose row-level feature-value matrices for CV/training rows only, keyed by permno/year and track where applicable."
+  - "Cover available raw, fundamental, latent, and combined feature families where source artifacts permit."
+  - "Joinability to AE-FP-DIAG CV cohort files must be validated without using test or OOS rows."
+  - "If any feature family cannot be produced from existing allowed evidence, document the missing source and continue with available families."
+  - "Do not edit production code or regenerate model/index/pipeline outputs."
+acceptance_criteria:
+  - "CV-only feature matrices or feature extracts exist under 03_Data_Output/8_FalsePositiveDiagnostics."
+  - "Validation proves all rows are CV/training rows and excludes test/OOS."
+  - "A source/coverage report lists available and unavailable feature families."
+  - "AE-FP-FEATURE-DEEPDIVE-002 is either unblocked or explicitly blocked with a narrower reason."
+completion_report_required: true

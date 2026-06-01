@@ -1,0 +1,19 @@
+ticket_id: AE-LIT-LINK-004
+goal: "Look up and summarize papers on distress-based portfolio construction, exclusions, transaction costs, and benchmark-relative alpha."
+dependencies:
+  - AE-LIT-LINK-003
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Use web/literature lookup with citations."
+  - "Connect literature to index construction, transaction costs, turnover, and active attribution."
+acceptance_criteria:
+  - "Cited portfolio/index-construction literature summary exists."
+completion_report_required: true

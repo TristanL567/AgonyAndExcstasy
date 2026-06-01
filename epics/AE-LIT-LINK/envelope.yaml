@@ -1,0 +1,29 @@
+epic_id: AE-LIT-LINK
+goal: "Review relevant research papers and link the thesis results, modelling choices, index construction, sensitivity checks, and feature interpretation to the literature."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-LIT-LINK-001
+  - AE-LIT-LINK-005
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-LIT-LINK-001
+  - AE-LIT-LINK-002
+  - AE-LIT-LINK-003
+  - AE-LIT-LINK-004
+  - AE-LIT-LINK-005
+depends_on_epics: []
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

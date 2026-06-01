@@ -1,0 +1,21 @@
+ticket_id: AE-LIT-LINK-001
+goal: "Inventory thesis claims and identify literature areas requiring support."
+dependencies: []
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-LIT-LINK_Literature_Linkage/**"
+  - "epics/AE-LIT-LINK/**"
+may_read:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Inventory thesis claims needing literature context: distress prediction, bankruptcy labels, AutoML/ensembles, VAE/latent features, AP/AUC vs portfolio alpha, index construction, transaction costs, and robustness."
+  - "Define search terms and inclusion criteria for later literature lookup."
+acceptance_criteria:
+  - "A literature search plan exists."
+completion_report_required: true

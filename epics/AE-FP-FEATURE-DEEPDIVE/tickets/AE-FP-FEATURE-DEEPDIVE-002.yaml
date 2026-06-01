@@ -1,0 +1,25 @@
+ticket_id: AE-FP-FEATURE-DEEPDIVE-002
+goal: "Compute CV-only FP-vs-TP feature separation tables once valid feature matrices are available."
+dependencies:
+  - AE-FP-FEATURE-DEEPDIVE-001
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FP-FEATURE-DEEPDIVE_FP_Feature_Separability/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "epics/AE-FP-FEATURE-DEEPDIVE/**"
+may_read:
+  - "03_Data_Output/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Join CV-only FP/TP cohorts to CV-only feature rows."
+  - "Compare false positives vs true positives by feature using standardized mean difference, rank gap, missingness gap, and distributional overlap."
+  - "Separate temporary CSI and permanent CSI."
+  - "Do not use test/OOS rows."
+acceptance_criteria:
+  - "Feature separation outputs exist."
+  - "All rows are CV-only."
+  - "Top separating features are listed by track."
+completion_report_required: true
