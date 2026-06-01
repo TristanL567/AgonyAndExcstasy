@@ -1,0 +1,57 @@
+ticket_id: AE-FEAT-IMPORT-001R
+objective: "Define and validate methodology for feature importance using model-based log-odds perturbation."
+goal: "Define and validate methodology for feature importance using model-based log-odds perturbation."
+dependencies:
+  - "Completed AE-MODEL-SUITE local compact model artifacts."
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "01_Code/pipeline/06B_FeatureEngineering.R"
+  - "01_Code/pipeline/08B_Autoencoder.py"
+  - "01_Code/pipeline/09C_AutoGluon.py"
+  - "03_Data_Output/6_ModelSuite/**"
+  - "03_Data_Output/8_FalsePositiveDiagnostics/**"
+  - "05_Documentation/01_Methodology/04_Feature_Engineering/Necessary/**"
+  - "05_Documentation/09_Epics/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "Use model-based log-odds perturbation as the primary feature-importance methodology."
+  - "Do not compute full feature-importance tables in this ticket."
+  - "Inventory whether local model-suite artifacts are sufficient for true perturbation for raw, fund, latent_raw, and raw_plus_latent across temporary and permanent CSI."
+  - "Define CV/training-only perturbation design with no test/OOS leakage."
+  - "Define continuous-variable perturbation, missing-value handling, latent VAE feature handling, and correlated feature-group handling."
+  - "Define the 11 feature families for later tickets and mark ambiguous assignments."
+  - "Define the point-in-time ratio subset."
+  - "Define the individual-feature output schema."
+  - "State whether the next ticket can compute true model-based perturbation locally or needs remote predictor artifacts / fallback surrogate method."
+non_goals:
+  - "No model training, model evaluation, index construction, sensitivity scripts, pipeline regeneration, or presentation compilation."
+  - "No full feature-importance computation."
+  - "No edits to code, input data, output data, presentations, cloud validation materials, or aegis-core."
+acceptance_criteria:
+  - "Methodology/readiness report exists under 05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/."
+  - "Model artifact inventory CSV covers four model families across both CSI tracks."
+  - "Feature-family mapping CSV defines 11 feature families and ambiguity notes."
+  - "Report explicitly states AutoGluon ensemble interpretation limitations."
+  - "Report explicitly states true local perturbation feasibility and fallback path."
+  - "Validation report confirms no protected paths were edited and no 03_Data_Output/** files were created, modified, staged, or committed."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git diff --name-only"
+  - "git diff --cached --name-only"
+  - "git status --short"
+completion_report_required: true
+business_context: "Feature-importance methodology is needed for later presentation-ready interpretation of model behavior without overstating ensemble coefficients or causal mechanisms."
+user_or_operator_outcome: "A validated, leakage-safe plan for computing feature importance at family, point-in-time ratio, and individual-feature levels."
+design_concept: "Model-response perturbation in log-odds units, not SHAP-first or coefficient-style interpretation."
+architecture_boundary: "Documentation and epic planning only; data and code remain read-only."
+success_signal: "The next ticket can proceed with either true perturbation if predictors exist locally or an explicit artifact-retrieval/fallback plan if they do not."
+tradeoffs_or_constraints: "Compact model-suite artifacts may omit pruned AutoGluon predictor binaries, which can block true local perturbation."
