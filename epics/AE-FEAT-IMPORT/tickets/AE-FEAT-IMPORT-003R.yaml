@@ -1,0 +1,64 @@
+ticket_id: AE-FEAT-IMPORT-003R
+objective: "Create or restore a loadable fitted-predictor workspace for true model-based log-odds perturbation."
+goal: "Prepare loadable AutoGluon predictors for raw, fund, latent_raw, and raw_plus_latent across dynamic_csi and permanent_csi without computing feature importance."
+dependencies:
+  - "AE-FEAT-IMPORT-001R methodology/readiness artifacts."
+  - "AE-FEAT-IMPORT-002R fitted-predictor availability audit."
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+may_read:
+  - "01_Code/pipeline/09C_AutoGluon.py"
+  - "01_Code/pipeline/config.R"
+  - "02_Data_Input/05_PipelineResults/Necessary/**"
+  - "03_Data_Output/6_ModelSuite/**"
+  - "03_Data_Output/10_FeatureImportance/**"
+  - "07_CloudComputing/Validation/AE-MODEL-SUITE/**"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "Remote /root/AgonyAndExcstasy read-only or isolated predictor workspace if explicit OpenSSH is reachable."
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "03_Data_Output/** outside 03_Data_Output/10_FeatureImportance/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "Check whether raw predictors can be restored without retraining."
+  - "For unavailable non-raw predictors, rebuild them in an isolated predictor workspace using existing revised inputs and 09C_AutoGluon.py only if required."
+  - "Preserve enough predictor artifacts for AutoGluon to load predictors and produce probabilities later."
+  - "Do not commit predictor binaries, caches, data files, or 03_Data_Output/** artifacts."
+  - "Produce a predictor load-validation inventory covering all 8 model-track combinations."
+  - "If any predictor cannot be restored or rebuilt, stop and report a validated blocker."
+  - "Do not compute group or individual feature importance."
+  - "Do not write endpoint details, key paths, ports, tokens, credentials, or raw SSH commands into committed reports."
+non_goals:
+  - "No 10_Evaluation.R."
+  - "No 11C_IndexConstruction_Revised.R."
+  - "No sensitivity scripts."
+  - "No pipeline regeneration."
+  - "No presentation compile."
+  - "No full feature-importance computation."
+acceptance_criteria:
+  - "Predictor workspace report exists."
+  - "Predictor load inventory accounts for all 8 model-track combinations."
+  - "Every available predictor has load validation attempted and smoke-prediction status recorded."
+  - "If any predictor cannot be restored/rebuilt, the blocker is explicit and validated."
+  - "No 03_Data_Output/** files are staged or committed."
+  - "Committed reports contain no endpoint, port, key path, token, credential, or raw SSH command leakage."
+  - "Next-ticket readiness for true perturbation is explicit."
+manual_verification_required: false
+manual_verification_steps: []
+verification_commands:
+  - "git branch --show-current"
+  - "git status --short"
+  - "git diff --name-only"
+  - "git diff --cached --name-only"
+completion_report_required: true
+business_context: "True log-odds perturbation requires loadable fitted predictors rather than compact predictions alone."
+user_or_operator_outcome: "A local or remote-isolated fitted predictor workspace, or a validated blocker explaining why it cannot be prepared."
+design_concept: "Predictor preparation only; feature-importance computation remains a later ticket."
+architecture_boundary: "Allowed local writes are limited to documentation, epic metadata, and ignored 03_Data_Output/10_FeatureImportance predictor workspace artifacts."
+success_signal: "All 8 model-track combinations are loadable with smoke probabilities, or the ticket stops with a validated blocker."
+tradeoffs_or_constraints: "Non-raw predictor rebuilds may be expensive and must use isolated output roots with no canonical-output overwrite."
