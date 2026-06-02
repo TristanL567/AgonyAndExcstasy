@@ -1,0 +1,55 @@
+ticket_id: AE-FEAT-IMPORT-007R
+epic_id: AE-FEAT-IMPORT
+branch: Development-FE
+visible_chat_name: "AEGIS Master-Agent | AE-FEAT-IMPORT"
+commit_required: true
+push_required: false
+objective: "Synthesize and close the feature-importance epic across family, PIT/base-ratio, and individual-feature importance layers without computing new feature importance."
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+may_read:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/**"
+  - "03_Data_Output/10_FeatureImportance/family_importance/**"
+  - "03_Data_Output/10_FeatureImportance/pit_ratio_importance/**"
+  - "03_Data_Output/10_FeatureImportance/individual_feature_importance/**"
+  - "epics/AE-FEAT-IMPORT/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+do_not_run:
+  - "model training"
+  - "feature-importance recomputation"
+  - "evaluation"
+  - "index construction"
+  - "sensitivity scripts"
+  - "pipeline regeneration"
+  - "presentation compile"
+requirements:
+  - "Produce a final closeout report covering methodology, bounded GBM-only caveat, CV/training-only no-leakage scope, completion of all three feature-importance layers, temporary CSI findings, permanent CSI findings, VAE feature relevance, and PIT alignment with family and individual-feature results."
+  - "Produce a presentation-ready summary table covering top families by track/model, top PIT ratios by track/model, and recurring individual features across models/tracks."
+  - "Produce a source map pointing to committed reports, local ignored full output folders, and scripts used."
+  - "Mark the AE-FEAT-IMPORT ledger as closed only after validator approval."
+  - "State remaining limitations: bounded GBM-only predictors, not final full AutoGluon suite importance, correlated-feature perturbation caveat, and CV/training-only evidence with no test/OOS inference."
+  - "Do not edit slides."
+expected_artifacts:
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/AE-FEAT-IMPORT-007R_Closeout_Report.md"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/AE-FEAT-IMPORT-007R_Presentation_Ready_Summary.md"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/AE-FEAT-IMPORT-007R_source_map.csv"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/AE-FEAT-IMPORT-007R_validation_report.md"
+  - "05_Documentation/09_Epics/AE-FEAT-IMPORT_Feature_Importance/AE-FEAT-IMPORT-007R_worker_completion_report.md"
+  - "epics/AE-FEAT-IMPORT/tickets/AE-FEAT-IMPORT-007R.yaml"
+  - "epics/AE-FEAT-IMPORT/ledger.md"
+validation_requirements:
+  - "Use a blocking DS validator."
+  - "Confirm no new feature-importance computation ran."
+  - "Confirm no 03_Data_Output/** files were edited, staged, or committed."
+  - "Confirm no protected paths were edited."
+  - "Confirm closeout references all three completed layers."
+  - "Confirm limitations are explicit."
+  - "Confirm ledger closure occurs only after validator approval."
+commit_message: "AE-FEAT-IMPORT AE-FEAT-IMPORT-007R docs: close feature importance epic"
