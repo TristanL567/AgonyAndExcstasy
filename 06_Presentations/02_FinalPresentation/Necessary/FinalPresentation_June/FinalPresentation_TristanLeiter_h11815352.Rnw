@@ -1378,15 +1378,10 @@ Small & 24 & 0.38 & 0.18 & 0.03--0.66 \\
 \scriptsize
 Values are benchmark-relative geometric-return deltas in percentage points.
 \vspace{0.1em}
-\begin{block}{Read this as robustness, not replacement}
-\scriptsize
-Temporary-CSI sensitivity supports the main run as a defensible, non-outlier setting. Completed C/M/T runs remain positive across all four universes; the main run is below median in Total/Large and above median in Mid/Small.
-\end{block}
-\vspace{-0.15em}
-\begin{alertblock}{Limit}
-\scriptsize
-This sensitivity evidence is temporary CSI only. Three blocked partial C/M/T configurations are excluded, so the result supports stability of completed runs rather than an exhaustive permanent-CSI claim.
-\end{alertblock}
+\textbf{Robustness read.} Temporary-CSI sensitivity supports the main run as a defensible, non-outlier setting. Completed C/M/T runs remain positive across all four universes; the main run is below median in Total/Large and above median in Mid/Small.
+
+\vspace{0.35em}
+\textbf{Limit.} This sensitivity evidence is temporary CSI only. Three blocked partial C/M/T configurations are excluded, so the result supports stability of completed runs rather than an exhaustive permanent-CSI claim.
 \end{column}
 \end{columns}
 \remarkfoot{Sources: \texttt{chart1\_sensitivity\_stability\_distribution.png}; \texttt{universe\_stability\_summary.csv}; \texttt{sensitivity\_index\_stability\_table.csv}; AE-SENS-CHART-001R interpretation.}
