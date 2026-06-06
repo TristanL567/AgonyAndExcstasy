@@ -1,0 +1,34 @@
+ticket_id: AE-INDEX-VALIDATE-003
+goal: "Test whether selected CSI strategy alpha exceeds random exclusion placebo portfolios with matched exclusion intensity."
+dependencies:
+  - "AE-INDEX-VALIDATE-001 completed and validator-approved"
+  - "AE-INDEX-VALIDATE-002 completed and validator-approved"
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "03_Data_Output/11_IndexValidation/**"
+  - "epics/AE-INDEX-VALIDATE/**"
+may_read:
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "05_Documentation/09_Epics/AE-ATTRIB_Main_Index_Attribution/**"
+  - "01_Code/pipeline/11C_IndexConstruction_Revised.R"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "For selected OOS best-strategy rows from AE-INDEX-VALIDATE-001, create random placebo exclusions matched to the selected CSI strategy's exclusion intensity."
+  - "Match at minimum by period, track, universe, rebalance date, and excluded benchmark weight or excluded-name count where feasible."
+  - "Compare realized CSI alpha to the random placebo alpha distribution."
+  - "Report percentile rank, mean placebo alpha, median placebo alpha, p5/p95 placebo alpha, and whether CSI alpha exceeds the placebo distribution."
+  - "Use deterministic seeds and document number of placebo draws."
+  - "Write any full simulation outputs only under 03_Data_Output/11_IndexValidation/ and do not stage or commit those outputs."
+acceptance_criteria:
+  - "Random placebo report exists."
+  - "Compact placebo summary CSV exists under documentation path."
+  - "Full derived outputs, if any, remain local under 03_Data_Output/11_IndexValidation/ and are not committed."
+  - "No code, input data, presentation, or cloud-validation files are modified."
+completion_report_required: true
+commit_required: true
