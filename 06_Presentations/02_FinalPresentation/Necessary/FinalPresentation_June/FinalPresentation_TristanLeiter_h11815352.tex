@@ -1165,6 +1165,68 @@ Reweighting aggregates retained-name effects from the older FN/TN diagnostic vie
 \remarkfoot{Sources: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{transaction\_cost\_bps=10}, \texttt{period=oos}; reconciliation checks in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
 \end{frame}
 
+%==== 24. Temporary Test Insert Repair =======================================%
+
+\begin{frame}{Temporary CSI Test-Set Index Results at 10 bps}
+\fontsize{4.85pt}{5.35pt}\selectfont
+\textbf{2016--2019 test-set benchmark and best temporary-CSI strategy by universe}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
+\toprule
+Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
+\midrule
+Total & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & 0.00pp \\
+Total & AG Exp. Dataset + VAE; Youden/3yr & 14.15\% & 11.65\% & 0.946 & -13.78\% & -8.14\% & +0.41pp \\
+Large & Benchmark & 14.17\% & 11.60\% & 0.951 & -13.82\% & -8.02\% & 0.00pp \\
+Large & AG Exp. Dataset + VAE; Youden/3yr & 14.41\% & 11.40\% & 0.984 & -13.33\% & -7.86\% & +0.24pp \\
+Mid & Benchmark & 13.73\% & 12.85\% & 0.840 & -15.32\% & -8.69\% & 0.00pp \\
+Mid & AG Expanded Dataset; Youden/5yr & 14.06\% & 12.15\% & 0.905 & -14.41\% & -8.34\% & +0.33pp \\
+Small & Benchmark & 11.37\% & 15.55\% & 0.582 & -20.09\% & -10.81\% & 0.00pp \\
+Small & AG Exp. Dataset + VAE; Youden/2yr & 12.26\% & 14.47\% & 0.670 & -18.37\% & -10.13\% & +0.89pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Test-set check}
+\scriptsize
+These are isolated 2016--2019 test rows at 10 bps, not the 2020+ OOS index construction. The validation package contains \texttt{period=test} rows only and reports zero OOS rows.
+\end{alertblock}
+\remarkfoot{Source: \texttt{03\_Data\_Output/9\_TestIndexConstruction/AE-FP-DIAG-006\_test\_index\_performance\_gross\_and\_net\_by\_tc.csv}; validation: \texttt{AE-FP-DIAG-006\_validation\_checks.csv}.}
+\end{frame}
+
+%==== 25. Temporary Test Diagnostic Insert Repair ============================%
+
+\begin{frame}{Temporary CSI Test Diagnostic and Active Contribution}
+\fontsize{4.95pt}{5.45pt}\selectfont
+\textbf{Selected test-set winners at 10 bps; contribution rows use main-suite \texttt{period=test} attribution}
+\vspace{-0.25em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.12pt}
+\begin{tabular}{L{0.74cm}L{1.82cm}R{0.62cm}R{0.62cm}R{0.66cm}R{0.62cm}R{0.65cm}R{0.66cm}}
+\toprule
+Universe & Strategy & TP gain & FP cost & Reweight & TC & Geo adj. & Alpha \\
+\midrule
+Total & AG +VAE, Youden 3yr & +0.08pp & -0.38pp & +0.67pp & -0.01pp & +0.04pp & +0.40pp \\
+Large & AG +VAE, Youden 3yr & +0.00pp & -0.19pp & +0.41pp & -0.01pp & +0.02pp & +0.23pp \\
+Mid & AG Expanded, Youden 5yr & +0.01pp & -0.67pp & +1.07pp & -0.09pp & -0.08pp & +0.24pp \\
+Small & AG +VAE, Youden 2yr & +0.31pp & -1.19pp & +1.42pp & -0.07pp & +0.34pp & +0.82pp \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.15em}
+\begin{alertblock}{Attribution caveat}
+\scriptsize
+The result table above is from isolated test-output files. This diagnostic view is not a standalone AE-FP-DIAG-006 test diagnostic build; it uses reconciled main-suite \texttt{period=test} attribution rows for the same temporary-CSI strategies.
+\end{alertblock}
+\scriptsize
+In the test window, gains mostly come from retained-stock reweighting and geometric effects after false-positive costs. TP exclusion helps most visibly in Small Cap, but the slide should not be read as causal event avoidance.
+\remarkfoot{Sources: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{transaction\_cost\_bps=10}, \texttt{period=test}; reconciliation checks in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
+\end{frame}
+
 %==== 24. Permanent OOS Index Results =========================================%
 
 \begin{frame}{Permanent CSI OOS Index Results at 10 bps}
