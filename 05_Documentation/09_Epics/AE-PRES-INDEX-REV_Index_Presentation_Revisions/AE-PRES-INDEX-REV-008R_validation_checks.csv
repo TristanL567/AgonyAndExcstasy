@@ -1,0 +1,34 @@
+check_id,category,check,evidence,result,notes
+artifact_pdf_exists,final_artifacts,Final PDF exists,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf,PASS,Read-only existence check.
+artifact_rnw_exists,final_artifacts,Final Rnw exists,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,PASS,Read-only existence check.
+artifact_source_map_exists,final_artifacts,SLIDE_DATA_SOURCES.md exists,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md,PASS,Read-only existence check.
+count_pdf_pages,final_artifacts,PDF page count is 58,pdfinfo reported Pages: 58,PASS,No compile was run.
+count_rnw_frames,final_artifacts,Rnw frame count is 58 begin and 58 end,Select-String counted begin=58 and end=58,PASS,Frame balance is intact.
+count_source_rows,final_artifacts,Source-map rows are sequential 1-58,rows=58 min=1 max=58 missing=none dupes=none,PASS,No gaps or duplicate row numbers.
+evidence_001,evidence_coverage,AE-PRES-INDEX-REV-001 evidence exists,7 files matched AE-PRES-INDEX-REV-001*,PASS,Existing evidence retained.
+evidence_002,evidence_coverage,AE-PRES-INDEX-REV-002 evidence exists,4 files matched AE-PRES-INDEX-REV-002*,PASS,Existing evidence retained.
+evidence_003,evidence_coverage,AE-PRES-INDEX-REV-003 evidence exists,5 files matched AE-PRES-INDEX-REV-003*,PASS,Existing evidence retained.
+evidence_004,evidence_coverage,AE-PRES-INDEX-REV-004 evidence exists,4 files matched AE-PRES-INDEX-REV-004*,PASS,Existing evidence retained.
+evidence_005,evidence_coverage,AE-PRES-INDEX-REV-005 evidence exists,5 files matched AE-PRES-INDEX-REV-005*,PASS,Existing evidence retained.
+evidence_006,evidence_coverage,AE-PRES-INDEX-REV-006 evidence exists,4 files matched AE-PRES-INDEX-REV-006*,PASS,Existing evidence retained.
+evidence_007,evidence_coverage,AE-PRES-INDEX-REV-007 evidence exists,13 files matched AE-PRES-INDEX-REV-007*,PASS,Includes 007 plus repair/refresh-prefixed artifacts.
+evidence_007r,evidence_coverage,AE-PRES-INDEX-REV-007R evidence exists,5 files matched AE-PRES-INDEX-REV-007R*,PASS,Repair insert evidence retained.
+evidence_007s,evidence_coverage,AE-PRES-INDEX-REV-007S evidence exists,4 files matched AE-PRES-INDEX-REV-007S*,PASS,Compile refresh evidence retained.
+evidence_008,evidence_coverage,AE-PRES-INDEX-REV-008 evidence exists,4 files matched AE-PRES-INDEX-REV-008*,PASS,Prior closeout retained but superseded by 008R.
+slide_temp_oos,slide_coverage,Temporary CSI OOS block exists,SLIDE_DATA_SOURCES.md rows 22-23,PASS,Result and diagnostic/contribution rows present.
+slide_temp_test_after_23,slide_coverage,Temporary CSI test block exists immediately after slide 23,SLIDE_DATA_SOURCES.md rows 24-25 and PDF text pages 24-25,PASS,Inserted block follows slide 23.
+slide_perm_oos,slide_coverage,Permanent CSI OOS block exists,SLIDE_DATA_SOURCES.md rows 26-27,PASS,Result and diagnostic/contribution rows present.
+slide_perm_test,slide_coverage,Permanent CSI test block exists,SLIDE_DATA_SOURCES.md rows 28-29,PASS,Result and diagnostic/contribution rows present.
+slide_tc,slide_coverage,Transaction-cost robustness slide exists,SLIDE_DATA_SOURCES.md row 30 and PDF text page 30,PASS,Covers OOS temporary/permanent CSI and 5/10/20 bps.
+slide_turnover,slide_coverage,Turnover-effect slide exists,SLIDE_DATA_SOURCES.md row 31 and PDF text page 31,PASS,Covers OOS temporary/permanent CSI and 5/10/20 bps drag.
+slide_threshold,slide_coverage,Threshold-family and turnover slide exists,SLIDE_DATA_SOURCES.md row 32 and PDF text page 32,PASS,Rule-family interpretation is present.
+slide_sensitivity,slide_coverage,Sensitivity slides exist and document temporary-only limitation,SLIDE_DATA_SOURCES.md rows 33 and 54; Rnw lines include temporary CSI only and no permanent-CSI claim,PASS,Permanent-CSI sensitivity remains planned/not completed on row 56.
+test_caveats,slide_coverage,Test-set attribution caveats are documented,Rnw has attribution caveat blocks; source-map rows 25 and 29 identify main-suite period=test attribution with caveat; evidence files 003/005/007R document caveat,PASS,Diagnostic/contribution rows are not claimed as standalone isolated test diagnostics.
+sensitivity_limitation,slide_coverage,Sensitivity limitation is documented,SLIDE_DATA_SOURCES.md rows 33 and 54; Rnw states temporary CSI only and no permanent-CSI claim; future work row 56 marks permanent sensitivity planned/not completed,PASS,No permanent-CSI sensitivity claim.
+scope_no_01,scope,No 01_Code changes,git status and intended staged paths exclude 01_Code,PASS,No code edits in closeout refresh.
+scope_no_02,scope,No 02_Data_Input changes,git status and intended staged paths exclude 02_Data_Input,PASS,No input data edits.
+scope_no_03,scope,No 03_Data_Output changes,git status and intended staged paths exclude 03_Data_Output,PASS,No output data edits.
+scope_no_06,scope,No 06_Presentations changes in this ticket,intended 008R changes are evidence files and ledger only,PASS,Presentation artifacts inspected read-only.
+scope_no_07,scope,No 07_CloudComputing changes,git status and intended staged paths exclude 07_CloudComputing,PASS,Pre-existing untracked 07_CloudComputing path left unstaged.
+forbidden_scripts,scope,No forbidden scripts were run,No compile/model/index/evaluation/sensitivity/pipeline commands run in 008R,PASS,Only read-only checks and documentation edits were performed.
+validator_gate,validation,Validator approval is blocking and recorded,AE-PRES-INDEX-REV-008R closeout report and ledger entry record validator approval before closure,PASS,Epic marked closed after validator approval.
