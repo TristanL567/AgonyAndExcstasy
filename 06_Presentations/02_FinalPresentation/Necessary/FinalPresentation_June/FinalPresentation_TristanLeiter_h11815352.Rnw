@@ -1250,136 +1250,119 @@ Interpretation is contribution-based, not causal: test-set gains are mostly reta
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Transaction-Cost Robustness}
-\fontsize{6.0pt}{6.55pt}\selectfont
-\textbf{Winner ranking is stable from 0 to 20 bps; costs apply to gross buy+sell turnover}
+\fontsize{5.05pt}{5.55pt}\selectfont
+\textbf{OOS winners are unchanged across 5, 10, and 20 bps transaction-cost overlays}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.15cm}L{1.25cm}L{1.55cm}L{1.55cm}R{0.78cm}R{0.78cm}}
+\setlength{\tabcolsep}{1.25pt}
+\begin{tabular}{L{0.70cm}L{0.78cm}L{2.05cm}R{0.62cm}R{0.62cm}R{0.62cm}L{1.10cm}}
 \toprule
-Track & Universe & 0 bps winner & 20 bps winner & Alpha 0 & Alpha 20 \\
+Track & Univ. & Selected OOS winner & Alpha 5 & Alpha 10 & Alpha 20 & Ranking read \\
 \midrule
-Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.42pp \\
-Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.15pp \\
-Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.51pp \\
-Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.62pp \\
-Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.27pp \\
-Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.23pp \\
-Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.74pp \\
-Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.32pp \\
+Temp. & Total & AG Base; Youden 3yr & +0.43pp & +0.43pp & +0.42pp & unchanged \\
+Temp. & Large & AG Base; Youden 3yr & +0.15pp & +0.15pp & +0.15pp & unchanged \\
+Temp. & Mid & AG Base; FPR5 5yr & +0.51pp & +0.51pp & +0.51pp & unchanged \\
+Temp. & Small & AG +VAE; Youden 3yr & +0.63pp & +0.63pp & +0.62pp & unchanged \\
+Perm. & Total & AG +VAE; FPR5 perm. & +0.27pp & +0.27pp & +0.27pp & unchanged \\
+Perm. & Large & AG +VAE; FPR5 perm. & +0.23pp & +0.23pp & +0.23pp & unchanged \\
+Perm. & Mid & AG Base; FPR5 perm. & +0.74pp & +0.74pp & +0.74pp & unchanged \\
+Perm. & Small & AG Latent; FPR3 perm. & +0.32pp & +0.32pp & +0.32pp & unchanged \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{-0.1em}
+\vspace{-0.15em}
+\begin{alertblock}{Interpretation}
 \scriptsize
-Transaction costs do not change the top winner in any of the eight track--index comparisons. The cost drag is economically visible in Mid and Small Cap, but it is not large enough at 20 bps to overturn the ranking.
-\remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+The conclusion does not change as costs rise to 20 bps: the same OOS temporary and permanent winners remain selected in every universe. Higher costs reduce net returns, but the active alpha ranking is stable because benchmark rows receive the same cost convention.
+\end{alertblock}
+\remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Sources: \texttt{best\_by\_track\_index\_cost.csv}, \texttt{transaction\_cost\_robustness\_summary.csv}, and \texttt{transaction\_cost\_impact.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Turnover Effect}
-\fontsize{5.25pt}{5.85pt}\selectfont
-\textbf{Best strategies keep their ranking at 10 bps; turnover is gross buy+sell traded weight}
-\vspace{-0.35em}
+\fontsize{5.1pt}{5.65pt}\selectfont
+\textbf{Cost drag scales with annualized gross buy+sell turnover in the selected OOS winners}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
+\setlength{\tabcolsep}{1.35pt}
+\begin{tabular}{L{0.70cm}L{0.78cm}L{2.03cm}R{0.78cm}R{0.62cm}R{0.62cm}R{0.62cm}}
 \toprule
-\multicolumn{6}{l}{\textbf{Temporary CSI}}\\
+Track & Univ. & Selected OOS winner & Turnover & Drag 5 & Drag 10 & Drag 20 \\
 \midrule
-Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
-\midrule
-Total & AG Base Dataset (Youden 3yr) & 15.3\% & 13.72\% & 13.71\% & -0.01pp \\
-Large & AG Base Dataset (Youden 3yr) & 18.8\% & 14.43\% & 14.42\% & -0.01pp \\
-Mid & AG Base Dataset (FPR5 5yr) & 97.7\% & 10.16\% & 10.05\% & -0.11pp \\
-Small & AG Exp. Dataset + VAE (Youden 3yr) & 77.2\% & 8.29\% & 8.20\% & -0.09pp \\
-\bottomrule
-\end{tabular}
-\vspace{0.25em}
-\begin{tabular}{L{0.78cm}L{2.35cm}R{0.95cm}R{0.95cm}R{0.95cm}R{0.95cm}}
-\toprule
-\multicolumn{6}{l}{\textbf{Permanent CSI}}\\
-\midrule
-Universe & Best strategy & Ann. turnover & Geo ret. 0 bps & Geo ret. 10 bps & Delta from TC \\
-\midrule
-Total & AG Exp. Dataset + VAE (FPR5 perm.) & 12.2\% & 13.56\% & 13.55\% & -0.01pp \\
-Large & AG Exp. Dataset + VAE (FPR5 perm.) & 17.2\% & 14.51\% & 14.49\% & -0.01pp \\
-Mid & AG Base Dataset (FPR5 perm.) & 97.0\% & 10.39\% & 10.28\% & -0.12pp \\
-Small & AG Latent Dataset (VAE) (FPR3 perm.) & 72.4\% & 7.98\% & 7.90\% & -0.08pp \\
+Temp. & Total & AG Base; Youden 3yr & 10.4\% & 0.03pp & 0.05pp & 0.10pp \\
+Temp. & Large & AG Base; Youden 3yr & 13.0\% & 0.03pp & 0.07pp & 0.13pp \\
+Temp. & Mid & AG Base; FPR5 5yr & 105.9\% & 0.26pp & 0.53pp & 1.06pp \\
+Temp. & Small & AG +VAE; Youden 3yr & 85.5\% & 0.21pp & 0.43pp & 0.85pp \\
+Perm. & Total & AG +VAE; FPR5 perm. & 6.8\% & 0.02pp & 0.03pp & 0.07pp \\
+Perm. & Large & AG +VAE; FPR5 perm. & 11.5\% & 0.03pp & 0.06pp & 0.12pp \\
+Perm. & Mid & AG Base; FPR5 perm. & 106.2\% & 0.27pp & 0.53pp & 1.06pp \\
+Perm. & Small & AG Latent; FPR3 perm. & 75.7\% & 0.19pp & 0.38pp & 0.76pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
+\begin{alertblock}{Practical read}
 \scriptsize
-Mid and Small Cap exclusions create the largest annualized gross turnover, measured as buy plus sell traded weight, so cost drag is visibly larger there. The 0--20 bps sweep did not change any top winner ranking.
-\remarkfoot{Source: \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
+Turnover is not just a nuisance metric: it is the direct multiplier for transaction-cost drag. Mid and Small Cap winners trade much more of the portfolio, so their 20 bps drag is visibly larger than Total or Large Cap, even though the winner ranking remains stable.
+\end{alertblock}
+\remarkfoot{Turnover is annualized gross buy+sell traded weight. Drag values use source-provided total transaction-cost return drag from \texttt{best\_by\_track\_index\_cost.csv}; cross-checks use \texttt{turnover\_summary.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{transaction\_cost\_impact.csv}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%
 
 \begin{frame}{Threshold Families and Turnover}
-\fontsize{6.1pt}{6.7pt}\selectfont
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.50\textwidth}
-\textbf{Threshold-family result at 20 bps}
-\vspace{-0.2em}
+\fontsize{5.55pt}{6.1pt}\selectfont
+\textbf{Final selected rules use finite lockouts for temporary CSI and stricter FPR cutoffs for permanent CSI}
+\vspace{-0.25em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.20cm}L{1.45cm}R{1.05cm}}
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{0.82cm}L{2.62cm}L{2.08cm}L{2.22cm}}
 \toprule
-Track & Lead family & Mean alpha \\
+Track & Final selected rule families & 20 bps family evidence & Turnover interpretation \\
 \midrule
-Temp. & Youden & +0.35pp \\
-Perm. & FPR3/FPR5 & +0.35/+0.33pp \\
+Temp. & Youden 3yr wins Total, Large, and Small; FPR5 5yr wins Mid. & Youden has the strongest mean best alpha at 20 bps: +0.35pp. & Finite 3--5yr lockouts let exclusions expire, limiting turnover outside Mid/Small. \\
+Perm. & FPR5 permanent wins Total, Large, and Mid; FPR3 permanent wins Small. & FPR3/FPR5 lead at 20 bps: +0.35pp/+0.33pp; Youden averages -0.20pp. & Permanent removal needs stricter fixed-FPR gates; broad Youden exclusion over-removes names. \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{0.15em}
-\scriptsize
-Temporary CSI benefits from calibrated finite lockouts; 3--5yr exclusions outperform 1yr exclusions. Permanent CSI needs stricter fixed-FPR rules; Youden is negative on average under absorbing exclusion.
-\end{column}
-\begin{column}{0.48\textwidth}
-\textbf{Annualized gross turnover for 20 bps winners}
-\vspace{-0.2em}
+\vspace{-0.1em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.15cm}R{0.85cm}R{0.85cm}}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{L{1.10cm}R{0.72cm}R{0.72cm}R{0.72cm}R{0.72cm}}
 \toprule
-Universe & Temp. & Perm. \\
+Track & Total & Large & Mid & Small \\
 \midrule
-Total & 15.3\% & 12.2\% \\
-Large & 18.8\% & 17.2\% \\
-Mid & 97.7\% & 97.0\% \\
-Small & 77.2\% & 72.4\% \\
+Temp. turnover & 10.4\% & 13.0\% & 105.9\% & 85.5\% \\
+Perm. turnover & 6.8\% & 11.5\% & 106.2\% & 75.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-\vspace{0.15em}
+\vspace{-0.15em}
+\begin{alertblock}{Interpretation}
 \scriptsize
-Turnover matters most in Mid and Small Cap. At 20 bps, the annual return drag is still modest: roughly 1.1pp in Mid Cap and below 0.9pp in Small Cap winners.
-\end{column}
-\end{columns}
-\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv} and \texttt{winner\_turnover\_summary\_20bps.csv}.}
+The final rules are not arbitrary threshold-grid winners. Temporary CSI uses recoverable lockouts where the signal can age out; Permanent CSI uses narrower FPR cutoffs because permanent exclusion is absorbing and turnover/cost mistakes compound.
+\end{alertblock}
+\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}, \texttt{winner\_turnover\_summary\_20bps.csv}, and \texttt{best\_by\_track\_index\_cost.csv}.}
 \end{frame}
 
-\begin{frame}{Sensitivity: Main Run Versus C/M/T Grid}
-\fontsize{5.55pt}{6.05pt}\selectfont
+\begin{frame}{Sensitivity: Temporary CSI Main Run Versus C/M/T Grid}
+\fontsize{5.45pt}{5.95pt}\selectfont
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.58\textwidth}
 \centering
 \includegraphics[width=\linewidth]{../../../../05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/charts/chart1_sensitivity_stability_distribution.png}
 \end{column}
 \begin{column}{0.40\textwidth}
-\textbf{Key results: best alpha distribution}
+\textbf{Main-run comparison}
 \vspace{-0.35em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{1.4pt}
+\setlength{\tabcolsep}{1.25pt}
 \begin{tabular}{L{0.72cm}R{0.40cm}R{0.58cm}R{0.58cm}R{0.88cm}}
 \toprule
 Univ. & Runs & Main & Median & Range \\
@@ -1393,14 +1376,17 @@ Small & 24 & 0.38 & 0.18 & 0.03--0.66 \\
 \end{table}
 \vspace{-0.35em}
 \scriptsize
-Values are benchmark-relative geometric return deltas in percentage points.
-\vspace{0.15em}
-\begin{itemize}
-  \item The accepted main run sits inside the completed-run distribution.
-  \item Main-run alpha is below the median for Total/Large and above the median for Mid/Small.
-  \item Sensitivity changes magnitude more than direction: completed runs remain positive across all four universes.
-  \item Three blocked partial C/M/T configs remain excluded from completed-run conclusions.
-\end{itemize}
+Values are benchmark-relative geometric-return deltas in percentage points.
+\vspace{0.1em}
+\begin{block}{Read this as robustness, not replacement}
+\scriptsize
+Temporary-CSI sensitivity supports the main run as a defensible, non-outlier setting. Completed C/M/T runs remain positive across all four universes; the main run is below median in Total/Large and above median in Mid/Small.
+\end{block}
+\vspace{-0.15em}
+\begin{alertblock}{Limit}
+\scriptsize
+This sensitivity evidence is temporary CSI only. Three blocked partial C/M/T configurations are excluded, so the result supports stability of completed runs rather than an exhaustive permanent-CSI claim.
+\end{alertblock}
 \end{column}
 \end{columns}
 \remarkfoot{Sources: \texttt{chart1\_sensitivity\_stability\_distribution.png}; \texttt{universe\_stability\_summary.csv}; \texttt{sensitivity\_index\_stability\_table.csv}; AE-SENS-CHART-001R interpretation.}
@@ -2001,7 +1987,7 @@ Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI
 
 \begin{frame}{Appendix A19: Temporary CSI Sensitivity Detail}
 \fontsize{5.55pt}{6.05pt}\selectfont
-\textbf{Selected configurations from the 27-run temporary-CSI sensitivity grid}
+\textbf{Temporary-CSI sensitivity only: selected configurations, main-run comparison, and limits}
 \vspace{-0.25em}
 \begin{table}[ht]
 \centering
@@ -2018,13 +2004,14 @@ Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp
 \end{tabular}
 \end{table}
 \vspace{-0.05em}
-\begin{block}{Blocked partial cases}
+\begin{block}{Main comparison and stability}
 \scriptsize
-The grid represents 27 C/M/T configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. Blocked cases are represented in manifests but excluded from completed-run conclusions.
+The accepted main run \texttt{C080\_M020\_T018} is the continuity baseline, not the top sensitivity setting. Across 24 completed/reused C/M/T runs, benchmark-relative index alpha remains positive in all four universes; sensitivity changes magnitude more than direction.
 \end{block}
-\begin{block}{Source interpretation}
+\vspace{-0.15em}
+\begin{block}{Limits and transaction-cost overlay}
 \scriptsize
-C/M/T sensitivity tests label-threshold robustness for temporary CSI. It supports the robustness narrative but does not alter the final accepted label definition used by AE-INDEX-SUITE. In the accepted-label temporary index grid, 0/5/10/20 bps transaction-cost overlays do not change the winner set: Base Dataset wins Total/Large/Mid and Exp. Dataset + VAE wins Small. Costs are applied to annualized gross buy+sell turnover.
+The grid represents 27 temporary-CSI configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. The sensitivity evidence does not support permanent-CSI claims. In the accepted-label temporary index grid, 0/5/10/20 bps overlays do not change the winner set.
 \end{block}
 \remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
 \end{frame}
