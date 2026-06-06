@@ -1,0 +1,26 @@
+ticket_id: AE-PRES-INDEX-REV-002
+goal: "Revise temporary-CSI OOS index-result block at 10 bps with result slide followed by combined diagnostic/contribution slide."
+dependencies:
+  - "AE-PRES-INDEX-REV-001 completed"
+allowed_areas:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/**"
+may_read:
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "05_Documentation/09_Epics/AE-ATTRIB_Main_Index_Attribution/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create/update first temporary-CSI OOS slide: benchmark and best strategies at 10 bps transaction costs."
+  - "Create/update second temporary-CSI OOS slide: combine error-cost diagnostics and realized active contribution into one readable slide."
+  - "Use OOS only and label period clearly."
+  - "Update SLIDE_DATA_SOURCES.md for changed slides."
+acceptance_criteria:
+  - "Temporary OOS result slide exists and is source-backed."
+  - "Temporary OOS combined diagnostic/contribution slide exists and is source-backed."
+completion_report_required: true
+commit_required: true

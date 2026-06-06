@@ -1,0 +1,25 @@
+ticket_id: AE-PRES-INDEX-REV-008
+goal: "Close AE-PRES-INDEX-REV with source-map and scope validation."
+dependencies:
+  - "AE-PRES-INDEX-REV-007 completed"
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/**"
+may_read:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Validate final PDF, source Rnw, source map, and changed-slide evidence."
+  - "Confirm future limitations and source caveats are documented."
+  - "Mark epic closed in ledger after validator approval."
+acceptance_criteria:
+  - "Closeout report exists."
+  - "Validation checks exist."
+  - "Ledger marks epic closed only after validation."
+completion_report_required: true
+commit_required: true

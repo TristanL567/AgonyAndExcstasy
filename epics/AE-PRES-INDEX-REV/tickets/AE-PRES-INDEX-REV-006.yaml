@@ -1,0 +1,31 @@
+ticket_id: AE-PRES-INDEX-REV-006
+goal: "Revise transaction-cost robustness, turnover, threshold-family, and sensitivity slides for intuitive OOS interpretation."
+dependencies:
+  - "AE-PRES-INDEX-REV-002 completed"
+  - "AE-PRES-INDEX-REV-004 completed"
+allowed_areas:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/**"
+may_read:
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "03_Data_Output/5_SensitivityAnalysis/**"
+  - "05_Documentation/09_Epics/AE-SENS-CHART_Sensitivity_Index_Charts/**"
+  - "05_Documentation/09_Epics/AE-TC-AUDIT_Transaction_Cost_Audit/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Create/update transaction-cost robustness slide for OOS temporary and permanent CSI only."
+  - "Create/update turnover-effect slide for 5, 10, and 20 bps, OOS temporary and permanent CSI only."
+  - "Create/update threshold-family and turnover interpretation slide."
+  - "Make sensitivity slides intuitive and clearly highlight the main results, stability of the main run, and limitations."
+  - "Update SLIDE_DATA_SOURCES.md for changed slides."
+acceptance_criteria:
+  - "Transaction-cost robustness slide is readable and source-backed."
+  - "Turnover slide covers 5/10/20 bps and both OOS tracks."
+  - "Sensitivity slides clearly identify the main-run comparison and key result."
+completion_report_required: true
+commit_required: true
