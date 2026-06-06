@@ -1,0 +1,22 @@
+check_id,category,check,status,evidence,notes
+AE-PRES-INDEX-REV-008-C01,final_artifacts,Final PDF exists,pass,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf,Read-only existence check returned true.
+AE-PRES-INDEX-REV-008-C02,final_artifacts,Final Rnw source exists,pass,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw,Read-only existence check returned true.
+AE-PRES-INDEX-REV-008-C03,final_artifacts,SLIDE_DATA_SOURCES.md exists,pass,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md,Read-only existence check returned true.
+AE-PRES-INDEX-REV-008-C04,counts,PDF page count remains consistent with ticket 007,pass,56 pages from pdfinfo,Matches AE-PRES-INDEX-REV-007.
+AE-PRES-INDEX-REV-008-C05,counts,Rnw frame balance remains consistent,pass,56 begin-frame markers and 56 end-frame markers,No presentation edits were made in this ticket.
+AE-PRES-INDEX-REV-008-C06,counts,Source-map rows align with active frame/page expectations,pass,56 numbered rows with min 1 and max 56,Matches 56 PDF pages and 56 active frames.
+AE-PRES-INDEX-REV-008-C07,evidence,Tickets 001-007 evidence files exist,pass,AE-PRES-INDEX-REV_Index_Presentation_Revisions directory,Expected evidence families for tickets 001 through 007 are present.
+AE-PRES-INDEX-REV-008-C08,evidence,Changed slide areas are represented in source map,pass,SLIDE_DATA_SOURCES.md rows 20-31 and 52,Index results diagnostics robustness turnover threshold and sensitivity slides are represented.
+AE-PRES-INDEX-REV-008-C09,evidence,Test-set attribution caveats documented,pass,AE-PRES-INDEX-REV-003_test_attribution_caveat.md and AE-PRES-INDEX-REV-005_test_attribution_caveat.md,Both temporary and permanent test diagnostic caveats are documented.
+AE-PRES-INDEX-REV-008-C10,evidence,Sensitivity limitation documented,pass,AE-PRES-INDEX-REV-006 report AE-PRES-INDEX-REV-007 report and source-map rows 31 and 52,Temporary-CSI-only sensitivity is documented; no permanent-CSI sensitivity claim.
+AE-PRES-INDEX-REV-008-C11,scope,No 01_Code changes by this ticket,pass,git status and staged-scope review,No closeout changes under 01_Code.
+AE-PRES-INDEX-REV-008-C12,scope,No 02_Data_Input changes by this ticket,pass,git status and staged-scope review,No closeout changes under 02_Data_Input.
+AE-PRES-INDEX-REV-008-C13,scope,No 03_Data_Output changes by this ticket,pass,git status and staged-scope review,No closeout changes under 03_Data_Output.
+AE-PRES-INDEX-REV-008-C14,scope,No 06_Presentations changes by this ticket,pass,git status and staged-scope review,Presentation files were inspected read-only only.
+AE-PRES-INDEX-REV-008-C15,scope,No 07_CloudComputing changes by this ticket,pass,git status and staged-scope review,Pre-existing unrelated untracked entries were left untouched and unstaged.
+AE-PRES-INDEX-REV-008-C16,scope,No forbidden scripts run,pass,command log for this closeout,No compile model index evaluation sensitivity or pipeline scripts were run.
+AE-PRES-INDEX-REV-008-C17,validation,Closeout report exists,pass,AE-PRES-INDEX-REV-008_Closeout_Report.md,Created under allowed evidence directory.
+AE-PRES-INDEX-REV-008-C18,validation,Validation checks exist and pass,pass,AE-PRES-INDEX-REV-008_validation_checks.csv,This file records pass status for all closeout checks.
+AE-PRES-INDEX-REV-008-C19,validation,Slide traceability exists,pass,AE-PRES-INDEX-REV-008_slide_traceability.csv,Created under allowed evidence directory.
+AE-PRES-INDEX-REV-008-C20,validation,Ledger marks epic closed after validator approval,pass,epics/AE-PRES-INDEX-REV/ledger.md,Closeout ledger entry records validator approval and epic closed for planner handoff.
+AE-PRES-INDEX-REV-008-C21,validation,Staged scope limited to allowed areas,pass,post-staging review required before commit,Only AE-PRES-INDEX-REV-008 evidence files and AE-PRES-INDEX-REV ledger are ticket-owned.
