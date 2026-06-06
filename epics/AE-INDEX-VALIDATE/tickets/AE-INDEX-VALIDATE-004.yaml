@@ -1,0 +1,34 @@
+ticket_id: AE-INDEX-VALIDATE-004
+status: worker_complete
+worker_completed_at: "2026-06-06T14:18:29+02:00"
+goal: "Close the AE-INDEX-VALIDATE epic by synthesizing tickets 001-003 into one final validation conclusion."
+dependencies:
+  - "AE-INDEX-VALIDATE-001 completed and validator-approved"
+  - "AE-INDEX-VALIDATE-002 completed and validator-approved"
+  - "AE-INDEX-VALIDATE-003 completed and validator-approved"
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "epics/AE-INDEX-VALIDATE/ledger.md"
+  - "epics/AE-INDEX-VALIDATE/tickets/AE-INDEX-VALIDATE-004.yaml"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "Summarize AE-INDEX-VALIDATE-001 attribution reconciliation and limits on pure TP event-avoidance alpha claims."
+  - "Summarize AE-INDEX-VALIDATE-002 false-positive versus retained-firm diagnostics."
+  - "Summarize AE-INDEX-VALIDATE-003 existing-output placebo approximation and its limitation."
+  - "State final conclusion: index results are not invalidated; narrow event-avoidance alpha claim is unsupported; defensible claim is broader distress/quality/risk screening with useful reweighting effects."
+  - "State further exact causal validation requires constituent-level monthly returns and exact random-name placebo reconstruction."
+  - "Do not run model, index, evaluation, sensitivity, or pipeline scripts."
+acceptance_criteria:
+  - "Closeout report exists."
+  - "Validation report exists."
+  - "Worker completion report exists."
+  - "Ledger marks epic closed after validator approval."
+  - "No code, data input, data output, presentation, or cloud-validation files are modified or staged."
+completion_report_required: true
+commit_required: true
