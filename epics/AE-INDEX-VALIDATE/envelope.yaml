@@ -1,0 +1,33 @@
+epic_id: AE-INDEX-VALIDATE
+goal: "Validate whether CSI-based index outperformance is signal-specific or mostly a generic reweighting/portfolio-screening artifact."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-INDEX-VALIDATE-001
+  - AE-INDEX-VALIDATE-007
+epic_allowed_areas:
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "03_Data_Output/11_IndexValidation/**"
+  - "epics/AE-INDEX-VALIDATE/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-INDEX-VALIDATE-001
+  - AE-INDEX-VALIDATE-002
+  - AE-INDEX-VALIDATE-003
+  - AE-INDEX-VALIDATE-004
+  - AE-INDEX-VALIDATE-005
+  - AE-INDEX-VALIDATE-006
+  - AE-INDEX-VALIDATE-007
+depends_on_epics:
+  - AE-INDEX-SUITE
+  - AE-ATTRIB
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true
