@@ -1,0 +1,43 @@
+ticket_id: AE-SLIDE-CLEANUP-001B
+goal: Apply the already approved AE-SLIDE-CLEANUP-001 modelling-summary changes to Draft source slide 16 only.
+dependencies:
+  - AE-SLIDE-CLEANUP-001
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Stop AE-SLIDE-CLEANUP-002 because Draft slide 16 was not yet the modelling-summary frame.
+  - Apply the approved modelling-summary content to the Draft source file's slide 16.
+  - Keep work limited to the Draft source file, evidence, and AE-SLIDE-CLEANUP metadata.
+  - Do not edit non-Draft June presentation files.
+  - Do not run model, index, evaluation, sensitivity, pipeline, or training scripts.
+  - Commit only after validator approval.
+non_goals:
+  - Starting AE-SLIDE-CLEANUP-002.
+  - Editing non-Draft June presentation files.
+  - Regenerating model outputs, data, index outputs, or pipeline artifacts.
+acceptance_criteria:
+  - Draft slide 16 has the approved AE-SLIDE-CLEANUP-001 modelling-summary content.
+  - Draft slide 16 has no VAE-specific detailed result bullets.
+  - Non-Draft June Rnw is not touched by this repair.
+  - Rnw frame begin/end counts match.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Inspect Draft source frame 16.
+  - Confirm frame 17 retains the VAE nuance slide.
+  - Review validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true

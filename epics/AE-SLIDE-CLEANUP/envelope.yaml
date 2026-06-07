@@ -17,6 +17,7 @@ epic_must_not_touch:
   - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
 tickets:
   - AE-SLIDE-CLEANUP-001
+  - AE-SLIDE-CLEANUP-001B
 depends_on_epics: []
 merge_policy:
   strategy: manual

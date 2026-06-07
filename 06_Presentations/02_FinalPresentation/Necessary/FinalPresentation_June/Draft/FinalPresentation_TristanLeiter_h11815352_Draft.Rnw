@@ -825,42 +825,7 @@ Temporary CSI has more positives and higher test prevalence: 4.44\% vs 3\%. Perm
 \end{frame}
 
 
-%==== 16. Modelling IV. =======================================================%
-
-\begin{frame}{Modelling IV: What VAE Features Add}
-\scriptsize
-\begin{alertblock}{Feature-set interpretation}
-\scriptsize
-The VAE does not replace expanded-dataset predictive information. It is useful as an augmentation or robustness signal: AG Exp. Dataset + VAE improves temporary OOS AP/FPR recall, while AG Latent Dataset (VAE) is the strongest permanent OOS model.
-\end{alertblock}
-
-\vspace{0.15em}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\textwidth}
-\textbf{Temporary CSI}
-\begin{itemize}
-  \item AG Exp. Dataset + VAE leads OOS AP: 0.3152.
-  \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
-  \item AG Expanded Dataset still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
-\end{itemize}
-\end{column}
-\begin{column}{0.49\textwidth}
-\textbf{Permanent CSI}
-\begin{itemize}
-  \item AG Exp. Dataset + VAE leads test AUC and FPR3/5 recall.
-  \item AG Latent Dataset (VAE) leads OOS AP/AUC/Brier/FPR recall.
-  \item AG Base Dataset remains a useful fundamentals-only benchmark, not the preferred model.
-\end{itemize}
-\end{column}
-\end{columns}
-
-\vspace{0.15em}
-\begin{block}{Model-family note}
-\scriptsize
-Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
-Standalone XGBoost diagnostics exist for the main model runs, but they are not relabelled here because the final index grid has no XGB-only strategy rows.
-\end{block}
-\end{frame}
+%==== 16. Modelling Summary. ==================================================%
 
 \begin{frame}{Modelling Summary: the Models Rank Implosion Risk Well}
 \footnotesize
@@ -929,6 +894,43 @@ VAE augments rather than replaces the expanded feature set; feature drivers move
 Calibrated scores become exclusion signals for the index; the question shifts from ``can we rank risk?'' to ``does removing flagged firms improve the index?''
 \end{block}
 \remarkfoot{Model metrics and caveats are in Appendix A10--A13.}
+\end{frame}
+
+%==== 17. Modelling IV. =======================================================%
+
+\begin{frame}{Modelling IV: What VAE Features Add}
+\scriptsize
+\begin{alertblock}{Feature-set interpretation}
+\scriptsize
+The VAE does not replace expanded-dataset predictive information. It is useful as an augmentation or robustness signal: AG Exp. Dataset + VAE improves temporary OOS AP/FPR recall, while AG Latent Dataset (VAE) is the strongest permanent OOS model.
+\end{alertblock}
+
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Temporary CSI}
+\begin{itemize}
+  \item AG Exp. Dataset + VAE leads OOS AP: 0.3152.
+  \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
+  \item AG Expanded Dataset still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
+\end{itemize}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Permanent CSI}
+\begin{itemize}
+  \item AG Exp. Dataset + VAE leads test AUC and FPR3/5 recall.
+  \item AG Latent Dataset (VAE) leads OOS AP/AUC/Brier/FPR recall.
+  \item AG Base Dataset remains a useful fundamentals-only benchmark, not the preferred model.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.15em}
+\begin{block}{Model-family note}
+\scriptsize
+Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
+Standalone XGBoost diagnostics exist for the main model runs, but they are not relabelled here because the final index grid has no XGB-only strategy rows.
+\end{block}
 \end{frame}
 
 %==== 17. Index Construction E. ===============================================%
