@@ -17,6 +17,7 @@ epic_must_not_touch:
   - 07_CloudComputing/**
 tickets:
   - AE-PRES-TC-FIX-001
+  - AE-PRES-TC-FIX-002
 depends_on_epics:
   - AE-TC-RECHECK
 merge_policy:

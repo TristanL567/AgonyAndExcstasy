@@ -1,0 +1,50 @@
+ticket_id: AE-PRES-TC-FIX-002
+goal: Compile and visually validate the presentation after AE-PRES-TC-FIX-001 corrected transaction-cost alpha values.
+dependencies:
+  - AE-PRES-TC-FIX-001
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**
+  - 05_Documentation/09_Epics/AE-PRES-TC-FIX_Transaction_Cost_Slide_Correction/**
+  - epics/AE-PRES-TC-FIX/**
+may_inspect_read_only:
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+requirements:
+  - Compile the June final presentation.
+  - Confirm the corrected transaction-cost slide renders clearly.
+  - Visually inspect the corrected transaction-cost slide and immediately adjacent slides.
+  - Confirm corrected values match AE-TC-RECHECK-002.
+  - Confirm the zero-cost benchmark note is visible.
+  - Confirm final PDF page count and Rnw frame count remain aligned.
+  - Confirm SLIDE_DATA_SOURCES.md row count remains aligned.
+  - Fix only layout issues caused by AE-PRES-TC-FIX-001 if found.
+  - Do not run model, index, evaluation, sensitivity, or pipeline scripts.
+  - Do not stage unrelated dirty files.
+non_goals:
+  - Editing source data or model/index outputs.
+  - Running forbidden data, model, index, evaluation, sensitivity, or pipeline scripts.
+  - Fixing unrelated deck layout or source-map ordering issues.
+acceptance_criteria:
+  - Corrected deck compiles.
+  - Corrected transaction-cost slide visually passes.
+  - Corrected values and zero-cost benchmark note are visible.
+  - PDF page count and Rnw frame count align.
+  - Source-map row count aligns.
+  - No 03_Data_Output files are modified.
+  - No forbidden scripts are run.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review rendered pages 27-29.
+  - Review AE-PRES-TC-FIX-002 visual QA CSV.
+  - Review validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true
