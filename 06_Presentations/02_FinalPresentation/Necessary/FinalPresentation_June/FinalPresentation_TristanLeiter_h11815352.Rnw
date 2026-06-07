@@ -1322,23 +1322,23 @@ Interpretation is contribution-based, not causal: test-set gains are mostly reta
 \toprule
 Track & Univ. & Selected OOS winner & Alpha 5 & Alpha 10 & Alpha 20 & Ranking read \\
 \midrule
-Temp. & Total & AG Base; Youden 3yr & +0.43pp & +0.43pp & +0.42pp & unchanged \\
-Temp. & Large & AG Base; Youden 3yr & +0.15pp & +0.15pp & +0.15pp & unchanged \\
-Temp. & Mid & AG Base; FPR5 5yr & +0.51pp & +0.51pp & +0.51pp & unchanged \\
-Temp. & Small & AG +VAE; Youden 3yr & +0.63pp & +0.63pp & +0.62pp & unchanged \\
-Perm. & Total & AG +VAE; FPR5 perm. & +0.27pp & +0.27pp & +0.27pp & unchanged \\
-Perm. & Large & AG +VAE; FPR5 perm. & +0.23pp & +0.23pp & +0.23pp & unchanged \\
-Perm. & Mid & AG Base; FPR5 perm. & +0.74pp & +0.74pp & +0.74pp & unchanged \\
-Perm. & Small & AG Latent; FPR3 perm. & +0.32pp & +0.32pp & +0.32pp & unchanged \\
+Temp. & Total & AG Base; Youden 3yr & +0.43pp & +0.42pp & +0.41pp & unchanged \\
+Temp. & Large & AG Base; Youden 3yr & +0.15pp & +0.14pp & +0.12pp & unchanged \\
+Temp. & Mid & AG Base; FPR5 5yr & +0.45pp & +0.39pp & +0.28pp & unchanged \\
+Temp. & Small & AG +VAE; Youden 3yr & +0.59pp & +0.55pp & +0.45pp & unchanged \\
+Perm. & Total & AG +VAE; FPR5 perm. & +0.26pp & +0.26pp & +0.25pp & unchanged \\
+Perm. & Large & AG +VAE; FPR5 perm. & +0.22pp & +0.22pp & +0.20pp & unchanged \\
+Perm. & Mid & AG Base; FPR5 perm. & +0.68pp & +0.62pp & +0.51pp & unchanged \\
+Perm. & Small & AG Latent; FPR3 perm. & +0.28pp & +0.24pp & +0.16pp & unchanged \\
 \bottomrule
 \end{tabular}
 \end{table}
 \vspace{-0.15em}
 \begin{alertblock}{Interpretation}
 \scriptsize
-The conclusion does not change as costs rise to 20 bps: the same OOS temporary and permanent winners remain selected in every universe. Higher costs reduce net returns, but the active alpha ranking is stable because benchmark rows receive the same cost convention.
+Active alpha is measured versus the zero-cost market-cap benchmark; only the strategy pays transaction costs. The same OOS temporary and permanent winners remain selected in every universe, but higher-turnover Mid and Small Cap alphas now decline visibly as costs rise.
 \end{alertblock}
-\remarkfoot{Alpha is net annualized geometric return minus the corresponding benchmark annualized return. Sources: \texttt{best\_by\_track\_index\_cost.csv}, \texttt{transaction\_cost\_robustness\_summary.csv}, and \texttt{transaction\_cost\_impact.csv}.}
+\remarkfoot{Alpha is strategy net annualized geometric return after costs minus the zero-cost market-cap benchmark annualized geometric return. Sources: \texttt{AE-TC-RECHECK-002\_corrected\_slide\_values.csv} and \texttt{AE-TC-RECHECK-002\_Zero\_Cost\_Benchmark\_Recompute\_Report.md}.}
 \end{frame}
 
 %==== 4b. Data findings =======================================================%

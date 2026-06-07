@@ -1,0 +1,26 @@
+epic_id: AE-PRES-TC-FIX
+goal: Correct the final presentation transaction-cost robustness slide to measure active alpha against a zero-cost market-cap benchmark.
+branch: development-slides
+base: null
+autonomy_policy: manual
+human_checkpoint_tickets: []
+epic_allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md
+  - 05_Documentation/09_Epics/AE-PRES-TC-FIX_Transaction_Cost_Slide_Correction/**
+  - epics/AE-PRES-TC-FIX/**
+epic_must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+tickets:
+  - AE-PRES-TC-FIX-001
+depends_on_epics:
+  - AE-TC-RECHECK
+merge_policy:
+  strategy: manual
+  base: null
+  requires_epic_validator: true
+  requires_human_approval: true
