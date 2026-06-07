@@ -1047,48 +1047,53 @@ The model produces a probability of CSI next year. A threshold turns that probab
 
 %==== 18. Index Construction I ================================================%
 
-\begin{frame}{Index Construction II: Four Benchmark Universes}
+\begin{frame}{Index Construction II: Universes and Comparators}
 \small
 
 \begin{alertblock}{Same exclusion rule, four universes}
 \scriptsize
-The revised 11C track applies the score-to-weight pipeline independently inside each CRSP-like universe, producing four screened benchmarks alongside their unfiltered counterparts.
+The calibrated score-to-weight pipeline is applied independently inside each universe, so each screened index is evaluated against the matching unfiltered benchmark.
 \end{alertblock}
 
-\vspace{0.6em}
+\vspace{0.45em}
 
 \begin{center}
 \begin{tikzpicture}[
   font=\scriptsize,
   uni/.style={draw=darkgrey, fill=grey!20, rounded corners=4pt, minimum width=2.7cm, minimum height=1.6cm, align=center}
 ]
-\node[uni] (tm) at (0,0)   {\textbf{Total Market}\\[1pt]\tiny full universe\\[-1pt]\tiny $\geq$ USD 100M};
-\node[uni] (lc) at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny top tier};
-\node[uni] (mc) at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny middle tier};
-\node[uni] (sc) at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny bottom tier};
+\node[uni] (tm) at (0,0)   {\textbf{Total Market}\\[1pt]\tiny all eligible firms\\[-1pt]\tiny $\geq$ USD 100M};
+\node[uni] (lc) at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny top tier};
+\node[uni] (mc) at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny middle tier};
+\node[uni] (sc) at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny bottom tier};
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.4em}
+\vspace{0.15em}
+\begin{center}
+\scriptsize\textit{Tier breakpoints: \textless{}author to insert exact Large/Mid/Small cap thresholds\textgreater{}}
+\end{center}
+
+\vspace{0.25em}
 
 \begin{columns}[t]
 \begin{column}{0.49\textwidth}
-\textbf{Benchmark construction}
+\textbf{Universe construction}
 \scriptsize
 \begin{itemize}
-  \item Universe formed from prior-December market capitalization.
-  \item Minimum market cap: USD 100 million.
+  \item Total Market keeps all eligible firms above USD 100 million market cap.
+  \item Large, Mid, and Small Cap are formed by prior-December market-cap rank.
   \item Quarterly rebalancing: March, June, September, December.
-  \item Market-cap weights; cost overlays use 0, 5, 10, and 20 bps.
+  \item Within each universe, portfolio weights start from market capitalization.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
-\textbf{Signal discipline}
+\textbf{Comparators}
 \scriptsize
 \begin{itemize}
-  \item Scores are annual for AG Expanded Dataset, AG Base Dataset, AG Latent Dataset (VAE), and AG Exp. Dataset + VAE.
-  \item Holding-year signal uses information available before the holding year.
-  \item Thresholds calibrated from CV predictions only: Youden, FPR1, FPR3, FPR5.
+  \item Primary comparator: the unfiltered cap-weighted benchmark in the same universe.
+  \item Screened portfolios are therefore compared like-for-like: Total vs Total, Large vs Large, Mid vs Mid, Small vs Small.
+  \item Min-volatility and quality screens are planned extensions under the main research question; see limitations.
 \end{itemize}
 \end{column}
 \end{columns}

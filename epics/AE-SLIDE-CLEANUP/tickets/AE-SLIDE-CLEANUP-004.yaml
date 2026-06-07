@@ -1,0 +1,53 @@
+ticket_id: AE-SLIDE-CLEANUP-004
+goal: Rework the Draft index-construction universe slide into an audience-facing universes and comparators slide.
+dependencies:
+  - AE-SLIDE-CLEANUP-001B
+  - AE-SLIDE-CLEANUP-002
+  - AE-SLIDE-CLEANUP-003
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/**
+  - 05_Documentation/**
+  - 07_CloudComputing/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Rework only the Draft slide currently titled Index Construction II: Four Benchmark Universes.
+  - Rename it to Index Construction II: Universes and Comparators.
+  - Remove internal jargon including revised 11C track, build or diagnostic codes, and internal output-folder names.
+  - Remove Signal discipline bullets that repeat the previous slide.
+  - Keep the four-universe concept and existing deck style.
+  - Add tier-breakpoint placeholder unless exact thresholds are already available.
+  - Replace second-column content with Comparators.
+  - Keep one alert block Same exclusion rule, four universes.
+  - Preserve slides 16-18 except no-op local comment renumbering if needed.
+  - Do not run model, index, evaluation, sensitivity, pipeline, or training scripts.
+non_goals:
+  - Edit non-Draft June presentation files.
+  - Modify source data, model outputs, index outputs, code, research, or cloud-computing artifacts.
+  - Rework adjacent model or index slides.
+acceptance_criteria:
+  - Target slide has the new title.
+  - Target slide contains no internal jargon.
+  - Four universes and comparator section are present.
+  - Tier-breakpoint placeholder is present if exact thresholds are not verified.
+  - Rnw frame begin/end counts match.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the revised target slide in the Draft Rnw.
+  - Review rendered page 20.
+  - Review validation report and source traceability.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+  - py -3.10 C:/Users/Tristan Leiter/Documents/aegis-core/tools/validate_ticket_scope.py --ticket C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/AE-SLIDE-CLEANUP-004_scope_envelope.md --changed-file <each staged path>
+completion_report_required: true
