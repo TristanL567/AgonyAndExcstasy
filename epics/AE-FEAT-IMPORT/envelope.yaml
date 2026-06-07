@@ -1,4 +1,6 @@
 epic_id: AE-FEAT-IMPORT
+status: closed
+closed_at: "2026-06-02T22:00:38+02:00"
 goal: "Compute and summarize feature importance in log-odds terms at three granularities: metagroups, feature groups, and individual features."
 branch: Development
 base: main
@@ -22,6 +24,7 @@ tickets:
   - AE-FEAT-IMPORT-004
   - AE-FEAT-IMPORT-005
   - AE-FEAT-IMPORT-006
+  - AE-FEAT-IMPORT-007R
 depends_on_epics:
   - AE-MODEL-SUITE
 merge_policy:
