@@ -932,7 +932,52 @@ The screen is useful but structurally imperfect. CSI firms are a small cap-weigh
 \remarkfoot{Threshold is CV-calibrated; distribution and counts use the 2016--2019 test set; \agexp{}; temporary CSI. Threshold-adjacent means a false-positive score in $[\tau,\tau+0.01]$, matching the prior false-positive diagnostic.}
 \end{frame}
 
-%==== 17. Index Construction E. ===============================================%
+%==== 18. VAE modelling nuance. =============================================%
+
+\begin{frame}{Modelling V: VAE Features --- Benefits and Drawbacks}
+\scriptsize
+\textbf{Autoencoder/AP subquestion.} How does the integration of Autoencoders for feature engineering impact the Average Precision of Ensemble models compared to those trained solely on raw financial data?
+
+\vspace{0.25em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\begin{block}{Benefits}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item Among VAE/non-raw variants, \agvae{} leads CV-AP in both tracks: temporary $0.2114$, permanent $0.1883$.
+  \item Temporary OOS: \agvae{} leads AP $0.3152$; R@FPR1/3/5 is $0.1051$ / $0.2632$ / $0.4128$.
+  \item Permanent test: \agvae{} leads AUC $0.8838$ and FPR3/5 recall $0.2011$ / $0.3155$.
+  \item Permanent OOS: \aglatent{} leads AP/AUC/Brier/FPR recall: AP $0.0482$, AUC $0.8337$.
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.49\textwidth}
+\begin{block}{Drawbacks}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item VAE does not replace expanded-data information.
+  \item \agexp{} keeps slightly higher temporary OOS AUC: $0.8961$ vs.\ $0.8950$.
+  \item \agexp{} is the cleaner reporting baseline.
+  \item Latent-only is weaker on temporary CV/test and mainly competitive for permanent OOS.
+  \item Added architecture and compute cost.
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+
+\vspace{0.25em}
+\begin{alertblock}{Verdict}
+\scriptsize
+Autoencoder features improve Average Precision as an augmentation, especially when combined with expanded features, but do not dominate AUC and do not replace raw/fundamental information.
+\end{alertblock}
+
+\remarkfoot{Values use current model-suite threshold metrics: \texttt{03\_Data\_Output/6\_ModelSuite/derived\_metrics/complete\_threshold\_metrics\_wide.csv}; raw comparator metrics use \texttt{raw/metric\_snapshot.csv}.}
+\end{frame}
+
+%==== 19. Index Construction E. ===============================================%
 
 \section{E. Index Construction}
 \begin{frame}{Index Construction I: From Score to Portfolio Weight}
