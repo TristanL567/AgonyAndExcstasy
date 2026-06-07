@@ -1,0 +1,13 @@
+track,file,rows,columns
+dynamic_csi,ag_preds_test.parquet,18111,4
+dynamic_csi,ag_preds_test_eval.parquet,18111,4
+dynamic_csi,ag_preds_oos.parquet,18502,4
+dynamic_csi,ag_preds_oos_eval.parquet,18502,4
+dynamic_csi,ag_preds_train_boundary.parquet,4663,4
+dynamic_csi,ag_cv_results.parquet,72223,5
+permanent_csi,ag_preds_test.parquet,18053,4
+permanent_csi,ag_preds_test_eval.parquet,18053,4
+permanent_csi,ag_preds_oos.parquet,26400,4
+permanent_csi,ag_preds_oos_eval.parquet,26400,4
+permanent_csi,ag_preds_train_boundary.parquet,4663,4
+permanent_csi,ag_cv_results.parquet,72223,5
