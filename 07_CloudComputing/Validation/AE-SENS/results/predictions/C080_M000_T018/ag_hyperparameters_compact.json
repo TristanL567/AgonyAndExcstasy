@@ -1,0 +1,9 @@
+{
+  "best_model": null,
+  "created_at_utc": "2026-05-29T04:23:35.927931+00:00",
+  "leaderboard_rows": [],
+  "model_names": [],
+  "note": "Detailed per-model hyperparameters were not reliably exposed as a compact JSON artifact without loading full heavy predictor state. Leaderboard, model names, package versions, and retained prediction metrics are preserved.",
+  "run_id": "C080_M000_T018",
+  "status": "compact_best_model_metadata_only"
+}

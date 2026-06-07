@@ -1,0 +1,2 @@
+run_id,model,cv_ap,cv_auc,cv_r3,cv_n_folds
+C080_M030_T012,raw,0.2076,0.886,0.3146,3

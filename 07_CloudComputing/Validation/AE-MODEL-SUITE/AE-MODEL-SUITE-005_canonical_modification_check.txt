@@ -1,0 +1,26 @@
+﻿local_git_status:
+## validation-model-suite...origin/validation-model-suite
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_ensemble_weights.json
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_hyperparameters.json
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_leaderboards.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_model_family_metadata.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_model_metrics.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_optional_family_evidence.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_prediction_row_counts.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_preflight.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_status.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_storage_retention.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_storage_retention_preprune.csv
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_latent_raw_warnings.txt
+?? 07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_remote_process_guard.txt
+?? 07_CloudComputing/Validation/AE-VALIDATE/AE-VALIDATE-005R_Model_Evaluation_Rerun_Report.md
+?? 07_CloudComputing/Validation/AE-VALIDATE/AE-VALIDATE-005_Model_Evaluation_Rerun_Report.md
+
+local_canonical_diff_names_03_Data_Output:
+(none)
+
+local_data_input_diff_names_02_Data_Input:
+(none)
+
+local_code_diff_names_01_Code:
+(none)

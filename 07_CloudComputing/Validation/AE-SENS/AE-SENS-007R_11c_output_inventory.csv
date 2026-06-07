@@ -1,0 +1,8 @@
+run_id,file,exists,size_bytes
+C060_M000_T012,index_thresholds_by_crsp_universe.csv,TRUE,605
+C060_M000_T012,index_returns_by_crsp_universe.csv,TRUE,3016483
+C060_M000_T012,index_performance_by_crsp_universe.csv,TRUE,66843
+C060_M000_T012,index_exclusion_summary_by_crsp_universe.csv,TRUE,880652
+C060_M000_T012,error_cost_decomposition_by_crsp_universe.csv,TRUE,348079
+C060_M000_T012,run_status.csv,TRUE,516
+C060_M000_T012,ae_sens_11c_merge_diagnostics.csv,TRUE,28865

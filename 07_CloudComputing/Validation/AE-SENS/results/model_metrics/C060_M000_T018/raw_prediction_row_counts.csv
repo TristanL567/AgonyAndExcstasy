@@ -1,0 +1,7 @@
+run_id,file_role,rows,path
+C060_M000_T018,test_eval,18111,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_preds_test_eval.parquet
+C060_M000_T018,test,18111,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_preds_test.parquet
+C060_M000_T018,oos_eval,17601,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_preds_oos_eval.parquet
+C060_M000_T018,oos,17601,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_preds_oos.parquet
+C060_M000_T018,train_boundary,4663,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_preds_train_boundary.parquet
+C060_M000_T018,cv,72223,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/raw_predictions/C060_M000_T018/ag_cv_results.parquet

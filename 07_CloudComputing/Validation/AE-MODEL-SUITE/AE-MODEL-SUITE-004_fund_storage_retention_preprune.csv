@@ -1,0 +1,3 @@
+track,folder,model_key,heavy_artifact_bytes_before_prune,pruned,retention_status
+dynamic_csi,temporary_csi,fund,4415541276,False,metadata extracted; prune pending
+permanent_csi,permanent_csi,fund,4116249643,False,metadata extracted; prune pending

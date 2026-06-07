@@ -1,0 +1,5 @@
+track,folder,model,cv_ap,cv_auc,cv_recall_fpr1,cv_recall_fpr3,cv_recall_fpr5,cv_n_folds,n_features,split,n_obs,n_pos,prevalence,ap,auc,recall_fpr1,recall_fpr3,recall_fpr5,recall_fpr10,brier
+dynamic_csi,temporary_csi,fund,0.2101,0.8663,,0.2371,,3,457,test,18111,804,0.0444,0.1656,0.8538,0.0585,0.1517,0.2413,0.4714,0.0392
+dynamic_csi,temporary_csi,fund,0.2101,0.8663,,0.2371,,3,457,oos,18502,1170,0.0632,0.2526,0.8686,0.0598,0.1795,0.3017,0.5701,0.0526
+permanent_csi,permanent_csi,fund,0.1892,0.8723,,0.2527,,3,457,test,18053,542,0.03,0.1289,0.8627,0.0627,0.1697,0.262,0.5018,0.0293
+permanent_csi,permanent_csi,fund,0.1892,0.8723,,0.2527,,3,457,oos,26400,337,0.0128,0.0281,0.7798,0.0,0.003,0.0297,0.184,0.0232

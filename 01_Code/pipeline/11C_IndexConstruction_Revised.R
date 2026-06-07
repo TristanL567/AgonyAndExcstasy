@@ -113,7 +113,39 @@ MODEL_AG_DIR <- MODEL_SPEC$ag_dir
 MODEL_LABEL <- MODEL_SPEC$label
 MODEL_PREDICTION_DIR <- file.path(DIR_TABLES_AUTOGLUON_TRACK, MODEL_AG_DIR)
 
-OUT_DIR <- file.path(DIR_TABLES_TRACK, MODEL_SPEC$out_dir_name)
+AE_SENS_RUN_ID <- Sys.getenv("AE_SENS_RUN_ID", unset = "")
+AE_SENS_OUTPUT_ROOT <- Sys.getenv("AE_SENS_OUTPUT_ROOT", unset = "")
+AE_SENS_MODE <- nzchar(AE_SENS_RUN_ID) || nzchar(AE_SENS_OUTPUT_ROOT)
+if (AE_SENS_MODE) {
+  if (!nzchar(AE_SENS_RUN_ID) || !nzchar(AE_SENS_OUTPUT_ROOT)) {
+    stop("AE_SENS_RUN_ID and AE_SENS_OUTPUT_ROOT are both required in AE-SENS mode.")
+  }
+  if (!identical(Sys.getenv("MODEL", unset = ""), "raw")) {
+    stop("AE-SENS 11C mode only permits MODEL=raw.")
+  }
+  if (!identical(RESPONSE_TRACK, "dynamic_csi")) {
+    stop("AE-SENS 11C mode only permits RESPONSE_TRACK=dynamic_csi.")
+  }
+  if (!grepl("^C(060|080|090)_M(000|020|030)_T(012|018|028)$", AE_SENS_RUN_ID)) {
+    stop("Invalid AE_SENS_RUN_ID: ", AE_SENS_RUN_ID)
+  }
+  if (!grepl("/03_Data_Output/3_Modelling_Results/Necessary/sensitivity$", AE_SENS_OUTPUT_ROOT)) {
+    stop("AE_SENS_OUTPUT_ROOT is outside the approved sensitivity root: ",
+         AE_SENS_OUTPUT_ROOT)
+  }
+  data.table::setDTthreads(1L)
+  Sys.setenv(
+    OMP_NUM_THREADS = "1",
+    OPENBLAS_NUM_THREADS = "1",
+    MKL_NUM_THREADS = "1"
+  )
+}
+
+OUT_DIR <- if (AE_SENS_MODE) {
+  file.path(AE_SENS_OUTPUT_ROOT, "index_construction", AE_SENS_RUN_ID)
+} else {
+  file.path(DIR_TABLES_TRACK, MODEL_SPEC$out_dir_name)
+}
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 ## CRSP-MI replication data lives under
@@ -144,6 +176,7 @@ PATH_11C_TURNOVER_SUMMARY <- file.path(OUT_DIR, "index_turnover_summary.rds")
 PATH_11C_RETURNS_TC <- file.path(OUT_DIR, "index_returns_gross_and_net_by_tc.rds")
 PATH_11C_PERF_TC <- file.path(OUT_DIR, "index_performance_gross_and_net_by_tc.rds")
 PATH_11C_STATUS <- file.path(OUT_DIR, "run_status.csv")
+PATH_AE_SENS_11C_DIAG <- file.path(OUT_DIR, "ae_sens_11c_merge_diagnostics.csv")
 
 fn_write_csv <- function(dt, path) {
   tryCatch(
@@ -163,7 +196,68 @@ fn_stop_missing <- function(paths) {
   }
 }
 
-HAS_ARROW <- requireNamespace("arrow", quietly = TRUE)
+fn_ae_sens_key_classes <- function(dt, cols) {
+  paste(
+    vapply(cols, function(col) {
+      if (!col %in% names(dt)) return(paste0(col, "=<missing>"))
+      paste0(col, "=", paste(class(dt[[col]]), collapse = "/"))
+    }, character(1)),
+    collapse = ";"
+  )
+}
+
+fn_ae_sens_key_na_counts <- function(dt, cols) {
+  paste(
+    vapply(cols, function(col) {
+      if (!col %in% names(dt)) return(paste0(col, "=NA"))
+      paste0(col, "=", sum(is.na(dt[[col]])))
+    }, character(1)),
+    collapse = ";"
+  )
+}
+
+fn_ae_sens_prepare_join_keys <- function(dt, key_cols, context, side) {
+  out <- copy(dt)
+  if ("index_id" %in% names(out)) out[, index_id := as.character(index_id)]
+  if ("qdate" %in% names(out)) out[, qdate := as.IDate(qdate)]
+  if ("permno" %in% names(out)) out[, permno := as.integer(permno)]
+
+  n_before <- nrow(out)
+  if (length(key_cols) > 0L) {
+    out <- out[complete.cases(out[, ..key_cols])]
+    setorderv(out, key_cols)
+  }
+  n_after <- nrow(out)
+  n_dup <- if (n_after > 0L && length(key_cols) > 0L) {
+    n_after - uniqueN(out, by = key_cols)
+  } else {
+    0L
+  }
+  diag <- data.table(
+    run_id = AE_SENS_RUN_ID,
+    context = context,
+    side = side,
+    n_before = n_before,
+    n_after = n_after,
+    n_dropped_na_key = n_before - n_after,
+    n_duplicate_keys = n_dup,
+    key_classes = fn_ae_sens_key_classes(out, key_cols),
+    key_na_counts = fn_ae_sens_key_na_counts(out, key_cols)
+  )
+  fwrite(diag, PATH_AE_SENS_11C_DIAG, append = file.exists(PATH_AE_SENS_11C_DIAG))
+  out
+}
+
+fn_ae_sens_left_merge <- function(left, right, by, context) {
+  if (!AE_SENS_MODE) {
+    return(merge(left, right, by = by, all.x = TRUE))
+  }
+  left_prepped <- fn_ae_sens_prepare_join_keys(left, by, context, "left")
+  right_prepped <- fn_ae_sens_prepare_join_keys(right, by, context, "right")
+  merge(left_prepped, right_prepped, by = by, all.x = TRUE)
+}
+
+HAS_ARROW <- requireNamespace("arrow", quietly = TRUE) && !AE_SENS_MODE
 
 fn_read_parquet <- function(path) {
   if (HAS_ARROW) {
@@ -178,7 +272,10 @@ fn_read_parquet <- function(path) {
     "import sys",
     "pd.read_parquet(sys.argv[1]).to_csv(sys.argv[2], index=False)"
   ), py_file)
-  status <- system2("python", c(py_file, path, tmp))
+  py_bin <- Sys.which("python3")
+  if (!nzchar(py_bin)) py_bin <- Sys.which("python")
+  if (!nzchar(py_bin)) stop("Python is required for parquet fallback")
+  status <- system2(py_bin, c(py_file, path, tmp))
   if (!identical(status, 0L)) {
     stop(sprintf("Python parquet fallback failed for %s", path))
   }
@@ -295,11 +392,16 @@ cat(sprintf(
 ))
 
 fn_load_predictions <- function() {
+  prediction_dir <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID)
+  } else {
+    MODEL_PREDICTION_DIR
+  }
   fmap <- c(
-    oos = file.path(MODEL_PREDICTION_DIR, "ag_preds_oos.parquet"),
-    test = file.path(MODEL_PREDICTION_DIR, "ag_preds_test.parquet"),
-    boundary = file.path(MODEL_PREDICTION_DIR, "ag_preds_train_boundary.parquet"),
-    cv = file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+    oos = file.path(prediction_dir, "ag_preds_oos.parquet"),
+    test = file.path(prediction_dir, "ag_preds_test.parquet"),
+    boundary = file.path(prediction_dir, "ag_preds_train_boundary.parquet"),
+    cv = file.path(prediction_dir, "ag_cv_results.parquet")
   )
   fn_stop_missing(unname(fmap))
 
@@ -318,22 +420,101 @@ fn_load_predictions <- function() {
   pred <- rbindlist(parts, use.names = TRUE, fill = TRUE)
   pred[, src_rank := src_rank[src]]
   setorder(pred, permno, year, src_rank)
-  pred <- pred[!duplicated(pred, by = c("permno", "year"))]
+  if (AE_SENS_MODE) {
+    keep_first <- !duplicated(data.frame(permno = pred$permno, year = pred$year))
+    pred <- pred[keep_first]
+  } else {
+    pred <- pred[!duplicated(pred, by = c("permno", "year"))]
+  }
   pred[, src_rank := NULL]
   pred[]
 }
 
 fn_cv_thresholds <- function() {
-  cv_path <- file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+  cv_path <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID,
+              "ag_cv_results.parquet")
+  } else {
+    file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+  }
   cv <- fn_read_parquet(cv_path)
-  cv <- cv[!is.na(y) & !is.na(p_csi), .(
-    y = as.integer(y),
-    p_csi = as.numeric(p_csi)
-  )]
-  if (nrow(cv) < 100L || uniqueN(cv$y) < 2L) {
+  y <- as.integer(cv$y)
+  p_csi <- as.numeric(cv$p_csi)
+  ok <- !is.na(y) & !is.na(p_csi)
+  y <- y[ok]
+  p_csi <- p_csi[ok]
+  if (length(y) < 100L || length(unique(y)) < 2L) {
     stop("CV predictions are insufficient for thresholding.")
   }
 
+  if (AE_SENS_MODE) {
+    ord <- order(p_csi, decreasing = TRUE)
+    y <- y[ord]
+    p_csi <- p_csi[ord]
+    runs <- rle(p_csi)
+    ends <- cumsum(runs$lengths)
+    pos_cum <- cumsum(y == 1L)
+    neg_cum <- cumsum(y == 0L)
+    pos_before <- c(0L, pos_cum[ends[-length(ends)]])
+    neg_before <- c(0L, neg_cum[ends[-length(ends)]])
+
+    roc_grid <- data.frame(
+      threshold = runs$values,
+      tp = pos_cum[ends],
+      fp = neg_cum[ends],
+      pos = pos_cum[ends] - pos_before,
+      neg = neg_cum[ends] - neg_before
+    )
+    total_pos <- sum(y == 1L)
+    total_neg <- sum(y == 0L)
+    roc_grid$fn <- total_pos - roc_grid$tp
+    roc_grid$tn <- total_neg - roc_grid$fp
+    roc_grid$recall <- roc_grid$tp / total_pos
+    roc_grid$fpr <- roc_grid$fp / total_neg
+    roc_grid$precision <- ifelse(
+      roc_grid$tp + roc_grid$fp > 0L,
+      roc_grid$tp / (roc_grid$tp + roc_grid$fp),
+      NA_real_
+    )
+    roc_grid$youden_j <- roc_grid$recall - roc_grid$fpr
+
+    fpr1_idx <- which(roc_grid$fpr <= 0.01)
+    fpr3_idx <- which(roc_grid$fpr <= 0.03)
+    if (length(fpr1_idx) == 0L) stop("No CV threshold satisfies FPR <= 1%.")
+    if (length(fpr3_idx) == 0L) stop("No CV threshold satisfies FPR <= 3%.")
+
+    pick_fpr <- function(idx) {
+      idx[order(-roc_grid$recall[idx], roc_grid$fpr[idx],
+                -roc_grid$threshold[idx])][1L]
+    }
+    picks <- c(
+      fpr1 = pick_fpr(fpr1_idx),
+      fpr3 = pick_fpr(fpr3_idx),
+      youden = order(-roc_grid$youden_j, -roc_grid$recall,
+                     roc_grid$fpr, -roc_grid$threshold)[1L]
+    )
+
+    out <- rbindlist(lapply(names(picks), function(method) {
+      row <- roc_grid[picks[[method]], ]
+      data.table(
+        track = RESPONSE_TRACK,
+        model_key = MODEL_KEY,
+        model_label = MODEL_LABEL,
+        threshold_method = method,
+        threshold_label = THRESHOLD_METHODS[[method]],
+        threshold = row$threshold,
+        cv_fpr = row$fpr,
+        cv_recall = row$recall,
+        cv_precision = row$precision,
+        cv_youden = row$youden_j,
+        cv_flag_rate = (row$tp + row$fp) / (total_pos + total_neg),
+        cv_n_flagged = row$tp + row$fp
+      )
+    }), use.names = TRUE)
+    return(out[order(threshold_method)])
+  }
+
+  cv <- data.table(y = y, p_csi = p_csi)
   total_pos <- sum(cv$y == 1L)
   total_neg <- sum(cv$y == 0L)
   roc_grid <- cv[, .(
@@ -997,11 +1178,11 @@ for (i in seq_len(nrow(model_strategies))) {
       exclusion_rule == sk$exclusion_rule,
     .(index_id, qdate, permno, model_w = w)
   ]
-  d <- merge(
+  d <- fn_ae_sens_left_merge(
     bench_q[index_id == sk$index_id],
     model_q,
     by = c("index_id", "qdate", "permno"),
-    all.x = TRUE
+    context = paste("exclusion_summary", sk$strategy_id, sep = "::")
   )
   d[, excluded := is.na(model_w)]
   out <- d[, .(
@@ -1041,7 +1222,10 @@ fn_write_csv(exclusion_summary, file.path(OUT_DIR, "index_exclusion_summary_by_c
 cat("[11C] Computing FP/FN/TP/TN error-cost decomposition...\n")
 
 fn_load_track_labels <- function() {
-  candidates <- if (IS_PERMANENT_TRACK) {
+  if (AE_SENS_MODE) {
+    candidates <- file.path(AE_SENS_OUTPUT_ROOT, "labels", AE_SENS_RUN_ID,
+                            "labels_model_ready.rds")
+  } else if (IS_PERMANENT_TRACK) {
     c(PATH_LABELS_MODEL_READY, PATH_LABELS_PERMANENT)
   } else {
     c(PATH_LABELS_MODEL_READY, PATH_LABELS_BASE)
@@ -1152,11 +1336,11 @@ for (i in seq_len(nrow(model_strategies))) {
       exclusion_rule == sk$exclusion_rule,
     .(index_id, qdate, permno, model_w = w)
   ]
-  d <- merge(
+  d <- fn_ae_sens_left_merge(
     base_month[index_id == sk$index_id],
     model_q,
     by = c("index_id", "qdate", "permno"),
-    all.x = TRUE
+    context = paste("error_cost_decomposition", sk$strategy_id, sep = "::")
   )
   d[is.na(model_w), model_w := 0]
   d[, predicted_excluded := model_w <= 0]

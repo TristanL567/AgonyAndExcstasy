@@ -1,0 +1,1 @@
+git check-ignore confirmed 03_Data_Output/5_SensitivityAnalysis/00_manifest/run_registry.csv is ignored by .gitignore rule 03_Data_Output/**. git status for 03_Data_Output/5_SensitivityAnalysis returned no staged or unstaged entries.

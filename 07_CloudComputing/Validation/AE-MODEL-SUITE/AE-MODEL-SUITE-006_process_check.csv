@@ -1,0 +1,13 @@
+﻿check,value,status
+active_09C_AutoGluon.py,0,PASS
+active_10_Evaluation.R,0,PASS
+active_11C_IndexConstruction_Revised.R,0,PASS
+active_AE-SENS,0,PASS
+heavy_dir_absent_temporary_csi_ag_predictor,True,PASS
+heavy_dir_absent_temporary_csi_ag_cv_fold2,True,PASS
+heavy_dir_absent_temporary_csi_ag_cv_fold3,True,PASS
+heavy_dir_absent_temporary_csi_ag_cv_fold4,True,PASS
+heavy_dir_absent_permanent_csi_ag_predictor,True,PASS
+heavy_dir_absent_permanent_csi_ag_cv_fold2,True,PASS
+heavy_dir_absent_permanent_csi_ag_cv_fold3,True,PASS
+heavy_dir_absent_permanent_csi_ag_cv_fold4,True,PASS

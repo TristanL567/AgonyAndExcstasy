@@ -1,0 +1,18 @@
+artifact_group,artifact_path_or_location,status,git_visibility,notes
+epic_plan,05_Documentation/09_Epics/AE-MODEL-SUITE_NonRaw_Model_Rerun/AE-MODEL-SUITE_Epic.md,present,tracked,Opened the non-raw model-suite epic and ticket sequence.
+ticket_plan,05_Documentation/09_Epics/AE-MODEL-SUITE_NonRaw_Model_Rerun/Tickets/AE-MODEL-SUITE_Ticket_Plan.md,present,tracked,Ticket plan for AE-MODEL-SUITE-001 through AE-MODEL-SUITE-008.
+AE-MODEL-SUITE-001,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-001_Readiness_Gate_Report.md,present,tracked,Readiness gate found stale VAE-derived features before training.
+AE-MODEL-SUITE-002,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-002_VAE_Feature_Regeneration_Report.md,present,tracked,VAE-derived features regenerated and validated on disk.
+AE-MODEL-SUITE-003,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-003_Remote_Model_Suite_Readiness_Report.md,present,tracked,Remote model-suite input readiness passed.
+AE-MODEL-SUITE-004,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-004_Fund_Model_Rerun_Report.md,present,tracked,Fundamentals-only AutoGluon rerun completed for both tracks.
+AE-MODEL-SUITE-005,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-005_Latent_Raw_Model_Rerun_Report.md,present,tracked,VAE-only AutoGluon rerun completed for both tracks.
+AE-MODEL-SUITE-006,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-006_Raw_Plus_Latent_Model_Rerun_Report.md,present,tracked,Raw plus VAE AutoGluon rerun completed for both tracks.
+AE-MODEL-SUITE-007,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-007_Model_Suite_Comparison_Report.md,present,tracked,Compared raw fund latent_raw and raw_plus_latent across both tracks.
+AE-MODEL-SUITE-008,07_CloudComputing/Validation/AE-MODEL-SUITE/AE-MODEL-SUITE-008_Download_And_Local_Structure_Report.md,present,tracked,Downloaded compact model-suite results locally and checksum-validated them.
+local_download_root,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite,present,ignored,Local compact result copy; ignored by 03_Data_Output/** and not committed.
+local_raw_results,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/raw,present,ignored,Revised raw comparator from AE-VALIDATE optional-library rerun.
+local_fund_results,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/fund,present,ignored,Fundamentals-only results with temporary_csi and permanent_csi subfolders.
+local_latent_raw_results,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/latent_raw,present,ignored,VAE-only results with temporary_csi and permanent_csi subfolders.
+local_raw_plus_latent_results,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/raw_plus_latent,present,ignored,Raw plus VAE results with temporary_csi and permanent_csi subfolders.
+local_comparison_results,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/comparison,present,ignored,Mirrored AE-MODEL-SUITE-007 comparison artifacts for local analysis.
+local_manifest,C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/03_Data_Output/6_ModelSuite/manifest,present,ignored,Download and checksum manifests for the local copy.

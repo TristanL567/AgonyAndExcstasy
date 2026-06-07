@@ -1,0 +1,12 @@
+Output root check: PASS
+
+Planned isolated output root:
+/root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/nonraw_rerun_20260529_ready
+
+Check performed:
+- Created the planned output root directory under the allowed AE-MODEL-SUITE validation output tree.
+- Created and removed a temporary `.write_test` file.
+- No model, evaluation, index, sensitivity, or pipeline script was run.
+
+Remote command output:
+OUTPUT_ROOT_WRITABLE

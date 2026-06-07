@@ -1,0 +1,9 @@
+check,passed,details
+all_feature_track_split_model_metrics_present,True,All 24 feature_set x track x split metric rows are present.
+raw_metrics_include_fpr_1_3_5,True,Raw complete threshold metrics were read from raw/derived_metrics/raw_complete_threshold_metrics.csv.
+nonraw_metrics_include_fpr_1_3_5,True,Non-raw complete threshold metrics were read from derived_metrics/complete_threshold_metrics_long.csv.
+raw_index_outputs_summarized,True,Raw revised 11C index benchmark summarized for temporary and permanent CSI.
+nonraw_index_results_not_fabricated,True,Non-raw index outputs are marked not_yet_rerun.
+sensitivity_results_excluded,True,No AE-SENS paths or inputs were used.
+no_remote_mutation,True,No SSH/SCP/remote commands were run for this ticket.
+no_model_or_pipeline_scripts_run,True,"No 09C, 10_Evaluation, 11C, pipeline, or sensitivity scripts were run."

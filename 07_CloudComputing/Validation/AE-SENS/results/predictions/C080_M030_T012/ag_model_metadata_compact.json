@@ -1,0 +1,51 @@
+{
+  "autogluon_version": null,
+  "best_model": "WeightedEnsemble_L2",
+  "created_at_utc": "2026-05-29T04:23:36.543536+00:00",
+  "leaderboard_path": "raw_predictions/C080_M030_T012/ag_leaderboard.csv",
+  "metric_coverage_path": "raw_predictions/C080_M030_T012/ag_metric_coverage_compact.csv",
+  "model_names": [
+    "WeightedEnsemble_L2",
+    "LightGBMXT",
+    "LightGBM",
+    "CatBoost",
+    "LightGBMLarge",
+    "RandomForestEntr",
+    "ExtraTreesEntr",
+    "ExtraTreesGini",
+    "NeuralNetTorch",
+    "RandomForestGini",
+    "NeuralNetFastAI",
+    "XGBoost"
+  ],
+  "optional_family_availability": [
+    {
+      "available": true,
+      "family": "LightGBM",
+      "matching_models": "LightGBMXT;LightGBM;LightGBMLarge",
+      "run_id": "C080_M030_T012"
+    },
+    {
+      "available": true,
+      "family": "CatBoost",
+      "matching_models": "CatBoost",
+      "run_id": "C080_M030_T012"
+    },
+    {
+      "available": true,
+      "family": "XGBoost",
+      "matching_models": "XGBoost",
+      "run_id": "C080_M030_T012"
+    },
+    {
+      "available": true,
+      "family": "FastAI",
+      "matching_models": "NeuralNetFastAI",
+      "run_id": "C080_M030_T012"
+    }
+  ],
+  "package_versions": {},
+  "python_version": null,
+  "run_id": "C080_M030_T012",
+  "source_metadata_path": null
+}

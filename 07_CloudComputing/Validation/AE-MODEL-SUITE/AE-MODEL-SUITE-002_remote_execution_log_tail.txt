@@ -1,0 +1,37 @@
+Remote execution log tail, sanitized.
+
+Endpoint: [authorized endpoint]
+Authentication: [authorized SSH key path]
+Remote isolated output root: /root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/vae_feature_regen_20260529_001
+
+Process guard after completion:
+- No active 09C_AutoGluon.py process.
+- No active 10_Evaluation.R process.
+- No active 11C_IndexConstruction_Revised.R process.
+- No active 08B_Autoencoder.py process.
+
+Dynamic CSI 08B exit code: 0
+Dynamic CSI stderr bytes: 0
+Dynamic CSI tail:
+  Epoch 131/150 | beta=1.000 | train=222.71 | val=225.43 | kl=50.24 | clf=0.1616
+  Epoch 141/150 | beta=1.000 | train=221.31 | val=223.91 | kl=50.25 | clf=0.1612
+  Best weights restored (val loss: 222.7064)
+  features_latent shape: (188460, 30)
+  Saved: features_latent_raw.parquet
+  Saved raw+latent: features_raw_plus_latent.parquet
+  Final collapsed dims: 0 / 24
+  All assertions passed.
+  DONE [RAW] -> features_latent_raw.parquet
+
+Permanent CSI 08B exit code: 0
+Permanent CSI stderr bytes: 0
+Permanent CSI tail:
+  Epoch 131/150 | beta=1.000 | train=222.20 | val=224.22 | kl=50.44 | clf=0.1412
+  Epoch 141/150 | beta=1.000 | train=220.73 | val=222.58 | kl=50.43 | clf=0.1412
+  Best weights restored (val loss: 221.2615)
+  features_latent shape: (188460, 30)
+  Saved: features_latent_raw.parquet
+  Saved raw+latent: features_raw_plus_latent.parquet
+  Final collapsed dims: 0 / 24
+  All assertions passed.
+  DONE [RAW] -> features_latent_raw.parquet

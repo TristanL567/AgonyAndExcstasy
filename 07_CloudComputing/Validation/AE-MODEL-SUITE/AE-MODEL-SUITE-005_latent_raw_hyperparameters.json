@@ -1,0 +1,3232 @@
+{
+  "dynamic_csi:LightGBMXT": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.05,
+      "extra_trees": true,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 104
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBMXT",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.9414722919464111,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.06679248809814453,
+      "val_score": 0.18201455426682833,
+      "hyperparameters": {
+        "learning_rate": 0.05,
+        "extra_trees": true,
+        "seed": 0
+      },
+      "hyperparameters_user": {
+        "extra_trees": true
+      },
+      "hyperparameters_fit": {
+        "num_boost_round": 104
+      },
+      "hyperparameters_nondefault": [
+        "extra_trees"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 371430,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:LightGBM": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.05,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 292
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBM",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 4.957853078842163,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.05103254318237305,
+      "val_score": 0.17725527719341588,
+      "hyperparameters": {
+        "learning_rate": 0.05,
+        "seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "num_boost_round": 292
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 1015403,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:RandomForestGini": {
+    "model_class": "RFModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "gini",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "RandomForestGini",
+      "model_type": "RFModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 16.930481433868408,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.13314390182495117,
+      "val_score": 0.16427063695568625,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "gini",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "gini",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 85560404,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "dynamic_csi:RandomForestEntr": {
+    "model_class": "RFModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "entropy",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "RandomForestEntr",
+      "model_type": "RFModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 17.902926445007324,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.12215256690979004,
+      "val_score": 0.17428772461702793,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "entropy",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "entropy",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 87835537,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "dynamic_csi:CatBoost": {
+    "model_class": "CatBoostModel",
+    "params": {
+      "iterations": 10000,
+      "learning_rate": 0.05,
+      "allow_writing_files": false,
+      "eval_metric": "Logloss",
+      "random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "iterations": 404
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "CatBoost",
+      "model_type": "CatBoostModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 3.042414903640747,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.009786605834960938,
+      "val_score": 0.18356448494860605,
+      "hyperparameters": {
+        "iterations": 10000,
+        "learning_rate": 0.05,
+        "allow_writing_files": false,
+        "eval_metric": "Logloss",
+        "random_seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "iterations": 404
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 482369,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:ExtraTreesGini": {
+    "model_class": "XTModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "gini",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "ExtraTreesGini",
+      "model_type": "XTModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.7411410808563232,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.11084794998168945,
+      "val_score": 0.1784178919438309,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "gini",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "gini",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 168046163,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "dynamic_csi:ExtraTreesEntr": {
+    "model_class": "XTModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "entropy",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "ExtraTreesEntr",
+      "model_type": "XTModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.6557931900024414,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.11109495162963867,
+      "val_score": 0.1830142397983941,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "entropy",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "entropy",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 149239491,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "dynamic_csi:NeuralNetFastAI": {
+    "model_class": "NNFastAiTabularModel",
+    "params": {
+      "layers": null,
+      "emb_drop": 0.1,
+      "ps": 0.1,
+      "bs": "auto",
+      "lr": 0.01,
+      "epochs": "auto",
+      "early.stopping.min_delta": 0.0001,
+      "early.stopping.patience": 20,
+      "smoothing": 0.0,
+      "random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": [
+        "text_ngram",
+        "text_as_category"
+      ],
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "epochs": 30,
+      "best_epoch": 5
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "NeuralNetFastAI",
+      "model_type": "NNFastAiTabularModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 74.81757998466492,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.16438984870910645,
+      "val_score": 0.18369082789368724,
+      "hyperparameters": {
+        "layers": null,
+        "emb_drop": 0.1,
+        "ps": 0.1,
+        "bs": "auto",
+        "lr": 0.01,
+        "epochs": "auto",
+        "early.stopping.min_delta": 0.0001,
+        "early.stopping.patience": 20,
+        "smoothing": 0.0,
+        "random_seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "epochs": 30,
+        "best_epoch": 5
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": [
+          "text_ngram",
+          "text_as_category"
+        ],
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 561789,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:XGBoost": {
+    "model_class": "XGBoostModel",
+    "params": {
+      "n_estimators": 10000,
+      "learning_rate": 0.1,
+      "n_jobs": -1,
+      "proc.max_category_levels": 100,
+      "objective": "binary:logistic",
+      "booster": "gbtree",
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 131
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "XGBoost",
+      "model_type": "XGBoostModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.6875803470611572,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.04288125038146973,
+      "val_score": 0.18361812400314279,
+      "hyperparameters": {
+        "n_estimators": 10000,
+        "learning_rate": 0.1,
+        "n_jobs": -1,
+        "proc.max_category_levels": 100,
+        "objective": "binary:logistic",
+        "booster": "gbtree",
+        "seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "n_estimators": 131
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 753546,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:NeuralNetTorch": {
+    "model_class": "TabularNeuralNetTorchModel",
+    "params": {
+      "num_epochs": 1000,
+      "epochs_wo_improve": null,
+      "activation": "relu",
+      "embedding_size_factor": 1.0,
+      "embed_exponent": 0.56,
+      "max_embedding_dim": 100,
+      "y_range": null,
+      "y_range_extend": 0.05,
+      "dropout_prob": 0.1,
+      "optimizer": "adam",
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-06,
+      "proc.embed_min_categories": 4,
+      "proc.impute_strategy": "median",
+      "proc.max_category_levels": 100,
+      "proc.skew_threshold": 0.99,
+      "use_ngram_features": false,
+      "num_layers": 4,
+      "hidden_size": 128,
+      "max_batch_size": 512,
+      "use_batchnorm": false,
+      "loss_function": "auto",
+      "seed_value": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": [
+        "text_ngram",
+        "text_as_category"
+      ],
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "batch_size": 256,
+      "num_epochs": 6
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "NeuralNetTorch",
+      "model_type": "TabularNeuralNetTorchModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 50.51848030090332,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.03748631477355957,
+      "val_score": 0.18202872465009215,
+      "hyperparameters": {
+        "num_epochs": 1000,
+        "epochs_wo_improve": null,
+        "activation": "relu",
+        "embedding_size_factor": 1.0,
+        "embed_exponent": 0.56,
+        "max_embedding_dim": 100,
+        "y_range": null,
+        "y_range_extend": 0.05,
+        "dropout_prob": 0.1,
+        "optimizer": "adam",
+        "learning_rate": 0.0003,
+        "weight_decay": 1e-06,
+        "proc.embed_min_categories": 4,
+        "proc.impute_strategy": "median",
+        "proc.max_category_levels": 100,
+        "proc.skew_threshold": 0.99,
+        "use_ngram_features": false,
+        "num_layers": 4,
+        "hidden_size": 128,
+        "max_batch_size": 512,
+        "use_batchnorm": false,
+        "loss_function": "auto",
+        "seed_value": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "batch_size": 256,
+        "num_epochs": 6
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": [
+          "text_ngram",
+          "text_as_category"
+        ],
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 225336,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:LightGBMLarge": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.03,
+      "num_leaves": 128,
+      "feature_fraction": 0.9,
+      "min_data_in_leaf": 3,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 446
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBMLarge",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 9.480195760726929,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.08563089370727539,
+      "val_score": 0.18151714132935318,
+      "hyperparameters": {
+        "learning_rate": 0.03,
+        "num_leaves": 128,
+        "feature_fraction": 0.9,
+        "min_data_in_leaf": 3,
+        "seed": 0
+      },
+      "hyperparameters_user": {
+        "learning_rate": 0.03,
+        "num_leaves": 128,
+        "feature_fraction": 0.9,
+        "min_data_in_leaf": 3
+      },
+      "hyperparameters_fit": {
+        "num_boost_round": 446
+      },
+      "hyperparameters_nondefault": [
+        "learning_rate",
+        "num_leaves",
+        "feature_fraction",
+        "min_data_in_leaf"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 6155443,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "dynamic_csi:WeightedEnsemble_L2": {
+    "model_class": "WeightedEnsembleModel",
+    "params": {
+      "use_orig_features": false,
+      "valid_stacker": true,
+      "max_base_models": 0,
+      "max_base_models_per_type": "auto",
+      "save_bag_folds": true,
+      "stratify": "auto",
+      "bin": "auto",
+      "n_bins": null,
+      "vary_seed_across_folds": false,
+      "model_random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": null,
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null,
+      "drop_unique": false
+    },
+    "params_trained": {},
+    "feature_count": 11,
+    "model_info": {
+      "name": "WeightedEnsemble_L2",
+      "model_type": "WeightedEnsembleModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 0.948408842086792,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.004150390625,
+      "val_score": 0.19529437090461652,
+      "hyperparameters": {
+        "use_orig_features": false,
+        "valid_stacker": true,
+        "max_base_models": 0,
+        "max_base_models_per_type": "auto",
+        "save_bag_folds": true,
+        "stratify": "auto",
+        "bin": "auto",
+        "n_bins": null,
+        "vary_seed_across_folds": false,
+        "model_random_seed": 0
+      },
+      "hyperparameters_user": {
+        "save_bag_folds": true
+      },
+      "hyperparameters_fit": {},
+      "hyperparameters_nondefault": [
+        "save_bag_folds"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": null,
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null,
+        "drop_unique": false
+      },
+      "num_features": 8,
+      "features": [
+        "ExtraTreesEntr",
+        "LightGBMXT",
+        "XGBoost",
+        "NeuralNetTorch",
+        "LightGBMLarge",
+        "CatBoost",
+        "NeuralNetFastAI",
+        "ExtraTreesGini"
+      ],
+      "feature_metadata": "('float', ['stack']) : 11 | ['LightGBMXT', 'LightGBM', 'RandomForestGini', 'RandomForestEntr', 'CatBoost', ...]",
+      "memory_size": 4205,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 22826,
+      "val_in_fit": false,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1,
+      "bagged_info": {
+        "child_model_type": "GreedyWeightedEnsembleModel",
+        "num_child_models": 1,
+        "child_model_names": [
+          "S1F1"
+        ],
+        "_n_repeats": 1,
+        "_k_per_n_repeat": [
+          1
+        ],
+        "_random_state": 2,
+        "low_memory": false,
+        "bagged_mode": false,
+        "max_memory_size": 4205,
+        "min_memory_size": 4205,
+        "child_hyperparameters": {
+          "ensemble_size": 25,
+          "subsample_size": 1000000
+        },
+        "child_hyperparameters_user": {},
+        "child_hyperparameters_fit": {
+          "ensemble_size": 20
+        },
+        "child_ag_args_fit": {
+          "max_memory_usage_ratio": 1.0,
+          "max_time_limit_ratio": 1.0,
+          "max_time_limit": null,
+          "min_time_limit": 0,
+          "valid_raw_types": null,
+          "valid_special_types": null,
+          "ignored_type_group_special": null,
+          "ignored_type_group_raw": null,
+          "get_features_kwargs": null,
+          "get_features_kwargs_extra": null,
+          "predict_1_batch_size": null,
+          "temperature_scalar": null,
+          "drop_unique": false
+        }
+      },
+      "stacker_info": {
+        "num_base_models": 8,
+        "base_model_names": [
+          "LightGBMXT",
+          "CatBoost",
+          "ExtraTreesGini",
+          "ExtraTreesEntr",
+          "NeuralNetFastAI",
+          "XGBoost",
+          "NeuralNetTorch",
+          "LightGBMLarge"
+        ]
+      },
+      "children_info": {
+        "S1F1": {
+          "name": "S1F1",
+          "model_type": "GreedyWeightedEnsembleModel",
+          "problem_type": "binary",
+          "eval_metric": "average_precision",
+          "stopping_metric": "average_precision",
+          "fit_time": 0.948408842086792,
+          "num_classes": 2,
+          "quantile_levels": null,
+          "predict_time": null,
+          "val_score": null,
+          "hyperparameters": {
+            "ensemble_size": 25,
+            "subsample_size": 1000000
+          },
+          "hyperparameters_user": {},
+          "hyperparameters_fit": {
+            "ensemble_size": 20
+          },
+          "hyperparameters_nondefault": [],
+          "ag_args_fit": {
+            "max_memory_usage_ratio": 1.0,
+            "max_time_limit_ratio": 1.0,
+            "max_time_limit": null,
+            "min_time_limit": 0,
+            "valid_raw_types": null,
+            "valid_special_types": null,
+            "ignored_type_group_special": null,
+            "ignored_type_group_raw": null,
+            "get_features_kwargs": null,
+            "get_features_kwargs_extra": null,
+            "predict_1_batch_size": null,
+            "temperature_scalar": null,
+            "drop_unique": false
+          },
+          "num_features": 8,
+          "features": [
+            "LightGBMXT",
+            "CatBoost",
+            "ExtraTreesGini",
+            "ExtraTreesEntr",
+            "NeuralNetFastAI",
+            "XGBoost",
+            "NeuralNetTorch",
+            "LightGBMLarge"
+          ],
+          "feature_metadata": "('float', ['stack']) : 11 | ['LightGBMXT', 'LightGBM', 'RandomForestGini', 'RandomForestEntr', 'CatBoost', ...]",
+          "memory_size": 9286,
+          "compile_time": null,
+          "is_initialized": true,
+          "is_fit": true,
+          "is_valid": true,
+          "can_infer": true,
+          "has_learning_curves": false,
+          "num_samples": 22826,
+          "val_in_fit": false,
+          "unlabeled_in_fit": false,
+          "num_cpus": 18,
+          "num_gpus": 1,
+          "model_weights": {
+            "LightGBMXT": 0.05,
+            "CatBoost": 0.05,
+            "ExtraTreesGini": 0.05,
+            "ExtraTreesEntr": 0.15,
+            "NeuralNetFastAI": 0.3,
+            "XGBoost": 0.15,
+            "NeuralNetTorch": 0.1,
+            "LightGBMLarge": 0.15
+          }
+        }
+      }
+    }
+  },
+  "permanent_csi:LightGBMXT": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.05,
+      "extra_trees": true,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 111
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBMXT",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 2.5884220600128174,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.02891373634338379,
+      "val_score": 0.13763237676144424,
+      "hyperparameters": {
+        "learning_rate": 0.05,
+        "extra_trees": true,
+        "seed": 0
+      },
+      "hyperparameters_user": {
+        "extra_trees": true
+      },
+      "hyperparameters_fit": {
+        "num_boost_round": 111
+      },
+      "hyperparameters_nondefault": [
+        "extra_trees"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 395732,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:LightGBM": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.05,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 283
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBM",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 3.0493876934051514,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.05407428741455078,
+      "val_score": 0.13590213515281013,
+      "hyperparameters": {
+        "learning_rate": 0.05,
+        "seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "num_boost_round": 283
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 984144,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:RandomForestGini": {
+    "model_class": "RFModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "gini",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "RandomForestGini",
+      "model_type": "RFModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 16.814213514328003,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.12639164924621582,
+      "val_score": 0.13356715564496657,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "gini",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "gini",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 79363678,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "permanent_csi:RandomForestEntr": {
+    "model_class": "RFModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "entropy",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "RandomForestEntr",
+      "model_type": "RFModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 17.236428260803223,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.1264629364013672,
+      "val_score": 0.14204352261075107,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "entropy",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "entropy",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 83172824,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "permanent_csi:CatBoost": {
+    "model_class": "CatBoostModel",
+    "params": {
+      "iterations": 10000,
+      "learning_rate": 0.05,
+      "allow_writing_files": false,
+      "eval_metric": "Logloss",
+      "random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "iterations": 292
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "CatBoost",
+      "model_type": "CatBoostModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 2.5886881351470947,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.00838780403137207,
+      "val_score": 0.1398704268128975,
+      "hyperparameters": {
+        "iterations": 10000,
+        "learning_rate": 0.05,
+        "allow_writing_files": false,
+        "eval_metric": "Logloss",
+        "random_seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "iterations": 292
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 353033,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:ExtraTreesGini": {
+    "model_class": "XTModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "gini",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "ExtraTreesGini",
+      "model_type": "XTModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.6780803203582764,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.11202454566955566,
+      "val_score": 0.13738277400708224,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "gini",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "gini",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 160262203,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "permanent_csi:ExtraTreesEntr": {
+    "model_class": "XTModel",
+    "params": {
+      "n_estimators": 300,
+      "max_leaf_nodes": 15000,
+      "n_jobs": -1,
+      "bootstrap": true,
+      "criterion": "entropy",
+      "max_depth": 15,
+      "random_state": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 300
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "ExtraTreesEntr",
+      "model_type": "XTModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.6190142631530762,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.11273813247680664,
+      "val_score": 0.13841955013190874,
+      "hyperparameters": {
+        "n_estimators": 300,
+        "max_leaf_nodes": 15000,
+        "n_jobs": -1,
+        "bootstrap": true,
+        "criterion": "entropy",
+        "max_depth": 15,
+        "random_state": 0
+      },
+      "hyperparameters_user": {
+        "criterion": "entropy",
+        "max_depth": 15
+      },
+      "hyperparameters_fit": {
+        "n_estimators": 300
+      },
+      "hyperparameters_nondefault": [
+        "criterion",
+        "max_depth"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 141484291,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 0
+    }
+  },
+  "permanent_csi:NeuralNetFastAI": {
+    "model_class": "NNFastAiTabularModel",
+    "params": {
+      "layers": null,
+      "emb_drop": 0.1,
+      "ps": 0.1,
+      "bs": "auto",
+      "lr": 0.01,
+      "epochs": "auto",
+      "early.stopping.min_delta": 0.0001,
+      "early.stopping.patience": 20,
+      "smoothing": 0.0,
+      "random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": [
+        "text_ngram",
+        "text_as_category"
+      ],
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "epochs": 30,
+      "best_epoch": 5
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "NeuralNetFastAI",
+      "model_type": "NNFastAiTabularModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 74.88365387916565,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.16734600067138672,
+      "val_score": 0.13839279299012028,
+      "hyperparameters": {
+        "layers": null,
+        "emb_drop": 0.1,
+        "ps": 0.1,
+        "bs": "auto",
+        "lr": 0.01,
+        "epochs": "auto",
+        "early.stopping.min_delta": 0.0001,
+        "early.stopping.patience": 20,
+        "smoothing": 0.0,
+        "random_seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "epochs": 30,
+        "best_epoch": 5
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": [
+          "text_ngram",
+          "text_as_category"
+        ],
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 561779,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:XGBoost": {
+    "model_class": "XGBoostModel",
+    "params": {
+      "n_estimators": 10000,
+      "learning_rate": 0.1,
+      "n_jobs": -1,
+      "proc.max_category_levels": 100,
+      "objective": "binary:logistic",
+      "booster": "gbtree",
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "n_estimators": 68
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "XGBoost",
+      "model_type": "XGBoostModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 1.205104112625122,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.03731203079223633,
+      "val_score": 0.1329839156258257,
+      "hyperparameters": {
+        "n_estimators": 10000,
+        "learning_rate": 0.1,
+        "n_jobs": -1,
+        "proc.max_category_levels": 100,
+        "objective": "binary:logistic",
+        "booster": "gbtree",
+        "seed": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "n_estimators": 68
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 444831,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:NeuralNetTorch": {
+    "model_class": "TabularNeuralNetTorchModel",
+    "params": {
+      "num_epochs": 1000,
+      "epochs_wo_improve": null,
+      "activation": "relu",
+      "embedding_size_factor": 1.0,
+      "embed_exponent": 0.56,
+      "max_embedding_dim": 100,
+      "y_range": null,
+      "y_range_extend": 0.05,
+      "dropout_prob": 0.1,
+      "optimizer": "adam",
+      "learning_rate": 0.0003,
+      "weight_decay": 1e-06,
+      "proc.embed_min_categories": 4,
+      "proc.impute_strategy": "median",
+      "proc.max_category_levels": 100,
+      "proc.skew_threshold": 0.99,
+      "use_ngram_features": false,
+      "num_layers": 4,
+      "hidden_size": 128,
+      "max_batch_size": 512,
+      "use_batchnorm": false,
+      "loss_function": "auto",
+      "seed_value": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": [
+        "text_ngram",
+        "text_as_category"
+      ],
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "batch_size": 256,
+      "num_epochs": 17
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "NeuralNetTorch",
+      "model_type": "TabularNeuralNetTorchModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 80.79356074333191,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.03608560562133789,
+      "val_score": 0.13377828194115812,
+      "hyperparameters": {
+        "num_epochs": 1000,
+        "epochs_wo_improve": null,
+        "activation": "relu",
+        "embedding_size_factor": 1.0,
+        "embed_exponent": 0.56,
+        "max_embedding_dim": 100,
+        "y_range": null,
+        "y_range_extend": 0.05,
+        "dropout_prob": 0.1,
+        "optimizer": "adam",
+        "learning_rate": 0.0003,
+        "weight_decay": 1e-06,
+        "proc.embed_min_categories": 4,
+        "proc.impute_strategy": "median",
+        "proc.max_category_levels": 100,
+        "proc.skew_threshold": 0.99,
+        "use_ngram_features": false,
+        "num_layers": 4,
+        "hidden_size": 128,
+        "max_batch_size": 512,
+        "use_batchnorm": false,
+        "loss_function": "auto",
+        "seed_value": 0
+      },
+      "hyperparameters_user": {},
+      "hyperparameters_fit": {
+        "batch_size": 256,
+        "num_epochs": 17
+      },
+      "hyperparameters_nondefault": [],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": [
+          "text_ngram",
+          "text_as_category"
+        ],
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 225343,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:LightGBMLarge": {
+    "model_class": "LGBModel",
+    "params": {
+      "learning_rate": 0.03,
+      "num_leaves": 128,
+      "feature_fraction": 0.9,
+      "min_data_in_leaf": 3,
+      "seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": [
+        "bool",
+        "int",
+        "float",
+        "category"
+      ],
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null
+    },
+    "params_trained": {
+      "num_boost_round": 317
+    },
+    "feature_count": 25,
+    "model_info": {
+      "name": "LightGBMLarge",
+      "model_type": "LGBModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 7.603342533111572,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.05303239822387695,
+      "val_score": 0.1337033530671726,
+      "hyperparameters": {
+        "learning_rate": 0.03,
+        "num_leaves": 128,
+        "feature_fraction": 0.9,
+        "min_data_in_leaf": 3,
+        "seed": 0
+      },
+      "hyperparameters_user": {
+        "learning_rate": 0.03,
+        "num_leaves": 128,
+        "feature_fraction": 0.9,
+        "min_data_in_leaf": 3
+      },
+      "hyperparameters_fit": {
+        "num_boost_round": 317
+      },
+      "hyperparameters_nondefault": [
+        "learning_rate",
+        "num_leaves",
+        "feature_fraction",
+        "min_data_in_leaf"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": [
+          "bool",
+          "int",
+          "float",
+          "category"
+        ],
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null
+      },
+      "num_features": 25,
+      "features": [
+        "z1",
+        "z2",
+        "z3",
+        "z4",
+        "z5",
+        "z6",
+        "z7",
+        "z8",
+        "z9",
+        "z10",
+        "z11",
+        "z12",
+        "z13",
+        "z14",
+        "z15",
+        "z16",
+        "z17",
+        "z18",
+        "z19",
+        "z20",
+        "z21",
+        "z22",
+        "z23",
+        "z24",
+        "vae_recon_error"
+      ],
+      "feature_metadata": "('float', []) : 25 | ['z1', 'z2', 'z3', 'z4', 'z5', ...]",
+      "memory_size": 4380046,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 120347,
+      "val_in_fit": true,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1
+    }
+  },
+  "permanent_csi:WeightedEnsemble_L2": {
+    "model_class": "WeightedEnsembleModel",
+    "params": {
+      "use_orig_features": false,
+      "valid_stacker": true,
+      "max_base_models": 0,
+      "max_base_models_per_type": "auto",
+      "save_bag_folds": true,
+      "stratify": "auto",
+      "bin": "auto",
+      "n_bins": null,
+      "vary_seed_across_folds": false,
+      "model_random_seed": 0
+    },
+    "params_aux": {
+      "max_memory_usage_ratio": 1.0,
+      "max_time_limit_ratio": 1.0,
+      "max_time_limit": null,
+      "min_time_limit": 0,
+      "valid_raw_types": null,
+      "valid_special_types": null,
+      "ignored_type_group_special": null,
+      "ignored_type_group_raw": null,
+      "get_features_kwargs": null,
+      "get_features_kwargs_extra": null,
+      "predict_1_batch_size": null,
+      "temperature_scalar": null,
+      "drop_unique": false
+    },
+    "params_trained": {},
+    "feature_count": 11,
+    "model_info": {
+      "name": "WeightedEnsemble_L2",
+      "model_type": "WeightedEnsembleModel",
+      "problem_type": "binary",
+      "eval_metric": "average_precision",
+      "stopping_metric": "average_precision",
+      "fit_time": 0.9544827938079834,
+      "num_classes": 2,
+      "quantile_levels": null,
+      "predict_time": 0.003970623016357422,
+      "val_score": 0.15052952179518386,
+      "hyperparameters": {
+        "use_orig_features": false,
+        "valid_stacker": true,
+        "max_base_models": 0,
+        "max_base_models_per_type": "auto",
+        "save_bag_folds": true,
+        "stratify": "auto",
+        "bin": "auto",
+        "n_bins": null,
+        "vary_seed_across_folds": false,
+        "model_random_seed": 0
+      },
+      "hyperparameters_user": {
+        "save_bag_folds": true
+      },
+      "hyperparameters_fit": {},
+      "hyperparameters_nondefault": [
+        "save_bag_folds"
+      ],
+      "ag_args_fit": {
+        "max_memory_usage_ratio": 1.0,
+        "max_time_limit_ratio": 1.0,
+        "max_time_limit": null,
+        "min_time_limit": 0,
+        "valid_raw_types": null,
+        "valid_special_types": null,
+        "ignored_type_group_special": null,
+        "ignored_type_group_raw": null,
+        "get_features_kwargs": null,
+        "get_features_kwargs_extra": null,
+        "predict_1_batch_size": null,
+        "temperature_scalar": null,
+        "drop_unique": false
+      },
+      "num_features": 4,
+      "features": [
+        "NeuralNetTorch",
+        "NeuralNetFastAI",
+        "RandomForestGini",
+        "RandomForestEntr"
+      ],
+      "feature_metadata": "('float', ['stack']) : 11 | ['LightGBMXT', 'LightGBM', 'RandomForestGini', 'RandomForestEntr', 'CatBoost', ...]",
+      "memory_size": 4173,
+      "compile_time": null,
+      "is_initialized": true,
+      "is_fit": true,
+      "is_valid": true,
+      "can_infer": true,
+      "has_learning_curves": false,
+      "num_samples": 22826,
+      "val_in_fit": false,
+      "unlabeled_in_fit": false,
+      "num_cpus": 18,
+      "num_gpus": 1,
+      "bagged_info": {
+        "child_model_type": "GreedyWeightedEnsembleModel",
+        "num_child_models": 1,
+        "child_model_names": [
+          "S1F1"
+        ],
+        "_n_repeats": 1,
+        "_k_per_n_repeat": [
+          1
+        ],
+        "_random_state": 2,
+        "low_memory": false,
+        "bagged_mode": false,
+        "max_memory_size": 4173,
+        "min_memory_size": 4173,
+        "child_hyperparameters": {
+          "ensemble_size": 25,
+          "subsample_size": 1000000
+        },
+        "child_hyperparameters_user": {},
+        "child_hyperparameters_fit": {
+          "ensemble_size": 24
+        },
+        "child_ag_args_fit": {
+          "max_memory_usage_ratio": 1.0,
+          "max_time_limit_ratio": 1.0,
+          "max_time_limit": null,
+          "min_time_limit": 0,
+          "valid_raw_types": null,
+          "valid_special_types": null,
+          "ignored_type_group_special": null,
+          "ignored_type_group_raw": null,
+          "get_features_kwargs": null,
+          "get_features_kwargs_extra": null,
+          "predict_1_batch_size": null,
+          "temperature_scalar": null,
+          "drop_unique": false
+        }
+      },
+      "stacker_info": {
+        "num_base_models": 4,
+        "base_model_names": [
+          "RandomForestGini",
+          "RandomForestEntr",
+          "NeuralNetFastAI",
+          "NeuralNetTorch"
+        ]
+      },
+      "children_info": {
+        "S1F1": {
+          "name": "S1F1",
+          "model_type": "GreedyWeightedEnsembleModel",
+          "problem_type": "binary",
+          "eval_metric": "average_precision",
+          "stopping_metric": "average_precision",
+          "fit_time": 0.9544827938079834,
+          "num_classes": 2,
+          "quantile_levels": null,
+          "predict_time": null,
+          "val_score": null,
+          "hyperparameters": {
+            "ensemble_size": 25,
+            "subsample_size": 1000000
+          },
+          "hyperparameters_user": {},
+          "hyperparameters_fit": {
+            "ensemble_size": 24
+          },
+          "hyperparameters_nondefault": [],
+          "ag_args_fit": {
+            "max_memory_usage_ratio": 1.0,
+            "max_time_limit_ratio": 1.0,
+            "max_time_limit": null,
+            "min_time_limit": 0,
+            "valid_raw_types": null,
+            "valid_special_types": null,
+            "ignored_type_group_special": null,
+            "ignored_type_group_raw": null,
+            "get_features_kwargs": null,
+            "get_features_kwargs_extra": null,
+            "predict_1_batch_size": null,
+            "temperature_scalar": null,
+            "drop_unique": false
+          },
+          "num_features": 4,
+          "features": [
+            "RandomForestGini",
+            "RandomForestEntr",
+            "NeuralNetFastAI",
+            "NeuralNetTorch"
+          ],
+          "feature_metadata": "('float', ['stack']) : 11 | ['LightGBMXT', 'LightGBM', 'RandomForestGini', 'RandomForestEntr', 'CatBoost', ...]",
+          "memory_size": 9351,
+          "compile_time": null,
+          "is_initialized": true,
+          "is_fit": true,
+          "is_valid": true,
+          "can_infer": true,
+          "has_learning_curves": false,
+          "num_samples": 22826,
+          "val_in_fit": false,
+          "unlabeled_in_fit": false,
+          "num_cpus": 18,
+          "num_gpus": 1,
+          "model_weights": {
+            "RandomForestGini": 0.16666666666666666,
+            "RandomForestEntr": 0.375,
+            "NeuralNetFastAI": 0.3333333333333333,
+            "NeuralNetTorch": 0.125
+          }
+        }
+      }
+    }
+  }
+}

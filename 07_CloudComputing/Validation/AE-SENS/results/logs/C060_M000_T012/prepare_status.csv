@@ -1,0 +1,2 @@
+run_id,C,M,T,features_rows,labels_rows,events_rows,started_at,output_root
+C060_M000_T012,-0.6,0,12,188460,188460,325275,2026-05-28 15:08:13.853387,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity

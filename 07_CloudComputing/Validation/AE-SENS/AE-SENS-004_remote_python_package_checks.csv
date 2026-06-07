@@ -1,0 +1,8 @@
+"language","package","status"
+"Python","numpy","OK"
+"Python","pandas","OK"
+"Python","pyreadr","OK"
+"Python","sklearn","OK"
+"Python","autogluon.tabular","OK"
+"Python","torch","OK"
+"Python","pyarrow","OK"

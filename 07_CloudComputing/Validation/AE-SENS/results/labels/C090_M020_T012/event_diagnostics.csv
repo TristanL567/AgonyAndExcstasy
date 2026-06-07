@@ -1,0 +1,2 @@
+param_id,C,M,T,n_triggers,n_confirmed,n_terminal_failure_before_confirmation,n_positive,n_recovered_within_T,n_censored
+C090_M020_T012,-0.9,-0.2,12,164243,7272,1376,8648,144363,11232

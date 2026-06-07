@@ -1,0 +1,3 @@
+feature_cols,feature_duplicate_keys,feature_exists,feature_has_y,feature_permno_na,feature_rows,feature_unique_keys,feature_year_na,folder,keys_extra_in_feature_vs_labels,keys_extra_in_feature_vs_split,keys_missing_from_feature_vs_labels,keys_missing_from_feature_vs_split,labels_exists,labels_has_y,labels_rows,labels_unique_keys,preflight_pass,response_track,split_exists,split_has_y,split_rows,split_unique_keys,y_mismatch_feature_vs_labels,y_mismatch_feature_vs_split
+519,0,True,True,0,188460,188460,0,temporary_csi,0,0,0,0,True,True,188460,188460,True,dynamic_csi,True,False,188460,188460,0,not_applicable_y_not_in_both
+529,0,True,True,0,188460,188460,0,permanent_csi,0,0,0,0,True,True,188460,188460,True,permanent_csi,True,False,188460,188460,0,not_applicable_y_not_in_both

@@ -1,0 +1,38 @@
+{
+  "autogluon_version": null,
+  "best_model": null,
+  "created_at_utc": "2026-05-29T04:23:35.927559+00:00",
+  "leaderboard_path": "raw_predictions/C080_M000_T018/ag_leaderboard.csv",
+  "metric_coverage_path": "raw_predictions/C080_M000_T018/ag_metric_coverage_compact.csv",
+  "model_names": [],
+  "optional_family_availability": [
+    {
+      "available": false,
+      "family": "LightGBM",
+      "matching_models": "",
+      "run_id": "C080_M000_T018"
+    },
+    {
+      "available": false,
+      "family": "CatBoost",
+      "matching_models": "",
+      "run_id": "C080_M000_T018"
+    },
+    {
+      "available": false,
+      "family": "XGBoost",
+      "matching_models": "",
+      "run_id": "C080_M000_T018"
+    },
+    {
+      "available": false,
+      "family": "FastAI",
+      "matching_models": "",
+      "run_id": "C080_M000_T018"
+    }
+  ],
+  "package_versions": {},
+  "python_version": null,
+  "run_id": "C080_M000_T018",
+  "source_metadata_path": null
+}

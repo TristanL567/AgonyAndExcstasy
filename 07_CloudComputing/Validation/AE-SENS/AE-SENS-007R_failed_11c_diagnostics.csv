@@ -1,0 +1,6 @@
+"run_id","failed_step","prior_completed_steps","exit_code","symptom","shared_failure_class"
+"C060_M000_T012","04_raw_11c_index","01_prepare_raw_inputs;02_raw_autogluon;03_raw_evaluation","139","R segfault / memory not mapped / forderv bad value","11C data.table merge/runtime instability in sensitivity mode"
+"C060_M000_T018","04_raw_11c_index","01_prepare_raw_inputs;02_raw_autogluon;03_raw_evaluation","134","R abort / double free or corruption","11C data.table merge/runtime instability in sensitivity mode"
+"C060_M000_T028","04_raw_11c_index","01_prepare_raw_inputs;02_raw_autogluon;03_raw_evaluation","139","R segfault / memory not mapped / forderv bad value","11C data.table merge/runtime instability in sensitivity mode"
+"C060_M020_T012","04_raw_11c_index","01_prepare_raw_inputs;02_raw_autogluon;03_raw_evaluation","134","R abort / double free or corruption","11C data.table merge/runtime instability in sensitivity mode"
+"C060_M020_T018","04_raw_11c_index","01_prepare_raw_inputs;02_raw_autogluon;03_raw_evaluation","134","R abort / double free or corruption","11C data.table merge/runtime instability in sensitivity mode"

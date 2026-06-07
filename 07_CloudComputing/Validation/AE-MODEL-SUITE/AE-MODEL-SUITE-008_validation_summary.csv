@@ -1,0 +1,10 @@
+check,value,status
+remote_manifest_rows,94,PASS
+remote_manifest_bytes,8991574,PASS
+download_checksum_pass,94,PASS
+download_checksum_fail,0,PASS
+download_missing_files,0,PASS
+heavy_autogluon_artifacts_found,0,PASS
+feature_sets_downloaded,fund;latent_raw;raw;raw_plus_latent,PASS
+tracks_downloaded,both;permanent_csi;temporary_csi,PASS
+local_destination,C:\Users\Tristan Leiter\Documents\AgonyAndExcstasy\03_Data_Output\6_ModelSuite,PASS

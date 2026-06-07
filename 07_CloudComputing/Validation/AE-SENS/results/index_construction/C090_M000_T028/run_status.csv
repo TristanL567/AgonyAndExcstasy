@@ -1,0 +1,2 @@
+track,started_at,ended_at,elapsed_minutes,script_path,output_dir,n_threshold_rows,n_weight_rows,n_return_rows,n_performance_rows,n_exclusion_rows,n_decomposition_rows,response_track,permanent_removal
+dynamic_csi,2026-05-28 22:51:56.720246,2026-05-28 22:55:22.079195,3.4226491411527,/root/AgonyAndExcstasy/01_Code/pipeline/11C_IndexConstruction_Revised.R,/root/AgonyAndExcstasy/03_Data_Output/3_Modelling_Results/Necessary/sensitivity/index_construction/C090_M000_T028,3,7399034,13728,208,4224,768,dynamic_csi,FALSE

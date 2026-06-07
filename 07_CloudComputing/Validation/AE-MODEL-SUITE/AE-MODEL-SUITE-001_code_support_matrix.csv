@@ -1,0 +1,11 @@
+component,check,status,evidence,risk_or_action
+09C_AutoGluon.py,MODEL=fund supported,pass,"MODEL_CONFIG contains fund mapped to Features/features_fund.rds.","No code change indicated for fund training path."
+09C_AutoGluon.py,MODEL=latent_raw supported,pass,"MODEL_CONFIG contains latent_raw mapped to Features/features_latent_raw.parquet.","Training must wait until VAE latent features are regenerated/validated against revised labels."
+09C_AutoGluon.py,MODEL=raw_plus_latent supported,pass,"MODEL_CONFIG contains raw_plus_latent mapped to Features/features_raw_plus_latent.parquet.","Training must wait until raw-plus-latent features are regenerated/validated against revised labels."
+09C_AutoGluon.py,RESPONSE_TRACK supported,pass,"Script reads RESPONSE_TRACK and maps dynamic_csi to temporary_csi.","No blocker found."
+09C_AutoGluon.py,MT_ROOT supported,pass,"Script reads MT_ROOT and uses it as DATA_ROOT when supplied.","No blocker found."
+09C_AutoGluon.py,MT_OUTPUT_DIR supported,pass,"resolve_output_dir treats an absolute MT_OUTPUT_DIR as DIR_OUTPUT override.","No blocker found."
+10_Evaluation.R,MODEL=fund evaluation supported,pass,"MODELS registry contains fund and loads ag_fund prediction paths.","No blocker found for fund."
+10_Evaluation.R,MODEL=latent_raw evaluation supported,pass,"MODELS registry contains latent_raw and loads ag_latent_raw prediction paths.","No blocker found for latent_raw."
+10_Evaluation.R,MODEL=raw_plus_latent evaluation supported,blocked_compatibility_risk,"MODELS registry and CSI TRACK_KEYS do not include raw_plus_latent.","Add or use a compact metric extractor before assuming raw_plus_latent can be evaluated by the existing full evaluation suite."
+config.R,MT_OUTPUT_DIR output isolation supported,pass,"DIR_DATA_OUTPUT uses absolute MT_OUTPUT_DIR when set and track constants resolve under DIR_MODELLING_NEC/TRACK_FOLDER.","No blocker found."

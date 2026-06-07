@@ -169,6 +169,28 @@ DIR_MODELLING_TRACK = DIR_OUTPUT / "3_Modelling_Results" / "Necessary" / TRACK_F
 DIR_MODELS   = DIR_MODELLING_TRACK / "AutoGluon"   # trained predictor binaries
 DIR_TABLES   = DIR_MODELLING_TRACK / "AutoGluon"   # predictions / leaderboard / cv_results
 
+AE_SENS_RUN_ID = os.environ.get("AE_SENS_RUN_ID", "").strip()
+AE_SENS_OUTPUT_ROOT = os.environ.get("AE_SENS_OUTPUT_ROOT", "").strip()
+AE_SENS_MODE = bool(AE_SENS_RUN_ID or AE_SENS_OUTPUT_ROOT)
+if AE_SENS_MODE:
+    assert AE_SENS_RUN_ID, "AE_SENS_RUN_ID is required when AE_SENS_OUTPUT_ROOT is set"
+    assert AE_SENS_OUTPUT_ROOT, "AE_SENS_OUTPUT_ROOT is required when AE_SENS_RUN_ID is set"
+    assert re.match(r"^C(060|080|090)_M(000|020|030)_T(012|018|028)$", AE_SENS_RUN_ID), \
+        f"Invalid AE_SENS_RUN_ID: {AE_SENS_RUN_ID}"
+    sens_root = Path(AE_SENS_OUTPUT_ROOT)
+    assert sens_root.is_absolute(), "AE_SENS_OUTPUT_ROOT must be absolute"
+    assert str(sens_root).endswith("03_Data_Output/3_Modelling_Results/Necessary/sensitivity"), \
+        f"AE_SENS_OUTPUT_ROOT outside approved sensitivity root: {sens_root}"
+    assert RESPONSE_TRACK == "dynamic_csi", "AE-SENS mode only permits RESPONSE_TRACK=dynamic_csi"
+    DIR_FEATURES = sens_root / "raw_features" / "by_config" / AE_SENS_RUN_ID
+    DIR_LABELS = sens_root / "labels" / AE_SENS_RUN_ID
+    DIR_MODELS = sens_root / "raw_models" / AE_SENS_RUN_ID
+    DIR_TABLES = sens_root / "raw_predictions" / AE_SENS_RUN_ID
+    print(f"[09C] AE-SENS mode: run_id={AE_SENS_RUN_ID}")
+    print(f"[09C] AE-SENS features: {DIR_FEATURES}")
+    print(f"[09C] AE-SENS models: {DIR_MODELS}")
+    print(f"[09C] AE-SENS predictions: {DIR_TABLES}")
+
 # Legacy bucket/structural labels — only in Additional/legacy_flat_pre_track_split/
 DIR_LABELS_LEGACY_FLAT = DIR_DATA_INPUT / "05_PipelineResults" / "Additional" \
     / "legacy_flat_pre_track_split" / "Labels"
@@ -204,6 +226,8 @@ MODEL_ALIASES = {
 
 MODEL = os.environ.get("MODEL", "fund")
 MODEL = MODEL_ALIASES.get(MODEL, MODEL)
+if AE_SENS_MODE:
+    assert MODEL == "raw", "AE-SENS mode only permits MODEL=raw"
 
 # ==============================================================================
 # 3. Training hyperparameters
@@ -399,8 +423,12 @@ if IS_BUCKET:
         f"Label file not found: {lbl_path}\n  {cfg['prereq']}"
 
 ## Output directories — one per model key, nothing ever overwrites another
-DIR_MODELS_RUN = DIR_MODELS / f"ag_{MODEL}"
-DIR_TABLES_RUN = DIR_TABLES / f"ag_{MODEL}"
+if AE_SENS_MODE:
+    DIR_MODELS_RUN = DIR_MODELS
+    DIR_TABLES_RUN = DIR_TABLES
+else:
+    DIR_MODELS_RUN = DIR_MODELS / f"ag_{MODEL}"
+    DIR_TABLES_RUN = DIR_TABLES / f"ag_{MODEL}"
 DIR_MODELS_RUN.mkdir(parents=True, exist_ok=True)
 DIR_TABLES_RUN.mkdir(parents=True, exist_ok=True)
 

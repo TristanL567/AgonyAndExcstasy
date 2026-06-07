@@ -1,0 +1,3 @@
+track,folder,model,exit_code,required_outputs_missing,output_dir,run_root
+dynamic_csi,temporary_csi,fund,0,,/root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/nonraw_rerun_20260529_105911/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_fund,/root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/nonraw_rerun_20260529_105911
+permanent_csi,permanent_csi,fund,0,,/root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/nonraw_rerun_20260529_105911/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_fund,/root/AgonyAndExcstasy/03_Data_Output/validation/AE-MODEL-SUITE/nonraw_rerun_20260529_105911
