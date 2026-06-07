@@ -1,0 +1,9 @@
+track,universe,strategy_id,corrected_alpha_5bps_pp,corrected_alpha_10bps_pp,corrected_alpha_20bps_pp,slide_ready_5bps_pp,slide_ready_10bps_pp,slide_ready_20bps_pp,strategy_net_5bps_pct,strategy_net_10bps_pct,strategy_net_20bps_pct,monotone_weakly_declining,selected_winner_unchanged,winner_ranking_unchanged_reason
+Temporary CSI,Total,youden_3yr,0.425502,0.419687,0.408059,0.43,0.42,0.41,13.716199,13.710385,13.698757,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Temporary CSI,Large,youden_3yr,0.145790,0.138485,0.123876,0.15,0.14,0.12,14.422650,14.415345,14.400736,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Temporary CSI,Mid,fpr5_5yr,0.449555,0.392308,0.277881,0.45,0.39,0.28,10.103006,10.045759,9.931332,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Temporary CSI,Small,youden_3yr,0.590512,0.545086,0.454276,0.59,0.55,0.45,8.245200,8.199775,8.108965,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Permanent CSI,Total,fpr5_permanent,0.262224,0.258423,0.250823,0.26,0.26,0.25,13.552922,13.549121,13.541520,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Permanent CSI,Large,fpr5_permanent,0.221807,0.215352,0.202444,0.22,0.22,0.20,14.498667,14.492213,14.479304,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Permanent CSI,Mid,fpr5_permanent,0.681006,0.623480,0.508494,0.68,0.62,0.51,10.334457,10.276931,10.161945,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved
+Permanent CSI,Small,fpr3_permanent,0.280885,0.240800,0.160662,0.28,0.24,0.16,7.935573,7.895488,7.815351,True,True,zero_cost_benchmark_is_constant_within_track_universe_cost_so_net_return_ranking_is_preserved

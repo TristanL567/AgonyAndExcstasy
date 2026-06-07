@@ -16,6 +16,7 @@ epic_must_not_touch:
   - 07_CloudComputing/**
 tickets:
   - AE-TC-RECHECK-001
+  - AE-TC-RECHECK-002
 depends_on_epics: []
 merge_policy:
   strategy: manual

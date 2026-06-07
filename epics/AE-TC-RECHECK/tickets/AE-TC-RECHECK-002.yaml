@@ -1,0 +1,50 @@
+ticket_id: AE-TC-RECHECK-002
+goal: Recompute transaction-cost slide active-alpha values against a zero-cost benchmark.
+dependencies:
+  - AE-TC-RECHECK-001
+allowed_areas:
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - epics/AE-TC-RECHECK/**
+may_inspect_read_only:
+  - 03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**
+  - 05_Documentation/09_Epics/AE-INDEX-SUITE_Index_Construction/**
+  - 05_Documentation/09_Epics/AE-TC-AUDIT_Transaction_Cost_Audit/**
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 06_Presentations/**
+  - 07_CloudComputing/**
+requirements:
+  - Locate the source rows for the eight selected OOS strategies.
+  - Recompute zero-cost benchmark geometric return, strategy net geometric return, active alpha versus zero-cost benchmark, difference versus current slide value, turnover, and expected cost drag for 5, 10, and 20 bps.
+  - Confirm whether selected OOS winners remain unchanged under the corrected active-alpha definition.
+  - Test fixed-strategy monotonicity of active alpha versus the zero-cost benchmark.
+  - Produce corrected slide-ready values for 5, 10, and 20 bps.
+  - Explain why the market-cap benchmark should remain zero-cost while the strategy pays transaction costs.
+  - Do not edit the presentation.
+  - Do not rerun index construction, model, evaluation, sensitivity, or pipeline scripts.
+non_goals:
+  - Editing presentation slides or source maps.
+  - Modifying source data or generated index outputs.
+  - Rerunning model, index, evaluation, sensitivity, or pipeline jobs.
+acceptance_criteria:
+  - Required evidence files exist.
+  - All 24 requested values are recomputed against the zero-cost benchmark.
+  - Monotonicity is confirmed or any failure is explained.
+  - Corrected slide-ready values are provided.
+  - Winner-ranking conclusion is documented.
+  - No presentation or 03_Data_Output files are modified.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the zero-cost benchmark recomputation report.
+  - Review corrected slide values and monotonicity CSVs.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true
