@@ -1028,8 +1028,8 @@ The revised 11C track applies the score-to-weight pipeline independently inside 
     \draw[darkgrey!22] (0,\y) -- (7.3,\y);
     \node[anchor=east, darkgrey, scale=0.85] at (-0.05,\y) {+\y};
   }
-  \foreach \x/\o/\t/\lbl in {0.35/0.43/0.41/Total, 2.15/0.15/0.24/Large,
-                             3.95/0.51/0.33/Mid, 5.75/0.63/0.89/Small} {
+  \foreach \x/\o/\t/\lbl in {0.35/0.42/0.41/Total, 2.15/0.14/0.24/Large,
+                             3.95/0.39/0.33/Mid, 5.75/0.55/0.89/Small} {
     \fill[MainColour] (\x,0)      rectangle (\x+0.55,\o);
     \fill[posgreenL]  (\x+0.62,0) rectangle (\x+1.17,\t);
     \node[anchor=north, black] at (\x+0.585,-0.015) {\lbl};
@@ -1054,7 +1054,7 @@ The crash-filter appears beneficial in both evaluation windows, but the evidence
 %==== 21. Temporary-CSI Results ==========================================%
 \begin{frame}{Temporary-CSI Results: OOS (2020-2024) with 10 bps of Transaction Costs}
 \scriptsize
-\textbf{Best strategy per universe vs.\ the market-weighted benchmark assuming 10 bps of transaction costs.}
+\textbf{Best strategy per universe net of 10 bps costs vs.\ the zero-cost market-weighted benchmark.}
 \vspace{0.3em}
 
 \begin{table}[ht]
@@ -1067,10 +1067,10 @@ The crash-filter appears beneficial in both evaluation windows, but the evidence
 \cmidrule(lr){3-4}\cmidrule(lr){5-6}
 Universe & Strategy & Geo ret. & $\Delta$ pp & Sharpe & Max DD \\
 \midrule
-Total & \agbase; Youden 3y & $13.3 \to 13.7$ & $+0.43$ & $0.60 \to \mathbf{0.64}$ & $-25.0 \to \mathbf{-23.8}$ \\
-Large & \agbase; Youden 3y & $14.3 \to 14.4$ & $+0.15$ & $0.66 \to \mathbf{0.68}$ & $-24.8 \to \mathbf{-23.9}$ \\
-Mid   & \agbase; FPR5 5y   & $9.5  \to 10.0$ & $+0.51$ & $0.41 \to \mathbf{0.42}$ & $-24.6 \to \mathbf{-24.5}$ \\
-Small & \agvae; Youden 3y  & $7.6  \to 8.2$  & \textcolor{posgreen}{$\mathbf{+0.63}$} & $0.31 \to \mathbf{0.33}$ & $-29.1 \to -29.3$ \\
+Total & \agbase; Youden 3y & $13.3 \to 13.7$ & $+0.42$ & $0.60 \to \mathbf{0.64}$ & $-25.0 \to \mathbf{-23.8}$ \\
+Large & \agbase; Youden 3y & $14.3 \to 14.4$ & $+0.14$ & $0.66 \to \mathbf{0.68}$ & $-24.8 \to \mathbf{-23.9}$ \\
+Mid   & \agbase; FPR5 5y   & $9.7  \to 10.0$ & $+0.39$ & $0.41 \to \mathbf{0.42}$ & $-24.6 \to \mathbf{-24.5}$ \\
+Small & \agvae; Youden 3y  & $7.7  \to 8.2$  & \textcolor{posgreen}{$\mathbf{+0.55}$} & $0.31 \to \mathbf{0.33}$ & $-29.1 \to -29.3$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1078,14 +1078,14 @@ Small & \agvae; Youden 3y  & $7.6  \to 8.2$  & \textcolor{posgreen}{$\mathbf{+0.
 \vspace{0.1em}
 \begin{block}{Main takeaway}
 \scriptsize
-The risk-filter works better the smaller the market cap.: the alpha rises from $+0.15$pp (Large) to $+0.51$pp (Mid) to $+0.63$pp (Small). Smaller-cap universes include more firms in distress and exclusions move a larger part of the portfolio (about 85-106\% turnover vs.\ 10-13\% for the total market). Drawdown improves everywhere except for small caps.
+The risk-filter works better the smaller the market cap.: the alpha rises from $+0.14$pp (Large) to $+0.39$pp (Mid) to $+0.55$pp (Small). Smaller-cap universes include more firms in distress and exclusions move a larger part of the portfolio (about 85-106\% turnover vs.\ 10-13\% for the total market). Drawdown improves everywhere except for small caps.
 \end{block}
 \end{frame}
 
 %==== 22. Permanent-CSI OOS Results ==========================================%
 \begin{frame}{Permanent-CSI Results: OOS (2020-2024) with 10 bps of Transaction Costs}
 \scriptsize
-\textbf{Best strategy per universe vs.\ the market-weighted benchmark assuming 10 bps of transaction costs.}
+\textbf{Best strategy per universe net of 10 bps costs vs.\ the zero-cost market-weighted benchmark.}
 \vspace{0.3em}
 
 \begin{table}[ht]
@@ -1098,10 +1098,10 @@ The risk-filter works better the smaller the market cap.: the alpha rises from $
 \cmidrule(lr){3-4}\cmidrule(lr){5-6}
 Universe & Strategy & Geo ret. & $\Delta$ pp & Sharpe & Max DD \\
 \midrule
-Total & \agvae; FPR5    & $13.3 \to 13.5$ & $+0.27$ & $0.60 \to \mathbf{0.61}$ & $-25.0 \to \mathbf{-24.7}$ \\
-Large & \agvae; FPR5    & $14.3 \to 14.5$ & $+0.23$ & $0.66 \to \mathbf{0.67}$ & $-24.8 \to \mathbf{-24.5}$ \\
-Mid   & \agbase; FPR5   & $9.5  \to 10.3$ & \textcolor{posgreen}{$\mathbf{+0.74}$} & $0.41 \to \mathbf{0.44}$ & $-24.6 \to \mathbf{-24.5}$ \\
-Small & \aglatent; FPR3 & $7.6  \to 7.9$  & $+0.32$ & $0.31 \to \mathbf{0.32}$ & $-29.1 \to -29.3$ \\
+Total & \agvae; FPR5    & $13.3 \to 13.5$ & $+0.26$ & $0.60 \to \mathbf{0.61}$ & $-25.0 \to \mathbf{-24.7}$ \\
+Large & \agvae; FPR5    & $14.3 \to 14.5$ & $+0.22$ & $0.66 \to \mathbf{0.67}$ & $-24.8 \to \mathbf{-24.5}$ \\
+Mid   & \agbase; FPR5   & $9.7  \to 10.3$ & \textcolor{posgreen}{$\mathbf{+0.62}$} & $0.41 \to \mathbf{0.44}$ & $-24.6 \to \mathbf{-24.5}$ \\
+Small & \aglatent; FPR3 & $7.7  \to 7.9$  & $+0.24$ & $0.31 \to \mathbf{0.32}$ & $-29.1 \to -29.3$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1109,7 +1109,7 @@ Small & \aglatent; FPR3 & $7.6  \to 7.9$  & $+0.32$ & $0.31 \to \mathbf{0.32}$ &
 \vspace{0.1em}
 \begin{block}{Main takeaway}
 \scriptsize
-The permanent filter tilts the gains toward Mid Cap ($+0.74$pp), its strongest universe. Direction matches the temporary track, but more exclusion over-removes firms with broad thresholds, which is why Youden is dropped in favour of FPR3 and FPR5.
+The permanent filter tilts the gains toward Mid Cap ($+0.62$pp), its strongest universe. Direction matches the temporary track, but more exclusion over-removes firms with broad thresholds, which is why Youden is dropped in favour of FPR3 and FPR5.
 \end{block}
 \end{frame}
 
@@ -1204,14 +1204,14 @@ In the calmer 2016-2019 window a single consistent strategy (Exp. Dataset + VAE 
 \toprule
 Track & Universe & Selected OOS winner & Active $\alpha$ (5/10/20) & Ranking \\
 \midrule
-Temp. & Total & \agbase; Youden 3y & $+0.43 / +0.43 / +0.42$ & \textcolor{posgreen}{unchanged} \\
-Temp. & Large & \agbase; Youden 3y & $+0.15 / +0.15 / +0.15$ & \textcolor{posgreen}{unchanged} \\
-Temp. & Mid   & \agbase; FPR5 5y   & $+0.51 / +0.51 / +0.51$ & \textcolor{posgreen}{unchanged} \\
-Temp. & Small & \agvae; Youden 3y  & $+0.63 / +0.63 / +0.62$ & \textcolor{posgreen}{unchanged} \\
-Perm. & Total & \agvae; FPR5       & $+0.27 / +0.27 / +0.27$ & \textcolor{posgreen}{unchanged} \\
-Perm. & Large & \agvae; FPR5       & $+0.23 / +0.23 / +0.23$ & \textcolor{posgreen}{unchanged} \\
-Perm. & Mid   & \agbase; FPR5      & $+0.74 / +0.74 / +0.74$ & \textcolor{posgreen}{unchanged} \\
-Perm. & Small & \aglatent; FPR3    & $+0.32 / +0.32 / +0.32$ & \textcolor{posgreen}{unchanged} \\
+Temp. & Total & \agbase; Youden 3y & $+0.43 / +0.42 / +0.41$ & \textcolor{posgreen}{unchanged} \\
+Temp. & Large & \agbase; Youden 3y & $+0.15 / +0.14 / +0.12$ & \textcolor{posgreen}{unchanged} \\
+Temp. & Mid   & \agbase; FPR5 5y   & $+0.45 / +0.39 / +0.28$ & \textcolor{posgreen}{unchanged} \\
+Temp. & Small & \agvae; Youden 3y  & $+0.59 / +0.55 / +0.45$ & \textcolor{posgreen}{unchanged} \\
+Perm. & Total & \agvae; FPR5       & $+0.26 / +0.26 / +0.25$ & \textcolor{posgreen}{unchanged} \\
+Perm. & Large & \agvae; FPR5       & $+0.22 / +0.22 / +0.20$ & \textcolor{posgreen}{unchanged} \\
+Perm. & Mid   & \agbase; FPR5      & $+0.68 / +0.62 / +0.51$ & \textcolor{posgreen}{unchanged} \\
+Perm. & Small & \aglatent; FPR3    & $+0.28 / +0.24 / +0.16$ & \textcolor{posgreen}{unchanged} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1221,8 +1221,7 @@ Perm. & Small & \aglatent; FPR3    & $+0.32 / +0.32 / +0.32$ & \textcolor{posgre
 \scriptsize
 Raising costs to 20 bps lowers net returns but does not change a single winner or flip the strategy ranking.
 \end{block}
-% TODO: this "active alpha" (annualized-return convention) does NOT equal the
-% geometric Delta-pp on slides 21-22. Standardise deck-wide or keep the relabel.
+\remarkfoot{Active alpha is measured versus the zero-cost market-cap benchmark; only the strategy pays transaction costs.}
 \end{frame}
 
 %==== 29. Turnover Effect (table -> chart) ===================================%
@@ -1268,14 +1267,14 @@ Drag scales linearly with turnover $\times$ cost. Total and Large are barely tra
 \begin{block}{Temporary CSI --- finite lockout}
 \scriptsize
 Youden 3yr wins Total, Large, and Small; FPR5 5yr wins Mid. A recoverable 3--5yr lockout lets the signal age out, capping turnover outside Mid / Small.\\[3pt]
-\textbf{20 bps evidence:} Youden has the strongest mean best alpha, $+0.35$pp.
+\textbf{20 bps evidence:} Youden has the strongest mean best alpha, $+0.24$pp.
 \end{block}
 \end{column}
 \begin{column}{0.48\textwidth}
 \begin{block}{Permanent CSI --- strict FPR}
 \scriptsize
 FPR5 wins Total, Large, and Mid; FPR3 wins Small. Absorbing removal needs narrower gates --- broad Youden over-removes names and compounds turnover.\\[3pt]
-\textbf{20 bps evidence:} FPR3 / FPR5 lead ($+0.35$ / $+0.33$pp); Youden averages $-0.20$pp.
+\textbf{20 bps evidence:} FPR3 / FPR5 lead ($+0.24$ / $+0.22$pp); Youden averages $-0.31$pp.
 \end{block}
 \end{column}
 \end{columns}
@@ -1751,20 +1750,20 @@ The index section uses OOS economic performance. Model metrics identify useful p
 \toprule
 Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
 \midrule
-Temp. & Total & AG Base Dataset & Youden / 3yr & 13.70\% & 13.28\% & +0.42pp \\
-Temp. & Large & AG Base Dataset & Youden / 3yr & 14.40\% & 14.25\% & +0.15pp \\
-Temp. & Mid & AG Base Dataset & FPR5 / 5yr & 9.93\% & 9.42\% & +0.51pp \\
-Temp. & Small & AG Exp. Dataset + VAE & Youden / 3yr & 8.11\% & 7.49\% & +0.62pp \\
-Perm. & Total & AG Exp. Dataset + VAE & FPR5 / perm. & 13.54\% & 13.28\% & +0.27pp \\
-Perm. & Large & AG Exp. Dataset + VAE & FPR5 / perm. & 14.48\% & 14.25\% & +0.23pp \\
-Perm. & Mid & AG Base Dataset & FPR5 / perm. & 10.16\% & 9.42\% & +0.74pp \\
-Perm. & Small & AG Latent Dataset (VAE) & FPR3 / perm. & 7.82\% & 7.49\% & +0.32pp \\
+Temp. & Total & AG Base Dataset & Youden / 3yr & 13.70\% & 13.29\% & +0.41pp \\
+Temp. & Large & AG Base Dataset & Youden / 3yr & 14.40\% & 14.28\% & +0.12pp \\
+Temp. & Mid & AG Base Dataset & FPR5 / 5yr & 9.93\% & 9.65\% & +0.28pp \\
+Temp. & Small & AG Exp. Dataset + VAE & Youden / 3yr & 8.11\% & 7.65\% & +0.45pp \\
+Perm. & Total & AG Exp. Dataset + VAE & FPR5 / perm. & 13.54\% & 13.29\% & +0.25pp \\
+Perm. & Large & AG Exp. Dataset + VAE & FPR5 / perm. & 14.48\% & 14.28\% & +0.20pp \\
+Perm. & Mid & AG Base Dataset & FPR5 / perm. & 10.16\% & 9.65\% & +0.51pp \\
+Perm. & Small & AG Latent Dataset (VAE) & FPR3 / perm. & 7.82\% & 7.65\% & +0.16pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \scriptsize
-VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is shown as the return reference and does not receive a strategy cost overlay.
-\remarkfoot{Source: \texttt{presentation\_headline\_tables.md}; final claim from \texttt{AE-INDEX-SUITE-009\_Closeout\_Report.md}.}
+VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is the zero-cost return reference and does not receive a strategy cost overlay.
+\remarkfoot{Sources: presentation headline tables; AE-TC-RECHECK-002 zero-cost benchmark recomputation.}
 \end{frame}
 
 \begin{frame}{Appendix A16: Error Decomposition and Index Source Paths}
@@ -1800,20 +1799,20 @@ All claims in the index-result slides are sourced from the completed AE-INDEX-SU
 \toprule
 Track & Universe & Winner 0 bps & Winner 20 bps & Alpha 0 & Alpha 20 \\
 \midrule
-Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.42pp \\
-Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.15pp \\
-Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.51pp \\
-Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.62pp \\
-Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.27pp \\
-Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.23pp \\
-Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.74pp \\
-Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.32pp \\
+Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.41pp \\
+Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.12pp \\
+Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.28pp \\
+Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.45pp \\
+Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.25pp \\
+Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.20pp \\
+Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.51pp \\
+Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.16pp \\
 \bottomrule
 \end{tabular}
 \end{table}
 \scriptsize
-Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enough for presentation, but not high enough to reverse the headline rankings.
-\remarkfoot{Source: \texttt{transaction\_cost\_robustness\_summary.csv}.}
+Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enough for presentation, but not high enough to reverse the headline rankings. Active alpha uses the zero-cost benchmark convention.
+\remarkfoot{Sources: transaction-cost robustness summary; AE-TC-RECHECK-002 zero-cost benchmark recomputation.}
 \end{frame}
 
 \begin{frame}{Appendix A18: Threshold Family and Turnover Summary}
@@ -1828,14 +1827,14 @@ Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enoug
 \toprule
 Track & Threshold & Mean alpha \\
 \midrule
-Temp. & Youden & +0.35pp \\
-Temp. & FPR3 & +0.19pp \\
-Temp. & FPR5 & +0.17pp \\
-Temp. & FPR1 & +0.12pp \\
-Perm. & FPR3 & +0.35pp \\
-Perm. & FPR5 & +0.33pp \\
-Perm. & FPR1 & +0.14pp \\
-Perm. & Youden & -0.20pp \\
+Temp. & Youden & +0.24pp \\
+Temp. & FPR3 & +0.08pp \\
+Temp. & FPR5 & +0.07pp \\
+Temp. & FPR1 & +0.01pp \\
+Perm. & FPR3 & +0.24pp \\
+Perm. & FPR5 & +0.22pp \\
+Perm. & FPR1 & +0.03pp \\
+Perm. & Youden & -0.31pp \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1861,7 +1860,7 @@ Small & 77.2\% & 72.4\% \\
 \vspace{0.2em}
 \scriptsize
 Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI is strongest with FPR3/FPR5. Turnover is concentrated in Mid and Small Cap, where exclusions shift more of the investable universe.
-\remarkfoot{Sources: \texttt{threshold\_family\_summary\_20bps.csv}; \texttt{winner\_turnover\_summary\_20bps.csv}.}
+\remarkfoot{Sources: threshold-family and winner-turnover summaries; AE-TC-RECHECK-002 zero-cost formula.}
 \end{frame}
 
 \begin{frame}{Appendix A19: Temporary CSI Sensitivity Detail}

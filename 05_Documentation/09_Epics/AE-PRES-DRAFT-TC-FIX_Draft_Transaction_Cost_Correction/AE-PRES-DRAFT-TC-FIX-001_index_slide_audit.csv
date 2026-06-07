@@ -1,0 +1,22 @@
+page,slide_title,index_construction_scope,transaction_cost_active_alpha_displayed,action,reason
+18,Index Construction I: From Score to Portfolio Weight,main index methodology,no,inspected_no_change,methodology slide only
+19,Index Construction II: Four Benchmark Universes,main index methodology,no,inspected_no_change,cost overlays listed but no active alpha values
+20,Index Results: Does the Crash Filter Help?,headline index result,yes,corrected,OOS 10 bps active-alpha bars updated to AE-TC-RECHECK-002 zero-cost benchmark convention
+21,Temporary-CSI Results: OOS,temporary OOS result,yes,corrected,10 bps deltas and zero-cost benchmark return pairs updated
+22,Permanent-CSI Results: OOS,permanent OOS result,yes,corrected,10 bps deltas and zero-cost benchmark return pairs updated
+23,Where Does the Alpha Come From?,temporary OOS attribution,yes,inspected_no_change,values already reconcile to accepted 10 bps attribution alpha
+24,Permanent-CSI Results: Test,test result,yes,inspected_no_change,test-set slide uses prior Draft validation/test-period evidence; no AE-TC-RECHECK OOS correction source applies
+25,Impact of transaction costs: the winners are unchanged,transaction-cost robustness,yes,corrected,5/10/20 bps active-alpha triples updated and zero-cost benchmark note added
+26,Cost Drag due to turnover is concentrated in mid and small caps,turnover,no,inspected_no_change,turnover and cost-drag interpretation only; no active-alpha values
+27,The Selected Rules Are Principled,threshold-family interpretation,yes,corrected,20 bps mean best alpha values recomputed using zero-cost benchmark formula
+28,Sensitivity Analysis: temporary CSI only,sensitivity,no,inspected_no_change,relative geometric-return sensitivity display; no 5/10/20 transaction-cost active-alpha values
+43,Appendix A15: 20 bps Winners With Benchmarks,20 bps winner appendix,yes,corrected,20 bps benchmark and alpha columns updated to zero-cost benchmark convention
+44,Appendix A16: Error Decomposition and Index Source Paths,source-path appendix,no,inspected_no_change,source path slide only
+45,Appendix A17: Transaction-Cost Robustness,transaction-cost appendix,yes,corrected,Alpha 20 values updated; Alpha 0 unchanged because zero-cost and costed benchmark conventions coincide at 0 bps
+46,Appendix A18: Threshold Family and Turnover Summary,threshold-family appendix,yes,corrected,20 bps mean alpha table recomputed using zero-cost benchmark formula
+47,Appendix A19: Temporary CSI Sensitivity Detail,sensitivity appendix,no,inspected_no_change,not a transaction-cost active-alpha slide; temporary sensitivity only
+48,Appendix A20: CV Metrics Versus Index Alpha,model metric appendix,no,inspected_no_change,does not display selected transaction-cost active-alpha values
+49,Appendix A21: Future Robustness and Extensions,future work appendix,no,inspected_no_change,no active-alpha correction target
+50,Appendix A22: Slide-to-Source Audit Map,source-map appendix,no,inspected_no_change,source-map summary only
+52,Temporary CSI Test-Set Index Results at 10 bps,temporary test result,yes,inspected_no_change,isolated test rows are outside AE-TC-RECHECK-002 OOS selected-row source; benchmark row is shown explicitly
+53,Temporary CSI Test-Set Diagnostic and Active Contribution,temporary test attribution,yes,inspected_no_change,main-suite period=test attribution caveat already present; no AE-TC-RECHECK OOS correction source applies
