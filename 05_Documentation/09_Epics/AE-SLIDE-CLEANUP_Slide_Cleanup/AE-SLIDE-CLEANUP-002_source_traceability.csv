@@ -1,0 +1,7 @@
+artifact_or_claim,source_path,source_role,notes
+CV FPR3 threshold tau,03_Data_Output/6_ModelSuite/raw/temporary_csi/ag_cv_results.parquet,CV prediction artifact,"Used only to choose tau; no test labels used for threshold calibration."
+2016-2019 test diagnostics,03_Data_Output/6_ModelSuite/raw/temporary_csi/ag_preds_test_eval.parquet,Test prediction artifact,"Used only after tau was fixed from CV predictions."
+Threshold rule,01_Code/pipeline/11D_IndexConstruction_Optimal03b.R,Read-only code reference,"fn_cv_thresholds computes pooled CV threshold grid and selects FPR3 among rows with fpr <= 0.03."
+Prior threshold-adjacent definition,05_Documentation/09_Epics/AE-FP-DIAG_False_Positive_Diagnostics/AE-FP-DIAG-004_FP_Mechanism_Assessment.md,Read-only documentation reference,"Reused narrow near-threshold definition: false-positive score in [tau, tau+0.01] and below TP lower-quartile score."
+Displayed values,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/slide17_fp_bridge_values.tex,Generated Draft-local macro file,"Generated from saved prediction artifacts and loaded by the Rnw."
+Density plot,06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/slide17_fp_bridge_density.pdf,Generated Draft-local figure,"Generated from 2016-2019 test prediction scores by true label."

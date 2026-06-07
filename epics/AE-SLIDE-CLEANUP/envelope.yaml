@@ -18,6 +18,7 @@ epic_must_not_touch:
 tickets:
   - AE-SLIDE-CLEANUP-001
   - AE-SLIDE-CLEANUP-001B
+  - AE-SLIDE-CLEANUP-002
 depends_on_epics: []
 merge_policy:
   strategy: manual

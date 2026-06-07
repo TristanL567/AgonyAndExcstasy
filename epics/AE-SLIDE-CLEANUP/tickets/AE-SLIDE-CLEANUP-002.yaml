@@ -1,0 +1,57 @@
+ticket_id: AE-SLIDE-CLEANUP-002
+goal: Rework Draft slide 17 into the approved false-positive bridge slide.
+dependencies:
+  - AE-SLIDE-CLEANUP-001B
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/slide17_fp_bridge_density.pdf
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/slide17_fp_bridge_values.tex
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/**
+  - 05_Documentation/**
+  - 07_CloudComputing/**
+  - 01_Code/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Rework only current Draft frame 17.
+  - Use title Why the Screen Cannot Be Perfect.
+  - Use Temporary CSI and AG Expanded Dataset.
+  - Compute displayed diagnostics from saved prediction artifacts.
+  - Compute FPR3 threshold tau from CV predictions only.
+  - Apply tau to 2016-2019 test predictions only.
+  - Add a left-side test-score density plot.
+  - Add right-side text with threshold-adjacent and true-positive score overlap diagnostics.
+  - Add alert block titled What this means for the index.
+  - Add a remark footnote with provenance and threshold-adjacent definition.
+  - Remove stale wording that no test rows were used.
+  - Do not reinsert the VAE slide in this ticket.
+  - Do not run model, index, evaluation, sensitivity, pipeline, or training scripts.
+non_goals:
+  - Reinsert or revise the VAE slide; that is deferred to AE-SLIDE-CLEANUP-003.
+  - Edit non-Draft June presentation files.
+  - Modify source data, model outputs, index outputs, code, research, or cloud-computing artifacts.
+acceptance_criteria:
+  - Draft frame 17 is the approved bridge slide.
+  - Frame 16 remains the modelling-summary slide.
+  - Rnw frame begin/end counts match.
+  - Values are generated from saved prediction artifacts and not manually embedded as literals in the slide text.
+  - Tau is CV-only and test diagnostics are test-only.
+  - Visual QA passes for slide 17.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Inspect rendered page 17.
+  - Review computed metrics CSV and source traceability CSV.
+  - Review validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true
