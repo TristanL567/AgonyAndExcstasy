@@ -1,0 +1,24 @@
+epic_id: AE-PRES-DRAFT-VALIDATE
+goal: Audit numeric claims in the Draft final presentation against source data.
+branch: development-slides
+base: null
+autonomy_policy: manual
+human_checkpoint_tickets: []
+epic_allowed_areas:
+  - 05_Documentation/09_Epics/AE-PRES-DRAFT-VALIDATE_Draft_Number_Audit/**
+  - epics/AE-PRES-DRAFT-VALIDATE/**
+epic_must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 06_Presentations/**
+  - 07_CloudComputing/**
+tickets:
+  - AE-PRES-DRAFT-VALIDATE-001
+depends_on_epics: []
+merge_policy:
+  strategy: manual
+  base: null
+  requires_epic_validator: true
+  requires_human_approval: true
