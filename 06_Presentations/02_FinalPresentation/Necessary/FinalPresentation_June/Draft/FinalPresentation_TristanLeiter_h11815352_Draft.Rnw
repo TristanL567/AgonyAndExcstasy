@@ -862,30 +862,73 @@ Standalone XGBoost diagnostics exist for the main model runs, but they are not r
 \end{block}
 \end{frame}
 
-\begin{frame}{CV-Only False-Positive Diagnostic}
-\fontsize{5.3pt}{5.85pt}\selectfont
-\textbf{Training/CV cohorts only; false positives are not cleanly separable in available evidence}
-\vspace{-0.2em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.4pt}
-\begin{tabular}{L{1.45cm}L{1.2cm}R{0.55cm}R{0.55cm}R{0.74cm}R{0.78cm}R{0.76cm}R{0.86cm}}
-\toprule
-Track & Model & FP & TP & Near thr. & TP-score overlap & Above TP med. & TP cost /100 near FP \\
-\midrule
-Temp. CSI & raw+latent & 2,059 & 773 & 16.6\% & 72.7\% & 44.5\% & 31.6 \\
-Perm. CSI & raw+latent & 2,092 & 634 & 18.6\% & 64.3\% & 37.0\% & 20.0 \\
-Temp. CSI & raw & 2,073 & 731 & 18.1\% & 69.8\% & 46.6\% & 29.5 \\
-Perm. CSI & raw & 2,092 & 641 & 16.7\% & 69.6\% & 41.9\% & 26.0 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.25em}
-\begin{alertblock}{Interpretation boundary}
-\scriptsize
-At the CV FPR3 rule, only 16.6--18.6\% of false positives are narrowly threshold-adjacent. Most overlap the true-positive score range, and raising thresholds would also remove true positives. Row-level raw/fundamental/latent feature matrices keyed by firm-year were not available, so feature-space separability and mechanism labels remain unclaimed.
-\end{alertblock}
-\remarkfoot{CV-only. Sources: \texttt{AE-FP-DIAG-005\_presentation\_summary\_table.csv}; \texttt{AE-FP-DIAG-005\_Presentation\_Ready\_CV\_FP\_Summary.md}. No test/OOS labels, outcomes, rows, or features are used.}
+\begin{frame}{Modelling Summary: the Models Rank Implosion Risk Well}
+\footnotesize
+
+\begin{center}
+\begin{tikzpicture}[
+  font=\footnotesize,
+  pill/.style={draw=MainColour!70, fill=MainColour!9, rounded corners=5pt,
+    text width=2.62cm, align=center, inner xsep=3pt, inner ysep=2.5pt,
+    minimum height=0.68cm}
+]
+\node[pill] at (-4.05,0) {AutoGluon weighted ensemble};
+\node[pill] at (-1.35,0) {Expanding-window CV; thresholds from CV only};
+\node[pill] at (1.35,0) {4 feature sets};
+\node[pill] at (4.05,0) {Rare-event metrics: AP, recall@FPR};
+\end{tikzpicture}
+\end{center}
+
+\vspace{-0.1em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Test Average Precision vs random baseline (prevalence)}
+
+\vspace{0.2em}
+\begin{tikzpicture}[font=\footnotesize, xscale=0.18, yscale=0.85]
+  \draw[darkgrey!60] (0,-0.15) -- (22,-0.15);
+  \foreach \x in {0,5,10,15,20} {
+    \draw[darkgrey!25] (\x,-0.15) -- (\x,1.75);
+    \node[anchor=north, darkgrey] at (\x,-0.22) {\x\%};
+  }
+  \node[anchor=east] at (-0.4,1.25) {Temporary CSI};
+  \node[anchor=east] at (-0.4,0.35) {Permanent CSI};
+
+  \fill[darkgrey!65] (0,1.43) rectangle (4.44,1.65);
+  \fill[MainColour] (0,1.10) rectangle (19.85,1.32);
+  \fill[darkgrey!65] (0,0.53) rectangle (3.00,0.75);
+  \fill[MainColour] (0,0.20) rectangle (14.16,0.42);
+
+  \node[anchor=west] at (4.70,1.54) {4.44\% baseline};
+  \node[anchor=west] at (0.55,1.21) {\textcolor{white}{19.85\%}};
+  \node[anchor=west] at (3.25,0.64) {3.00\% baseline};
+  \node[anchor=west] at (0.55,0.31) {\textcolor{white}{14.2\%}};
+
+  \fill[darkgrey!65] (0,-0.82) rectangle (0.75,-0.64);
+  \node[anchor=west] at (0.95,-0.73) {random baseline};
+  \fill[MainColour] (0,-1.15) rectangle (0.75,-0.97);
+  \node[anchor=west] at (0.95,-1.06) {best Test-AP};
+\end{tikzpicture}
+\end{column}
+
+\begin{column}{0.47\textwidth}
+\textbf{\color{MainColour}Result.}
+Test-AUC is around $0.88$, recall@FPR3 is around $0.20$, and Test-AP is about $4.5$--$4.7\times$ the base rate.\\[4pt]
+
+\textbf{\color{MainColour}Verdict.}
+\agexp{} is the reporting baseline; \agvae{} is the strongest challenger. Weighted ensembles top the leaderboards, and tree families carry the useful signal.\\[4pt]
+
+\textbf{\color{MainColour}Subquestions.}
+VAE augments rather than replaces the expanded feature set; feature drivers move to the appendix.
+\end{column}
+\end{columns}
+
+\vspace{0.35em}
+\begin{block}{Hand-off}
+\footnotesize
+Calibrated scores become exclusion signals for the index; the question shifts from ``can we rank risk?'' to ``does removing flagged firms improve the index?''
+\end{block}
+\remarkfoot{Model metrics and caveats are in Appendix A10--A13.}
 \end{frame}
 
 %==== 17. Index Construction E. ===============================================%

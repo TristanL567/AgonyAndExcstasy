@@ -1,0 +1,25 @@
+epic_id: AE-SLIDE-CLEANUP
+goal: Clean up Draft presentation slides for clearer final narrative and modelling-section payoff.
+branch: development-slides
+base: null
+autonomy_policy: manual
+human_checkpoint_tickets: []
+epic_allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+epic_must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+tickets:
+  - AE-SLIDE-CLEANUP-001
+depends_on_epics: []
+merge_policy:
+  strategy: manual
+  base: null
+  requires_epic_validator: true
+  requires_human_approval: true

@@ -1,0 +1,50 @@
+ticket_id: AE-SLIDE-CLEANUP-001
+goal: Rework Draft deck slide 16 into the approved modelling-summary payoff slide.
+dependencies: []
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/6_ModelSuite/comparison/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Rework only slide 16 in the Draft Rnw.
+  - Use the exact required title.
+  - Make the slide a modelling-section payoff with process, result, and verdict.
+  - Move VAE-specific detail out of slide 16.
+  - Add the required four-tag process strip.
+  - Add a left-side Test Average Precision versus random-baseline chart.
+  - Add right-side result, verdict, and subquestion text.
+  - Add a grey Hand-off block linking calibrated scores to index exclusion signals.
+  - Add a remark footnote pointing to Appendix A10-A13.
+  - Match the existing Beamer style and avoid sub-8pt custom font sizing.
+  - Do not run model, index, evaluation, sensitivity, pipeline, or training scripts.
+  - Do not stage unrelated dirty files.
+non_goals:
+  - Editing main/non-Draft final presentation files.
+  - Editing source data, code, research, cloud-computing, or model output directories.
+  - Reworking other modelling or VAE slides.
+acceptance_criteria:
+  - Slide title and required content are present.
+  - Chart values match current modelling evidence.
+  - Slide 16 no longer contains VAE-specific result-detail bullets that belong on the VAE slide.
+  - Rnw frame begin/end counts match.
+  - Draft slide visually passes if compiled/rendered.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review rendered page 17.
+  - Review chart-value trace CSV.
+  - Review validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true
