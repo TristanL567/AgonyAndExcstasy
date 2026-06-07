@@ -1,0 +1,55 @@
+ticket_id: AE-SLIDE-CLEANUP-005
+goal: Clean and compress the Draft appendix to at most 10 appendix slides, with feature-importance slides as Appendix A9 and A10.
+dependencies:
+  - AE-SLIDE-CLEANUP-001B
+  - AE-SLIDE-CLEANUP-002
+  - AE-SLIDE-CLEANUP-003
+  - AE-SLIDE-CLEANUP-004
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.pdf
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.tex
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/10_FeatureImportance/**
+  - 03_Data_Output/6_ModelSuite/**
+  - 03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**
+  - 03_Data_Output/5_SensitivityAnalysis/**
+  - 05_Documentation/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Rework only the Draft appendix section after the appendix marker.
+  - Keep at most 10 appendix slides total.
+  - Keep at most 8 ordinary appendix slides before feature-importance slides.
+  - Use Appendix A9 for family-level feature importance.
+  - Use Appendix A10 for point-in-time ratio and individual-feature importance.
+  - Include the required bounded-GBM log-odds perturbation caveat on feature-importance slides.
+  - Do not run model, index, evaluation, sensitivity, pipeline, training, or feature-importance computation scripts.
+non_goals:
+  - Edit non-Draft June presentation files.
+  - Modify source data, model outputs, index outputs, code, research, or cloud-computing artifacts.
+  - Recompute feature importance.
+acceptance_criteria:
+  - Appendix contains exactly A1-A10.
+  - A9 and A10 are feature-importance slides using current source-backed values.
+  - Rnw frame begin/end counts match.
+  - Draft compile succeeds.
+  - Rendered feature-importance slides are readable.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the cleaned Draft appendix in the Rnw.
+  - Review rendered pages 38 and 39.
+  - Review validation report and source traceability.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+  - py -3.10 C:/Users/Tristan Leiter/Documents/aegis-core/tools/validate_ticket_scope.py --ticket C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/AE-SLIDE-CLEANUP-005_scope_envelope.md --changed-file <each staged path>
+completion_report_required: true
