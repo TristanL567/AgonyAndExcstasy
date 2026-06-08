@@ -1,0 +1,25 @@
+epic_id: AE-TC-RECHECK
+goal: Recheck transaction-cost slide values and explain whether the apparent weak cost sensitivity is source-backed.
+branch: development-slides
+base: null
+autonomy_policy: manual
+human_checkpoint_tickets: []
+epic_allowed_areas:
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - epics/AE-TC-RECHECK/**
+epic_must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 06_Presentations/**
+  - 07_CloudComputing/**
+tickets:
+  - AE-TC-RECHECK-001
+  - AE-TC-RECHECK-002
+depends_on_epics: []
+merge_policy:
+  strategy: manual
+  base: null
+  requires_epic_validator: true
+  requires_human_approval: true

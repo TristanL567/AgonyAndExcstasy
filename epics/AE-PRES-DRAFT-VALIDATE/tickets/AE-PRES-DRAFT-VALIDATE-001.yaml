@@ -1,0 +1,35 @@
+ticket_id: AE-PRES-DRAFT-VALIDATE-001
+goal: Audit the numeric claims in the Draft final presentation, with special focus on slide 25, and determine whether displayed numbers match their underlying source data.
+dependencies: []
+allowed_areas:
+  - 05_Documentation/09_Epics/AE-PRES-DRAFT-VALIDATE_Draft_Number_Audit/**
+  - epics/AE-PRES-DRAFT-VALIDATE/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 06_Presentations/**
+  - 07_CloudComputing/**
+requirements:
+  - Identify slide/frame titles and slide numbers in the Draft deck.
+  - Identify numeric result tables and claims on slides 20-28.
+  - Deep-dive slide 25.
+  - Map displayed values to source files.
+  - Do not edit or compile the presentation.
+non_goals:
+  - Fixing Draft presentation content.
+  - Running model, index, evaluation, sensitivity, or pipeline scripts.
+acceptance_criteria:
+  - Required audit artifacts exist.
+  - Slide 25 has displayed values, source values, differences, source paths, and statuses.
+  - Checked values include displayed value, source value, source path, and status.
+  - No presentation files or data outputs are modified.
+manual_verification_required: true
+manual_verification_steps:
+  - Review audit report findings.
+  - Review slide 25 deep-dive CSV.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true

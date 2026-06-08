@@ -1,0 +1,80 @@
+dynamic_csi:12: Total GPU Memory:   Free: 11.63 GB, Allocated: 0.00 GB, Total: 11.63 GB
+dynamic_csi:45: 		Fitting DropDuplicatesFeatureGenerator...
+dynamic_csi:52: 		Features can also be unused if they carry very little information, such as being categorical but having almost entirely unique values or being duplicates of other features.
+dynamic_csi:70: 	'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, {'learning_rate': 0.03, 'num_leaves': 128, 'feature_fraction': 0.9, 'min_data_in_leaf': 3, 'ag_args': {'name_suffix': 'Large', 'priority': 0, 'hyperparameter_tune_kwargs': None}}],
+dynamic_csi:71: 	'CAT': [{}],
+dynamic_csi:72: 	'XGB': [{}],
+dynamic_csi:73: 	'FASTAI': [{}],
+dynamic_csi:78: Fitting model: LightGBMXT ... Training model for up to 1794.79s of the 1794.79s of remaining time.
+dynamic_csi:80: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+dynamic_csi:81: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:85: Fitting model: LightGBM ... Training model for up to 1785.57s of the 1785.57s of remaining time.
+dynamic_csi:87: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+dynamic_csi:88: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:102: Fitting model: CatBoost ... Training model for up to 1667.90s of the 1667.89s of remaining time.
+dynamic_csi:104: 	Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
+dynamic_csi:105: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+dynamic_csi:119: Fitting model: NeuralNetFastAI ... Training model for up to 1622.30s of the 1622.30s of remaining time.
+dynamic_csi:126: Fitting model: XGBoost ... Training model for up to 1511.93s of the 1511.93s of remaining time.
+dynamic_csi:136: Fitting model: LightGBMLarge ... Training model for up to 1450.50s of the 1450.49s of remaining time.
+dynamic_csi:138: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+dynamic_csi:139: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:145: 	Ensemble Weights: {'ExtraTreesEntr': 0.214, 'NeuralNetTorch': 0.214, 'RandomForestEntr': 0.143, 'NeuralNetFastAI': 0.143, 'LightGBMLarge': 0.143, 'LightGBMXT': 0.071, 'LightGBM': 0.071}
+dynamic_csi:151: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:152: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:153: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+dynamic_csi:155: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:156: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:157: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:158: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+dynamic_csi:160: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:161: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:162: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:163: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+dynamic_csi:165: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+dynamic_csi:223:          LightGBMXT   0.217673       0.053819   8.926904
+dynamic_csi:226:            CatBoost   0.216106       0.058589   9.091503
+dynamic_csi:228:            LightGBM   0.213695       0.083386  10.759900
+dynamic_csi:229:       LightGBMLarge   0.212389       0.103738  30.349995
+dynamic_csi:232:             XGBoost   0.200142       0.592353   8.508519
+dynamic_csi:233:     NeuralNetFastAI   0.195909       3.258325 107.010535
+permanent_csi:12: Total GPU Memory:   Free: 11.63 GB, Allocated: 0.00 GB, Total: 11.63 GB
+permanent_csi:45: 		Fitting DropDuplicatesFeatureGenerator...
+permanent_csi:52: 		Features can also be unused if they carry very little information, such as being categorical but having almost entirely unique values or being duplicates of other features.
+permanent_csi:70: 	'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, {'learning_rate': 0.03, 'num_leaves': 128, 'feature_fraction': 0.9, 'min_data_in_leaf': 3, 'ag_args': {'name_suffix': 'Large', 'priority': 0, 'hyperparameter_tune_kwargs': None}}],
+permanent_csi:71: 	'CAT': [{}],
+permanent_csi:72: 	'XGB': [{}],
+permanent_csi:73: 	'FASTAI': [{}],
+permanent_csi:78: Fitting model: LightGBMXT ... Training model for up to 1795.06s of the 1795.06s of remaining time.
+permanent_csi:80: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+permanent_csi:81: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:85: Fitting model: LightGBM ... Training model for up to 1788.04s of the 1788.04s of remaining time.
+permanent_csi:87: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+permanent_csi:88: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:102: Fitting model: CatBoost ... Training model for up to 1678.34s of the 1678.33s of remaining time.
+permanent_csi:104: 	Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
+permanent_csi:105: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+permanent_csi:119: Fitting model: NeuralNetFastAI ... Training model for up to 1638.17s of the 1638.17s of remaining time.
+permanent_csi:126: Fitting model: XGBoost ... Training model for up to 1529.61s of the 1529.61s of remaining time.
+permanent_csi:136: Fitting model: LightGBMLarge ... Training model for up to 1466.69s of the 1466.69s of remaining time.
+permanent_csi:138: 	Warning: Training LightGBM with GPU. This may negatively impact model quality compared to CPU training.
+permanent_csi:139: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:145: 	Ensemble Weights: {'NeuralNetTorch': 0.389, 'LightGBMXT': 0.278, 'ExtraTreesEntr': 0.222, 'RandomForestEntr': 0.111}
+permanent_csi:151: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:152: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:153: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+permanent_csi:155: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:156: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:157: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:158: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+permanent_csi:160: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:161: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:162: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:163: 	Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+permanent_csi:165: Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:	pip uninstall lightgbm -y	pip install
+permanent_csi:225:          LightGBMXT   0.185136       0.057962   6.806009
+permanent_csi:227:            LightGBM   0.183704       0.161654   9.167674
+permanent_csi:228:       LightGBMLarge   0.183185       0.057808  20.517019
+permanent_csi:229:            CatBoost   0.180116       0.050280   5.633276
+permanent_csi:231:     NeuralNetFastAI   0.177318       2.807464 105.653177
+permanent_csi:232:             XGBoost   0.175832       0.541131   8.478232

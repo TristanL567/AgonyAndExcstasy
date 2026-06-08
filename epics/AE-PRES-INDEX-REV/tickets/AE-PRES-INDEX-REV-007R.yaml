@@ -1,0 +1,39 @@
+ticket_id: AE-PRES-INDEX-REV-007R
+goal: "Insert the missing Temporary CSI test-set 10 bps block immediately after current slide 23 in the June final presentation."
+dependencies:
+  - "AE-PRES-INDEX-REV-007 completed"
+allowed_areas:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/ledger.md"
+  - "epics/AE-PRES-INDEX-REV/tickets/AE-PRES-INDEX-REV-007R.yaml"
+may_read:
+  - "03_Data_Output/9_TestIndexConstruction/**"
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "05_Documentation/09_Epics/AE-ATTRIB_Main_Index_Attribution/**"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+  - "04_Research/**"
+requirements:
+  - "Insert exactly two Temporary CSI test-set slides immediately after current slide 23."
+  - "Use period=test and transaction_cost_bps=10 rows."
+  - "Cover Total, Large, Mid, and Small universes."
+  - "Use caveated AE-ATTRIB main-suite period=test attribution when isolated diagnostics are unavailable."
+  - "Update SLIDE_DATA_SOURCES.md and evidence."
+  - "Do not change non-target slide content except unavoidable renumbering/source-map updates."
+non_goals:
+  - "Do not remove existing OOS or permanent CSI slides."
+  - "Do not run model, index, evaluation, sensitivity, or pipeline scripts."
+acceptance_criteria:
+  - "Two Temporary CSI test slides are inserted immediately after slide 23."
+  - "Source map rows align with active frame/page expectations."
+  - "Test attribution caveat is visible on-slide and in evidence."
+  - "Frame balance passes."
+completion_report_required: true
+commit_required: true

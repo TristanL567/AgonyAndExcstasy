@@ -1,0 +1,96 @@
+{
+  "generated_utc": "2026-05-28T06:55:06.640603+00:00",
+  "log_missing_import_hits": [],
+  "remote_output_root": "/root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models",
+  "run_id": "raw_rerun_20260528_optional_models",
+  "tracks": {
+    "dynamic_csi": {
+      "ag_raw_exists": true,
+      "file_count": 152,
+      "leaderboard_rows": 12,
+      "metrics": {
+        "cv_ap": 0.2166,
+        "cv_auc": 0.8732,
+        "cv_n_folds": 3,
+        "cv_r3": 0.2471,
+        "excluded_model_types": [],
+        "n_features": 476,
+        "oos": {
+          "auc_roc": 0.8961,
+          "avg_precision": 0.3084,
+          "brier": 0.0498,
+          "n_obs": 18502,
+          "n_pos": 1170,
+          "prevalence": 0.0632,
+          "recall_fpr1": 0.0915,
+          "recall_fpr10": 0.6556,
+          "recall_fpr3": 0.2547,
+          "recall_fpr5": 0.4,
+          "set": "oos_2020_2024"
+        },
+        "test": {
+          "auc_roc": 0.8766,
+          "avg_precision": 0.1985,
+          "brier": 0.0389,
+          "n_obs": 18111,
+          "n_pos": 804,
+          "prevalence": 0.0444,
+          "recall_fpr1": 0.0821,
+          "recall_fpr10": 0.5124,
+          "recall_fpr3": 0.2002,
+          "recall_fpr5": 0.2998,
+          "set": "test_2016_2019"
+        }
+      },
+      "root": "/root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models/3_Modelling_Results/Necessary/temporary_csi/AutoGluon/ag_raw",
+      "status": {
+        "track": "dynamic_csinstart_utc=2026-05-28T06:06:37Znend_utc=2026-05-28T06:30:24Znexit_code=0n"
+      },
+      "total_bytes": 4427514740
+    },
+    "permanent_csi": {
+      "ag_raw_exists": true,
+      "file_count": 152,
+      "leaderboard_rows": 12,
+      "metrics": {
+        "cv_ap": 0.1929,
+        "cv_auc": 0.8789,
+        "cv_n_folds": 3,
+        "cv_r3": 0.2658,
+        "excluded_model_types": [],
+        "n_features": 476,
+        "oos": {
+          "auc_roc": 0.8081,
+          "avg_precision": 0.0323,
+          "brier": 0.0211,
+          "n_obs": 26400,
+          "n_pos": 337,
+          "prevalence": 0.0128,
+          "recall_fpr1": 0.0,
+          "recall_fpr10": 0.276,
+          "recall_fpr3": 0.0119,
+          "recall_fpr5": 0.0623,
+          "set": "oos_2020_2024"
+        },
+        "test": {
+          "auc_roc": 0.881,
+          "avg_precision": 0.1416,
+          "brier": 0.0284,
+          "n_obs": 18053,
+          "n_pos": 542,
+          "prevalence": 0.03,
+          "recall_fpr1": 0.0664,
+          "recall_fpr10": 0.5517,
+          "recall_fpr3": 0.1808,
+          "recall_fpr5": 0.3007,
+          "set": "test_2016_2019"
+        }
+      },
+      "root": "/root/AgonyAndExcstasy/03_Data_Output/validation/AE-VALIDATE/raw_rerun_20260528_optional_models/3_Modelling_Results/Necessary/permanent_csi/AutoGluon/ag_raw",
+      "status": {
+        "track": "permanent_csinstart_utc=2026-05-28T06:30:36Znend_utc=2026-05-28T06:53:41Znexit_code=0n"
+      },
+      "total_bytes": 4138271351
+    }
+  }
+}

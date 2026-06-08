@@ -1,0 +1,50 @@
+ticket_id: AE-PRES-TC-FIX-001
+goal: Update the final presentation transaction-cost robustness slide so active alpha is measured against the zero-cost market-cap benchmark.
+dependencies:
+  - AE-TC-RECHECK-002
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md
+  - 05_Documentation/09_Epics/AE-PRES-TC-FIX_Transaction_Cost_Slide_Correction/**
+  - epics/AE-PRES-TC-FIX/**
+may_inspect_read_only:
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**
+  - 03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+requirements:
+  - Locate the slide titled "Impact of transaction costs: the winners are unchanged".
+  - Replace the Active alpha 5/10/20 values with AE-TC-RECHECK-002 corrected slide-ready values.
+  - Keep winner labels unchanged.
+  - Add or revise the slide note to state that active alpha is measured versus the zero-cost market-cap benchmark and only the strategy pays transaction costs.
+  - Preserve the slide's general layout and style.
+  - Update SLIDE_DATA_SOURCES.md to reference AE-TC-RECHECK-002 corrected evidence.
+  - Do not change unrelated slides.
+  - Do not compile the deck.
+  - Do not run model, index, evaluation, sensitivity, or pipeline scripts.
+non_goals:
+  - Deck compilation or generated PDF/TeX refresh.
+  - Any modification to source data or model/index outputs.
+  - Any edits to unrelated slides.
+acceptance_criteria:
+  - Corrected values exactly match AE-TC-RECHECK-002 slide-ready values.
+  - Slide note states the zero-cost benchmark and strategy-only cost convention.
+  - Source map references AE-TC-RECHECK-002 evidence.
+  - Rnw frame balance remains unchanged.
+  - No deck compile was run.
+  - No 03_Data_Output files are modified.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the Transaction-Cost Robustness slide source in the Rnw.
+  - Review SLIDE_DATA_SOURCES.md row 30.
+  - Review AE-PRES-TC-FIX-001 validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true

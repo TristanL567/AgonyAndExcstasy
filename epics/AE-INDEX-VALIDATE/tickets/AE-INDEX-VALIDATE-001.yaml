@@ -1,0 +1,35 @@
+ticket_id: AE-INDEX-VALIDATE-001
+goal: "Audit the current attribution state and clarify what existing index attribution proves and does not prove."
+dependencies:
+  - "AE-INDEX-SUITE closed"
+  - "AE-ATTRIB-001 completed"
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "epics/AE-INDEX-VALIDATE/**"
+may_read:
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "05_Documentation/09_Epics/AE-ATTRIB_Main_Index_Attribution/**"
+  - "05_Documentation/09_Epics/AE-INDEX-SUITE*/**"
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/SLIDE_DATA_SOURCES.md"
+  - "01_Code/pipeline/11C_IndexConstruction_Revised.R"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "Summarize the existing index construction timing: model signal year, holding year, temporary lockout rules, and permanent-removal rule."
+  - "For the selected main temporary-CSI and permanent-CSI OOS best-strategy rows, audit TP exclusion gain, FP exclusion cost, retained-stock reweighting effect, transaction-cost effect, geometric adjustment, and realized alpha."
+  - "Quantify the benchmark weights assigned to TP, FP, FN, and TN categories for the selected rows."
+  - "Explain whether existing alpha is direct event-avoidance alpha, broader distress/quality-screen alpha, or retained-constituent reweighting."
+  - "Clarify why near-zero TP gain does not by itself invalidate the index results, but does weaken a pure event-avoidance interpretation."
+  - "Identify the strongest criticism to test in later tickets: whether performance is model-specific or a generic reweighting/placebo effect."
+acceptance_criteria:
+  - "Attribution state audit report exists."
+  - "Selected-strategy attribution table exists and includes both tracks and all four universes where available."
+  - "Criticism/risk table exists."
+  - "No code, data output, presentation, or cloud-validation files are modified."
+completion_report_required: true
+commit_required: true

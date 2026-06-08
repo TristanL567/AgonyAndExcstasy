@@ -1,0 +1,48 @@
+ticket_id: AE-TC-RECHECK-001
+goal: Independently recompute and validate the transaction-cost slide values for "Impact of transaction costs: the winners are unchanged."
+dependencies: []
+allowed_areas:
+  - 05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/**
+  - epics/AE-TC-RECHECK/**
+may_inspect_read_only:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**
+  - 03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**
+  - 05_Documentation/09_Epics/AE-INDEX-SUITE_Index_Construction/**
+  - 05_Documentation/09_Epics/AE-TC-AUDIT_Transaction_Cost_Audit/**
+  - 05_Documentation/09_Epics/AE-PRES-DRAFT-VALIDATE_Draft_Number_Audit/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 06_Presentations/**
+  - 07_CloudComputing/**
+requirements:
+  - Locate the exact source files used for the slide.
+  - Recompute active alpha values from source data, not slide text.
+  - For each row and 5/10/20 bps, report strategy, benchmark, turnover, expected cost drag, displayed value, recomputed value, difference, and pass/fail.
+  - Determine whether the slide uses the same selected strategy or independently selected winners by cost level.
+  - Include same-strategy monotonicity checks for net returns and active alpha.
+  - Explain why transaction-cost changes may be small.
+  - Do not edit the presentation.
+  - Do not rerun index construction, model, evaluation, sensitivity, or pipeline scripts.
+non_goals:
+  - Editing presentation slides or source maps.
+  - Modifying source data or generated index outputs.
+  - Rerunning model, index, evaluation, sensitivity, or pipeline jobs.
+acceptance_criteria:
+  - Required evidence files exist.
+  - Every slide row has recomputed 5/10/20 bps values.
+  - Monotonicity check is included.
+  - Report states whether slide values are valid, rounding-valid, or wrong.
+  - No presentation or 03_Data_Output files are modified.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the audit report conclusion.
+  - Review recomputed value and turnover-drag CSVs.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+completion_report_required: true

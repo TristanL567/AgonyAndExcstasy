@@ -1,0 +1,36 @@
+epic_id: AE-PRES-INDEX-REV
+goal: "Revise the June final presentation index-results section so temporary/permanent CSI OOS and test results are shown with paired result and attribution slides, followed by clearer transaction-cost, turnover, threshold-family, and sensitivity slides."
+branch: Development
+base: main
+autonomy_policy: checkpointed
+human_checkpoint_tickets:
+  - AE-PRES-INDEX-REV-001
+  - AE-PRES-INDEX-REV-007
+epic_allowed_areas:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/**"
+epic_must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+tickets:
+  - AE-PRES-INDEX-REV-001
+  - AE-PRES-INDEX-REV-002
+  - AE-PRES-INDEX-REV-003
+  - AE-PRES-INDEX-REV-004
+  - AE-PRES-INDEX-REV-005
+  - AE-PRES-INDEX-REV-006
+  - AE-PRES-INDEX-REV-007
+  - AE-PRES-INDEX-REV-008
+depends_on_epics:
+  - AE-INDEX-SUITE
+  - AE-ATTRIB
+  - AE-FP-DIAG
+  - AE-SENS-CHART
+merge_policy:
+  strategy: no_ff
+  target_base: main
+  requires_epic_validator: true
+  requires_human_approval: true

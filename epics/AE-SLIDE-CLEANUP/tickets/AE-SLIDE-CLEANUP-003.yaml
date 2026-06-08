@@ -1,0 +1,53 @@
+ticket_id: AE-SLIDE-CLEANUP-003
+goal: Insert the VAE modelling benefits/drawbacks slide immediately after Draft frame 17.
+dependencies:
+  - AE-SLIDE-CLEANUP-001B
+  - AE-SLIDE-CLEANUP-002
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/FinalPresentation_TristanLeiter_h11815352_Draft.Rnw
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/6_ModelSuite/**
+  - 05_Documentation/**
+  - 07_CloudComputing/Validation/AE-MODEL-SUITE/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Insert exactly one new Draft frame immediately after current frame 17.
+  - Use title Modelling V: VAE Features --- Benefits and Drawbacks.
+  - Restate the autoencoder/AP subquestion from the Research Question slide.
+  - Use two-column Benefits and Drawbacks structure.
+  - Include the required AG Exp.+VAE and AG Latent Dataset metrics.
+  - Include an alert block titled Verdict.
+  - Pull or verify values from current model-suite source files where possible.
+  - Preserve slide 16 and slide 17 content from prior tickets.
+  - Do not run model, index, sensitivity, evaluation, pipeline, or training scripts.
+non_goals:
+  - Edit the non-Draft June presentation files.
+  - Modify source data, model outputs, index outputs, code, research, or cloud-computing artifacts.
+  - Rework adjacent modelling or index slides beyond the local comment renumbering needed after insertion.
+acceptance_criteria:
+  - New VAE slide is immediately after frame 17.
+  - Frame count increases by exactly one.
+  - Frame begin/end counts match.
+  - Slide 16 remains the modelling-summary slide.
+  - Slide 17 remains the false-positive bridge slide.
+  - Inserted slide contains the autoencoder/AP subquestion, benefits/drawbacks, and verdict.
+  - Displayed values match model-suite evidence or are documented with source caveats.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review the new VAE slide in the Draft Rnw.
+  - Review source traceability CSV.
+  - Review validation report.
+verification_commands:
+  - git diff --cached --name-only
+  - git diff --cached --check
+  - py -3.10 C:/Users/Tristan Leiter/Documents/aegis-core/tools/validate_ticket_scope.py --ticket C:/Users/Tristan Leiter/Documents/AgonyAndExcstasy/05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/AE-SLIDE-CLEANUP-003_scope_envelope.md --changed-file <each staged path>
+completion_report_required: true

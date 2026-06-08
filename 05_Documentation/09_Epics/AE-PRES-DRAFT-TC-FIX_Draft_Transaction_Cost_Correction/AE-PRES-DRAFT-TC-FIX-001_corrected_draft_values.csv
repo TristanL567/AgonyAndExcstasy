@@ -1,0 +1,53 @@
+page,slide_title,item,old_value,new_value,source,notes
+20,Index Results: Does the Crash Filter Help?,OOS Total bar,+0.43,+0.42,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+20,Index Results: Does the Crash Filter Help?,OOS Large bar,+0.15,+0.14,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+20,Index Results: Does the Crash Filter Help?,OOS Mid bar,+0.51,+0.39,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+20,Index Results: Does the Crash Filter Help?,OOS Small bar,+0.63,+0.55,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+21,Temporary-CSI Results: OOS,Total delta,+0.43,+0.42,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+21,Temporary-CSI Results: OOS,Large delta,+0.15,+0.14,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+21,Temporary-CSI Results: OOS,Mid return pair,9.5 -> 10.0,9.7 -> 10.0,AE-TC-RECHECK-002_corrected_slide_values.csv,zero-cost benchmark return replaces costed benchmark return
+21,Temporary-CSI Results: OOS,Mid delta,+0.51,+0.39,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+21,Temporary-CSI Results: OOS,Small return pair,7.6 -> 8.2,7.7 -> 8.2,AE-TC-RECHECK-002_corrected_slide_values.csv,zero-cost benchmark return replaces costed benchmark return
+21,Temporary-CSI Results: OOS,Small delta,+0.63,+0.55,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+22,Permanent-CSI Results: OOS,Total delta,+0.27,+0.26,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+22,Permanent-CSI Results: OOS,Large delta,+0.23,+0.22,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+22,Permanent-CSI Results: OOS,Mid return pair,9.5 -> 10.3,9.7 -> 10.3,AE-TC-RECHECK-002_corrected_slide_values.csv,zero-cost benchmark return replaces costed benchmark return
+22,Permanent-CSI Results: OOS,Mid delta,+0.74,+0.62,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+22,Permanent-CSI Results: OOS,Small return pair,7.6 -> 7.9,7.7 -> 7.9,AE-TC-RECHECK-002_corrected_slide_values.csv,zero-cost benchmark return replaces costed benchmark return
+22,Permanent-CSI Results: OOS,Small delta,+0.32,+0.24,AE-TC-RECHECK-002_corrected_slide_values.csv,10 bps selected OOS active alpha versus zero-cost benchmark
+25,Impact of transaction costs,Temp Total active alpha 5/10/20,+0.43 / +0.43 / +0.42,+0.43 / +0.42 / +0.41,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Temp Large active alpha 5/10/20,+0.15 / +0.15 / +0.15,+0.15 / +0.14 / +0.12,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Temp Mid active alpha 5/10/20,+0.51 / +0.51 / +0.51,+0.45 / +0.39 / +0.28,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Temp Small active alpha 5/10/20,+0.63 / +0.63 / +0.62,+0.59 / +0.55 / +0.45,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Perm Total active alpha 5/10/20,+0.27 / +0.27 / +0.27,+0.26 / +0.26 / +0.25,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Perm Large active alpha 5/10/20,+0.23 / +0.23 / +0.23,+0.22 / +0.22 / +0.20,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Perm Mid active alpha 5/10/20,+0.74 / +0.74 / +0.74,+0.68 / +0.62 / +0.51,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,Perm Small active alpha 5/10/20,+0.32 / +0.32 / +0.32,+0.28 / +0.24 / +0.16,AE-TC-RECHECK-002_corrected_slide_values.csv,requested slide-ready values
+25,Impact of transaction costs,slide note,missing,Active alpha is measured versus the zero-cost market-cap benchmark; only the strategy pays transaction costs.,ticket requirement,added visible note
+27,The Selected Rules Are Principled,Temp Youden mean best alpha at 20 bps,+0.35pp,+0.24pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+27,The Selected Rules Are Principled,Perm FPR3 / FPR5 mean best alpha at 20 bps,+0.35 / +0.33pp,+0.24 / +0.22pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+27,The Selected Rules Are Principled,Perm Youden mean best alpha at 20 bps,-0.20pp,-0.31pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+43,Appendix A15: 20 bps Winners With Benchmarks,Temp Total benchmark/alpha,13.28% / +0.42pp,13.29% / +0.41pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Temp Large benchmark/alpha,14.25% / +0.15pp,14.28% / +0.12pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Temp Mid benchmark/alpha,9.42% / +0.51pp,9.65% / +0.28pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Temp Small benchmark/alpha,7.49% / +0.62pp,7.65% / +0.45pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Perm Total benchmark/alpha,13.28% / +0.27pp,13.29% / +0.25pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Perm Large benchmark/alpha,14.25% / +0.23pp,14.28% / +0.20pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Perm Mid benchmark/alpha,9.42% / +0.74pp,9.65% / +0.51pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+43,Appendix A15: 20 bps Winners With Benchmarks,Perm Small benchmark/alpha,7.49% / +0.32pp,7.65% / +0.16pp,AE-TC-RECHECK-002_corrected_slide_values.csv,20 bps selected OOS zero-cost benchmark convention
+45,Appendix A17: Transaction-Cost Robustness,Temp Total Alpha 20,+0.42pp,+0.41pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Temp Large Alpha 20,+0.15pp,+0.12pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Temp Mid Alpha 20,+0.51pp,+0.28pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Temp Small Alpha 20,+0.62pp,+0.45pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Perm Total Alpha 20,+0.27pp,+0.25pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Perm Large Alpha 20,+0.23pp,+0.20pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Perm Mid Alpha 20,+0.74pp,+0.51pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+45,Appendix A17: Transaction-Cost Robustness,Perm Small Alpha 20,+0.32pp,+0.16pp,AE-TC-RECHECK-002_corrected_slide_values.csv,Alpha 0 unchanged because costed and zero-cost benchmarks coincide at 0 bps
+46,Appendix A18: Threshold Family and Turnover Summary,Temp Youden mean alpha,+0.35pp,+0.24pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Temp FPR3 mean alpha,+0.19pp,+0.08pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Temp FPR5 mean alpha,+0.17pp,+0.07pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Temp FPR1 mean alpha,+0.12pp,+0.01pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Perm FPR3 mean alpha,+0.35pp,+0.24pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Perm FPR5 mean alpha,+0.33pp,+0.22pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Perm FPR1 mean alpha,+0.14pp,+0.03pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes
+46,Appendix A18: Threshold Family and Turnover Summary,Perm Youden mean alpha,-0.20pp,-0.31pp,threshold_family_summary_20bps.csv plus AE-TC-RECHECK-002 formula,mean net return minus mean zero-cost benchmark across four universes

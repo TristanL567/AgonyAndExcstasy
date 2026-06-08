@@ -1,0 +1,29 @@
+epic_id: AE-PRES-DRAFT-TC-FIX
+goal: Correct Draft final presentation transaction-cost active-alpha values to use the zero-cost benchmark convention.
+branch: development-slides
+base: Development
+autonomy_policy: manual
+human_checkpoint_tickets:
+  - AE-PRES-DRAFT-TC-FIX-001
+epic_allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/
+  - 05_Documentation/09_Epics/AE-PRES-DRAFT-TC-FIX_Draft_Transaction_Cost_Correction/
+  - epics/AE-PRES-DRAFT-TC-FIX/
+epic_must_not_touch:
+  - 01_Code/
+  - 02_Data_Input/
+  - 03_Data_Output/
+  - 04_Research/
+  - 07_CloudComputing/
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.tex
+tickets:
+  - AE-PRES-DRAFT-TC-FIX-001
+depends_on_epics:
+  - AE-TC-RECHECK
+merge_policy:
+  strategy: ticket_scoped_commit
+  target_base: Development
+  requires_epic_validator: false
+  requires_human_approval: true

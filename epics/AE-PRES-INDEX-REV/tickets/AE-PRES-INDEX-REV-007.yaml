@@ -1,0 +1,30 @@
+ticket_id: AE-PRES-INDEX-REV-007
+goal: "Compile the revised June final presentation and perform visual QA on all changed index-result and robustness slides."
+dependencies:
+  - "AE-PRES-INDEX-REV-002 completed"
+  - "AE-PRES-INDEX-REV-003 completed"
+  - "AE-PRES-INDEX-REV-004 completed"
+  - "AE-PRES-INDEX-REV-005 completed"
+  - "AE-PRES-INDEX-REV-006 completed"
+allowed_areas:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+  - "05_Documentation/09_Epics/AE-PRES-INDEX-REV_Index_Presentation_Revisions/**"
+  - "epics/AE-PRES-INDEX-REV/**"
+may_read:
+  - "06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/**"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "03_Data_Output/**"
+  - "07_CloudComputing/**"
+requirements:
+  - "Compile the June deck."
+  - "Render and visually inspect all changed slides."
+  - "Fix layout issues in changed slides only."
+  - "Confirm frame/page count and source-map row count."
+acceptance_criteria:
+  - "Deck compiles successfully."
+  - "Visual QA passes for changed slides."
+  - "No data/model/index/pipeline scripts are run."
+completion_report_required: true
+commit_required: true

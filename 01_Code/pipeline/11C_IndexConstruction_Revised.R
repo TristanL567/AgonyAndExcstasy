@@ -396,11 +396,16 @@ cat(sprintf(
 ))
 
 fn_load_predictions <- function() {
+  prediction_dir <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID)
+  } else {
+    MODEL_PREDICTION_DIR
+  }
   fmap <- c(
-    oos = file.path(MODEL_PREDICTION_DIR, "ag_preds_oos.parquet"),
-    test = file.path(MODEL_PREDICTION_DIR, "ag_preds_test.parquet"),
-    boundary = file.path(MODEL_PREDICTION_DIR, "ag_preds_train_boundary.parquet"),
-    cv = file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+    oos = file.path(prediction_dir, "ag_preds_oos.parquet"),
+    test = file.path(prediction_dir, "ag_preds_test.parquet"),
+    boundary = file.path(prediction_dir, "ag_preds_train_boundary.parquet"),
+    cv = file.path(prediction_dir, "ag_cv_results.parquet")
   )
   fn_stop_missing(unname(fmap))
 
@@ -430,7 +435,12 @@ fn_load_predictions <- function() {
 }
 
 fn_cv_thresholds <- function() {
-  cv_path <- file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+  cv_path <- if (AE_SENS_MODE) {
+    file.path(AE_SENS_OUTPUT_ROOT, "raw_predictions", AE_SENS_RUN_ID,
+              "ag_cv_results.parquet")
+  } else {
+    file.path(MODEL_PREDICTION_DIR, "ag_cv_results.parquet")
+  }
   cv <- fn_read_parquet(cv_path)
   y <- as.integer(cv$y)
   p_csi <- as.numeric(cv$p_csi)

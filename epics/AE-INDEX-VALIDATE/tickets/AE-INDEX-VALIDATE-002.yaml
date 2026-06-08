@@ -1,0 +1,32 @@
+ticket_id: AE-INDEX-VALIDATE-002
+goal: "Diagnose whether excluded false-positive firms underperform retained firms despite not becoming labelled CSI events."
+dependencies:
+  - "AE-INDEX-VALIDATE-001 completed and validator-approved"
+allowed_areas:
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "03_Data_Output/11_IndexValidation/**"
+  - "epics/AE-INDEX-VALIDATE/**"
+may_read:
+  - "03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**"
+  - "05_Documentation/09_Epics/AE-ATTRIB_Main_Index_Attribution/**"
+  - "05_Documentation/09_Epics/AE-INDEX-VALIDATE_Index_Validation/**"
+  - "01_Code/pipeline/11C_IndexConstruction_Revised.R"
+must_not_touch:
+  - "01_Code/**"
+  - "02_Data_Input/**"
+  - "06_Presentations/**"
+  - "07_CloudComputing/**"
+  - "C:/Users/Tristan Leiter/Documents/aegis-core/**"
+requirements:
+  - "For selected OOS best-strategy rows from AE-INDEX-VALIDATE-001, compare subsequent realized return contributions of false positives, true positives, false negatives, true negatives, and retained constituents."
+  - "Quantify whether false-positive exclusions underperform retained true negatives or the retained portfolio despite being labelled non-CSI."
+  - "Report results separately for temporary CSI and permanent CSI across Total, Large, Mid, and Small universes where available."
+  - "Clarify whether the observed alpha is compatible with a broader distress/quality-screen interpretation."
+  - "Do not modify existing 03_Data_Output inputs; any derived tables must be written only under 03_Data_Output/11_IndexValidation/ and must not be staged or committed."
+acceptance_criteria:
+  - "Excluded-versus-retained return diagnostic report exists."
+  - "Compact summary CSV exists under documentation path."
+  - "Full derived outputs, if any, remain local under 03_Data_Output/11_IndexValidation/ and are not committed."
+  - "No code, input data, presentation, or cloud-validation files are modified."
+completion_report_required: true
+commit_required: true

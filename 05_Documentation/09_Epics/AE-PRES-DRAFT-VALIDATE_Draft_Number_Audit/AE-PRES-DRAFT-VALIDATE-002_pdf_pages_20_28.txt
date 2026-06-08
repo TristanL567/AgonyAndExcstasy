@@ -1,0 +1,272 @@
+Index Results: Does the Crash Filter Help?
+
+
+   Benchmark-relative alpha by universe (pp, 10 bps net)         OOS alpha. Current OOS deltas are positive in
+                                                                 all four universes; Mid and Small are strongest.
+                     OOS 2020–24       Test 2016–19
+                                                                 Test-set check. Test evidence is shown
+  +0.8
+                                                                 separately; Permanent-CSI Total Sharpe rises
+                                                                 0.89 → 1.00.
+  +0.6
+
+                                                                 Source of alpha. Mostly retained-name
+  +0.4                                                           reweighting, not direct event-avoidance (next
+                                                                 slides).
+  +0.2
+
+
+
+
+             Total            Large   Mid             Small
+
+
+
+Summary
+The crash-filter appears beneficial in both evaluation windows, but the evidence differs by split. The OOS
+result is a positive benchmark-relative return delta across the four universes. The test-set result is reported
+separately and should not be read as the same diagnostic as OOS risk performance.
+
+
+
+
+ June 2nd, 2026                                                                                              20
+Temporary-CSI Results: OOS (2020-2024) with 10 bps of
+Transaction Costs
+Best strategy per universe vs. the market-weighted benchmark assuming 10 bps of transaction costs.
+
+
+                                                     Return                               Risk
+
+ Universe         Strategy                        Geo ret.     ∆ pp              Sharpe           Max DD
+
+ Total            AG Base Dataset; Youden    13.3 → 13.7      +0.43        0.60 → 0.64      −25.0 → −23.8
+                  3y
+ Large            AG Base Dataset; Youden    14.3 → 14.4      +0.15        0.66 → 0.68      −24.8 → −23.9
+                  3y
+ Mid              AG Base Dataset; FPR5 5y     9.5 → 10.0     +0.51        0.41 → 0.42      −24.6 → −24.5
+ Small            AG Exp. Dataset + VAE;        7.6 → 8.2     +0.63        0.31 → 0.33      −29.1 → −29.3
+                  Youden 3y
+
+
+
+Main takeaway
+The risk-filter works better the smaller the market cap.: the alpha rises from +0.15pp (Large) to +0.51pp
+(Mid) to +0.63pp (Small). Smaller-cap universes include more firms in distress and exclusions move a larger
+part of the portfolio (about 85-106% turnover vs. 10-13% for the total market). Drawdown improves
+everywhere except for small caps.
+
+
+
+ June 2nd, 2026                                                                                        21
+Permanent-CSI Results: OOS (2020-2024) with 10 bps of
+Transaction Costs
+Best strategy per universe vs. the market-weighted benchmark assuming 10 bps of transaction costs.
+
+
+                                                     Return                               Risk
+
+ Universe         Strategy                        Geo ret.     ∆ pp              Sharpe           Max DD
+
+ Total            AG Exp. Dataset + VAE;     13.3 → 13.5      +0.27        0.60 → 0.61      −25.0 → −24.7
+                  FPR5
+ Large            AG Exp. Dataset + VAE;     14.3 → 14.5      +0.23        0.66 → 0.67      −24.8 → −24.5
+                  FPR5
+ Mid              AG Base Dataset; FPR5        9.5 → 10.3     +0.74        0.41 → 0.44      −24.6 → −24.5
+ Small            AG Latent Dataset (VAE);      7.6 → 7.9     +0.32        0.31 → 0.32      −29.1 → −29.3
+                  FPR3
+
+
+
+Main takeaway
+The permanent filter tilts the gains toward Mid Cap (+0.74pp), its strongest universe. Direction matches the
+temporary track, but more exclusion over-removes firms with broad thresholds, which is why Youden is
+dropped in favour of FPR3 and FPR5.
+
+
+
+ June 2nd, 2026                                                                                        22
+Where Does the Alpha Come From?
+It is not direct event-avoidance
+Because positives are rare, realized alpha is dominated by reweighting retained firms, not by directly dodging
+CSI events. A large false-positive opportunity cost is the main offset. For this reason, most of the performance
+gain disappears.
+
+Decomposition for Total Market, OOS (pp): TP + FP + reweight + cost + geo = alpha
+                                                 Rwt +1.79
+
+
+
+                                                                   Geo +0.59
+
+                  TP +0.08
+                                                                                       =      α +0.42
+
+
+
+                              FP −2.03
+
+
+
+
+  Universe (OOS, temp)                   TP         FP        Reweight           TC         Geo         Alpha
+
+  Total                             +0.08       −2.03           +1.79          −0.01       +0.59        +0.42
+  Large                             +0.00       −1.50           +1.24          −0.01       +0.41        +0.14
+  Mid                               −0.00       +0.05           +0.27          −0.11       +0.18        +0.39
+  Small                             +0.42       −4.00           +3.94          −0.09       +0.28        +0.55
+
+ June 2nd, 2026                                                                                           23
+Permanent-CSI Results: Test (2016-2019) with 10 bps of
+Transaction Costs
+
+                                                    Return                              Risk
+
+ Universe         Strategy                       Geo ret.    ∆ pp              Sharpe           Max DD
+
+ Total            AG Exp. Dataset + VAE;    13.8 → 14.2      +0.45       0.89 → 1.00      −14.6 → −12.8
+                  Youden
+ Large            AG Exp. Dataset + VAE;    14.2 → 14.4      +0.26       0.95 → 1.04      −13.8 → −12.2
+                  Youden
+ Mid              AG Exp. Dataset + VAE;    13.7 → 14.2      +0.43       0.84 → 0.95      −15.3 → −13.8
+                  Youden
+ Small            AG Exp. Dataset + VAE;    11.4 → 12.2      +0.83       0.58 → 0.68      −20.1 → −18.3
+                  Youden
+
+
+
+Validation Summary
+In the calmer 2016-2019 window a single consistent strategy (Exp. Dataset + VAE with Youden computed
+thresholds) improves Sharpe and cuts drawdown in every universe, with Total Sharpe crossing 1.0. The same
+small-cap tilt appears (+0.83pp Small vs. +0.26pp Large).
+
+
+
+
+ June 2nd, 2026                                                                                      24
+Impact of transaction costs: the winners are unchanged
+Selected OOS winners when assuming transaction costs of 5, 10 and 20 bps.
+
+
+          Track     Universe   Selected OOS winner               Active α (5/10/20)            Ranking
+
+          Temp.     Total      AG Base Dataset; Youden       +0.43/ + 0.43/ + 0.42          unchanged
+                               3y
+          Temp.     Large      AG Base Dataset; Youden       +0.15/ + 0.15/ + 0.15          unchanged
+                               3y
+          Temp.     Mid        AG Base Dataset; FPR5         +0.51/ + 0.51/ + 0.51          unchanged
+                               5y
+          Temp.     Small      AG Exp. Dataset + VAE;        +0.63/ + 0.63/ + 0.62          unchanged
+                               Youden 3y
+          Perm.     Total      AG Exp. Dataset + VAE;        +0.27/ + 0.27/ + 0.27          unchanged
+                               FPR5
+          Perm.     Large      AG Exp. Dataset + VAE;        +0.23/ + 0.23/ + 0.23          unchanged
+                               FPR5
+          Perm.     Mid        AG Base Dataset; FPR5         +0.74/ + 0.74/ + 0.74          unchanged
+          Perm.     Small      AG Latent Dataset             +0.32/ + 0.32/ + 0.32          unchanged
+                               (VAE); FPR3
+
+
+
+Takeaway
+Raising costs to 20 bps lowers net returns but does not change a single winner or flip the strategy ranking.
+
+
+ June 2nd, 2026                                                                                           25
+Cost Drag due to turnover is concentrated in mid and
+small caps
+
+Annualized gross buy + sell turnover of the selected OOS strategies (%)
+
+                                          Temporary           Permanent
+
+          100%
+
+
+           75%
+
+
+           50%
+
+
+           25%
+
+
+
+                       Total                 Large                  Mid                  Small
+
+
+
+
+Summary
+Drag scales linearly with turnover × cost. Total and Large are barely traded (between 7-13%), so their 20 bps
+drag is at most 0.13pp. Mid and Small rebalancing is comparably larger at 75-106% a year, lifting their 20 bps
+drag to roughly 0.76-1.06pp. Yet, the winner ranking on the previous slide still holds.
+
+
+
+ June 2nd, 2026                                                                                         26
+The Selected Rules Are Principled, Not Grid-Mined
+
+
+
+Temporary CSI — finite lockout                                        Permanent CSI — strict FPR
+Youden 3yr wins Total, Large, and Small; FPR5 5yr                     FPR5 wins Total, Large, and Mid; FPR3 wins Small.
+wins Mid. A recoverable 3–5yr lockout lets the signal                 Absorbing removal needs narrower gates — broad
+age out, capping turnover outside Mid / Small.                        Youden over-removes names and compounds
+                                                                      turnover.
+20 bps evidence: Youden has the strongest mean
+best alpha, +0.35pp.                                                  20 bps evidence: FPR3 / FPR5 lead (+0.35 /
+                                                                      +0.33pp); Youden averages −0.20pp.
+
+
+
+Why this matters
+The two tracks select different rule families for a structural reason, not by grid-mining: a temporary flag can
+expire, so it tolerates a looser cutoff; a permanent flag is irreversible, so cost and turnover mistakes must be
+gated more tightly. Turnover detail is on the previous slide.
+
+Remark: Source: threshold family summary 20bps.csv; best by track index cost.csv.
+
+
+
+
+ June 2nd, 2026                                                                                                    27
+Sensitivity Analysis: temporary CSI only
+Main run versus 24 completed temporary-CSI C/M/T sensitivity runs; relative geometric-return delta (pp).
+
+                                 min–max range                   median                  main run
+
+
+
+                  Total
+
+
+
+                  Large
+
+
+
+                    Mid
+
+
+
+                  Small
+
+
+                          0                           0.2                          0.4                        0.6
+
+                                                               benchmark-relative delta (pp)
+
+
+
+
+Robustness read
+All completed temporary-CSI C/M/T runs stay positive; sensitivity changes magnitude, not sign. Main run:
+below median in Total/Large, above in Mid/Small. Temporary-CSI evidence only.
+
+Remark: Temporary CSI only; three blocked-partial configs excluded. Source: universe stability summary.csv.
+
+
+ June 2nd, 2026                                                                                                     28
+

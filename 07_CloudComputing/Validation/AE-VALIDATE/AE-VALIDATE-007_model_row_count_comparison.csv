@@ -1,0 +1,23 @@
+track,split_or_output_group,output_file,canonical_rows,validation_rows,abs_delta,pct_delta,canonical_columns,validation_columns,classification,comparability_note
+dynamic_csi,cv,ag_cv_results.parquet,273910,72223,-201687,-0.7363258004454017,5,5,interpretation-changing,
+dynamic_csi,leaderboard,ag_leaderboard.csv,12,12,0,0.0,13,6,none,
+dynamic_csi,oos,ag_preds_oos.parquet,74847,18502,-56345,-0.7528023835290659,4,4,interpretation-changing,
+dynamic_csi,oos,ag_preds_oos_eval.parquet,74847,18502,-56345,-0.7528023835290659,4,4,interpretation-changing,
+dynamic_csi,test,ag_preds_test.parquet,78260,18111,-60149,-0.7685790953232814,4,4,interpretation-changing,
+dynamic_csi,test,ag_preds_test_eval.parquet,78260,18111,-60149,-0.7685790953232814,4,4,interpretation-changing,
+dynamic_csi,train_boundary,ag_preds_train_boundary.parquet,19565,4663,-14902,-0.7616662407360082,4,4,interpretation-changing,
+dynamic_csi,evaluation,eval_by_year_all.rds,27,8,-19,-0.7037037037037037,11,,interpretation-changing,
+dynamic_csi,evaluation,eval_performance_all.rds,6,2,-4,-0.6666666666666666,21,,interpretation-changing,
+dynamic_csi,evaluation,eval_threshold_all.rds,4,0,-4,-1.0,10,,interpretation-changing,
+dynamic_csi,evaluation,evaluation_results.rds,16,,,,7,,interpretation-changing,not present in compact validation row-count evidence
+permanent_csi,cv,ag_cv_results.parquet,273910,72223,-201687,-0.7363258004454017,5,5,interpretation-changing,
+permanent_csi,leaderboard,ag_leaderboard.csv,12,12,0,0.0,13,6,none,
+permanent_csi,oos,ag_preds_oos.parquet,77459,26400,-51059,-0.6591745310422288,4,4,interpretation-changing,
+permanent_csi,oos,ag_preds_oos_eval.parquet,77459,26400,-51059,-0.6591745310422288,4,4,interpretation-changing,
+permanent_csi,test,ag_preds_test.parquet,78202,18053,-60149,-0.7691491266208026,4,4,interpretation-changing,
+permanent_csi,test,ag_preds_test_eval.parquet,78202,18053,-60149,-0.7691491266208026,4,4,interpretation-changing,
+permanent_csi,train_boundary,ag_preds_train_boundary.parquet,19565,4663,-14902,-0.7616662407360082,4,4,interpretation-changing,
+permanent_csi,evaluation,eval_by_year_all.rds,24,9,-15,-0.625,11,,interpretation-changing,
+permanent_csi,evaluation,eval_performance_all.rds,6,2,-4,-0.6666666666666666,21,,interpretation-changing,
+permanent_csi,evaluation,eval_threshold_all.rds,4,0,-4,-1.0,10,,interpretation-changing,
+permanent_csi,evaluation,evaluation_results.rds,16,,,,7,,interpretation-changing,not present in compact validation row-count evidence

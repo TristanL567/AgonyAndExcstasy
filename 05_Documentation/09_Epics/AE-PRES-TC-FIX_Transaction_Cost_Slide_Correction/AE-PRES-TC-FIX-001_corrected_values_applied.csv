@@ -1,0 +1,9 @@
+track,universe,winner,alpha_5bps_pp,alpha_10bps_pp,alpha_20bps_pp,source_file
+Temporary CSI,Total,AG Base Dataset; Youden 3y,+0.43,+0.42,+0.41,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Temporary CSI,Large,AG Base Dataset; Youden 3y,+0.15,+0.14,+0.12,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Temporary CSI,Mid,AG Base Dataset; FPR5 5y,+0.45,+0.39,+0.28,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Temporary CSI,Small,AG Exp. Dataset + VAE; Youden 3y,+0.59,+0.55,+0.45,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Permanent CSI,Total,AG Exp. Dataset + VAE; FPR5,+0.26,+0.26,+0.25,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Permanent CSI,Large,AG Exp. Dataset + VAE; FPR5,+0.22,+0.22,+0.20,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Permanent CSI,Mid,AG Base Dataset; FPR5,+0.68,+0.62,+0.51,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv
+Permanent CSI,Small,AG Latent Dataset (VAE); FPR3,+0.28,+0.24,+0.16,05_Documentation/09_Epics/AE-TC-RECHECK_Transaction_Cost_Slide_Audit/AE-TC-RECHECK-002_corrected_slide_values.csv

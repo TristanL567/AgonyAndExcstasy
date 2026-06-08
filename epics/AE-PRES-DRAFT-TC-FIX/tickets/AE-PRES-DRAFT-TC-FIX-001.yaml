@@ -1,0 +1,46 @@
+ticket_id: AE-PRES-DRAFT-TC-FIX-001
+goal: Update Draft final presentation transaction-cost active-alpha values so active alpha equals strategy net geometric return after transaction costs minus the zero-cost market-cap benchmark geometric return.
+dependencies:
+  - AE-TC-RECHECK-002 corrected values
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/
+  - 05_Documentation/09_Epics/AE-PRES-DRAFT-TC-FIX_Draft_Transaction_Cost_Correction/
+  - epics/AE-PRES-DRAFT-TC-FIX/
+must_not_touch:
+  - 01_Code/
+  - 02_Data_Input/
+  - 03_Data_Output/
+  - 04_Research/
+  - 07_CloudComputing/
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.pdf
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.tex
+requirements:
+  - Inspect every Draft index-construction slide.
+  - Correct transaction-cost active-alpha values to the zero-cost benchmark convention.
+  - At minimum update the slide titled "Impact of transaction costs: the winners are unchanged".
+  - Add or revise the zero-cost benchmark note.
+  - Recompile the Draft PDF.
+  - Visually inspect changed Draft slides and neighboring slides.
+  - Do not run model, index, evaluation, sensitivity, or pipeline scripts.
+non_goals:
+  - Modify non-Draft final presentation files.
+  - Modify 01_Code, 02_Data_Input, 03_Data_Output, 04_Research, or 07_CloudComputing.
+  - Push the branch.
+acceptance_criteria:
+  - Corrected values match AE-TC-RECHECK-002 where the source applies.
+  - Draft PDF compiles.
+  - Corrected transaction-cost slide values and note are visible.
+  - Draft page/frame counts are recorded.
+  - Visual QA passes for changed slides and neighbors.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review rendered pages for changed slides and neighbors.
+  - Confirm corrected transaction-cost slide values and note are visible.
+verification_commands:
+  - Rscript knit2pdf for the Draft Rnw.
+  - pypdf page count and PDF text extraction.
+  - pdftoppm render for changed slides and neighbors.
+  - validate_ticket_scope.py against staged paths.
+completion_report_required: true
