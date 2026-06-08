@@ -827,7 +827,7 @@ Temporary CSI has more positives and higher test prevalence: 4.44\% vs 3\%. Perm
 
 %==== 16. Modelling Summary. ==================================================%
 
-\begin{frame}{Modelling Summary: the Models Rank Implosion Risk Well}
+\begin{frame}{\small Modelling Summary: the Models Rank Implosion Risk Well}
 \footnotesize
 
 \begin{center}

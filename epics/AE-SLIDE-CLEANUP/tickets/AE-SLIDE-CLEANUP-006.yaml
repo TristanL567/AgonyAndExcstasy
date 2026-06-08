@@ -1,0 +1,58 @@
+ticket_id: AE-SLIDE-CLEANUP-006
+goal: Final compile, visual QA, and closeout for the Draft slide cleanup epic.
+dependencies:
+  - AE-SLIDE-CLEANUP-001B
+  - AE-SLIDE-CLEANUP-002
+  - AE-SLIDE-CLEANUP-003
+  - AE-SLIDE-CLEANUP-004
+  - AE-SLIDE-CLEANUP-005
+allowed_areas:
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/Draft/**
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+  - epics/AE-SLIDE-CLEANUP/**
+may_inspect_read_only:
+  - 03_Data_Output/10_FeatureImportance/**
+  - 03_Data_Output/6_ModelSuite/**
+  - 03_Data_Output/7_IndexConstructionValidation/nonraw_index_suite/**
+  - 03_Data_Output/5_SensitivityAnalysis/**
+  - 05_Documentation/09_Epics/AE-SLIDE-CLEANUP_Slide_Cleanup/**
+must_not_touch:
+  - 01_Code/**
+  - 02_Data_Input/**
+  - 03_Data_Output/**
+  - 04_Research/**
+  - 07_CloudComputing/**
+  - 06_Presentations/02_FinalPresentation/Necessary/FinalPresentation_June/FinalPresentation_TristanLeiter_h11815352.Rnw
+requirements:
+  - Compile the Draft deck from the Draft Rnw to PDF.
+  - Confirm final Draft PDF exists and is current relative to the Draft Rnw.
+  - Confirm final PDF page count equals Rnw frame count.
+  - Confirm Rnw frame begin/end counts match.
+  - Visual QA slides 16, 17, 18, 20, A9, and A10.
+  - Fix only blocking layout issues in changed/critical Draft slides.
+  - Confirm appendix count remains 10 total with A9/A10 feature-importance slides.
+  - Mark the AE-SLIDE-CLEANUP ledger closed only after validator approval.
+  - Do not run model, index, sensitivity, evaluation, pipeline, training, or feature-importance computation scripts.
+non_goals:
+  - Edit non-Draft June presentation files.
+  - Modify source data, model outputs, index outputs, code, research, or cloud-computing artifacts.
+  - Push changes.
+acceptance_criteria:
+  - Full Draft compile passes.
+  - PDF page count matches Rnw frame count.
+  - Visual QA passes for required pages.
+  - Appendix count remains 10 total with A9/A10 feature-importance slides.
+  - Staged scope is limited to allowed areas.
+manual_verification_required: true
+manual_verification_steps:
+  - Review rendered QA pages 16, 17, 18, 20, 38, and 39.
+  - Review closeout and validation reports.
+verification_commands:
+  - knitr::knit2pdf('FinalPresentation_TristanLeiter_h11815352_Draft.Rnw')
+  - pdfinfo FinalPresentation_TristanLeiter_h11815352_Draft.pdf
+  - pdftoppm -png -f 16 -l 18 FinalPresentation_TristanLeiter_h11815352_Draft.pdf
+  - pdftoppm -png -f 20 -l 20 FinalPresentation_TristanLeiter_h11815352_Draft.pdf
+  - pdftoppm -png -f 38 -l 39 FinalPresentation_TristanLeiter_h11815352_Draft.pdf
+  - git diff --cached --check
+  - validate_ticket_scope.py with staged files
+completion_report_required: true

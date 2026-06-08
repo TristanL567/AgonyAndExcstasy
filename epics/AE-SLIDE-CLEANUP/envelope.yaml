@@ -22,6 +22,7 @@ tickets:
   - AE-SLIDE-CLEANUP-003
   - AE-SLIDE-CLEANUP-004
   - AE-SLIDE-CLEANUP-005
+  - AE-SLIDE-CLEANUP-006
 depends_on_epics: []
 merge_policy:
   strategy: manual
