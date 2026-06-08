@@ -1,0 +1,8 @@
+"output","source","use"
+"AE-ALPHA-010_per_universe_risk_return_table_data.csv","performance/benchmark_performance_summary.rds","Benchmark Test/OOS risk-return rows at 0 bps"
+"AE-ALPHA-010_per_universe_risk_return_table_data.csv","performance/lowvol_performance_summary.rds","Low-volatility quintile Test/OOS risk-return rows at 20 bps"
+"AE-ALPHA-010_per_universe_risk_return_table_data.csv","comparisons/csi_vs_lowvol_headline.rds","Headline temporary and permanent CSI Test/OOS risk-return rows at 20 bps"
+"AE-ALPHA-010_per_universe_overlap_table_data.csv","overlap_diagnostics/csi_exclusion_quintile_overlap.rds","Excluded-name and excluded-weight low-vol quintile shares"
+"AE-ALPHA-010_per_universe_overlap_table_data.csv","overlap_diagnostics/csi_retained_quintile_exposure.rds","Retained CSI weight low-vol quintile shares"
+"AE-ALPHA-010_per_universe_overlap_table_data.csv","overlap_diagnostics/csi_active_quintile_exposure.rds","Active CSI retained weight versus benchmark by low-vol quintile"
+"AE-ALPHA_Risk_Return_and_Overlap_Summary.md","Generated from AE-ALPHA-010 table data outputs","Narrative summary and table-ready appendices"
