@@ -825,70 +825,159 @@ Temporary CSI has more positives and higher test prevalence: 4.44\% vs 3\%. Perm
 \end{frame}
 
 
-%==== 16. Modelling IV. =======================================================%
+%==== 16. Modelling Summary. ==================================================%
 
-\begin{frame}{Modelling IV: What VAE Features Add}
-\scriptsize
-\begin{alertblock}{Feature-set interpretation}
-\scriptsize
-The VAE does not replace expanded-dataset predictive information. It is useful as an augmentation or robustness signal: AG Exp. Dataset + VAE improves temporary OOS AP/FPR recall, while AG Latent Dataset (VAE) is the strongest permanent OOS model.
-\end{alertblock}
+\begin{frame}{\small Modelling Summary: the Models Rank Implosion Risk Well}
+\footnotesize
 
-\vspace{0.15em}
+\begin{center}
+\begin{tikzpicture}[
+  font=\footnotesize,
+  pill/.style={draw=MainColour!70, fill=MainColour!9, rounded corners=5pt,
+    text width=2.62cm, align=center, inner xsep=3pt, inner ysep=2.5pt,
+    minimum height=0.68cm}
+]
+\node[pill] at (-4.05,0) {AutoGluon weighted ensemble};
+\node[pill] at (-1.35,0) {Expanding-window CV; thresholds from CV only};
+\node[pill] at (1.35,0) {4 feature sets};
+\node[pill] at (4.05,0) {Rare-event metrics: AP, recall@FPR};
+\end{tikzpicture}
+\end{center}
+
+\vspace{-0.1em}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
-\textbf{Temporary CSI}
-\begin{itemize}
-  \item AG Exp. Dataset + VAE leads OOS AP: 0.3152.
-  \item OOS R@FPR1/3/5 improves to 0.1051 / 0.2632 / 0.4128.
-  \item AG Expanded Dataset still has the slightly higher OOS AUC: 0.8961 vs 0.8950.
-\end{itemize}
+\textbf{Test Average Precision vs random baseline (prevalence)}
+
+\vspace{0.2em}
+\begin{tikzpicture}[font=\footnotesize, xscale=0.18, yscale=0.85]
+  \draw[darkgrey!60] (0,-0.15) -- (22,-0.15);
+  \foreach \x in {0,5,10,15,20} {
+    \draw[darkgrey!25] (\x,-0.15) -- (\x,1.75);
+    \node[anchor=north, darkgrey] at (\x,-0.22) {\x\%};
+  }
+  \node[anchor=east] at (-0.4,1.25) {Temporary CSI};
+  \node[anchor=east] at (-0.4,0.35) {Permanent CSI};
+
+  \fill[darkgrey!65] (0,1.43) rectangle (4.44,1.65);
+  \fill[MainColour] (0,1.10) rectangle (19.85,1.32);
+  \fill[darkgrey!65] (0,0.53) rectangle (3.00,0.75);
+  \fill[MainColour] (0,0.20) rectangle (14.16,0.42);
+
+  \node[anchor=west] at (4.70,1.54) {4.44\% baseline};
+  \node[anchor=west] at (0.55,1.21) {\textcolor{white}{19.85\%}};
+  \node[anchor=west] at (3.25,0.64) {3.00\% baseline};
+  \node[anchor=west] at (0.55,0.31) {\textcolor{white}{14.2\%}};
+
+  \fill[darkgrey!65] (0,-0.82) rectangle (0.75,-0.64);
+  \node[anchor=west] at (0.95,-0.73) {random baseline};
+  \fill[MainColour] (0,-1.15) rectangle (0.75,-0.97);
+  \node[anchor=west] at (0.95,-1.06) {best Test-AP};
+\end{tikzpicture}
 \end{column}
-\begin{column}{0.49\textwidth}
-\textbf{Permanent CSI}
-\begin{itemize}
-  \item AG Exp. Dataset + VAE leads test AUC and FPR3/5 recall.
-  \item AG Latent Dataset (VAE) leads OOS AP/AUC/Brier/FPR recall.
-  \item AG Base Dataset remains a useful fundamentals-only benchmark, not the preferred model.
-\end{itemize}
+
+\begin{column}{0.47\textwidth}
+\textbf{\color{MainColour}Result.}
+Test-AUC is around $0.88$, recall@FPR3 is around $0.20$, and Test-AP is about $4.5$--$4.7\times$ the base rate.\\[4pt]
+
+\textbf{\color{MainColour}Verdict.}
+\agexp{} is the reporting baseline; \agvae{} is the strongest challenger. Weighted ensembles top the leaderboards, and tree families carry the useful signal.\\[4pt]
+
+\textbf{\color{MainColour}Subquestions.}
+VAE augments rather than replaces the expanded feature set; feature drivers move to the appendix.
 \end{column}
 \end{columns}
 
-\vspace{0.15em}
-\begin{block}{Model-family note}
-\scriptsize
-Weighted AutoGluon ensembles top the leaderboard across tracks and feature sets. Tree families supply most of the useful base-model signal; neural nets are considered but do not dominate the final ranks.
-Standalone XGBoost diagnostics exist for the main model runs, but they are not relabelled here because the final index grid has no XGB-only strategy rows.
+\vspace{0.35em}
+\begin{block}{Hand-off}
+\footnotesize
+Calibrated scores become exclusion signals for the index; the question shifts from ``can we rank risk?'' to ``does removing flagged firms improve the index?''
 \end{block}
+\remarkfoot{Model metrics and caveats are in Appendix A10--A13.}
 \end{frame}
 
-\begin{frame}{CV-Only False-Positive Diagnostic}
-\fontsize{5.3pt}{5.85pt}\selectfont
-\textbf{Training/CV cohorts only; false positives are not cleanly separable in available evidence}
-\vspace{-0.2em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.4pt}
-\begin{tabular}{L{1.45cm}L{1.2cm}R{0.55cm}R{0.55cm}R{0.74cm}R{0.78cm}R{0.76cm}R{0.86cm}}
-\toprule
-Track & Model & FP & TP & Near thr. & TP-score overlap & Above TP med. & TP cost /100 near FP \\
-\midrule
-Temp. CSI & raw+latent & 2,059 & 773 & 16.6\% & 72.7\% & 44.5\% & 31.6 \\
-Perm. CSI & raw+latent & 2,092 & 634 & 18.6\% & 64.3\% & 37.0\% & 20.0 \\
-Temp. CSI & raw & 2,073 & 731 & 18.1\% & 69.8\% & 46.6\% & 29.5 \\
-Perm. CSI & raw & 2,092 & 641 & 16.7\% & 69.6\% & 41.9\% & 26.0 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.25em}
-\begin{alertblock}{Interpretation boundary}
+%==== 17. False-positive bridge. =============================================%
+
+\input{slide17_fp_bridge_values.tex}
+
+\begin{frame}{Why the Screen Cannot Be Perfect}
 \scriptsize
-At the CV FPR3 rule, only 16.6--18.6\% of false positives are narrowly threshold-adjacent. Most overlap the true-positive score range, and raising thresholds would also remove true positives. Row-level raw/fundamental/latent feature matrices keyed by firm-year were not available, so feature-space separability and mechanism labels remain unclaimed.
+\textbf{Temporary CSI, \agexp{}:} FPR3 threshold calibrated on CV predictions only, then applied to the 2016--2019 test set.
+
+\vspace{0.15em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.54\textwidth}
+\includegraphics[width=\linewidth]{slide17_fp_bridge_density.pdf}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{\color{MainColour}Live test diagnostic}
+\begin{itemize}
+  \setlength\itemsep{0.15em}
+  \item CV-calibrated $\tau=\slideSeventeenTau$; test FPR is \slideSeventeenTestFpr{} and recall is \slideSeventeenTestRecall{}.
+  \item The rule flags \slideSeventeenTpCount{} true CSI rows and \slideSeventeenFpCount{} negatives in test.
+  \item Only \slideSeventeenAdjacentShare{} of false positives are threshold-adjacent.
+  \item \slideSeventeenOverlapShare{} of false positives overlap the flagged true-positive score range.
+\end{itemize}
+Raising the threshold would remove some false positives, but it would also drop real CSI firms.
+\end{column}
+\end{columns}
+
+\vspace{0.05em}
+\begin{alertblock}{What this means for the index}
+\scriptsize
+The screen is useful but structurally imperfect. CSI firms are a small cap-weighted exposure, so false positives and retained-stock reweighting create a dilution ceiling. This is not simply a model failure; it frames the attribution slide.
 \end{alertblock}
-\remarkfoot{CV-only. Sources: \texttt{AE-FP-DIAG-005\_presentation\_summary\_table.csv}; \texttt{AE-FP-DIAG-005\_Presentation\_Ready\_CV\_FP\_Summary.md}. No test/OOS labels, outcomes, rows, or features are used.}
+\vspace{-0.2em}
+\remarkfoot{Threshold is CV-calibrated; distribution and counts use the 2016--2019 test set; \agexp{}; temporary CSI. Threshold-adjacent means a false-positive score in $[\tau,\tau+0.01]$, matching the prior false-positive diagnostic.}
 \end{frame}
 
-%==== 17. Index Construction E. ===============================================%
+%==== 18. VAE modelling nuance. =============================================%
+
+\begin{frame}{Modelling V: VAE Features --- Benefits and Drawbacks}
+\scriptsize
+\textbf{Autoencoder/AP subquestion.} How does the integration of Autoencoders for feature engineering impact the Average Precision of Ensemble models compared to those trained solely on raw financial data?
+
+\vspace{0.25em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\begin{block}{Benefits}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item Among VAE/non-raw variants, \agvae{} leads CV-AP in both tracks: temporary $0.2114$, permanent $0.1883$.
+  \item Temporary OOS: \agvae{} leads AP $0.3152$; R@FPR1/3/5 is $0.1051$ / $0.2632$ / $0.4128$.
+  \item Permanent test: \agvae{} leads AUC $0.8838$ and FPR3/5 recall $0.2011$ / $0.3155$.
+  \item Permanent OOS: \aglatent{} leads AP/AUC/Brier/FPR recall: AP $0.0482$, AUC $0.8337$.
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{0.49\textwidth}
+\begin{block}{Drawbacks}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item VAE does not replace expanded-data information.
+  \item \agexp{} keeps slightly higher temporary OOS AUC: $0.8961$ vs.\ $0.8950$.
+  \item \agexp{} is the cleaner reporting baseline.
+  \item Latent-only is weaker on temporary CV/test and mainly competitive for permanent OOS.
+  \item Added architecture and compute cost.
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+
+\vspace{0.25em}
+\begin{alertblock}{Verdict}
+\scriptsize
+Autoencoder features improve Average Precision as an augmentation, especially when combined with expanded features, but do not dominate AUC and do not replace raw/fundamental information.
+\end{alertblock}
+
+\remarkfoot{Values use current model-suite threshold metrics: \texttt{03\_Data\_Output/6\_ModelSuite/derived\_metrics/complete\_threshold\_metrics\_wide.csv}; raw comparator metrics use \texttt{raw/metric\_snapshot.csv}.}
+\end{frame}
+
+%==== 19. Index Construction E. ===============================================%
 
 \section{E. Index Construction}
 \begin{frame}{Index Construction I: From Score to Portfolio Weight}
@@ -958,48 +1047,53 @@ The model produces a probability of CSI next year. A threshold turns that probab
 
 %==== 18. Index Construction I ================================================%
 
-\begin{frame}{Index Construction II: Four Benchmark Universes}
+\begin{frame}{Index Construction II: Universes and Comparators}
 \small
 
 \begin{alertblock}{Same exclusion rule, four universes}
 \scriptsize
-The revised 11C track applies the score-to-weight pipeline independently inside each CRSP-like universe, producing four screened benchmarks alongside their unfiltered counterparts.
+The calibrated score-to-weight pipeline is applied independently inside each universe, so each screened index is evaluated against the matching unfiltered benchmark.
 \end{alertblock}
 
-\vspace{0.6em}
+\vspace{0.45em}
 
 \begin{center}
 \begin{tikzpicture}[
   font=\scriptsize,
   uni/.style={draw=darkgrey, fill=grey!20, rounded corners=4pt, minimum width=2.7cm, minimum height=1.6cm, align=center}
 ]
-\node[uni] (tm) at (0,0)   {\textbf{Total Market}\\[1pt]\tiny full universe\\[-1pt]\tiny $\geq$ USD 100M};
-\node[uni] (lc) at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny top tier};
-\node[uni] (mc) at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny middle tier};
-\node[uni] (sc) at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny CRSP-like\\[-1pt]\tiny bottom tier};
+\node[uni] (tm) at (0,0)   {\textbf{Total Market}\\[1pt]\tiny all eligible firms\\[-1pt]\tiny $\geq$ USD 100M};
+\node[uni] (lc) at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny top tier};
+\node[uni] (mc) at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny middle tier};
+\node[uni] (sc) at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny bottom tier};
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.4em}
+\vspace{0.15em}
+\begin{center}
+\scriptsize\textit{Tier breakpoints: \textless{}author to insert exact Large/Mid/Small cap thresholds\textgreater{}}
+\end{center}
+
+\vspace{0.25em}
 
 \begin{columns}[t]
 \begin{column}{0.49\textwidth}
-\textbf{Benchmark construction}
+\textbf{Universe construction}
 \scriptsize
 \begin{itemize}
-  \item Universe formed from prior-December market capitalization.
-  \item Minimum market cap: USD 100 million.
+  \item Total Market keeps all eligible firms above USD 100 million market cap.
+  \item Large, Mid, and Small Cap are formed by prior-December market-cap rank.
   \item Quarterly rebalancing: March, June, September, December.
-  \item Market-cap weights; cost overlays use 0, 5, 10, and 20 bps.
+  \item Within each universe, portfolio weights start from market capitalization.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
-\textbf{Signal discipline}
+\textbf{Comparators}
 \scriptsize
 \begin{itemize}
-  \item Scores are annual for AG Expanded Dataset, AG Base Dataset, AG Latent Dataset (VAE), and AG Exp. Dataset + VAE.
-  \item Holding-year signal uses information available before the holding year.
-  \item Thresholds calibrated from CV predictions only: Youden, FPR1, FPR3, FPR5.
+  \item Primary comparator: the unfiltered cap-weighted benchmark in the same universe.
+  \item Screened portfolios are therefore compared like-for-like: Total vs Total, Large vs Large, Mid vs Mid, Small vs Small.
+  \item Min-volatility and quality screens are planned extensions under the main research question; see limitations.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -1339,683 +1433,398 @@ All completed temporary-CSI C/M/T runs stay positive; sensitivity changes magnit
 
 %==== APPENDIX ================================================================%
 
-
 \appendix
 \section{Appendix}
 
-
-\begin{frame}{Appendix A1: Delisting and Bankruptcy Detection}
+\begin{frame}{Appendix A1: Dataset, Labels, and Detection Checks}
 \scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Failure-label audit}
+\vspace{0.15em}
 \begin{table}[ht]
 \centering
-\begin{tabular}{L{4.0cm}R{1.2cm}R{1.2cm}R{1.2cm}R{1.35cm}}
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{L{2.75cm}R{1.0cm}R{0.95cm}R{1.0cm}}
 \toprule
-Indicator group & CRSP firms & Detected & Rate & Positive rows followed \\
+Signal & Firms & Detected & Rate \\
 \midrule
-Bankruptcy range 572-574 & 629 & 545 & 86.65\% & 2,757 \\
-Bankruptcy / declared insolvent 574 & 548 & 513 & 93.61\% & 2,502 \\
-Adverse 400-490, 550-585 & 5,654 & 3,676 & 65.02\% & 7,000 \\
+CRSP 572--574 & 629 & 545 & 86.65\% \\
+CRSP 574 only & 548 & 513 & 93.61\% \\
+Adverse 400--490, 550--585 & 5,654 & 3,676 & 65.02\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\vspace{0.3em}
-\begin{block}{Why the override is additive}
-\scriptsize
-The CRSP signal is not an independent default label. It only turns a CSI-like trigger into a positive \dyn{} event when the firm fails before the 18-month confirmation clock can fully resolve.
-\end{block}
-\end{frame}
-
-\begin{frame}{Appendix A2: Revised Annual Prevalence}
-\scriptsize
-\begin{columns}[t]
-\begin{column}{0.45\textwidth}
-\begin{table}[ht]
-\centering
-\begin{tabular}{L{4.1cm}R{1.35cm}}
-\toprule
-Annual label metric & Count \\
-\midrule
-Temporary positive label cells & 8,517 \\
-Temporary unresolved cells ($y=NA$) & 8,674 \\
-Permanent positive label cells & 6,258 \\
-Permanent unresolved cells ($y=NA$) & 834 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\vspace{0.25em}
+Temporary CSI has 8,517 positive rows and 8,674 unresolved rows. Permanent CSI has 6,258 positive rows and 834 unresolved rows.
 \end{column}
-\begin{column}{0.53\textwidth}
-\textbf{Current CRSP 572--574 overlap}
-\begin{table}[ht]
-\centering
-\begin{tabular}{L{3.7cm}R{0.9cm}}
-\toprule
-Metric & Count \\
-\midrule
-CRSP 572--574 firms in sample & 629 \\
-Detected by revised temporary CSI & 545 \\
-Missed by revised temporary CSI & 84 \\
-Detection rate & 86.65\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{-0.2em}
-\scriptsize
-The 84 are CRSP 572--574 firms not captured by a valid drawdown trigger within the terminal-failure timing window. They remain outside labelled positives, not known pipeline errors.
-\end{column}
-\end{columns}
-
-\vspace{0.2em}
-\begin{alertblock}{Methodological status}
-\scriptsize
-The local overlap audit supports 545 detected and 84 missed. It does not decompose every miss, so the wording stays limited to the retained trigger-and-window rule.
-\end{alertblock}
-\end{frame}
-
-\begin{frame}{Appendix A3: Cleaned Label Counts}
-\fontsize{4.8pt}{5.35pt}\selectfont
+\begin{column}{0.49\textwidth}
+\textbf{Clean labelled prevalence}
+\vspace{0.15em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.4cm}L{0.85cm}R{1.05cm}R{0.95cm}R{0.85cm}R{1.05cm}R{0.8cm}}
+\begin{tabular}{L{1.35cm}L{0.8cm}R{0.85cm}R{0.75cm}R{0.75cm}}
 \toprule
-CSI type & Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
+Track & Split & Labelled & Pos. & Prev. \\
 \midrule
-Temporary & Full & 188,460 & 171,269 & \textbf{8,517} & 179,786 & 4.74\% \\
-Temporary & Train & 143,173 & 136,630 & 6,543 & 143,173 & 4.57\% \\
-Temporary & Test & 18,111 & 17,307 & 804 & 18,111 & 4.44\% \\
-Temporary & OOS & 27,176 & 17,332 & 1,170 & 18,502 & 6.32\% \\
-Permanent & Full & 188,460 & 181,368 & 6,258 & 187,626 & 3.34\% \\
-Permanent & Train & 143,173 & 137,794 & 5,379 & 143,173 & 3.76\% \\
-Permanent & Test & 18,111 & 17,511 & 542 & 18,053 & 3.00\% \\
-Permanent & OOS & 27,176 & 26,063 & 337 & 26,400 & 1.28\% \\
+Temp. & Train & 143,173 & 6,543 & 4.57\% \\
+Temp. & Test & 18,111 & 804 & 4.44\% \\
+Temp. & OOS & 18,502 & 1,170 & 6.32\% \\
+Perm. & Train & 143,173 & 5,379 & 3.76\% \\
+Perm. & Test & 18,053 & 542 & 3.00\% \\
+Perm. & OOS & 26,400 & 337 & 1.28\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-
+\end{column}
+\end{columns}
 \vspace{0.25em}
 \begin{block}{Read}
 \scriptsize
-Both targets remain rare after the observable-scaffold cleanup. Unresolved labels stay in canonical artifacts for scaffold consistency, but are excluded from labelled counts shown here, supervised training, and label-based evaluation.
+The labels stay rare after the observable-scaffold cleanup. CRSP terminal-failure information is an additive audit/override around the CSI timing rule, not an independent default label.
 \end{block}
-\sourcefoot{Labelled rows = $y=0+y=1$; prevalence = $y=1$/labelled rows.}
+\sourcefoot{Sources: AE-PANEL label-count and CRSP-overlap evidence used in the original appendix source map.}
 \end{frame}
 
-\begin{frame}{Appendix A4: Descriptive Statistics -- Market Cap}
-\fontsize{5.7pt}{6.25pt}\selectfont
-\textbf{Market cap, USD millions}
-\vspace{-0.25em}
+\begin{frame}{Appendix A2: Descriptive Statistics and Feature Groups}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Positive firms look distressed before modelling}
+\vspace{0.15em}
 \begin{table}[ht]
 \centering
-\setlength{\tabcolsep}{2.8pt}
-\begin{tabular}{L{1.55cm}L{0.95cm}R{0.45cm}R{1.0cm}R{0.9cm}R{0.85cm}R{0.85cm}}
+\setlength{\tabcolsep}{2.1pt}
+\begin{tabular}{L{1.45cm}L{1.05cm}R{0.8cm}R{0.85cm}R{0.75cm}}
 \toprule
-CSI type & Split & y & Mean & Median & P25 & P75 \\
+Track & Class & Mkt cap & Ann. ret. & ROA \\
 \midrule
-Temporary & CV & 0 & 4,117.4 & 408.1 & 87.3 & 1,924.5 \\
-Temporary & CV & 1 & 613.4 & 85.1 & 30.0 & 255.5 \\
-Temporary & Full & 0 & 4,864.6 & 350.9 & 67.2 & 1,903.7 \\
-Temporary & Full & 1 & 574.6 & 68.7 & 23.3 & 228.0 \\
-Permanent & CV & 0 & 3,452.1 & 354.5 & 85.2 & 1,551.6 \\
-Permanent & CV & 1 & 447.3 & 79.6 & 30.3 & 221.6 \\
-Permanent & Full & 0 & 3,558.3 & 249.3 & 57.7 & 1,232.6 \\
-Permanent & Full & 1 & 496.5 & 66.2 & 22.7 & 219.0 \\
+Temp. & y=0 & 350.9 & 4.9\% & 1.6\% \\
+Temp. & y=1 & 68.7 & -35.0\% & -18.8\% \\
+Perm. & y=0 & 249.3 & 4.2\% & 1.5\% \\
+Perm. & y=1 & 66.2 & -37.5\% & -19.3\% \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\vspace{0.25em}
-\begin{block}{Read}
-\scriptsize
-CSI-positive firms are much smaller across both definitions. In the full sample, median market cap is 68.7 for temporary positives versus 350.9 for non-positives, and 66.2 for permanent positives versus 249.3 for non-positives.
-\end{block}
-\sourcefoot{Market cap is USD millions.}
+\vspace{0.2em}
+\scriptsize Market cap is the full-sample median in USD millions.
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Feature blocks retained}
+\vspace{0.2em}
+\begin{itemize}
+  \item Point-in-time accounting ratios: leverage, liquidity, profitability, accruals, cash flow, and Altman-style distress.
+  \item Firm histories: differences, accelerations, expanding means/volatility, rolling minima/maxima/trends, and peak/trough moves.
+  \item Price and macro signals: momentum, volatility, drawdowns, macro levels, and selected firm $\times$ macro interactions.
+  \item Feature sets: base, expanded, VAE latent, and expanded plus VAE.
+\end{itemize}
+\end{column}
+\end{columns}
+\sourcefoot{Sources: descriptive-statistics CSVs and feature-dictionary evidence from the original appendix/source map.}
 \end{frame}
 
-\begin{frame}{Appendix A5: Descriptive Statistics -- Other Medians}
-\fontsize{5.55pt}{6.1pt}\selectfont
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.6pt}
-\begin{tabular}{L{1.45cm}L{0.95cm}R{0.45cm}R{0.85cm}R{0.9cm}R{0.9cm}R{0.75cm}R{0.65cm}}
-\toprule
-CSI type & Split & y & Ann. ret. & Assets & Sales & ROA & M/B \\
-\midrule
-Temporary & CV & 0 & 6.1\% & 640.9 & 326.7 & 1.7\% & 1.82 \\
-Temporary & CV & 1 & -24.9\% & 86.1 & 50.2 & -14.2\% & 1.51 \\
-Temporary & Full & 0 & 4.9\% & 565.3 & 295.2 & 1.6\% & 1.81 \\
-Temporary & Full & 1 & -35.0\% & 77.5 & 46.8 & -18.8\% & 1.59 \\
-Permanent & CV & 0 & 6.0\% & 567.8 & 270.2 & 1.7\% & 1.82 \\
-Permanent & CV & 1 & -28.3\% & 78.8 & 44.4 & -15.8\% & 1.46 \\
-Permanent & Full & 0 & 4.2\% & 395.3 & 191.9 & 1.5\% & 1.80 \\
-Permanent & Full & 1 & -37.5\% & 64.6 & 35.1 & -19.3\% & 1.52 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.25em}
-\begin{block}{Read}
+\begin{frame}{Appendix A3: CV Design and Model Metrics}
 \scriptsize
-The positive class has sharply lower realized returns, smaller operating scale, and negative profitability. The contrast strengthens in the full sample for both temporary and permanent CSI.
-\end{block}
-\sourcefoot{Assets and sales are USD millions.}
-\end{frame}
-
-\begin{frame}{Appendix A6: CV Folds, Leakage Controls, and Training Metric}
-\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.47\textwidth}
 \textbf{Expanding-window CV}
-
-\vspace{0.25em}
+\vspace{0.15em}
+\begin{table}[ht]
 \centering
-\begin{tabular}{R{0.55cm}L{3.0cm}L{5.7cm}}
+\setlength{\tabcolsep}{2.1pt}
+\begin{tabular}{R{0.45cm}L{2.3cm}L{2.45cm}}
 \toprule
-Fold & Training years & Validation years \\
+Fold & Training & Validation \\
 \midrule
-1 & Initial training block & No validation; used to seed expanding window \\
-2 & Up to 1998 & 1999-2004 \\
-3 & Up to 2004 & 2005-2009 \\
-4 & Up to 2009 & 2010-2015 \\
+1 & Initial block & seed only \\
+2 & through 1998 & 1999--2004 \\
+3 & through 2004 & 2005--2009 \\
+4 & through 2009 & 2010--2015 \\
 \bottomrule
 \end{tabular}
+\end{table}
+\vspace{0.2em}
+Split-before-preprocessing discipline is retained: winsorization, imputation, PIT scaling, and thresholds are fitted on training/CV information only.
+\end{column}
+\begin{column}{0.51\textwidth}
+\textbf{Payoff metrics used in the main story}
+\vspace{0.15em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{L{1.1cm}L{1.45cm}R{0.78cm}R{0.78cm}R{0.78cm}}
+\toprule
+Track & Split/model & AP & AUC & R@FPR3 \\
+\midrule
+Temp. & Test AG Exp. & 0.1985 & 0.8766 & 0.2002 \\
+Temp. & OOS AG +VAE & 0.3152 & 0.8950 & 0.2632 \\
+Perm. & Test AG Exp. & 0.1416 & 0.8810 & 0.1808 \\
+Perm. & Test AG +VAE & 0.1415 & 0.8838 & 0.2011 \\
+Perm. & OOS VAE latent & 0.0482 & 0.8337 & 0.1484 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\end{columns}
+\vspace{0.25em}
+\begin{alertblock}{Metric interpretation}
+\scriptsize
+AP and fixed-FPR recall are emphasized because positives are rare. Economic claims are made only after thresholding, exclusions, turnover, and returns in the index section.
+\end{alertblock}
+\sourcefoot{Sources: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv} and raw derived metrics.}
+\end{frame}
 
-\vspace{0.8em}
-\raggedright
-\textbf{Training / selection metric}
-
+\begin{frame}{Appendix A4: VAE and Model-Family Evidence}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.47\textwidth}
+\textbf{VAE setup}
+\vspace{0.2em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{L{1.7cm}L{3.4cm}}
+\toprule
+Item & Setting \\
+\midrule
+Encoder & $n \rightarrow 256 \rightarrow 128 \rightarrow 64$ \\
+Latent dim. & 24 \\
+Decoder & $z \rightarrow 64 \rightarrow 128 \rightarrow 256 \rightarrow n$ \\
+Loss & Recon. + $\beta$ KL + $\gamma$ CSI loss \\
+Weights & $\beta=1.0$, $\gamma=0.1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+Test and OOS labels are not used for VAE fitting.
+\end{column}
+\begin{column}{0.51\textwidth}
+\textbf{Model-family result}
 \vspace{0.2em}
 \begin{itemize}
-  \item \textbf{AutoGluon:} yes, model ranking uses AP via \texttt{EVAL\_METRIC = "average\_precision"} passed to \texttt{TabularPredictor(..., eval\_metric=EVAL\_METRIC)} in \texttt{09C\_AutoGluon.py}.
-  \item \textbf{XGBoost:} binary-logistic training uses \texttt{eval\_metric="aucpr"} in \texttt{09\_Train.R}; reported AP is computed from predicted probabilities.
-  \item Split before preprocessing.
-  \item Train-fitted winsorization, imputation, and PIT only.
-  \item CV AP/AUC/R@FPR metrics are averaged per fold; OOS is reserved for index construction, not model selection.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Appendix A7: Feature Engineering Groups}
-\fontsize{6.9pt}{7.55pt}\selectfont
-\renewcommand{\arraystretch}{1.08}
-\setlength{\tabcolsep}{3.0pt}
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{L{2.55cm}L{8.15cm}}
-\toprule
-Group & How it works in the final model inputs \\
-\midrule
-Firm fundamentals & Point-in-time ratios turn accounting levels into leverage, liquidity, coverage, profitability, accrual, cash-flow, and Altman-style signals. \\
-Level and momentum & First differences, second differences, lagged expanding means, peak/trough moves, consecutive-decline counters, accounting momentum, and 3/5-year rolling mean/min/max/trend/autocorrelation summarize each firm's own history. \\
-Dispersion and price distress & Within-firm dispersion appears through lagged expanding volatility, rolling standard deviation, monthly return volatility, trailing momentum, and 12/60-month drawdown features. These are time-series distress summaries, not peer-universe cross-sectional ranks. \\
-Macro and interactions & Macro levels and regimes enter directly, with selected firm \(\times\) macro interactions such as leverage/rates, coverage/rates, debt/high-yield spreads, profitability/GDP growth, and returns/VIX. \\
-Rank-style VAE scaling & Before VAE fitting, continuous inputs are imputed using train-fitted rules and transformed by train-fitted PIT/quantile scaling to a percentile-like \([0,1]\) scale; test and OOS rows reuse those fitted transforms. \\
-Feature-set assembly & \textbf{Base} strips price-direction features; \textbf{Expanded} uses the full engineered matrix; \textbf{Latent} uses VAE \(z_1,\ldots,z_{24}\) plus reconstruction error; \textbf{Exp. + VAE} concatenates expanded and latent signals. \\
-Metadata excluded & Labels, event dates, confirmation dates, censoring flags, and diagnostics are retained for audit but excluded from model features. \\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{frame}
-
-\begin{frame}{Appendix A8: Best-Model Hyperparameters and Choices}
-\scriptsize
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\textwidth}
-\textbf{What won locally}
-\begin{itemize}
-  \item All eight track $\times$ feature-set runs rank \texttt{WeightedEnsemble\_L2} first.
-  \item Selection uses average precision, matching the rare-positive CSI setting.
-  \item Temporary CSI: \texttt{raw\_plus\_latent} has the strongest CV/OOS AP case; raw remains the test/AUC comparator.
-  \item Permanent CSI: \texttt{raw\_plus\_latent} is the main non-raw challenger; \texttt{latent\_raw} is only an OOS robustness sensitivity.
-\end{itemize}
-\end{column}
-\begin{column}{0.49\textwidth}
-\textbf{Hyperparameter/model-choice evidence}
-\begin{itemize}
-  \item \texttt{WeightedEnsemble\_L2}: stack level 2, greedy ensemble, \texttt{save\_bag\_folds = TRUE}, target ensemble size 25.
-  \item Base menu: LightGBM variants, CatBoost, XGBoost, ExtraTrees/RandomForest, and neural nets.
-  \item Retained \texttt{LightGBMLarge}: learning rate 0.03, 128 leaves, feature fraction 0.9, minimum leaf size 3.
-  \item Full fitted hyperparameters are pruned for some compact evidence, so missing tuning details are not inferred.
+  \item All eight final track $\times$ feature-set AutoGluon leaderboards select \texttt{WeightedEnsemble\_L2}.
+  \item Useful base signal is mostly tree/boosted-tree based; neural nets were tried but do not dominate.
+  \item AG Expanded is the reporting baseline; AG Expanded + VAE is the strongest challenger in the main modelling story.
+  \item VAE augments the expanded predictors; it does not replace tabular fundamentals.
 \end{itemize}
 \end{column}
 \end{columns}
-
-\vspace{0.25em}
-\begin{alertblock}{Story}
-\scriptsize
-The local evidence favors nonlinear mixtures over one stable parametric form. Ensembles dominate the validation leaderboards; tree and boosted-tree families carry much of the signal, while XGBoost appears as a candidate/component rather than the final standalone winner.
-\end{alertblock}
-\remarkfoot{Source: model-suite comparison files, family-winner CSV, compact hyperparameter JSONs, ensemble-weight JSONs, and AutoGluon log excerpts under \texttt{03\_Data\_Output/6\_ModelSuite}.}
+\sourcefoot{Sources: model-suite family-winner CSVs, compact hyperparameter JSONs, ensemble-weight JSONs, and VAE evidence files.}
 \end{frame}
 
-\begin{frame}{Appendix A9: VAE Architecture Details}
-\scriptsize
-\begin{table}[ht]
-\centering
-\begin{tabular}{L{3.2cm}L{7.2cm}}
-\toprule
-Component & Setting \\
-\midrule
-Encoder & $n\_features \rightarrow 256 \rightarrow 128 \rightarrow 64 \rightarrow z\_mean,z\_log\_var$ \\
-Latent dimension & 24 \\
-Decoder & $z \rightarrow 64 \rightarrow 128 \rightarrow 256 \rightarrow n\_features$ \\
-Loss & Reconstruction + $\beta$ KL + $\gamma$ supervised CSI classification loss \\
-Parameters & $\beta=1.0$, $\gamma=0.1$, early stopping patience 15 \\
-Status & Weakly supervised on training rows; test and OOS labels are not used for VAE fitting. \\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{frame}
-
-\begin{frame}{Appendix A10: Temporary CSI CV/Test/OOS Model Metrics}
-\fontsize{4.85pt}{5.35pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{1.8pt}
-\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{0.7cm}L{2.35cm}R{0.72cm}R{0.72cm}R{0.76cm}R{0.76cm}R{0.76cm}R{0.72cm}}
-\toprule
-Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
-\midrule
-CV & AG Expanded Dataset & 0.2046 & 0.8635 & 0.0917 & 0.2344 & 0.3415 & 0.0371 \\
-CV & AG Base Dataset & 0.1923 & 0.8446 & 0.0830 & 0.2206 & 0.3229 & 0.0374 \\
-CV & AG Latent Dataset (VAE) & 0.1659 & 0.8454 & 0.0670 & 0.1706 & 0.2735 & 0.0380 \\
-CV & AG Exp. Dataset + VAE & \textbf{0.2114} & \textbf{0.8667} & \textbf{0.0981} & \textbf{0.2478} & \textbf{0.3581} & \textbf{0.0368} \\
-Test & AG Expanded Dataset & \textbf{0.1985} & \textbf{0.8766} & \textbf{0.0821} & \textbf{0.2002} & \textbf{0.2998} & \textbf{0.0389} \\
-Test & AG Base Dataset & 0.1656 & 0.8538 & 0.0585 & 0.1517 & 0.2413 & 0.0392 \\
-Test & AG Latent Dataset (VAE) & 0.1501 & 0.8438 & 0.0410 & 0.1294 & 0.2264 & 0.0394 \\
-Test & AG Exp. Dataset + VAE & 0.1864 & 0.8741 & 0.0634 & 0.1779 & 0.2749 & 0.0394 \\
-OOS & AG Expanded Dataset & 0.3084 & \textbf{0.8961} & 0.0915 & 0.2547 & 0.4000 & 0.0498 \\
-OOS & AG Base Dataset & 0.2526 & 0.8686 & 0.0598 & 0.1795 & 0.3017 & 0.0526 \\
-OOS & AG Latent Dataset (VAE) & 0.2813 & 0.8626 & 0.1009 & 0.2274 & 0.3556 & 0.0518 \\
-OOS & AG Exp. Dataset + VAE & \textbf{0.3152} & 0.8950 & \textbf{0.1051} & \textbf{0.2632} & \textbf{0.4128} & \textbf{0.0494} \\
-\bottomrule
-\end{tabular}
-\end{center}
-\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix A11: Permanent CSI CV/Test/OOS Model Metrics}
-\fontsize{4.85pt}{5.35pt}\selectfont
-\renewcommand{\arraystretch}{0.78}
-\setlength{\tabcolsep}{1.8pt}
-\textbf{Full model-suite threshold metrics} {\scriptsize \quad Train/CV, test, and OOS; AP/AUC/FPR recall.}
-\vspace{-0.25em}
-\begin{center}
-\begin{tabular}{L{0.7cm}L{2.35cm}R{0.72cm}R{0.72cm}R{0.76cm}R{0.76cm}R{0.76cm}R{0.72cm}}
-\toprule
-Split & Model & AP & AUC & R@FPR1 & R@FPR3 & R@FPR5 & Brier \\
-\midrule
-CV & AG Expanded Dataset & 0.1854 & \textbf{0.8757} & 0.1098 & \textbf{0.2607} & \textbf{0.3697} & 0.0297 \\
-CV & AG Base Dataset & 0.1785 & 0.8677 & 0.1033 & 0.2379 & 0.3469 & 0.0299 \\
-CV & AG Latent Dataset (VAE) & 0.1426 & 0.8460 & 0.0732 & 0.1960 & 0.2908 & 0.0308 \\
-CV & AG Exp. Dataset + VAE & \textbf{0.1883} & 0.8719 & \textbf{0.1196} & 0.2578 & 0.3680 & \textbf{0.0297} \\
-Test & AG Expanded Dataset & \textbf{0.1416} & 0.8810 & \textbf{0.0664} & 0.1808 & 0.3007 & 0.0284 \\
-Test & AG Base Dataset & 0.1289 & 0.8627 & 0.0627 & 0.1697 & 0.2620 & 0.0293 \\
-Test & AG Latent Dataset (VAE) & 0.1115 & 0.8496 & 0.0424 & 0.1513 & 0.2546 & \textbf{0.0280} \\
-Test & AG Exp. Dataset + VAE & 0.1415 & \textbf{0.8838} & 0.0609 & \textbf{0.2011} & \textbf{0.3155} & 0.0283 \\
-OOS & AG Expanded Dataset & 0.0323 & 0.8081 & 0.0000 & 0.0119 & 0.0623 & 0.0211 \\
-OOS & AG Base Dataset & 0.0281 & 0.7798 & 0.0000 & 0.0030 & 0.0297 & 0.0232 \\
-OOS & AG Latent Dataset (VAE) & \textbf{0.0482} & \textbf{0.8337} & \textbf{0.0504} & \textbf{0.1484} & \textbf{0.2226} & \textbf{0.0166} \\
-OOS & AG Exp. Dataset + VAE & 0.0311 & 0.8032 & 0.0000 & 0.0208 & 0.0653 & 0.0207 \\
-\bottomrule
-\end{tabular}
-\end{center}
-\remarkfoot{Source: \texttt{03\_Data\_Output/6\_ModelSuite/comparison/AE-MODEL-SUITE-007\_model\_suite\_metrics\_long.csv}; raw comparator from \texttt{raw/derived\_metrics/raw\_complete\_threshold\_metrics.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix A12: Model Family Winners}
-\scriptsize
-\begin{alertblock}{AutoGluon selection evidence}
-\scriptsize
-Every final feature-set/track run selected a \texttt{WeightedEnsemble\_L2} as the top leaderboard model. The useful base signal is mostly tree-based; neural nets were considered but did not dominate.
-\end{alertblock}
-\vspace{0.15em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.8pt}
-\begin{tabular}{L{2.1cm}L{2.0cm}L{2.2cm}R{1.2cm}R{1.2cm}}
-\toprule
-Track & Feature set & Best family & Val. score & Fit sec. \\
-\midrule
-Temporary & AG Expanded Dataset & WeightedEnsemble & 0.2307 & 280 \\
-Temporary & AG Base Dataset & WeightedEnsemble & 0.2203 & 83 \\
-Temporary & AG Latent Dataset (VAE) & WeightedEnsemble & 0.1953 & 146 \\
-Temporary & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2314} & 203 \\
-Permanent & AG Expanded Dataset & WeightedEnsemble & 0.2010 & 126 \\
-Permanent & AG Base Dataset & WeightedEnsemble & 0.1929 & 229 \\
-Permanent & AG Latent Dataset (VAE) & WeightedEnsemble & 0.1505 & 191 \\
-Permanent & AG Exp. Dataset + VAE & WeightedEnsemble & \textbf{0.2041} & 291 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\remarkfoot{Source: \texttt{AE-MODEL-SUITE-007\_model\_family\_winners.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix A13: Model Metric Caveats and OOS Robustness}
-\scriptsize
-\begin{block}{Comparability}
-\scriptsize
-The raw comparator is the revised-dataset optional-library AutoGluon rerun from AE-VALIDATE. Complete local threshold metrics were later materialized under \texttt{03\_Data\_Output/6\_ModelSuite/raw/derived\_metrics}, so the presentation uses AP, AUC, Brier, and R@FPR1/3/5 consistently across feature sets.
-\end{block}
-\vspace{0.15em}
-\begin{itemize}
-  \item AP and fixed-FPR recall are emphasized because CSI positives are rare.
-  \item AUC remains useful as a ranking diagnostic but can mask low-prevalence false-positive economics.
-  \item AG Exp. Dataset + VAE is the main enhanced feature-set challenger for temporary CSI and permanent test/CV.
-  \item AG Latent Dataset (VAE) is retained for permanent OOS robustness, not as a universal replacement.
-  \item Economic superiority is not claimed from model metrics alone; index-construction slides test benchmark-relative performance.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Appendix A14: Final Index Grid Contract}
+\begin{frame}{Appendix A5: Index Grid and Selected Rules}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.50\textwidth}
-\textbf{Completed grid}
+\begin{column}{0.49\textwidth}
+\textbf{Completed economic grid}
 \begin{itemize}
-  \item Models: AG Expanded Dataset, AG Base Dataset, AG Latent Dataset (VAE), and AG Exp. Dataset + VAE.
   \item Tracks: temporary CSI and permanent CSI.
-  \item Universes: Total Market, Large Cap, Mid Cap, Small Cap.
-  \item Thresholds: Youden, FPR1, FPR3, FPR5.
+  \item Universes: Total, Large, Mid, and Small.
+  \item Models: AG Expanded, AG Base, AG Latent (VAE), and AG Expanded + VAE.
+  \item Thresholds: Youden, FPR1, FPR3, and FPR5.
+  \item Transaction costs: 0, 5, 10, and 20 bps on strategy turnover.
 \end{itemize}
 \end{column}
-\begin{column}{0.48\textwidth}
-\textbf{Portfolio rules}
+\begin{column}{0.49\textwidth}
+\textbf{Rules used in the final selected strategies}
 \begin{itemize}
-  \item Temporary CSI: 1-, 2-, 3-, and 5-year exclusion lockouts.
-  \item Permanent CSI: absorbing permanent removal after first active signal.
-  \item Costs: 0, 5, 10, and 20 bps on gross turnover.
-  \item Turnover output is populated for every model--track--universe cell.
+  \item Temporary CSI uses finite exclusion lockouts: 1, 2, 3, or 5 years.
+  \item Permanent CSI is absorbing after the first active signal.
+  \item Temporary winners mostly use Youden with longer finite lockouts.
+  \item Permanent winners mostly use FPR3/FPR5, where the absorbing rule makes false positives more costly.
 \end{itemize}
 \end{column}
 \end{columns}
-\vspace{0.4em}
-\begin{alertblock}{Presentation interpretation}
-\scriptsize
-The index section uses OOS economic performance. Model metrics identify useful prediction signals; index construction tests whether those signals improve benchmark-relative returns after thresholding, exclusions, turnover, and transaction costs.
-\end{alertblock}
-\remarkfoot{Sources: \texttt{comparison/full\_grid\_manifest.csv}; \texttt{comparison/best\_by\_track\_index\_cost.csv}; \texttt{comparison/turnover\_summary.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix A15: 20 bps Winners With Benchmarks}
-\fontsize{5.65pt}{6.15pt}\selectfont
-\textbf{Best strategy by track and universe at 20 bps}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{L{0.85cm}L{1.00cm}L{1.75cm}L{1.40cm}R{0.65cm}R{0.65cm}R{0.65cm}}
-\toprule
-Track & Universe & Winner & Rule & Net ret. & Bench. & Alpha \\
-\midrule
-Temp. & Total & AG Base Dataset & Youden / 3yr & 13.70\% & 13.29\% & +0.41pp \\
-Temp. & Large & AG Base Dataset & Youden / 3yr & 14.40\% & 14.28\% & +0.12pp \\
-Temp. & Mid & AG Base Dataset & FPR5 / 5yr & 9.93\% & 9.65\% & +0.28pp \\
-Temp. & Small & AG Exp. Dataset + VAE & Youden / 3yr & 8.11\% & 7.65\% & +0.45pp \\
-Perm. & Total & AG Exp. Dataset + VAE & FPR5 / perm. & 13.54\% & 13.29\% & +0.25pp \\
-Perm. & Large & AG Exp. Dataset + VAE & FPR5 / perm. & 14.48\% & 14.28\% & +0.20pp \\
-Perm. & Mid & AG Base Dataset & FPR5 / perm. & 10.16\% & 9.65\% & +0.51pp \\
-Perm. & Small & AG Latent Dataset (VAE) & FPR3 / perm. & 7.82\% & 7.65\% & +0.16pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\scriptsize
-VAE/non-raw variants beat raw in 5 of 8 track--index cases at 20 bps. The market-weighted benchmark is the zero-cost return reference and does not receive a strategy cost overlay.
-\remarkfoot{Sources: presentation headline tables; AE-TC-RECHECK-002 zero-cost benchmark recomputation.}
-\end{frame}
-
-\begin{frame}{Appendix A16: Error Decomposition and Index Source Paths}
-\scriptsize
-\textbf{Base folders:} \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/}\\
-\vspace{0.25em}
-\begin{itemize}
-  \item Headline winners: \texttt{final\_tables/headline\_winners\_20bps.csv}
-  \item Presentation tables: \texttt{final\_tables/presentation\_headline\_tables.md}
-  \item Transaction costs: \texttt{comparison/transaction\_cost\_impact.csv}; \texttt{final\_tables/transaction\_cost\_robustness\_summary.csv}
-  \item Best-by-cost grid: \texttt{comparison/best\_by\_track\_index\_cost.csv}
-  \item Threshold-family grid: \texttt{comparison/best\_by\_track\_index\_threshold\_family.csv}
-  \item Strategy performance fields: model-specific \texttt{index\_performance\_gross\_and\_net\_by\_tc.csv}
-  \item Threshold families: \texttt{final\_tables/threshold\_family\_summary\_20bps.csv}
-  \item Turnover: \texttt{comparison/turnover\_summary.csv}; \texttt{final\_tables/winner\_turnover\_summary\_20bps.csv}
-  \item Error-cost decomposition: selected AG Base Dataset, AG Exp. Dataset + VAE, and AG Latent Dataset (VAE) \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv} files mapped exactly in \texttt{SLIDE\_DATA\_SOURCES.md}.
-\end{itemize}
 \vspace{0.3em}
-\begin{block}{Source discipline}
+\begin{block}{Interpretation}
 \scriptsize
-All claims in the index-result slides are sourced from the completed AE-INDEX-SUITE grid. Sensitivity-analysis results are intentionally not finalized in this section.
+The rules translate calibrated risk ranks into implementable exclusions. Model quality is necessary, but realized alpha also depends on event timing, universe weights, turnover, and benchmark returns.
 \end{block}
+\sourcefoot{Sources: \texttt{full\_grid\_manifest.csv}, \texttt{best\_by\_track\_index\_cost.csv}, threshold-family summaries, and turnover summaries.}
 \end{frame}
 
-\begin{frame}{Appendix A17: Transaction-Cost Robustness}
-\fontsize{5.75pt}{6.25pt}\selectfont
-\textbf{Top winner did not change between 0 and 20 bps}
-\vspace{-0.25em}
+\begin{frame}{Appendix A6: Transaction Costs and Attribution Sources}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{20 bps robustness summary}
+\vspace{0.15em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{L{1.05cm}L{1.15cm}L{1.50cm}L{1.50cm}R{0.74cm}R{0.74cm}}
+\begin{tabular}{L{1.15cm}L{1.1cm}R{0.8cm}R{0.8cm}}
 \toprule
-Track & Universe & Winner 0 bps & Winner 20 bps & Alpha 0 & Alpha 20 \\
+Track & Univ. & Alpha 0 & Alpha 20 \\
 \midrule
-Temp. & Total & AG Base Dataset & AG Base Dataset & +0.43pp & +0.41pp \\
-Temp. & Large & AG Base Dataset & AG Base Dataset & +0.15pp & +0.12pp \\
-Temp. & Mid & AG Base Dataset & AG Base Dataset & +0.51pp & +0.28pp \\
-Temp. & Small & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.64pp & +0.45pp \\
-Perm. & Total & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.27pp & +0.25pp \\
-Perm. & Large & AG Exp. Dataset + VAE & AG Exp. Dataset + VAE & +0.23pp & +0.20pp \\
-Perm. & Mid & AG Base Dataset & AG Base Dataset & +0.74pp & +0.51pp \\
-Perm. & Small & AG Latent Dataset (VAE) & AG Latent Dataset (VAE) & +0.32pp & +0.16pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\scriptsize
-Costs are applied at 0, 5, 10, and 20 bps. The 20 bps case is conservative enough for presentation, but not high enough to reverse the headline rankings. Active alpha uses the zero-cost benchmark convention.
-\remarkfoot{Sources: transaction-cost robustness summary; AE-TC-RECHECK-002 zero-cost benchmark recomputation.}
-\end{frame}
-
-\begin{frame}{Appendix A18: Threshold Family and Turnover Summary}
-\fontsize{5.85pt}{6.35pt}\selectfont
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.50\textwidth}
-\textbf{Mean best alpha by threshold family}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.15cm}L{1.15cm}R{0.78cm}}
-\toprule
-Track & Threshold & Mean alpha \\
-\midrule
-Temp. & Youden & +0.24pp \\
-Temp. & FPR3 & +0.08pp \\
-Temp. & FPR5 & +0.07pp \\
-Temp. & FPR1 & +0.01pp \\
-Perm. & FPR3 & +0.24pp \\
-Perm. & FPR5 & +0.22pp \\
-Perm. & FPR1 & +0.03pp \\
-Perm. & Youden & -0.31pp \\
+Temp. & Total & +0.43 & +0.41 \\
+Temp. & Large & +0.15 & +0.12 \\
+Temp. & Mid & +0.51 & +0.28 \\
+Temp. & Small & +0.64 & +0.45 \\
+Perm. & Total & +0.27 & +0.25 \\
+Perm. & Large & +0.23 & +0.20 \\
+Perm. & Mid & +0.74 & +0.51 \\
+Perm. & Small & +0.32 & +0.16 \\
 \bottomrule
 \end{tabular}
 \end{table}
 \end{column}
-\begin{column}{0.48\textwidth}
-\textbf{Mean annualized turnover for winners}
+\begin{column}{0.49\textwidth}
+\textbf{Attribution/source paths}
+\begin{itemize}
+  \item Headline winners and TC overlays come from AE-INDEX-SUITE final tables and comparison outputs.
+  \item Contribution slides use config-level attribution plus model-specific error-cost decompositions.
+  \item Test-set contribution rows use main-suite \texttt{period=test} attribution where isolated test diagnostics are unavailable.
+  \item Active alpha is measured versus the zero-cost market-cap benchmark; only the strategy pays transaction costs.
+\end{itemize}
+\end{column}
+\end{columns}
+\sourcefoot{Sources: \texttt{03\_Data\_Output/7\_IndexConstructionValidation/nonraw\_index\_suite/} comparison/final-table outputs and AE-ATTRIB evidence.}
+\end{frame}
+
+\begin{frame}{Appendix A7: Temporary CSI Sensitivity Detail}
+\scriptsize
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{L{1.45cm}L{1.7cm}R{0.75cm}R{0.75cm}R{0.78cm}R{0.85cm}L{1.05cm}}
+\toprule
+Role & Run ID & Pos. & OOS AP & OOS AUC & 11C alpha & Status \\
+\midrule
+Composite & \texttt{C090\_M000\_T012} & 12,761 & 0.557 & 0.920 & +0.169 & complete \\
+AP winner & \texttt{C060\_M000\_T012} & 31,596 & 0.566 & 0.864 & +0.052 & reused \\
+11C winner & \texttt{C090\_M020\_T018} & 6,035 & 0.274 & 0.911 & +0.226 & complete \\
+Baseline & \texttt{C080\_M020\_T018} & 8,517 & 0.308 & 0.896 & +0.065 & reused \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{0.15em}
+\begin{block}{Main-run comparison and limits}
+\scriptsize
+The accepted main run \texttt{C080\_M020\_T018} is the continuity baseline, not the top sensitivity setting. Across completed/reused temporary-CSI C/M/T runs, sensitivity changes magnitude more than direction. This sensitivity evidence is temporary-CSI only and does not support permanent-CSI sensitivity claims.
+\end{block}
+\begin{block}{Incomplete grid disclosure}
+\scriptsize
+Three configurations remain \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}.
+\end{block}
+\sourcefoot{Sources: local AE-SENS summary CSVs and temporary transaction-cost overlay files.}
+\end{frame}
+
+\begin{frame}{Appendix A8: Limitations, Future Work, and Source Traceability}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Limitations kept explicit}
+\begin{itemize}
+  \item Sensitivity evidence is temporary-CSI only.
+  \item Test-set attribution caveats are documented where main-suite \texttt{period=test} rows are used.
+  \item Model metrics do not establish index alpha by themselves.
+  \item Feature-importance slides are directional perturbation evidence, not full AutoGluon-native importance.
+\end{itemize}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Traceability pointer}
+\begin{itemize}
+  \item Dataset/model/index/sensitivity claims map to source files in the slide-source map and ticket evidence.
+  \item Conceptual frames and future-work notes are marked as non-result claims.
+  \item Future robustness: permanent-CSI sensitivity, low-vol/quality benchmarks, probability weighting, and terminal-failure miss decomposition.
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{0.3em}
+\begin{alertblock}{Source-map status}
+\scriptsize
+This cleaned Draft appendix is a presentation-compression pass. The ticket evidence records the appendix remapping and the feature-importance source files used for A9--A10.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Appendix A9: Feature Importance -- 11 Families}
+\scriptsize
+\textbf{Temporary CSI, AG Expanded family-level perturbation; top canonical families}
+\vspace{0.1em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{2.2pt}
-\begin{tabular}{L{1.15cm}R{0.78cm}R{0.78cm}}
+\begin{tabular}{L{3.45cm}R{0.9cm}R{0.82cm}R{0.55cm}L{2.25cm}}
 \toprule
-Universe & Temp. & Perm. \\
+Family & Abs. response & Signed & N & Scale \\
 \midrule
-Total & 15.3\% & 12.2\% \\
-Large & 18.8\% & 17.2\% \\
-Mid & 97.7\% & 97.0\% \\
-Small & 77.2\% & 72.4\% \\
+Point-in-time ratios & 0.609 & -0.121 & 53 & \rule{2.20cm}{0.55em} \\
+Rolling-window statistics & 0.523 & -0.083 & 180 & \rule{1.89cm}{0.55em} \\
+Peak deterioration & 0.152 & -0.021 & 18 & \rule{0.55cm}{0.55em} \\
+Expanding volatility & 0.098 & +0.005 & 38 & \rule{0.35cm}{0.55em} \\
+YoY changes & 0.094 & -0.015 & 38 & \rule{0.34cm}{0.55em} \\
+Expanding mean & 0.065 & -0.007 & 38 & \rule{0.23cm}{0.55em} \\
+Trough rise & 0.048 & +0.002 & 7 & \rule{0.17cm}{0.55em} \\
+Price/macro interactions & 0.039 & -0.004 & 5 & \rule{0.14cm}{0.55em} \\
+Acceleration & 0.037 & -0.002 & 38 & \rule{0.13cm}{0.55em} \\
+Accounting momentum & 0.037 & -0.004 & 15 & \rule{0.13cm}{0.55em} \\
+Consecutive declines & 0.008 & +0.001 & 10 & \rule{0.03cm}{0.55em} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{-0.1em}
+\begin{block}{Caveat}
+\scriptsize
+Model-based log-odds perturbation on bounded GBM-only predictor workspace; CV/training rows only; interpret as directional model-response evidence, not full AutoGluon-native feature importance.
+\end{block}
+\sourcefoot{\texttt{03\_Data\_Output/10\_FeatureImportance/family\_importance/AE-FEAT-IMPORT-004R\_family\_importance\_summary.csv}.}
+\end{frame}
+
+\begin{frame}{Appendix A10: Feature Importance -- Ratios and Individual Drivers}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.49\textwidth}
+\textbf{Point-in-time ratios}
+\vspace{0.1em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{2.1pt}
+\begin{tabular}{L{2.2cm}R{0.85cm}R{0.75cm}}
+\toprule
+Ratio & Abs. & Signed \\
+\midrule
+\texttt{earn\_yld} & 0.133 & -0.017 \\
+\texttt{altman\_z2} & 0.131 & +0.012 \\
+\texttt{ocf\_per\_share} & 0.101 & -0.015 \\
+\texttt{roic} & 0.067 & -0.019 \\
+\texttt{roa} & 0.048 & -0.020 \\
+\texttt{ocf\_margin} & 0.046 & -0.009 \\
+\texttt{interest\_cov} & 0.042 & -0.013 \\
+\texttt{quick\_ratio} & 0.028 & -0.003 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Individual features}
+\vspace{0.1em}
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{1.8pt}
+\begin{tabular}{L{2.25cm}R{0.8cm}L{1.45cm}}
+\toprule
+Feature & Abs. & Family \\
+\midrule
+\texttt{unrate} & 0.181 & PIT ratios \\
+\texttt{earn\_yld} & 0.133 & PIT ratios \\
+\texttt{altman\_z2} & 0.131 & PIT ratios \\
+\texttt{ocf\_per\_share} & 0.101 & PIT ratios \\
+\texttt{peak\_drop\_log\_mkvalt} & 0.096 & Peak drop \\
+\texttt{roll\_min\_5y\_earn\_yld} & 0.086 & Rolling \\
+\texttt{roll\_min\_3y\_earn\_yld} & 0.067 & Rolling \\
+\texttt{roll\_sd\_5y\_earn\_yld} & 0.067 & Rolling \\
 \bottomrule
 \end{tabular}
 \end{table}
 \end{column}
 \end{columns}
-\vspace{0.2em}
-\scriptsize
-Temporary CSI is strongest with Youden and longer finite lockouts; permanent CSI is strongest with FPR3/FPR5. Turnover is concentrated in Mid and Small Cap, where exclusions shift more of the investable universe.
-\remarkfoot{Sources: threshold-family and winner-turnover summaries; AE-TC-RECHECK-002 zero-cost formula.}
-\end{frame}
-
-\begin{frame}{Appendix A19: Temporary CSI Sensitivity Detail}
-\fontsize{5.55pt}{6.05pt}\selectfont
-\textbf{Temporary-CSI sensitivity only: selected configurations, main-run comparison, and limits}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.6pt}
-\begin{tabular}{L{1.35cm}L{1.55cm}R{0.65cm}R{0.65cm}R{0.65cm}R{0.65cm}R{1.00cm}L{0.95cm}}
-\toprule
-Role & Run ID & Pos. & Prev. & OOS AP & OOS AUC & 11C TM alpha & Status \\
-\midrule
-Composite & \texttt{C090\_M000\_T012} & 12,761 & 7.02\% & 0.557 & 0.920 & +0.169pp & complete \\
-AP winner & \texttt{C060\_M000\_T012} & 31,596 & 17.49\% & 0.566 & 0.864 & +0.052pp & reused \\
-11C winner & \texttt{C090\_M020\_T018} & 6,035 & 3.34\% & 0.274 & 0.911 & +0.226pp & complete \\
-Baseline & \texttt{C080\_M020\_T018} & 8,517 & 4.74\% & 0.308 & 0.896 & +0.065pp & reused \\
-\bottomrule
-\end{tabular}
-\end{table}
 \vspace{-0.05em}
-\begin{block}{Main comparison and stability}
+\begin{block}{Caveat}
 \scriptsize
-The accepted main run \texttt{C080\_M020\_T018} is the continuity baseline, not the top sensitivity setting. Across 24 completed/reused C/M/T runs, benchmark-relative index alpha remains positive in all four universes; sensitivity changes magnitude more than direction.
+Model-based log-odds perturbation on bounded GBM-only predictor workspace; CV/training rows only; interpret as directional model-response evidence, not full AutoGluon-native feature importance.
 \end{block}
-\vspace{-0.15em}
-\begin{block}{Limits and transaction-cost overlay}
-\scriptsize
-The grid represents 27 temporary-CSI configurations: 24 are complete or reused, and three are \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}, \texttt{C080\_M000\_T018}, and \texttt{C060\_M020\_T028}. The sensitivity evidence does not support permanent-CSI claims. In the accepted-label temporary index grid, 0/5/10/20 bps overlays do not change the winner set.
-\end{block}
-\remarkfoot{Sources: local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{sensitivity\_cmt\_index\_summary.csv}; \texttt{temporary\_index\_transaction\_cost\_lines.csv}; \texttt{temporary\_blocked\_config\_disclosure.csv}.}
-\end{frame}
-
-\begin{frame}{Appendix A20: CV Metrics Versus Index Alpha}
-\fontsize{5.35pt}{5.85pt}\selectfont
-\centering
-\includegraphics[width=\linewidth,height=0.71\textheight,keepaspectratio]{../../../../05_Documentation/09_Epics/AE-PRES-QA-FIX_Final_Presentation_QA_Fixes/charts/slide48_cv_metrics_vs_cv_test_alpha.png}
-\vspace{-0.35em}
-\begin{itemize}
-  \item CV-only AP/AUC/R@FPR3/R@FPR5 do not map cleanly into total-market alpha; AP is near zero against test alpha.
-  \item Index performance is the realized result after thresholding, timing, universe weights, and returns, not a generic ML metric.
-  \item The 11C source period is named \texttt{insample}; this slide labels it as in-sample/CV-proxy alpha.
-\end{itemize}
-\remarkfoot{Sources: \texttt{slide48\_cv\_metrics\_vs\_cv\_test\_alpha.png}; local \texttt{sensitivity\_cmt\_model\_summary.csv}; \texttt{combined\_11c\_performance.csv}; AE-PRES-QA-FIX-008 evidence.}
-\end{frame}
-
-\begin{frame}{Appendix A21: Future Robustness and Extensions}
-\scriptsize
-\begin{alertblock}{Not completed results}
-\scriptsize
-The items below are explicitly future validation or extensions. They should not be read as completed empirical findings in this deck.
-\end{alertblock}
-\vspace{0.15em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{2.4pt}
-\begin{tabular}{L{2.8cm}L{4.2cm}L{3.5cm}}
-\toprule
-Item & Purpose & Current status \\
-\midrule
-Permanent-CSI sensitivity grid & Test label-threshold robustness for the permanent response track. & Planned / not completed \\
-Minimum-volatility benchmark & Check whether CSI screens add value beyond a low-risk index comparator. & Planned / not completed \\
-Quality/risk-scaling benchmark & Compare exclusions with quality or risk-scaled benchmark construction. & Planned / not completed \\
-Active CSI-probability weighting & Use CSI probabilities continuously rather than thresholded exclusions. & Planned / not completed \\
-Recovered bankrupt/insolvent diagnostic & Decompose remaining terminal-failure misses and recovery cases. & Planned / not completed \\
-\bottomrule
-\end{tabular}
-\end{table}
-\remarkfoot{Source status is mapped in \texttt{SLIDE\_DATA\_SOURCES.md}; these are future-work notes, not result claims.}
-\end{frame}
-
-\begin{frame}{Appendix A22: Slide-to-Source Audit Map}
-\scriptsize
-\begin{block}{Audit artifact}
-\scriptsize
-The complete slide-to-source map is stored beside this June source deck:
-\texttt{06\_Presentations/02\_FinalPresentation/Necessary/FinalPresentation\_June/SLIDE\_DATA\_SOURCES.md}.
-\end{block}
-\vspace{0.2em}
-\begin{itemize}
-  \item Dataset and label slides map to AE-PANEL evidence and descriptive-statistics CSVs.
-  \item Model slides map to AE-MODEL-SUITE comparison files and threshold metrics.
-  \item Index slides map to AE-INDEX-SUITE final-table and comparison outputs.
-  \item Sensitivity slides map to local AE-SENS manifests and comparison artifacts.
-  \item Conceptual or future-work slides are marked as such rather than linked to empirical result files.
-\end{itemize}
-\remarkfoot{This appendix frame is a navigation pointer; the source map contains per-frame paths and source type.}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Bibliography}
-\nocite{Altman1968,Campbell2008,Cembalest2014,Penman2018,Shumway1997,Shumway2001,Tewari2024}
-\bibliographystyle{plainnat}
-\bibliography{references}
-\end{frame}
-
-%==== 20. Temporary Test Index Results ========================================%
-
-\begin{frame}{Temporary CSI Test-Set Index Results at 10 bps}
-\fontsize{4.85pt}{5.35pt}\selectfont
-\textbf{2016--2019 test-set benchmark and best temporary-CSI strategy by universe}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.25pt}
-\begin{tabular}{L{0.75cm}L{2.55cm}R{0.67cm}R{0.67cm}R{0.72cm}R{0.67cm}R{0.67cm}R{0.67cm}}
-\toprule
-Universe & Strategy & Geo ret. & Ann. SD & Sharpe Ratio & Max DD & ES 2.5\% & Delta pp \\
-\midrule
-Total & Benchmark & 13.75\% & 12.05\% & 0.889 & -14.62\% & -8.44\% & 0.00pp \\
-Total & AG Exp. Dataset + VAE; Youden/3yr & 14.15\% & 11.65\% & 0.946 & -13.78\% & -8.14\% & +0.41pp \\
-Large & Benchmark & 14.17\% & 11.60\% & 0.951 & -13.82\% & -8.02\% & 0.00pp \\
-Large & AG Exp. Dataset + VAE; Youden/3yr & 14.41\% & 11.40\% & 0.984 & -13.33\% & -7.86\% & +0.24pp \\
-Mid & Benchmark & 13.73\% & 12.85\% & 0.840 & -15.32\% & -8.69\% & 0.00pp \\
-Mid & AG Expanded Dataset; Youden/5yr & 14.06\% & 12.15\% & 0.905 & -14.41\% & -8.34\% & +0.33pp \\
-Small & Benchmark & 11.37\% & 15.55\% & 0.582 & -20.09\% & -10.81\% & 0.00pp \\
-Small & AG Exp. Dataset + VAE; Youden/2yr & 12.26\% & 14.47\% & 0.670 & -18.37\% & -10.13\% & +0.89pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.15em}
-\begin{alertblock}{Test-set check}
-\scriptsize
-These are isolated 2016--2019 test rows at 10 bps, not the 2020+ OOS index construction. The validation package contains \texttt{period=test} rows only and reports zero OOS rows.
-\end{alertblock}
-\remarkfoot{Source: \texttt{03\_Data\_Output/9\_TestIndexConstruction/AE-FP-DIAG-006\_test\_index\_performance\_gross\_and\_net\_by\_tc.csv}; validation: \texttt{AE-FP-DIAG-006\_validation\_checks.csv}.}
-\end{frame}
-
-%==== 21. Temporary Test Diagnostic And Contribution ==========================%
-
-\begin{frame}{Temporary CSI Test-Set Diagnostic and Active Contribution}
-\fontsize{4.95pt}{5.45pt}\selectfont
-\textbf{Selected test-set winners at 10 bps; contribution rows use main-suite \texttt{period=test} attribution}
-\vspace{-0.25em}
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{1.12pt}
-\begin{tabular}{L{0.74cm}L{1.82cm}R{0.62cm}R{0.62cm}R{0.66cm}R{0.62cm}R{0.65cm}R{0.66cm}}
-\toprule
-Universe & Strategy & TP gain & FP cost & Reweight & TC & Geo adj. & Alpha \\
-\midrule
-Total & AG +VAE, Youden 3yr & +0.08pp & -0.38pp & +0.67pp & -0.01pp & +0.04pp & +0.40pp \\
-Large & AG +VAE, Youden 3yr & +0.00pp & -0.19pp & +0.41pp & -0.01pp & +0.02pp & +0.23pp \\
-Mid & AG Expanded, Youden 5yr & +0.01pp & -0.67pp & +1.07pp & -0.09pp & -0.08pp & +0.24pp \\
-Small & AG +VAE, Youden 2yr & +0.31pp & -1.19pp & +1.42pp & -0.07pp & +0.34pp & +0.82pp \\
-\bottomrule
-\end{tabular}
-\end{table}
-\vspace{-0.15em}
-\begin{alertblock}{Attribution caveat}
-\scriptsize
-The result table above is from isolated test-output files. This diagnostic view is not a standalone AE-FP-DIAG-006 test diagnostic build; it uses reconciled main-suite \texttt{period=test} attribution rows for the same temporary-CSI strategies.
-\end{alertblock}
-\scriptsize
-In the test window, gains mostly come from retained-stock reweighting and geometric effects after false-positive costs. TP exclusion helps most visibly in Small Cap, but the slide should not be read as causal event avoidance.
-\remarkfoot{Sources: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{transaction\_cost\_bps=10}, \texttt{period=test}; reconciliation checks in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
+\sourcefoot{\texttt{AE-FEAT-IMPORT-005R\_pit\_ratio\_importance\_summary.csv}; \texttt{AE-FEAT-IMPORT-006R\_individual\_feature\_importance\_summary.csv}.}
 \end{frame}
 
 \end{document}
