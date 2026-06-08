@@ -1,0 +1,7 @@
+"check","expected","actual","pass"
+"existing_four_blocks_unchanged","All four named aggregate blocks match pre-ticket baseline","TRUE, TRUE, TRUE, TRUE",TRUE
+"exactly_8_appended_risk_return_tables","8 appended per-universe risk-return tables","8",TRUE
+"test_oos_four_universe_coverage","Test/OOS x Total/Large/Mid/Small","### Test - Total; ### Test - Large; ### Test - Mid; ### Test - Small; ### OOS - Total; ### OOS - Large; ### OOS - Mid; ### OOS - Small",TRUE
+"risk_rows_available","64 documentation-local risk-return rows","64",TRUE
+"summary_contains_required_headers","10 risk-return table headers total: 2 existing aggregate + 8 appended","10",TRUE
+"no_03_data_output_target","Summary and ticket evidence written under 05_Documentation only","05_Documentation/09_Epics/AE-ALPHA_LowVol_Tilt_Independence/AE-ALPHA_Risk_Return_and_Overlap_Summary.md",TRUE
