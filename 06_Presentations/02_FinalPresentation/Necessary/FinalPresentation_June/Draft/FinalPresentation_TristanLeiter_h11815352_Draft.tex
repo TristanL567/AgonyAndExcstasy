@@ -869,109 +869,106 @@ Temporary CSI has more positives and higher test prevalence: 4.44\% vs 3\%. Perm
 
 %==== 16. Modelling Summary. ==================================================%
 
-\begin{frame}{\small Modelling Summary: the Models Rank Implosion Risk Well}
+\begin{frame}{Modelling Summary: the Models Rank Implosion Risk Well}
 \footnotesize
 
 \begin{center}
-\begin{tikzpicture}[
-  font=\footnotesize,
-  pill/.style={draw=MainColour!70, fill=MainColour!9, rounded corners=5pt,
-    text width=2.62cm, align=center, inner xsep=3pt, inner ysep=2.5pt,
-    minimum height=0.68cm}
-]
-\node[pill] at (-4.05,0) {AutoGluon weighted ensemble};
-\node[pill] at (-1.35,0) {Expanding-window CV; thresholds from CV only};
-\node[pill] at (1.35,0) {4 feature sets};
-\node[pill] at (4.05,0) {Rare-event metrics: AP, recall@FPR};
+\begin{tikzpicture}[font=\scriptsize,
+  pill/.style={draw=MainColour!70, fill=MainColour!8, rounded corners=4pt,
+    text width=2.3cm, align=center, minimum height=0.62cm, inner sep=2pt}]
+\node[pill] at (0,0)    {AutoGluon ensemble};
+\node[pill] at (2.75,0) {Expanding-window CV};
+\node[pill] at (5.5,0)  {4 feature sets};
+\node[pill] at (8.25,0) {AP \& recall@FPR};
 \end{tikzpicture}
 \end{center}
 
-\vspace{-0.1em}
+\vspace{0.3em}
 \begin{columns}[T,onlytextwidth]
-\begin{column}{0.49\textwidth}
-\textbf{Test Average Precision vs random baseline (prevalence)}
+\begin{column}{0.54\textwidth}
+\textbf{Test AP vs naive benchmark} {\scriptsize\color{darkgrey}(prevalence)}
 
-\vspace{0.2em}
-\begin{tikzpicture}[font=\footnotesize, xscale=0.18, yscale=0.85]
-  \draw[darkgrey!60] (0,-0.15) -- (22,-0.15);
+\vspace{0.4em}
+\begin{tikzpicture}[font=\scriptsize, xscale=0.205, yscale=1]
+  \draw[darkgrey!55] (0,0) -- (21.5,0);
   \foreach \x in {0,5,10,15,20} {
-    \draw[darkgrey!25] (\x,-0.15) -- (\x,1.75);
-    \node[anchor=north, darkgrey] at (\x,-0.22) {\x\%};
+    \draw[darkgrey!20] (\x,0) -- (\x,3.75);
+    \node[anchor=north, darkgrey, scale=0.9] at (\x,-0.04) {\x\%};
   }
-  \node[anchor=east] at (-0.4,1.25) {Temporary CSI};
-  \node[anchor=east] at (-0.4,0.35) {Permanent CSI};
-
-  \fill[darkgrey!65] (0,1.43) rectangle (4.44,1.65);
-  \fill[MainColour] (0,1.10) rectangle (19.85,1.32);
-  \fill[darkgrey!65] (0,0.53) rectangle (3.00,0.75);
-  \fill[MainColour] (0,0.20) rectangle (14.16,0.42);
-
-  \node[anchor=west] at (4.70,1.54) {4.44\% baseline};
-  \node[anchor=west] at (0.55,1.21) {\textcolor{white}{19.85\%}};
-  \node[anchor=west] at (3.25,0.64) {3.00\% baseline};
-  \node[anchor=west] at (0.55,0.31) {\textcolor{white}{14.2\%}};
-
-  \fill[darkgrey!65] (0,-0.82) rectangle (0.75,-0.64);
-  \node[anchor=west] at (0.95,-0.73) {random baseline};
-  \fill[MainColour] (0,-1.15) rectangle (0.75,-0.97);
-  \node[anchor=west] at (0.95,-1.06) {best Test-AP};
+  \node[anchor=west, scale=0.95] at (0,3.6) {Temporary CSI};
+  \fill[darkgrey!60] (0,3.0) rectangle (4.44,3.24);
+  \fill[MainColour]  (0,2.64) rectangle (19.85,2.88);
+  \node[anchor=west, scale=0.85] at (4.7,3.12) {4.4\%};
+  \node[anchor=west, scale=0.85, text=white] at (0.5,2.76) {19.9\%};
+  \node[anchor=west, scale=0.95] at (0,2.05) {Permanent CSI};
+  \fill[darkgrey!60] (0,1.45) rectangle (3.0,1.69);
+  \fill[MainColour]  (0,1.09) rectangle (14.2,1.33);
+  \node[anchor=west, scale=0.85] at (3.25,1.57) {3.0\%};
+  \node[anchor=west, scale=0.85, text=white] at (0.5,1.21) {14.2\%};
+  \fill[darkgrey!60] (0,0.42) rectangle (0.95,0.62);
+  \node[anchor=west, scale=0.85] at (1.15,0.52) {Naive Benchmark};
+  \fill[MainColour] (0,0.05) rectangle (0.95,0.25);
+  \node[anchor=west, scale=0.85] at (1.15,0.15) {Best Test-AP};
 \end{tikzpicture}
 \end{column}
-
-\begin{column}{0.47\textwidth}
-\textbf{\color{MainColour}Result.}
-Test-AUC is around $0.88$, recall@FPR3 is around $0.20$, and Test-AP is about $4.5$--$4.7\times$ the base rate.\\[4pt]
-
-\textbf{\color{MainColour}Verdict.}
-\agexp{} is the reporting baseline; \agvae{} is the strongest challenger. Weighted ensembles top the leaderboards, and tree families carry the useful signal.\\[4pt]
-
-\textbf{\color{MainColour}Subquestions.}
-VAE augments rather than replaces the expanded feature set; feature drivers move to the appendix.
+\begin{column}{0.44\textwidth}
+\vspace{0.2em}
+\textbf{\color{MainColour}Result:} AP $\approx 4.5$--$4.7\times$ the base rate; Test-AUC $\approx 0.88$; recall@FPR3 $\approx 0.20$.\\[6pt]
+\textbf{\color{MainColour}Interpretation:} \agexp{} is the reporting baseline; \agvae{} the strongest challenger.\\[6pt]
+\textbf{\color{MainColour}Subfinding:} VAE augments the base models, but it is not able to replace them.
 \end{column}
 \end{columns}
 
-\vspace{0.35em}
-\begin{block}{Hand-off}
-\footnotesize
-Calibrated scores become exclusion signals for the index; the question shifts from ``can we rank risk?'' to ``does removing flagged firms improve the index?''
+\vspace{0.45em}
+\begin{block}{Take-Away}
+\scriptsize
+Calibrated scores become the index exclusion signal. The question expands from \emph{"Can we rank risk?"} to \emph{"Does removing flagged firms using the model-predictions improve the risk-return metric of risk-filtered indices?"}
 \end{block}
-\remarkfoot{Model metrics and caveats are in Appendix A10--A13.}
+\remarkfoot{Best Test-AP: temporary 0.199, permanent 0.142. Metrics in Appendix A10 to A13.}
 \end{frame}
 
 %==== 17. False-positive bridge. =============================================%
 
-\input{slide17_fp_bridge_values.tex}
-
 \begin{frame}{Why the Screen Cannot Be Perfect}
 \scriptsize
-\textbf{Temporary CSI, \agexp{}:} FPR3 threshold calibrated on CV predictions only, then applied to the 2016--2019 test set.
-
+\textbf{Temporary CSI, \agexp{}.} The exclusion threshold is calibrated on cross-validation, then carried \emph{unchanged} to the held-out 2016--2019 test set.
 \vspace{0.15em}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.54\textwidth}
-\includegraphics[width=\linewidth]{slide17_fp_bridge_density.pdf}
-\end{column}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize, >=stealth,
+  b/.style={draw, rounded corners=3pt, align=center, inner sep=4pt, minimum height=0.82cm, text width=4.6cm}]
+\node[b, draw=MainColour, fill=MainColour!8] (cv) {\textbf{1.\ Calibrate $\tau$ on CV}\\[-2pt]\tiny $\tau=0.217$ at FPR $=3.0\%$ (recall $23.4\%$)};
+\node[b, draw=orange!60!black, fill=orange!12, right=1.0cm of cv] (te) {\textbf{2.\ Apply the same $\tau$ to test}\\[-2pt]\tiny FPR $\to 8.7\%$, recall $\to 45.9\%$};
+\draw[->, thick] (cv) -- node[above, font=\tiny]{$\tau$ fixed} (te);
+\end{tikzpicture}
+\end{center}
 
-\begin{column}{0.43\textwidth}
-\textbf{\color{MainColour}Live test diagnostic}
-\begin{itemize}
-  \setlength\itemsep{0.15em}
-  \item CV-calibrated $\tau=\slideSeventeenTau$; test FPR is \slideSeventeenTestFpr{} and recall is \slideSeventeenTestRecall{}.
-  \item The rule flags \slideSeventeenTpCount{} true CSI rows and \slideSeventeenFpCount{} negatives in test.
-  \item Only \slideSeventeenAdjacentShare{} of false positives are threshold-adjacent.
-  \item \slideSeventeenOverlapShare{} of false positives overlap the flagged true-positive score range.
+\vspace{0.1em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.52\textwidth}
+\includegraphics[width=0.93\linewidth]{slide17_fp_bridge_density.pdf}
+\end{column}
+\begin{column}{0.45\textwidth}
+\textbf{\color{MainColour}On the test set at this $\tau$}
+\begin{itemize}\setlength\itemsep{0.18em}
+  \item 369 of 804 CSI firms flagged; 1{,}502 false positives.
+  \item \textbf{100\%} of false positives fall inside the true-positive score range.
+  \item Only \textbf{10.8\%} sit just above $\tau$ (within $[\tau,\tau+0.01]$).
 \end{itemize}
-Raising the threshold would remove some false positives, but it would also drop real CSI firms.
 \end{column}
 \end{columns}
 
 \vspace{0.05em}
+\begin{block}{Read carefully}
+\scriptsize
+The false-positive rate \emph{drifts} from $3.0\%$ on CV to $8.7\%$ on test because $\tau$ is fixed before the test period is seen --- this is out-of-sample threshold drift, not the modelling table's ``Test-FPR3'', which re-fixes $3\%$ FPR on the test set itself.
+\end{block}
+
+\vspace{-0.15em}
 \begin{alertblock}{What this means for the index}
 \scriptsize
-The screen is useful but structurally imperfect. CSI firms are a small cap-weighted exposure, so false positives and retained-stock reweighting create a dilution ceiling. This is not simply a model failure; it frames the attribution slide.
+Every false positive overlaps the true-positive scores, so a higher threshold cannot remove them without dropping real CSI firms. This is the statistical ceiling; because CSI firms are only a small cap-weighted exposure, it becomes the index-level dilution ceiling.
 \end{alertblock}
-\vspace{-0.2em}
-\remarkfoot{Threshold is CV-calibrated; distribution and counts use the 2016--2019 test set; \agexp{}; temporary CSI. Threshold-adjacent means a false-positive score in $[\tau,\tau+0.01]$, matching the prior false-positive diagnostic.}
+\remarkfoot{CV: 72{,}223 rows, 3{,}119 positives; test: 18{,}111 rows, 804 positives. \agexp{}, temporary CSI.}
 \end{frame}
 
 %==== 18. VAE modelling nuance. =============================================%
@@ -1094,48 +1091,37 @@ The model produces a probability of CSI next year. A threshold turns that probab
 
 \begin{alertblock}{Same exclusion rule, four universes}
 \scriptsize
-The calibrated score-to-weight pipeline is applied independently inside each universe, so each screened index is evaluated against the matching unfiltered benchmark.
+The calibrated score-to-weight pipeline runs independently inside each universe, so every screened index is judged against its matching unfiltered benchmark.
 \end{alertblock}
 
-\vspace{0.45em}
-
+\vspace{0.55em}
 \begin{center}
-\begin{tikzpicture}[
-  font=\scriptsize,
-  uni/.style={draw=darkgrey, fill=grey!20, rounded corners=4pt, minimum width=2.7cm, minimum height=1.6cm, align=center}
-]
-\node[uni] (tm) at (0,0)   {\textbf{Total Market}\\[1pt]\tiny all eligible firms\\[-1pt]\tiny $\geq$ USD 100M};
-\node[uni] (lc) at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny top tier};
-\node[uni] (mc) at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny middle tier};
-\node[uni] (sc) at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny prior-Dec. rank\\[-1pt]\tiny bottom tier};
+\begin{tikzpicture}[font=\scriptsize,
+  uni/.style={draw=darkgrey, fill=grey!20, rounded corners=4pt, minimum width=2.7cm, minimum height=1.5cm, align=center}]
+\node[uni] at (0,0)   {\textbf{Total Market}\\[1pt]\tiny all eligible firms\\[-1pt]\tiny $\geq$ USD 100M};
+\node[uni] at (3.0,0) {\textbf{Large Cap}\\[1pt]\tiny prior-Dec.\ rank\\[-1pt]\tiny top tier};
+\node[uni] at (6.0,0) {\textbf{Mid Cap}\\[1pt]\tiny prior-Dec.\ rank\\[-1pt]\tiny middle tier};
+\node[uni] at (9.0,0) {\textbf{Small Cap}\\[1pt]\tiny prior-Dec.\ rank\\[-1pt]\tiny bottom tier};
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.15em}
-\begin{center}
-\scriptsize\textit{Tier breakpoints: \textless{}author to insert exact Large/Mid/Small cap thresholds\textgreater{}}
-\end{center}
-
-\vspace{0.25em}
-
+\vspace{0.5em}
 \begin{columns}[t]
 \begin{column}{0.49\textwidth}
 \textbf{Universe construction}
 \scriptsize
 \begin{itemize}
-  \item Total Market keeps all eligible firms above USD 100 million market cap.
-  \item Large, Mid, and Small Cap are formed by prior-December market-cap rank.
-  \item Quarterly rebalancing: March, June, September, December.
-  \item Within each universe, portfolio weights start from market capitalization.
+  \item Prior-December market cap; minimum USD 100M.
+  \item Large/Mid/Small split by cap rank \textcolor{darkgrey}{(insert breakpoints)}.
+  \item Quarterly rebalancing; cap weights.
 \end{itemize}
 \end{column}
 \begin{column}{0.49\textwidth}
 \textbf{Comparators}
 \scriptsize
 \begin{itemize}
-  \item Primary comparator: the unfiltered cap-weighted benchmark in the same universe.
-  \item Screened portfolios are therefore compared like-for-like: Total vs Total, Large vs Large, Mid vs Mid, Small vs Small.
-  \item Min-volatility and quality screens are planned extensions under the main research question; see limitations.
+  \item Primary: the unfiltered cap-weighted benchmark, like-for-like per universe.
+  \item Min-volatility and quality screens (main RQ): planned extension --- see limitations.
 \end{itemize}
 \end{column}
 \end{columns}
@@ -1182,7 +1168,7 @@ The calibrated score-to-weight pipeline is applied independently inside each uni
 
 \begin{alertblock}{Summary}
 \scriptsize
-The crash-filter appears beneficial in both evaluation windows, but the evidence differs by split. The OOS result is a positive benchmark-relative return delta across the four universes. The test-set result is reported separately and should not be read as the same diagnostic as OOS risk performance.
+The crash-filter is useful, but not because it cleanly identifies only future CSI firms. The previous slide shows that thresholding is noisy; the index result shows what remains after that noise: modest positive alpha from reweighting away from flagged names, strongest where cap-weight dilution is lower. The thesis claim is therefore a bounded risk-screening and portfolio-composition effect, not a pure crash-avoidance alpha engine.
 \end{alertblock}
 
 \end{frame}
@@ -1214,7 +1200,7 @@ Small & \agvae; Youden 3y  & $7.7  \to 8.2$  & \textcolor{posgreen}{$\mathbf{+0.
 \vspace{0.1em}
 \begin{block}{Main takeaway}
 \scriptsize
-The risk-filter works better the smaller the market cap.: the alpha rises from $+0.14$pp (Large) to $+0.39$pp (Mid) to $+0.55$pp (Small). Smaller-cap universes include more firms in distress and exclusions move a larger part of the portfolio (about 85-106\% turnover vs.\ 10-13\% for the total market). Drawdown improves everywhere except for small caps.
+The risk-filter is most visible outside large caps: alpha rises from $+0.14$pp (Large) to $+0.39$pp (Mid) to $+0.55$pp (Small). This matches the dilution story: in smaller universes, flagged firms receive more portfolio weight and exclusions move more capital (about 85--106\% turnover vs.\ 10--13\% for the total market). Drawdown improves everywhere except for small caps.
 \end{block}
 \end{frame}
 
@@ -1255,7 +1241,7 @@ The permanent filter tilts the gains toward Mid Cap ($+0.62$pp), its strongest u
 
 \begin{alertblock}{It is not direct event-avoidance}
 \scriptsize
-Because positives are rare, realized alpha is dominated by reweighting retained firms, not by directly dodging CSI events. A large false-positive opportunity cost is the main offset. For this reason, most of the performance gain disappears.
+The modelling section explains why the attribution looks like this: the score ranks risk, but any usable cutoff also removes many non-CSI firms. Direct TP avoidance is small, FP opportunity cost is large, and the remaining positive alpha comes from retained-name reweighting and geometric effects. This supports a risk-screening interpretation, not a pure event-avoidance claim.
 \end{alertblock}
 
 \vspace{0.2em}
@@ -1867,6 +1853,172 @@ Feature & Abs. & Family \\
 Model-based log-odds perturbation on bounded GBM-only predictor workspace; CV/training rows only; interpret as directional model-response evidence, not full AutoGluon-native feature importance.
 \end{block}
 \sourcefoot{\texttt{AE-FEAT-IMPORT-005R\_pit\_ratio\_importance\_summary.csv}; \texttt{AE-FEAT-IMPORT-006R\_individual\_feature\_importance\_summary.csv}.}
+\end{frame}
+
+%==== LOW-VOLATILITY COMPARISON APPENDIX =====================================%
+\begin{frame}{Identical universes, windows and costs isolate what the method adds}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.52\textwidth}
+\begin{block}{Building the low-volatility comparator}
+\scriptsize
+\begin{itemize}\setlength\itemsep{0.4pt}
+  \item Rank each firm by trailing realized volatility.
+  \item Sort into quintiles Q1 (lowest) through Q5 (highest).
+  \item Low-volatility holds Q1; Q5 is the high-volatility tail.
+  \item Quintiles are rebuilt in each evaluation window.
+\end{itemize}
+\end{block}
+\vspace{0.3mm}
+{\scriptsize\color{MainColour} Realized volatility rises across quintiles (test)}\\[0.3mm]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
+  \fill[lightblue,draw=MainColour,line width=0.7pt] (0.15,0) rectangle (0.85,0.690);
+  \fill[darkgrey] (1.10,0) rectangle (1.80,0.924);
+  \fill[darkgrey] (2.05,0) rectangle (2.75,1.102);
+  \fill[darkgrey] (3.00,0) rectangle (3.70,1.194);
+  \fill[warningRed] (3.95,0) rectangle (4.65,1.500);
+  \node[font=\scriptsize] at (0.50,0.690) [above=0.0mm] {9.7\%};
+  \node[font=\scriptsize] at (1.45,0.924) [above=0.0mm] {13.0\%};
+  \node[font=\scriptsize] at (2.40,1.102) [above=0.0mm] {15.5\%};
+  \node[font=\scriptsize] at (3.35,1.194) [above=0.0mm] {16.8\%};
+  \node[font=\scriptsize] at (4.30,1.500) [above=0.0mm] {21.1\%};
+  \node[font=\scriptsize] at (0.50,0) [below] {Q1};
+  \node[font=\scriptsize] at (1.45,0) [below] {Q2};
+  \node[font=\scriptsize] at (2.40,0) [below] {Q3};
+  \node[font=\scriptsize] at (3.35,0) [below] {Q4};
+  \node[font=\scriptsize] at (4.30,0) [below] {Q5};
+  \node[font=\scriptsize,MainColour] at (0.50,-0.45) {held};
+  \node[font=\scriptsize,warningRed] at (4.30,-0.45) {high-vol tail};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.46\textwidth}
+\begin{block}{Matched to the CSI results}
+\scriptsize
+\begin{itemize}\setlength\itemsep{0.4pt}
+  \item Same four universes: Total Market, Large, Mid, and Small.
+  \item Test: 2016-01-29 to 2019-12-31.
+  \item OOS: 2020-01-31 to 2024-12-31.
+  \item Benchmark at 0 bps; LowVol Q1 and CSI at 20 bps.
+\end{itemize}
+\end{block}
+\vspace{0.3mm}
+\begin{alertblock}{Comparison question}
+\footnotesize
+Does the ML crash filter add something beyond a transparent volatility screen, and is the difference meaningful once dilution and transaction costs are included?
+\end{alertblock}
+\end{column}
+\end{columns}
+\sourcefoot{\texttt{AE-ALPHA\_Risk-Return\_and\_Overlap\_Summary.md}; low-volatility quintile and CSI comparison outputs.}
+\end{frame}
+
+\begin{frame}{Low-vol's edge is large but regime-bound; CSI's is small but stable}
+\scriptsize
+\centering
+{\scriptsize
+  \tikz\fill[darkgrey](0,0) rectangle (0.24,0.24);~Naive Benchmark\quad
+  \tikz{\fill[lightblue](0,0) rectangle (0.24,0.24);\draw[MainColour,line width=0.6pt](0,0) rectangle (0.24,0.24);}~LowVol Q1\quad
+  \tikz\fill[MainColour](0,0) rectangle (0.24,0.24);~CSI dynamic\par}
+\vspace{0.7mm}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.5\textwidth}
+\centering
+{\footnotesize\color{MainColour} Sharpe ratio --- higher is better}\\[0.7mm]
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
+  \fill[darkgrey] (0.20,0) rectangle (0.65,1.934);
+  \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,2.562);
+  \fill[MainColour] (1.20,0) rectangle (1.65,2.035);
+  \fill[darkgrey] (2.25,0) rectangle (2.70,1.161);
+  \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,0.853);
+  \fill[MainColour] (3.25,0) rectangle (3.70,1.218);
+  \node[font=\scriptsize] at (0.425,1.934)[above=0mm]{0.82};
+  \node[font=\scriptsize] at (0.925,2.562)[above=0mm]{1.08};
+  \node[font=\scriptsize] at (1.425,2.035)[above=0mm]{0.86};
+  \node[font=\scriptsize] at (2.475,1.161)[above=0mm]{0.49};
+  \node[font=\scriptsize,negred] at (2.975,0.853)[above=0mm]{0.36};
+  \node[font=\scriptsize] at (3.475,1.218)[above=0mm]{0.52};
+  \node[font=\scriptsize] at (0.925,0)[below]{Test};
+  \node[font=\scriptsize] at (2.975,0)[below]{OOS};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.5\textwidth}
+\centering
+{\footnotesize\color{MainColour} Max drawdown $|\%|$ --- smaller is better}\\[0.7mm]
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
+  \fill[darkgrey] (0.20,0) rectangle (0.65,1.60);
+  \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,0.93);
+  \fill[MainColour] (1.20,0) rectangle (1.65,1.52);
+  \fill[darkgrey] (2.25,0) rectangle (2.70,2.59);
+  \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,2.30);
+  \fill[MainColour] (3.25,0) rectangle (3.70,2.54);
+  \node[font=\scriptsize] at (0.425,1.60)[above=0mm]{16.0};
+  \node[font=\scriptsize,posgreen] at (0.925,0.93)[above=0mm]{9.3};
+  \node[font=\scriptsize] at (1.425,1.52)[above=0mm]{15.2};
+  \node[font=\scriptsize] at (2.475,2.59)[above=0mm]{25.9};
+  \node[font=\scriptsize] at (2.975,2.30)[above=0mm]{23.0};
+  \node[font=\scriptsize] at (3.475,2.54)[above=0mm]{25.4};
+  \node[font=\scriptsize] at (0.925,0)[below]{Test};
+  \node[font=\scriptsize] at (2.975,0)[below]{OOS};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\vspace{0.5mm}
+\begin{alertblock}{Defensive trade-off}
+\footnotesize
+LowVol Q1 has the strongest test-window risk reduction, but OOS it gives up $-3.4$ pp of geometric return versus the benchmark. CSI keeps return close to benchmark ($+0.3$ pp OOS) while delivering smaller, steadier risk improvements.
+\end{alertblock}
+\sourcefoot{Average across four universes. Benchmark at 0 bps; LowVol Q1 and CSI at 20 bps.}
+\end{frame}
+
+\begin{frame}{CSI trims the tail low-vol targets --- yet it is not just a volatility sort}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.5\textwidth}
+\centering
+{\footnotesize\color{MainColour} Where dynamic CSI exclusions fall}\\
+{\scriptsize\color{darkgrey} Share of excluded names by volatility quintile (test)}\\[0.7mm]
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
+  \fill[darkgrey] (0.15,0) rectangle (0.85,0.032);
+  \fill[darkgrey] (1.10,0) rectangle (1.80,0.067);
+  \fill[darkgrey] (2.05,0) rectangle (2.75,0.211);
+  \fill[darkgrey] (3.00,0) rectangle (3.70,0.636);
+  \fill[warningRed] (3.95,0) rectangle (4.65,2.250);
+  \node[font=\scriptsize] at (0.50,0.032)[above=0mm]{1.0\%};
+  \node[font=\scriptsize] at (1.45,0.067)[above=0mm]{2.1\%};
+  \node[font=\scriptsize] at (2.40,0.211)[above=0mm]{6.6\%};
+  \node[font=\scriptsize] at (3.35,0.636)[above=0mm]{19.9\%};
+  \node[font=\scriptsize,warningRed] at (4.30,2.250)[above=0mm]{\textbf{70.4\%}};
+  \node[font=\scriptsize] at (0.50,0)[below]{Q1};
+  \node[font=\scriptsize] at (1.45,0)[below]{Q2};
+  \node[font=\scriptsize] at (2.40,0)[below]{Q3};
+  \node[font=\scriptsize] at (3.35,0)[below]{Q4};
+  \node[font=\scriptsize,warningRed] at (4.30,0)[below]{Q5};
+\end{tikzpicture}\\[0.7mm]
+{\setbeamercolor{block title}{bg=posgreenL,fg=white}
+\begin{block}{Retained portfolio remains diversified}
+\scriptsize
+Dynamic CSI retains about 35\% in Q1 and keeps exposure across Q1--Q5, so it is not a pure volatility sort.
+\end{block}}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{block}{Why the CSI effect is bounded}
+\footnotesize
+\textbf{Dilution.} CSI exclusions are small in cap-weight terms, so only limited benchmark weight can move.\\[0.4mm]
+\textbf{Classification noise.} False positives remain hard to separate from true positives, limiting how aggressively the filter can be used.
+\end{block}
+\vspace{0.4mm}
+\begin{alertblock}{Verdict}
+\footnotesize
+LowVol cuts risk more when the low-volatility anomaly is favorable, but it falls below the benchmark OOS. CSI's risk reduction is smaller and more benchmark-like; its exclusions overlap the high-volatility tail, yet it keeps broad retained exposure.\\[0.4mm]
+{\color{MainColour}\textbf{CSI complements low-volatility; it does not dominate it.}}
+\end{alertblock}
+\end{column}
+\end{columns}
+\sourcefoot{Test dynamic CSI Q5 excluded-name share is 70.4\%; OOS is 65.7\%. Retained exposure spans Q1--Q5.}
 \end{frame}
 
 \end{document}
