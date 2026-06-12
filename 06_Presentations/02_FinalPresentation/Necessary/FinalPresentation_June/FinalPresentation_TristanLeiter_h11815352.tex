@@ -387,7 +387,7 @@ Before: \texttt{confirmed\_csi} only & 8,369 & 5,642 & 629 & 151 & 478 & 24.0\% 
 
 \vspace{0.45em}
 
-\textbf{Core issue:} The low-detection rate causes methodological issues. If one sticks strictly to the paper,
+\textbf{Core issue:} The low-detection rate causes methodological issues. If one sticks strictly to the paper, 
 then the CSI methodology should catch firms which do not recover anymore. Yet, the data shows a different result.
 
 
@@ -403,7 +403,7 @@ then the CSI methodology should catch firms which do not recover anymore. Yet, t
 The original CSI-classification grid remains unchanged. It is proposed to explicitly add all
 firms, which match the CRSP-codes 572,573 and 574, to the dataset after observing
 a valid drawdown trigger. This classification methodology will henceforth be referred to
-as "Temporary-CSI".
+as "Temporary-CSI". 
 \end{alertblock}
 
 \vspace{0.4em}
@@ -1263,6 +1263,7 @@ Permanent CSI test-set rows come from the isolated 2016--2019 test-index package
 
 \begin{frame}{Permanent CSI Test-Set Diagnostic and Active Contribution}
 \fontsize{4.95pt}{5.45pt}\selectfont
+\vfill
 \textbf{Selected permanent-CSI test rows at 10 bps; realized alpha reconciles to contribution terms}
 \vspace{-0.25em}
 \begin{table}[ht]
@@ -1287,6 +1288,7 @@ The result table above uses isolated test-output files. This diagnostic view use
 \scriptsize
 Interpretation is contribution-based, not causal: test-set gains are mostly retained-stock reweighting plus geometric portfolio effects, partly offset by broad-exclusion FP cost and small transaction-cost drag; direct TP event-avoidance gain is not the main channel.
 \remarkfoot{Sources: \texttt{AE-ATTRIB-001\_config\_level\_attribution.csv}; model-specific \texttt{error\_cost\_decomposition\_by\_crsp\_universe.csv}; \texttt{track=permanent CSI}, \texttt{period=test}, \texttt{transaction\_cost\_bps=10}; reconciliation checks in \texttt{AE-ATTRIB-001\_reconciliation\_checks.csv}.}
+\vfill
 \end{frame}
 
 %==== 28. Data findings =======================================================%

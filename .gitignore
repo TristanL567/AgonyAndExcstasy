@@ -22,6 +22,9 @@ venv/
 02_Data_Input/**
 03_Data_Output/**
 04_Research/**
+!04_Research/05_Papers/
+!04_Research/05_Papers/Necessary/
+!04_Research/05_Papers/Necessary/reference.bib
 05_Documentation/**
 06_Presentations/**
 
@@ -40,4 +43,3 @@ venv/
 
 # Generated logs
 *.log
-
