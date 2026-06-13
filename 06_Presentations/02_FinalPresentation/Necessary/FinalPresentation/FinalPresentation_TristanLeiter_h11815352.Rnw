@@ -118,7 +118,7 @@ Long-run index returns are driven by a few high-performing stocks \citep{Bessemb
 \begin{column}{0.48\textwidth}
 \textbf{Ecstasy}
 \begin{itemize}
-  \item Extreme winners carry a large share of long-run wealth creation \citep{Cembalest2014}.
+  \item Extreme winners carry a large share of long-run wealth creation.
   \item Winners can be volatile, expensive, or distressed.
   \item[$\Rightarrow$] \alert{Even a small number of disregarded winners can hurt performance.}
 \end{itemize}
@@ -126,7 +126,7 @@ Long-run index returns are driven by a few high-performing stocks \citep{Bessemb
 \begin{column}{0.48\textwidth}
 \textbf{Agony}
 \begin{itemize}
-  \item Some constituents experience deep and persistent drawdowns without recovery.
+  \item Some index constituents experience deep and persistent drawdowns without recovery \citep{Cembalest2014}.
   \item Passive strategies may hold imploding firms for too long.
 \end{itemize}
 \end{column}
@@ -283,47 +283,7 @@ y_{i,t} =
 
 \end{frame}
 
-%==== 6. Applying the classification ==========================================%
-
-\begin{frame}{Applying the revised temporary classification}
-
-\small
-After applying the revised temporary-CSI rule, which augments the paper classification
-with terminal-failure delisting codes, one finds 8,517 response observations for the
-selected CRSP dataset within the 1993 to 2024 time period. The prevalence of the
-response variable is similar across the train and test datasets. Overall, the dataset
-has 188,460 observations, with roughly 75\% clustered in the train set.
-
-\vspace{0.3em}
-
-\begin{table}[ht]
-\centering
-\scriptsize
-\setlength{\tabcolsep}{4.4pt}
-\begin{tabular}{L{1.7cm}R{1.25cm}R{1.1cm}R{1.1cm}R{1.25cm}R{1.0cm}}
-\toprule
-Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
-\midrule
-Full & 188,460 & 171,269 & \textbf{8,517} & 179,786 & 4.74\% \\
-Train & 143,173 & 136,630 & 6,543 & 143,173 & 4.57\% \\
-Test & 18,111 & 17,307 & 804 & 18,111 & 4.44\% \\
-OOS & 27,176 & 17,332 & 1,170 & 18,502 & 6.32\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.15em}
-\begin{alertblock}{Motivation for robustness}
-\scriptsize
-Even though the paper outlines that a combination of classification grid values was tested,
-the selected combination still appears arbitrary. For this reason, further robustness checks
-will be conducted to evaluate the chosen grid values. It will be asked whether the dataset actually contains
-the bankrupt firms and how different the prevalence rate of the response variable is when testing different
-grid combinations.
-\end{alertblock}
-\end{frame}
-
-%==== 7. Robustness I =========================================================%
+%==== 6. Robustness I =========================================================%
 
 \begin{frame}{Robustness I: Do CSI-firms go bankrupt?}
 
@@ -355,7 +315,7 @@ then the CSI methodology should catch firms that never recover. Yet, the data sh
 
 \end{frame}
 
-%==== 8. Methodology II =======================================================%
+%==== 7. Methodology II =======================================================%
 
 \begin{frame}{Methodology II: ``Temporary-CSI''}
 \small
@@ -414,7 +374,46 @@ After:  \texttt{CSI} + terminal failure & 629 & \textbf{545} & 84 & \textbf{86.6
 \end{table}
 
 \vspace{-0.2em}
-{\tiny\color{darkgrey} The 84 remaining misses are treated as methodological exclusions under the retained CSI-trigger rule, not as known pipeline errors.}
+{\tiny\color{darkgrey} The 84 remaining delisted firms to not breach the initial drawdown threshold. They are excluded form the dataset.}
+\end{frame}
+
+%==== 8. Applying the classification ==========================================%
+
+\begin{frame}{Applying the revised temporary classification}
+
+\small
+After applying the revised temporary-CSI rule, which augments the paper classification
+with terminal-failure delisting codes, one finds 8,517 response observations for the
+selected CRSP dataset within the 1993 to 2024 time period. The prevalence of the
+response variable is similar across the train and test datasets. Overall, the dataset
+has 188,460 observations, with roughly 75\% clustered in the train set.
+
+\vspace{0.3em}
+
+\begin{table}[ht]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4.4pt}
+\begin{tabular}{L{1.7cm}R{1.25cm}R{1.1cm}R{1.1cm}R{1.25cm}R{1.0cm}}
+\toprule
+Split & Obs. rows & $y=0$ & $y=1$ & Labelled & Prev. \\
+\midrule
+Full & 188,460 & 171,269 & \textbf{8,517} & 179,786 & 4.74\% \\
+Train & 143,173 & 136,630 & 6,543 & 143,173 & 4.57\% \\
+Test & 18,111 & 17,307 & 804 & 18,111 & 4.44\% \\
+OOS & 27,176 & 17,332 & 1,170 & 18,502 & 6.32\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.15em}
+\begin{alertblock}{Motivation for robustness}
+\scriptsize
+Even though the paper outlines that a combination of classification grid values was tested,
+the selected combination still appears arbitrary. For this reason, further robustness checks
+will be conducted to evaluate the chosen grid values. It will be asked how different the prevalence rate of the response variable is when testing different grid combinations.
+\end{alertblock}
+
 \end{frame}
 
 %==== 9. Robustness II ========================================================%
@@ -625,7 +624,7 @@ performance in the later part of the thesis.
 \scriptsize
 \begin{alertblock}{CSI positives are rare and economically distinct from non-positives}
 \scriptsize
-Both label definitions isolate a small distressed tail. The key contrast is not only prevalence: positive firms are much smaller and show worse realized returns and profitability.
+Both label definitions isolate a small distressed tail. The key contrast is not only prevalence: labeled firms are much smaller and show worse realized returns and profitability.
 \end{alertblock}
 
 \vspace{0.05em}
@@ -710,7 +709,7 @@ to observe a drastic outperformance by avoiding or downweighting CSI-classified 
 
 \vspace{0.4em}
 
-\textbf{Final feature-set keys}
+\textbf{Feature-sets}
 
 \vspace{0.3em}
 \begin{center}
@@ -719,26 +718,26 @@ to observe a drastic outperformance by avoiding or downweighting CSI-classified 
   baseline,
 ]
 % Legend row
-\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Fundamentals};
-\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Raw market signals};
-\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny VAE latent};
+\fill[MainColour!30]     (3.0,3.0) rectangle (5.0,3.4); \node at (4.0,3.2){\tiny Firm-level};
+\fill[teal!45]           (5.0,3.0) rectangle (7.6,3.4); \node at (6.3,3.2){\tiny Market based signals};
+\fill[purple!30]         (7.6,3.0) rectangle (9.6,3.4); \node at (8.6,3.2){\tiny Latent (VAE)};
 
 % Row: AG Base Dataset
-\node[anchor=east, align=right] at (2.9,2.5){AG Base\\Dataset};
+\node[anchor=east, align=right] at (2.9,2.5){Base\\Dataset};
 \fill[MainColour!30]     (3.0,2.3) rectangle (5.0,2.7);
 
 % Row: AG Expanded Dataset
-\node[anchor=east, align=right] at (2.9,1.85){AG Expanded\\Dataset};
+\node[anchor=east, align=right] at (2.9,1.85){Expanded\\Dataset};
 \fill[MainColour!30]     (3.0,1.65) rectangle (5.0,2.05);
 \fill[teal!45]           (5.0,1.65) rectangle (7.6,2.05);
 
 % Row: AG Latent Dataset (VAE)
-\node[anchor=east, align=right] at (2.9,1.20){AG Latent\\Dataset (VAE)};
+\node[anchor=east, align=right] at (2.9,1.20){Latent\\Dataset (VAE)};
 \fill[purple!30]         (7.6,1.00) rectangle (9.6,1.40);
 \node[anchor=west, darkgrey] at (3.05,1.20){\tiny Latent representation};
 
 % Row: AG Exp. Dataset + VAE
-\node[anchor=east, align=right] at (2.9,0.55){AG Exp. Dataset\\+ VAE};
+\node[anchor=east, align=right] at (2.9,0.55){Exp. Dataset\\+ VAE};
 \fill[MainColour!30]     (3.0,0.35) rectangle (5.0,0.75);
 \fill[teal!45]           (5.0,0.35) rectangle (7.6,0.75);
 \fill[purple!30]         (7.6,0.35) rectangle (9.6,0.75);
@@ -746,15 +745,79 @@ to observe a drastic outperformance by avoiding or downweighting CSI-classified 
 \end{tikzpicture}
 \end{center}
 
-\footnotesize
-AutoGluon was introduced by \citet{EricksonMuellerShirkovZhangLarroyLiSmola2020} in the context of tabular data and was later expanded to more ML-applications \citep{EricksonShiSharpnackSmola2022}.
-\vspace*{\fill}
-
 \end{frame}
 
 %==== 14. Modelling II. =======================================================%
 
-\begin{frame}{Modelling II: Results temporary CSI}
+\section{Modelling}
+\begin{frame}{Modelling II: AutoGluon}
+\small
+
+\begin{block}{AutoGluon framework}
+\scriptsize
+AutoGluon is an open-source AutoML library (developed by \citet{EricksonMuellerShirkovZhangLarroyLiSmola2020} for Amazon) designed to train and
+deploy state-of-the-art machine and deep learning models on various types of data.
+It optimizes a diverse set of model families (GBMs, Random Forests, Neural Networks) and combines them via multi-layer ensemble-stacking.
+\end{block}
+
+\small
+In this thesis, AutoGluon was selected to be the primary ML-framework. XGBoost was also tested, but continously underperformed compared to AG. Additionally, in the context of credit-risk prediction \citet{PryshchepaEtAl2026CreditRiskModeling} found that AutoGluon dominates compared to linear models, neural networks and single gradient-boosting methods. The tables below show the second-layer ensemble weights via the first-layer base-learners. 
+
+\vspace{0.1em}
+
+\scriptsize
+\begin{columns}[T]
+
+  \begin{column}{0.46\textwidth}
+    \centering
+    \textbf{Temporary-CSI} — L2 Ensemble Weights\\[0.4em]
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      \textbf{Base-Learners} & \textbf{Weight} \\
+      \midrule
+      \texttt{LightGBMLarge}         & 0.320 \\
+      \texttt{LightGBM\_r196}        & 0.320 \\
+      \texttt{CatBoost\_r70}         & 0.160 \\
+      \texttt{LightGBM\_r131}        & 0.080 \\
+      \texttt{XGBoost}               & 0.040 \\
+      \texttt{XGBoost\_r89}          & 0.040 \\
+      \texttt{NeuralNetFastAI\_r191} & 0.040 \\
+      \midrule
+      \textit{Total} & \textit{1.00} \\
+      \bottomrule
+    \end{tabular}
+  \end{column}
+
+  \begin{column}{0.50\textwidth}
+    \centering
+    \textbf{Permanent-CSI} — L2 Ensemble Weights\\[0.4em]
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      \textbf{Base-Learners} & \textbf{Weight} \\
+      \midrule
+      \texttt{ExtraTreesEntr}        & 0.238 \\
+      \texttt{XGBoost\_r33}          & 0.238 \\
+      \texttt{NeuralNetTorch\_r79}   & 0.143 \\
+      \texttt{NeuralNetFastAI\_r102} & 0.143 \\
+      \texttt{ExtraTreesGini}        & 0.048 \\
+      \texttt{NeuralNetTorch}        & 0.048 \\
+      \texttt{LightGBM\_r96}         & 0.048 \\
+      \texttt{NeuralNetTorch\_r22}   & 0.048 \\
+      \texttt{ExtraTrees\_r42}       & 0.048 \\
+      \midrule
+      \textit{Total} & \textit{1.00}\\
+      \bottomrule
+    \end{tabular}
+  \end{column}
+
+\end{columns}
+
+
+\end{frame}
+
+%==== 15. Modelling III. ======================================================%
+
+\begin{frame}{Modelling III: Results temporary CSI}
 \scriptsize
 \begin{block}{Description}
 \scriptsize
@@ -787,7 +850,7 @@ Test-AP improves from the 4.44\% test prevalence baseline to 19.85\%, showing me
 
 \end{frame}
 
-%==== 15. Modelling III. ======================================================%
+%==== 16. Modelling III. ======================================================%
 
 \begin{frame}{Modelling III: Results permanent CSI}
 \scriptsize
@@ -823,7 +886,7 @@ Temporary CSI has more positives and higher test prevalence: 4.44\% vs 3\%. Perm
 \end{frame}
 
 
-%==== 16. Modelling Summary. ==================================================%
+%==== 17. Modelling Summary. ==================================================%
 
 \begin{frame}{Modelling Summary: the models rank implosion risk well}
 \footnotesize
@@ -882,87 +945,9 @@ Calibrated scores become the index exclusion signal. The question expands from \
 \remarkfoot{Best Test-AP: temporary 0.199, permanent 0.142. Additional metrics are summarized in Appendix B2--B3.}
 \end{frame}
 
-%==== 17. False-positive bridge. =============================================%
+%==== 18. Modelling IV: Summary and Implications ==============================%
 
-\begin{frame}{Why the screen cannot be perfect}
-\scriptsize
-\textbf{The shown example is temporary CSI, \agexp{}.} The exclusion threshold is calibrated on the training set to ensure no data leakage, then carried \emph{unchanged} to the held-out 2016--2019 test set.
-\vspace{0.15em}
-\begin{center}
-\begin{tikzpicture}[font=\scriptsize, >=stealth,
-  b/.style={draw, rounded corners=3pt, align=center, inner sep=4pt, minimum height=0.82cm, text width=4.6cm}]
-\node[b, draw=MainColour, fill=MainColour!8] (cv) {\textbf{1.\ Calibrate $\tau$ on CV}\\[-2pt]\tiny $\tau=0.217$ at FPR $=3.0\%$ (recall $23.4\%$)};
-\node[b, draw=orange!60!black, fill=orange!12, right=1.0cm of cv] (te) {\textbf{2.\ Apply the same $\tau$ to test}\\[-2pt]\tiny FPR $\to 8.7\%$, recall $\to 45.9\%$};
-\draw[->, thick] (cv) -- node[above, font=\tiny]{$\tau$ fixed} (te);
-\end{tikzpicture}
-\end{center}
-
-\vspace{0.1em}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.52\textwidth}
-\includegraphics[width=0.93\linewidth]{slide17_fp_bridge_density.pdf}
-\end{column}
-\begin{column}{0.45\textwidth}
-\textbf{\color{MainColour}On the test set at this $\tau$}
-\begin{itemize}\setlength\itemsep{0.18em}
-  \item 369 of 804 CSI firms flagged; 1{,}502 false positives.
-  \item Only \textbf{10.8\%} of FPs sit just above $\tau$ (within $[\tau,\tau+0.01]$).
-\end{itemize}
-\end{column}
-\end{columns}
-
-\vspace{-0.05em}
-\begin{alertblock}{Conclusions for index construction}
-\scriptsize
-Many false positives overlap the true-positive scores. A higher threshold (e.g. with FPR5) cannot remove them without dropping real CSI firms.
-\end{alertblock}
-\remarkfoot{CV: 72{,}223 rows, 3{,}119 positives; test: 18{,}111 rows, 804 positives. \agexp{}, temporary CSI.}
-\end{frame}
-
-%==== 18. VAE modelling nuance. =============================================%
-
-\begin{frame}{Modelling IV: The benefits and drawbacks of VAE}
-\scriptsize
-\textbf{Sub research-question.} How does the integration of Autoencoders for feature engineering impact the Average Precision of Ensemble models compared to those trained solely on raw financial data?
-
-\vspace{0.25em}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.47\textwidth}
-\begin{block}{Benefits}
-\scriptsize
-\begin{itemize}
-  \setlength\itemsep{0.22em}
-  \item \aglatent{} is considerably smaller in dimension (25 features) compared to \agexp{} (478 features).
-  \item \aglatent{} performs reasonably well. AUC is similar, AP is substantially lower on CV and test.
-  \item \agvae{} leads CV-AP in both temporary and permanent CSI.
-\end{itemize}
-\end{block}
-\end{column}
-
-\begin{column}{0.47\textwidth}
-\begin{block}{Drawbacks}
-\scriptsize
-\begin{itemize}
-  \setlength\itemsep{0.22em}
-  \item \aglatent{} cannot fully replicate the informational content of \agexp{}.
-  \item \agexp{} retains slightly higher temporary OOS AUC: $0.8961$ compared with $0.8950$ for \agvae{}.
-  \item Added architecture and compute cost.
-\end{itemize}
-\end{block}
-\end{column}
-\end{columns}
-
-\vspace{0.25em}
-\begin{alertblock}{Summary}
-\scriptsize
-Autoencoder features slightly improve average precision when added to the existing dataset, but do not dominate AUC and AP on their own. Yet, their performance is impressive given the strong reduction in dimensionality.
-\end{alertblock}
-
-\end{frame}
-
-%==== 19. Modelling V: Summary and Implications ===============================%
-
-\begin{frame}{Modelling V: Implications for index construction}
+\begin{frame}{Modelling IV: Implications for index construction}
 \centering
 \vspace{0.7em}
 
@@ -1003,7 +988,7 @@ Autoencoder features slightly improve average precision when added to the existi
 
 \end{frame}
 
-%==== 20 Index Construction E. ===============================================%
+%==== 19. Index Construction E. ===============================================%
 
 \section{Index Construction}
 \begin{frame}{Index Construction I: From score to portfolio weight}
@@ -1071,7 +1056,7 @@ The model produces a probability of a CSI in the next year. A threshold turns th
 
 \end{frame}
 
-%==== 21. Index Construction I ================================================%
+%==== 20. Index Construction I ================================================%
 
 \begin{frame}{Index Construction II: Universes and benchmarks}
 \small
@@ -1120,7 +1105,7 @@ WU does not grant access to these prepared index-data.}
 
 \end{frame}
 
-%==== 22. Headline / Verdict (NEW) ===========================================%
+%==== 21. Headline / Verdict (NEW) ===========================================%
 \begin{frame}{Index Results: Does the crash filter help?}
 \small
 
@@ -1164,7 +1149,7 @@ The crash-filter appears beneficial in both evaluation windows, but the evidence
 
 \end{frame}
 
-%==== 23. Temporary-CSI Results ==========================================%
+%==== 22. Temporary-CSI Results ==========================================%
 \begin{frame}{Temporary-CSI results: OOS (2020-2024) with 10 bps of transaction costs}
 \scriptsize
 \textbf{Best strategy per universe net of 10 bps costs vs.\ the market-weighted BM.}
@@ -1195,7 +1180,7 @@ The risk-filter works better the smaller the market cap.: the alpha rises from $
 \end{block}
 \end{frame}
 
-%==== 24. Permanent-CSI OOS Results ==========================================%
+%==== 23. Permanent-CSI OOS Results ===========================================%
 \begin{frame}{Permanent-CSI results: OOS (2020-2024) with 10 bps of transaction costs}
 \scriptsize
 \textbf{Best strategy per universe net of 10 bps costs vs.\ the market-weighted BM.}
@@ -1226,7 +1211,7 @@ The permanent filter tilts the gains toward Mid Caps ($+0.62$pp), its strongest 
 \end{block}
 \end{frame}
 
-%==== 25. Attribution: Where Does the Alpha Come From? =======================%
+%==== 24. Attribution: Where Does the Alpha Come From? ========================%
 \begin{frame}{Attribution: where does the alpha come from?}
 \scriptsize
 
@@ -1245,17 +1230,17 @@ Because positives are rare, realized alpha is dominated by reweighting retained 
                              1.79/4.2/posgreen/{Rwt +1.79}, 0.59/6.2/posgreen/{Adj. +0.59}} {
     \fill[\c!60] (\x,0) rectangle (\x+1.4,\v);
   }
-  \node[anchor=south, posgreen] at (0.9,0.1)  {TP +0.08};
-  \node[anchor=north, negred]   at (2.9,-0.08){FP $-2.03$};
-  \node[anchor=south, posgreen] at (4.9,1.85) {Reweight +1.79};
-  \node[anchor=south, posgreen] at (6.9,0.65) {Adjustment +0.59};
+  \node[anchor=south, posgreen] at (0.9,0.1)  {TP: +0.08};
+  \node[anchor=north, negred]   at (2.9,-0.08){FP: $-2.03$};
+  \node[anchor=south, posgreen] at (4.9,1.85) {Reweight: +1.79};
+  \node[anchor=south, posgreen] at (6.9,0.65) {Adjustment: +0.59};
   \node at (8.55,0.6) {\large $=$};
   \fill[MainColour] (9.0,0) rectangle (10.4,0.42);
-  \node[anchor=south, MainColour] at (9.7,0.5) {$\alpha$ +0.42};
+  \node[anchor=south, MainColour] at (9.7,0.5) {$\alpha$: +0.42};
 \end{tikzpicture}
 \end{center}
 
-\vspace{0.2em}
+\vspace{0.1em}
 \begin{table}[ht]
 \centering
 \setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
@@ -1272,68 +1257,7 @@ Small & \textcolor{posgreen}{$+0.42$} & \textcolor{negred}{$-4.00$} & \textcolor
 \end{table}
 \end{frame}
 
-%==== 26. Test-Set Validation ================================================%
-% TODO: this shows the PERMANENT-Youden test winners (one consistent strategy,
-% Total Return/Vol. crosses 1.0). To show the Temporary winners instead, replace the
-% four rows with your temp test winners and the strategy column accordingly.
-\begin{frame}{Permanent-CSI results: Test (2016-2019) with 10 bps of transaction costs}
-\scriptsize
-
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{L{0.95cm}L{3.1cm}R{1.7cm}R{0.8cm}@{\hspace{1.8em}}R{1.7cm}R{1.9cm}}
-\toprule
- & & \multicolumn{2}{c}{\textbf{Return}} & \multicolumn{2}{c}{\textbf{\color{MainColour}Risk}} \\
-\cmidrule(lr){3-4}\cmidrule(lr){5-6}
-Universe & Strategy & Geo ret. & $\Delta$ pp & Return/Vol. & Max DD \\
-\midrule
-Total & \agvae; Youden & $13.8 \to 14.2$ & $+0.45$ & $0.89 \to \textcolor{posgreen}{\mathbf{1.00}}$ & $-14.6 \to \mathbf{-12.8}$ \\
-Large & \agvae; Youden & $14.2 \to 14.4$ & $+0.26$ & $0.95 \to \textcolor{posgreen}{\mathbf{1.04}}$ & $-13.8 \to \mathbf{-12.2}$ \\
-Mid   & \agvae; Youden & $13.7 \to 14.2$ & $+0.43$ & $0.84 \to \mathbf{0.95}$ & $-15.3 \to \mathbf{-13.8}$ \\
-Small & \agvae; Youden & $11.4 \to 12.2$ & \textcolor{posgreen}{$\mathbf{+0.83}$} & $0.58 \to \mathbf{0.68}$ & $-20.1 \to \mathbf{-18.3}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.1em}
-\begin{block}{Validation Summary}
-\scriptsize
-In the different 2016-2019 market regime, a single consistent strategy (Exp. Dataset + VAE with Youden computed thresholds) improves return/volatility ratios and cuts drawdown in every universe, with Total Return/Vol. crossing 1.0. The same small-cap tilt appears ($+0.83$pp Small vs.\ $+0.26$pp Large).
-\end{block}
-\end{frame}
-
-%==== 26b. Temporary Test-Set Validation =====================================%
-\begin{frame}{Temporary-CSI results: Test (2016-2019) with 10 bps of transaction costs}
-\scriptsize
-
-\begin{table}[ht]
-\centering
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{L{0.95cm}L{3.1cm}R{1.7cm}R{0.8cm}@{\hspace{1.8em}}R{1.7cm}R{1.9cm}}
-\toprule
- & & \multicolumn{2}{c}{\textbf{Return}} & \multicolumn{2}{c}{\textbf{\color{MainColour}Risk}} \\
-\cmidrule(lr){3-4}\cmidrule(lr){5-6}
-Universe & Strategy & Geo ret. & $\Delta$ pp & Return/Vol. & Max DD \\
-\midrule
-Total & \agexp; Youden 5y & $13.7 \to 14.2$ & $+0.45$ & $0.89 \to \mathbf{0.96}$ & $-14.6 \to \mathbf{-13.7}$ \\
-Large & \agexp; Youden 3y & $14.2 \to 14.5$ & $+0.29$ & $0.95 \to \textcolor{posgreen}{\mathbf{1.00}}$ & $-13.8 \to \mathbf{-13.3}$ \\
-Mid   & \agexp; Youden 5y & $13.7 \to 14.2$ & $+0.45$ & $0.84 \to \mathbf{0.91}$ & $-15.3 \to \mathbf{-14.4}$ \\
-Small & \agvae; Youden 2y & $11.4 \to 12.3$ & \textcolor{posgreen}{$\mathbf{+0.89}$} & $0.58 \to \mathbf{0.67}$ & $-20.1 \to \mathbf{-18.4}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.1em}
-\begin{block}{Validation Summary}
-\scriptsize
-Temporary-CSI test winners are mostly \agexp{} Youden lockout rules: Total and Mid prefer five-year lockouts, Large prefers three years, and Small switches to \agvae{} with a two-year lockout. Gains are positive in every universe, led by Small ($+0.89$pp), while drawdowns improve across all four buckets and Large rounds to a 1.00 Return/Vol. ratio.
-\end{block}
-\end{frame}
-
-%==== 27. Results of the key-cutoffs ==========================================%
+%==== 25. Results of the key-cutoffs ==========================================%
 \begin{frame}{Results of the key-cutoffs across the two CSI methodologies}
 \centering
 \vspace*{\fill}
@@ -1394,7 +1318,174 @@ minimizing type-II errors.
 
 \end{frame}
 
-%==== 28. Main Summary: Mechanism =============================================%
+%==== Slide 26: Low-Vol 1: Methodology ========================================%
+
+\begin{frame}{Low-volatility and its interaction with CSI}
+\scriptsize
+
+\begin{alertblock}{Methodology: low-volatility comparison}
+\scriptsize
+\begin{itemize}\setlength\itemsep{1pt}
+  \item Firms are sorted by trailing five-year realized volatility into quintiles Q1 (low-vol)--Q5 (high-vol) (similar to \citet{BakerBradleyWurgler2011}).
+  \item The sort is rebuilt inside each benchmark universe: Total, Large, Mid, and Small are each comparable to the CSI models.
+  \item Portfolios are cap-weighted within quintile; low-vol and CSI rows are evaluated with 20\,bps transaction costs, while the market benchmark remains the 0\,bps reference.
+\end{itemize}
+\end{alertblock}
+
+\vspace{0.25em}
+
+\begin{center}
+{\scriptsize\color{MainColour}\textbf{Realized volatility rises monotonically across quintiles within the test-set.}}\\[-0.2em]
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
+
+  \fill[lightblue,draw=MainColour,line width=0.7pt] (0.15,0) rectangle (0.85,0.690);
+  \fill[darkgrey] (1.10,0) rectangle (1.80,0.924);
+  \fill[darkgrey] (2.05,0) rectangle (2.75,1.102);
+  \fill[darkgrey] (3.00,0) rectangle (3.70,1.194);
+  \fill[warningRed] (3.95,0) rectangle (4.65,1.500);
+
+  \node[font=\scriptsize] at (0.50,0.690) [above=0.0mm] {9.7\%};
+  \node[font=\scriptsize] at (1.45,0.924) [above=0.0mm] {13.0\%};
+  \node[font=\scriptsize] at (2.40,1.102) [above=0.0mm] {15.5\%};
+  \node[font=\scriptsize] at (3.35,1.194) [above=0.0mm] {16.8\%};
+  \node[font=\scriptsize] at (4.30,1.500) [above=0.0mm] {21.1\%};
+
+  \node[font=\scriptsize] at (0.50,0) [below] {Q1};
+  \node[font=\scriptsize] at (1.45,0) [below] {Q2};
+  \node[font=\scriptsize] at (2.40,0) [below] {Q3};
+  \node[font=\scriptsize] at (3.35,0) [below] {Q4};
+  \node[font=\scriptsize] at (4.30,0) [below] {Q5};
+
+  \node[font=\scriptsize,MainColour] at (0.50,-0.45) {low-volatility};
+  \node[font=\scriptsize,warningRed] at (4.30,-0.45) {high-volatility};
+\end{tikzpicture}
+\end{center}
+
+\begin{block}{Motivation}
+\footnotesize
+The low-volatility screen removes firms because they are volatile. The CSI screen removes firms because the model ranks them as likely implosion candidates. The comparison asks whether the classification layer improves index outcomes without simply reproducing a generic volatility tilt.
+\end{block}
+
+\end{frame}
+
+%==== Slide 27: Low-Vol 2: Results ============================================%
+
+\begin{frame}{Low-vol's edge is large, but conditional on the market regime}
+  \centering
+  \vspace{1mm}
+  \begin{columns}[T,onlytextwidth]
+    % ---- Return/Vol. chart ----
+    \begin{column}{0.5\textwidth}
+      \centering
+      {\footnotesize\color{MainColour} Return/Vol. ratio}\\[1mm]
+      \begin{tikzpicture}[x=1cm,y=1cm]
+        \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
+        % Test group
+        \fill[darkgrey] (0.20,0) rectangle (0.65,1.934);
+        \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,2.562);
+        \fill[MainColour] (1.20,0) rectangle (1.65,2.035);
+        % OOS group
+        \fill[darkgrey] (2.25,0) rectangle (2.70,1.161);
+        \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,0.853);
+        \fill[MainColour] (3.25,0) rectangle (3.70,1.218);
+        \node[font=\scriptsize] at (0.425,1.934)[above=0mm]{0.82};
+        \node[font=\scriptsize] at (0.925,2.562)[above=0mm]{1.08};
+        \node[font=\scriptsize] at (1.425,2.035)[above=0mm]{0.86};
+        \node[font=\scriptsize] at (2.475,1.161)[above=0mm]{0.49};
+        \node[font=\scriptsize,negred] at (2.975,0.853)[above=0mm]{0.36};
+        \node[font=\scriptsize] at (3.475,1.218)[above=0mm]{0.52};
+        \node[font=\scriptsize] at (0.925,0)[below]{Test};
+        \node[font=\scriptsize] at (2.975,0)[below]{OOS};
+      \end{tikzpicture}
+    \end{column}
+    % ---- Max DD chart ----
+    \begin{column}{0.5\textwidth}
+      \centering
+      {\footnotesize\color{MainColour} Max drawdown $|\%|$ (smaller is better)}\\[1mm]
+      \begin{tikzpicture}[x=1cm,y=1cm]
+        \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
+        \fill[darkgrey] (0.20,0) rectangle (0.65,1.60);
+        \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,0.93);
+        \fill[MainColour] (1.20,0) rectangle (1.65,1.52);
+        \fill[darkgrey] (2.25,0) rectangle (2.70,2.59);
+        \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,2.30);
+        \fill[MainColour] (3.25,0) rectangle (3.70,2.54);
+        \node[font=\scriptsize] at (0.425,1.60)[above=0mm]{16.0};
+        \node[font=\scriptsize,posgreen] at (0.925,0.93)[above=0mm]{9.3};
+        \node[font=\scriptsize] at (1.425,1.52)[above=0mm]{15.2};
+        \node[font=\scriptsize] at (2.475,2.59)[above=0mm]{25.9};
+        \node[font=\scriptsize] at (2.975,2.30)[above=0mm]{23.0};
+        \node[font=\scriptsize] at (3.475,2.54)[above=0mm]{25.4};
+        \node[font=\scriptsize] at (0.925,0)[below]{Test};
+        \node[font=\scriptsize] at (2.975,0)[below]{OOS};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+    {\scriptsize
+    \tikz\fill[darkgrey](0,0) rectangle (0.24,0.24);~Naive Benchmark\quad
+    \tikz{\fill[lightblue](0,0) rectangle (0.24,0.24);\draw[MainColour,line width=0.6pt](0,0) rectangle (0.24,0.24);}~Low-Volatility\quad
+    \tikz\fill[MainColour](0,0) rectangle (0.24,0.24);~Temporary-CSI\par}
+  \vspace{1mm}
+  \begin{alertblock}{What it costs to be defensive}
+    \footnotesize
+    In the OOS set, the Low-volatility portfolio performs considerably worse than in the test period ($-3.4$\,pp). The CSI model remains stable ($+0.3$\,pp). The maximum drawdowns of the low-volatility portfolio are smaller than those of the benchmark and the CSI model. The results are supported by \citet{Ang2006} and \citet{Moreira2017}, which find that high idiosyncratic volatility stocks earn lower returns and reducing volatility exposure can raise Sharpe ratios. \citet{BlitzVanVliet2007} also finds support for a low-volatility stock anomaly.
+  \end{alertblock}
+  \remarkfoot{Avg.\ across four universes; 20\,bps costs (Naive Benchmark 0\,bps). CSI permanent tracks dynamic closely.}
+\end{frame}
+
+%==== Slide 28: Low-Vol 3: CSI and Low-Vol ====================================%
+
+\begin{frame}{CSI-exclusions and the high-vol. portfolio overlap}
+  \begin{columns}[T,onlytextwidth]
+
+    % ---- Left: overlap chart + positive callout ----
+    \begin{column}{0.50\textwidth}
+      \centering
+      {\footnotesize\color{MainColour} Number of CSI-exclusions per decile portfolio}\\
+      \begin{tikzpicture}[x=1cm,y=1cm]
+        \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
+        \fill[darkgrey]    (0.15,0) rectangle (0.85,0.032);
+        \fill[darkgrey]    (1.10,0) rectangle (1.80,0.067);
+        \fill[darkgrey]    (2.05,0) rectangle (2.75,0.211);
+        \fill[darkgrey]    (3.00,0) rectangle (3.70,0.636);
+        \fill[warningRed]  (3.95,0) rectangle (4.65,2.250);
+        \node[font=\scriptsize]           at (0.50,0.032)[above=0mm]{1.0\%};
+        \node[font=\scriptsize]           at (1.45,0.067)[above=0mm]{2.1\%};
+        \node[font=\scriptsize]           at (2.40,0.211)[above=0mm]{6.6\%};
+        \node[font=\scriptsize]           at (3.35,0.636)[above=0mm]{19.9\%};
+        \node[font=\scriptsize,warningRed] at (4.30,2.250)[above=0mm]{\textbf{70.4\%}};
+        \node[font=\scriptsize]           at (0.50,0)[below]{Q1};
+        \node[font=\scriptsize]           at (1.45,0)[below]{Q2};
+        \node[font=\scriptsize]           at (2.40,0)[below]{Q3};
+        \node[font=\scriptsize]           at (3.35,0)[below]{Q4};
+        \node[font=\scriptsize,warningRed] at (4.30,0)[below]{Q5};
+      \end{tikzpicture}\\[1.5mm]
+    \end{column}
+
+    % ---- Right: ceiling pills + verdict ----
+    \begin{column}{0.48\textwidth}
+      {\footnotesize\color{MainColour} Reasons for the smaller return impact of CSI compared to low-vol:}\\[2mm]
+      \begin{tikzpicture}[font=\scriptsize, node distance=2.5mm]
+        \node[draw=MainColour, fill=MainColour!8, rounded corners=3pt,
+              text width=4.75cm, align=left, inner sep=5pt] (str)
+          {\textbf{Structural.}~CSI firms, dependent on the index, have a minor index weight. Their return impact is rather small};
+        \node[draw=darkgrey!80, fill=grey, rounded corners=3pt,
+              text width=4.75cm, align=left, inner sep=5pt, below=2.5mm of str] (stat)
+          {\textbf{Statistical.}~Many FPs lead to a loss in performance due to their exclusion.};
+      \end{tikzpicture}
+    \end{column}
+
+  \end{columns}
+
+\begin{alertblock}{Summary}
+        \scriptsize
+        Low-vol performs well in the test-set, but it falls below the Benchmark in the OOS-set. CSI's gain is smaller but \textbf{regime-stable} and preserves the slight edge in returns and risk.\\[1.5mm]
+        {\color{MainColour}\small\textbf{CSI complements low-vol. It does not dominate it.}}
+      \end{alertblock}
+  \end{frame}
+
+%==== 29 Main Summary: Mechanism ==============================================%
 
 \begin{frame}{Summary: risk screening, not crash avoidance}
 \centering
@@ -1591,173 +1682,142 @@ All completed temporary-CSI C/M/T runs stay positive; sensitivity changes magnit
 
 \end{alertblock}
 \end{frame}
+  
+%==== Appendix A4: VAE Comparison =============================================%
 
-%==== Appendix A4: Low-Vol 1: Methodology =====================================%
-
-\begin{frame}{Appendix A4: Low-volatility and its interaction with CSI}
+\begin{frame}{Appendix A4: The benefits and drawbacks of VAE}
 \scriptsize
-
-\begin{alertblock}{Methodology: low-volatility comparison}
-\scriptsize
-\begin{itemize}\setlength\itemsep{1pt}
-  \item Firms are sorted by trailing five-year realized volatility into quintiles Q1 (low-vol)--Q5 (high-vol).
-  \item The sort is rebuilt inside each benchmark universe: Total, Large, Mid, and Small are each comparable to the CSI models.
-  \item Portfolios are cap-weighted within quintile; low-vol and CSI rows are evaluated with 20\,bps transaction costs, while the market benchmark remains the 0\,bps reference.
-\end{itemize}
-\end{alertblock}
+\textbf{Sub research-question.} How does the integration of Autoencoders for feature engineering impact the Average Precision of Ensemble models compared to those trained solely on raw financial data?
 
 \vspace{0.25em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.47\textwidth}
+\begin{block}{Benefits}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item \aglatent{} is considerably smaller in dimension (25 features) compared to \agexp{} (478 features).
+  \item \aglatent{} performs reasonably well. AUC is similar, AP is substantially lower on CV and test.
+  \item \agvae{} leads CV-AP in both temporary and permanent CSI.
+\end{itemize}
+\end{block}
+\end{column}
 
+\begin{column}{0.47\textwidth}
+\begin{block}{Drawbacks}
+\scriptsize
+\begin{itemize}
+  \setlength\itemsep{0.22em}
+  \item \aglatent{} cannot fully replicate the informational content of \agexp{}.
+  \item \agexp{} retains slightly higher temporary OOS AUC: $0.8961$ compared with $0.8950$ for \agvae{}.
+  \item Added architecture and compute cost.
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+
+\vspace{0.25em}
+\begin{alertblock}{Summary}
+\scriptsize
+Autoencoder features slightly improve average precision when added to the existing dataset, but do not dominate AUC and AP on their own. Yet, their performance is impressive given the strong reduction in dimensionality.
+\end{alertblock}
+
+\end{frame}
+
+%==== Appendix A5: Temporary-CSI: Test set ====================================%
+\begin{frame}{Appendix A5: Temporary-CSI results - Test (2016-2019) with 10 bps of transaction costs}
+\scriptsize
+
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{L{0.95cm}L{3.1cm}R{1.7cm}R{0.8cm}@{\hspace{1.8em}}R{1.7cm}R{1.9cm}}
+\toprule
+ & & \multicolumn{2}{c}{\textbf{Return}} & \multicolumn{2}{c}{\textbf{\color{MainColour}Risk}} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Universe & Strategy & Geo ret. & $\Delta$ pp & Return/Vol. & Max DD \\
+\midrule
+Total & \agexp; Youden 5y & $13.7 \to 14.2$ & $+0.45$ & $0.89 \to \mathbf{0.96}$ & $-14.6 \to \mathbf{-13.7}$ \\
+Large & \agexp; Youden 3y & $14.2 \to 14.5$ & $+0.29$ & $0.95 \to \textcolor{posgreen}{\mathbf{1.00}}$ & $-13.8 \to \mathbf{-13.3}$ \\
+Mid   & \agexp; Youden 5y & $13.7 \to 14.2$ & $+0.45$ & $0.84 \to \mathbf{0.91}$ & $-15.3 \to \mathbf{-14.4}$ \\
+Small & \agvae; Youden 2y & $11.4 \to 12.3$ & \textcolor{posgreen}{$\mathbf{+0.89}$} & $0.58 \to \mathbf{0.67}$ & $-20.1 \to \mathbf{-18.4}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.1em}
+\begin{block}{Validation Summary}
+\scriptsize
+Temporary-CSI test winners are mostly \agexp{} Youden lockout rules: Total and Mid prefer five-year lockouts, Large prefers three years, and Small switches to \agvae{} with a two-year lockout. Gains are positive in every universe, led by Small ($+0.89$pp), while drawdowns improve across all four buckets and Large rounds to a 1.00 Return/Vol. ratio.
+\end{block}
+\end{frame}
+
+%==== Appendix A6: Permanent-CSI: Test set ====================================%
+\begin{frame}{Appendix A6: Permanent-CSI results - Test (2016-2019) with 10 bps of transaction costs}
+\scriptsize
+
+\begin{table}[ht]
+\centering
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{L{0.95cm}L{3.1cm}R{1.7cm}R{0.8cm}@{\hspace{1.8em}}R{1.7cm}R{1.9cm}}
+\toprule
+ & & \multicolumn{2}{c}{\textbf{Return}} & \multicolumn{2}{c}{\textbf{\color{MainColour}Risk}} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Universe & Strategy & Geo ret. & $\Delta$ pp & Return/Vol. & Max DD \\
+\midrule
+Total & \agvae; Youden & $13.8 \to 14.2$ & $+0.45$ & $0.89 \to \textcolor{posgreen}{\mathbf{1.00}}$ & $-14.6 \to \mathbf{-12.8}$ \\
+Large & \agvae; Youden & $14.2 \to 14.4$ & $+0.26$ & $0.95 \to \textcolor{posgreen}{\mathbf{1.04}}$ & $-13.8 \to \mathbf{-12.2}$ \\
+Mid   & \agvae; Youden & $13.7 \to 14.2$ & $+0.43$ & $0.84 \to \mathbf{0.95}$ & $-15.3 \to \mathbf{-13.8}$ \\
+Small & \agvae; Youden & $11.4 \to 12.2$ & \textcolor{posgreen}{$\mathbf{+0.83}$} & $0.58 \to \mathbf{0.68}$ & $-20.1 \to \mathbf{-18.3}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.1em}
+\begin{block}{Validation Summary}
+\scriptsize
+In the different 2016-2019 market regime, a single consistent strategy (Exp. Dataset + VAE with Youden computed thresholds) improves return/volatility ratios and cuts drawdown in every universe, with Total Return/Vol. crossing 1.0. The same small-cap tilt appears ($+0.83$pp Small vs.\ $+0.26$pp Large).
+\end{block}
+\end{frame}
+
+%==== Appendix A7: Why the screen cannot be perfect ===========================%
+
+\begin{frame}{Appendix A7: Why the screen cannot be perfect}
+\scriptsize
+\textbf{The shown example is temporary CSI, \agexp{}.} The exclusion threshold is calibrated on the training set to ensure no data leakage, then carried \emph{unchanged} to the held-out 2016--2019 test set.
+\vspace{0.15em}
 \begin{center}
-{\scriptsize\color{MainColour}\textbf{Realized volatility rises monotonically across quintiles within the test-set.}}\\[-0.2em]
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
-
-  \fill[lightblue,draw=MainColour,line width=0.7pt] (0.15,0) rectangle (0.85,0.690);
-  \fill[darkgrey] (1.10,0) rectangle (1.80,0.924);
-  \fill[darkgrey] (2.05,0) rectangle (2.75,1.102);
-  \fill[darkgrey] (3.00,0) rectangle (3.70,1.194);
-  \fill[warningRed] (3.95,0) rectangle (4.65,1.500);
-
-  \node[font=\scriptsize] at (0.50,0.690) [above=0.0mm] {9.7\%};
-  \node[font=\scriptsize] at (1.45,0.924) [above=0.0mm] {13.0\%};
-  \node[font=\scriptsize] at (2.40,1.102) [above=0.0mm] {15.5\%};
-  \node[font=\scriptsize] at (3.35,1.194) [above=0.0mm] {16.8\%};
-  \node[font=\scriptsize] at (4.30,1.500) [above=0.0mm] {21.1\%};
-
-  \node[font=\scriptsize] at (0.50,0) [below] {Q1};
-  \node[font=\scriptsize] at (1.45,0) [below] {Q2};
-  \node[font=\scriptsize] at (2.40,0) [below] {Q3};
-  \node[font=\scriptsize] at (3.35,0) [below] {Q4};
-  \node[font=\scriptsize] at (4.30,0) [below] {Q5};
-
-  \node[font=\scriptsize,MainColour] at (0.50,-0.45) {low-volatility};
-  \node[font=\scriptsize,warningRed] at (4.30,-0.45) {high-volatility};
+\begin{tikzpicture}[font=\scriptsize, >=stealth,
+  b/.style={draw, rounded corners=3pt, align=center, inner sep=4pt, minimum height=0.82cm, text width=4.6cm}]
+\node[b, draw=MainColour, fill=MainColour!8] (cv) {\textbf{1.\ Calibrate $\tau$ on CV}\\[-2pt]\tiny $\tau=0.217$ at FPR $=3.0\%$ (recall $23.4\%$)};
+\node[b, draw=orange!60!black, fill=orange!12, right=1.0cm of cv] (te) {\textbf{2.\ Apply the same $\tau$ to test}\\[-2pt]\tiny FPR $\to 8.7\%$, recall $\to 45.9\%$};
+\draw[->, thick] (cv) -- node[above, font=\tiny]{$\tau$ fixed} (te);
 \end{tikzpicture}
 \end{center}
 
-\begin{block}{Motivation}
-\footnotesize
-The low-volatility screen removes firms because they are volatile. The CSI screen removes firms because the model ranks them as likely implosion candidates. The comparison asks whether the classification layer improves index outcomes without simply reproducing a generic volatility tilt.
-\end{block}
+\vspace{0.1em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.52\textwidth}
+\includegraphics[width=0.93\linewidth]{slide17_fp_bridge_density.pdf}
+\end{column}
+\begin{column}{0.45\textwidth}
+\textbf{\color{MainColour}On the test set at this $\tau$}
+\begin{itemize}\setlength\itemsep{0.18em}
+  \item 369 of 804 CSI firms flagged; 1{,}502 false positives.
+  \item Only \textbf{10.8\%} of FPs sit just above $\tau$ (within $[\tau,\tau+0.01]$).
+\end{itemize}
+\end{column}
+\end{columns}
 
+\vspace{-0.05em}
+\begin{alertblock}{Conclusions for index construction}
+\scriptsize
+Many false positives overlap the true-positive scores. A higher threshold (e.g. with FPR5) cannot remove them without dropping real CSI firms.
+\end{alertblock}
+\remarkfoot{CV: 72{,}223 rows, 3{,}119 positives; test: 18{,}111 rows, 804 positives. \agexp{}, temporary CSI.}
 \end{frame}
-
-%==== Appendix A5: Low-Vol 2: Results =========================================%
-
-\begin{frame}{Appendix A5: Low-vol's edge is large, but conditional on the market regime}
-  \centering
-  \vspace{1mm}
-  \begin{columns}[T,onlytextwidth]
-    % ---- Return/Vol. chart ----
-    \begin{column}{0.5\textwidth}
-      \centering
-      {\footnotesize\color{MainColour} Return/Vol. ratio}\\[1mm]
-      \begin{tikzpicture}[x=1cm,y=1cm]
-        \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
-        % Test group
-        \fill[darkgrey] (0.20,0) rectangle (0.65,1.934);
-        \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,2.562);
-        \fill[MainColour] (1.20,0) rectangle (1.65,2.035);
-        % OOS group
-        \fill[darkgrey] (2.25,0) rectangle (2.70,1.161);
-        \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,0.853);
-        \fill[MainColour] (3.25,0) rectangle (3.70,1.218);
-        \node[font=\scriptsize] at (0.425,1.934)[above=0mm]{0.82};
-        \node[font=\scriptsize] at (0.925,2.562)[above=0mm]{1.08};
-        \node[font=\scriptsize] at (1.425,2.035)[above=0mm]{0.86};
-        \node[font=\scriptsize] at (2.475,1.161)[above=0mm]{0.49};
-        \node[font=\scriptsize,negred] at (2.975,0.853)[above=0mm]{0.36};
-        \node[font=\scriptsize] at (3.475,1.218)[above=0mm]{0.52};
-        \node[font=\scriptsize] at (0.925,0)[below]{Test};
-        \node[font=\scriptsize] at (2.975,0)[below]{OOS};
-      \end{tikzpicture}
-    \end{column}
-    % ---- Max DD chart ----
-    \begin{column}{0.5\textwidth}
-      \centering
-      {\footnotesize\color{MainColour} Max drawdown $|\%|$ (smaller is better)}\\[1mm]
-      \begin{tikzpicture}[x=1cm,y=1cm]
-        \draw[darkgrey,line width=0.6pt] (0.05,0) -- (3.95,0);
-        \fill[darkgrey] (0.20,0) rectangle (0.65,1.60);
-        \fill[lightblue,draw=MainColour,line width=0.6pt] (0.70,0) rectangle (1.15,0.93);
-        \fill[MainColour] (1.20,0) rectangle (1.65,1.52);
-        \fill[darkgrey] (2.25,0) rectangle (2.70,2.59);
-        \fill[lightblue,draw=MainColour,line width=0.6pt] (2.75,0) rectangle (3.20,2.30);
-        \fill[MainColour] (3.25,0) rectangle (3.70,2.54);
-        \node[font=\scriptsize] at (0.425,1.60)[above=0mm]{16.0};
-        \node[font=\scriptsize,posgreen] at (0.925,0.93)[above=0mm]{9.3};
-        \node[font=\scriptsize] at (1.425,1.52)[above=0mm]{15.2};
-        \node[font=\scriptsize] at (2.475,2.59)[above=0mm]{25.9};
-        \node[font=\scriptsize] at (2.975,2.30)[above=0mm]{23.0};
-        \node[font=\scriptsize] at (3.475,2.54)[above=0mm]{25.4};
-        \node[font=\scriptsize] at (0.925,0)[below]{Test};
-        \node[font=\scriptsize] at (2.975,0)[below]{OOS};
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
-    {\scriptsize
-    \tikz\fill[darkgrey](0,0) rectangle (0.24,0.24);~Naive Benchmark\quad
-    \tikz{\fill[lightblue](0,0) rectangle (0.24,0.24);\draw[MainColour,line width=0.6pt](0,0) rectangle (0.24,0.24);}~Low-Volatility\quad
-    \tikz\fill[MainColour](0,0) rectangle (0.24,0.24);~CSI\par}
-  \vspace{1mm}
-  \begin{alertblock}{What it costs to be defensive (geo.\ return delta)}
-    \footnotesize
-    In the OOS set, the Low-volatility portfolio performs considerably worse than in the test period ($-3.4$\,pp). The CSI model remains stable ($+0.3$\,pp). The maximum drawdowns of the low-volatility portfolio are smaller than those of the benchmark and the CSI model. The results are supported by \citet{Ang2006} and \citet{Moreira2017}, which find that high idiosyncratic volatility stocks earn lower returns and reducing volatility exposure can raise Sharpe ratios. \citet{BlitzVanVliet2007} also finds support for a low-volatility stock anomaly.
-  \end{alertblock}
-  \remarkfoot{Avg.\ across four universes; 20\,bps costs (Naive Benchmark 0\,bps). CSI permanent tracks dynamic closely.}
-\end{frame}
-
-%==== Appendix A6: Low-Vol 3: CSI and Low-Vol =================================%
-
-\begin{frame}{Appendix A6: CSI-exclusions and the high-vol. portfolio overlap}
-  \begin{columns}[T,onlytextwidth]
-
-    % ---- Left: overlap chart + positive callout ----
-    \begin{column}{0.50\textwidth}
-      \centering
-      {\footnotesize\color{MainColour} Number of CSI-exclusions per decile portfolio}\\
-      \begin{tikzpicture}[x=1cm,y=1cm]
-        \draw[darkgrey,line width=0.6pt] (0,0) -- (5.05,0);
-        \fill[darkgrey]    (0.15,0) rectangle (0.85,0.032);
-        \fill[darkgrey]    (1.10,0) rectangle (1.80,0.067);
-        \fill[darkgrey]    (2.05,0) rectangle (2.75,0.211);
-        \fill[darkgrey]    (3.00,0) rectangle (3.70,0.636);
-        \fill[warningRed]  (3.95,0) rectangle (4.65,2.250);
-        \node[font=\scriptsize]           at (0.50,0.032)[above=0mm]{1.0\%};
-        \node[font=\scriptsize]           at (1.45,0.067)[above=0mm]{2.1\%};
-        \node[font=\scriptsize]           at (2.40,0.211)[above=0mm]{6.6\%};
-        \node[font=\scriptsize]           at (3.35,0.636)[above=0mm]{19.9\%};
-        \node[font=\scriptsize,warningRed] at (4.30,2.250)[above=0mm]{\textbf{70.4\%}};
-        \node[font=\scriptsize]           at (0.50,0)[below]{Q1};
-        \node[font=\scriptsize]           at (1.45,0)[below]{Q2};
-        \node[font=\scriptsize]           at (2.40,0)[below]{Q3};
-        \node[font=\scriptsize]           at (3.35,0)[below]{Q4};
-        \node[font=\scriptsize,warningRed] at (4.30,0)[below]{Q5};
-      \end{tikzpicture}\\[1.5mm]
-    \end{column}
-
-    % ---- Right: ceiling pills + verdict ----
-    \begin{column}{0.48\textwidth}
-      {\footnotesize\color{MainColour} Reasons for the smaller return impact of CSI compared to low-vol:}\\[2mm]
-      \begin{tikzpicture}[font=\scriptsize, node distance=2.5mm]
-        \node[draw=MainColour, fill=MainColour!8, rounded corners=3pt,
-              text width=4.75cm, align=left, inner sep=5pt] (str)
-          {\textbf{Structural.}~CSI firms, dependent on the index, have a minor index weight. Their return impact is rather small};
-        \node[draw=darkgrey!80, fill=grey, rounded corners=3pt,
-              text width=4.75cm, align=left, inner sep=5pt, below=2.5mm of str] (stat)
-          {\textbf{Statistical.}~Many FPs lead to a loss in performance due to their exclusion.};
-      \end{tikzpicture}
-    \end{column}
-
-  \end{columns}
-
-\begin{alertblock}{Summary}
-        \scriptsize
-        Low-vol performs well in the test-set, but it falls below the Benchmark in the OOS-set. CSI's gain is smaller but \textbf{regime-stable} and preserves the slight edge in returns and risk.\\[1.5mm]
-        {\color{MainColour}\small\textbf{CSI complements low-vol. It does not dominate it.}}
-      \end{alertblock}
-  \end{frame}
 
 %==== APPENDIX: Additional Information ========================================%
 
@@ -2004,9 +2064,9 @@ Three configurations remain \texttt{blocked\_partial}: \texttt{C080\_M000\_T012}
 \end{block}
 \end{frame}
 
-%==== Appendix B6a: Sensitivity model results =================================%
+%==== Appendix B7a: Sensitivity model results =================================%
 
-\begin{frame}{Appendix B6a: Sensitivity model results}
+\begin{frame}{Appendix B7a: Sensitivity model results}
 \tiny
 \centering
 \setlength{\tabcolsep}{1.2pt}
@@ -2048,9 +2108,9 @@ Config & CV-AP & CV-FPR3 & Test-AP & Test-FPR3 & Test alpha & OOS alpha \\
 \rowcolors{2}{}{}
 \end{frame}
 
-%==== Appendix B6b: Sensitivity attribution ===================================%
+%==== Appendix B7b: Sensitivity attribution ===================================%
 
-\begin{frame}{Appendix B6b: Sensitivity attribution decomposition}
+\begin{frame}{Appendix B7b: Sensitivity attribution decomposition}
 \tiny
 \centering
 \setlength{\tabcolsep}{0.95pt}
@@ -2095,7 +2155,7 @@ Config & Best OOS rule & TP & FP & Reweight & Cost & Adj. & Alpha \\
 
 %==== Appendix B7: Limitations and future work ================================%
 
-\begin{frame}{Appendix B7: Limitations and future work}
+\begin{frame}{Appendix B8: Limitations and future work}
 \scriptsize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -2212,6 +2272,83 @@ Feature & Abs. & Family \\
 \scriptsize
 Model-based log-odds perturbation on bounded GBM-only predictor workspace; CV/training rows only; interpret as directional model-response evidence, not full AutoGluon-native feature importance.
 \end{block}
+
+\end{frame}
+
+%==== Appendix B10: AutoGluon Ensemble Composition ============================%
+
+\begin{frame}{Appendix B10: AutoGluon Ensemble Composition}
+\scriptsize
+
+\begin{columns}[T]
+
+  \begin{column}{0.46\textwidth}
+    \centering
+    \textbf{Method A} — L2 Ensemble Weights\\[0.4em]
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      \textbf{Model} & \textbf{Weight} \\
+      \midrule
+      \texttt{LightGBMLarge}         & 0.320 \\
+      \texttt{LightGBM\_r196}        & 0.320 \\
+      \texttt{CatBoost\_r70}         & 0.160 \\
+      \texttt{LightGBM\_r131}        & 0.080 \\
+      \texttt{XGBoost}               & 0.040 \\
+      \texttt{XGBoost\_r89}          & 0.040 \\
+      \texttt{NeuralNetFastAI\_r191} & 0.040 \\
+      \midrule
+      \textit{Total} & \textit{1.000} \\
+      \bottomrule
+    \end{tabular}
+  \end{column}
+
+  \begin{column}{0.50\textwidth}
+    \centering
+    \textbf{Method B} — L2 Ensemble Weights\\[0.4em]
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      \textbf{Model} & \textbf{Weight} \\
+      \midrule
+      \texttt{ExtraTreesEntr}        & 0.238 \\
+      \texttt{XGBoost\_r33}          & 0.238 \\
+      \texttt{NeuralNetTorch\_r79}   & 0.143 \\
+      \texttt{NeuralNetFastAI\_r102} & 0.143 \\
+      \texttt{ExtraTreesGini}        & 0.048 \\
+      \texttt{NeuralNetTorch}        & 0.048 \\
+      \texttt{LightGBM\_r96}         & 0.048 \\
+      \texttt{NeuralNetTorch\_r22}   & 0.048 \\
+      \texttt{ExtraTrees\_r42}       & 0.048 \\
+      \midrule
+      \textit{Total} & \textit{1.00} \\
+      \bottomrule
+    \end{tabular}
+  \end{column}
+
+\end{columns}
+
+\vspace{0.35em}
+
+\begin{block}{Why stacking works — and why runtime HPO is unnecessary}
+\scriptsize
+\textbf{Stacking:} L1 base learners differ systematically in inductive bias (gradient boosting,
+neural networks, tree ensembles), so their prediction errors are only partially correlated across
+observations. A L2 meta-learner learns optimal weights from \emph{out-of-fold} (OOF) predictions,
+preventing data leakage while consistently outperforming any single base model.
+The contrast is striking: Method A is almost entirely GBM-dominated
+($\sum w_{\text{GBM}} \approx 0.96$), whereas Method B draws substantial weight from
+tree ensembles and neural networks --- illustrating how the ensemble adapts to the
+feature space induced by each labelling scheme.
+
+\textbf{No HPO needed:} AutoGluon employs a \emph{Zeroshot-HPO portfolio} ---
+hyperparameter configurations pre-optimised \emph{offline} across hundreds of datasets.
+Additional diversity is provided by randomly sampled configurations at training time
+(the \texttt{\_r\{seed\}} suffix). The L2 weighting then performs implicit model selection:
+configurations that fail to generalise receive near-zero weight, rendering
+expensive runtime HPO redundant.
+\end{block}
+
+\vspace{0.1em}
+{\tiny $^{\dagger}$Rounding artefact; weights sum to $\approx 1$.}
 
 \end{frame}
 
